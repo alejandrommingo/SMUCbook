@@ -4,6 +4,3 @@ author: "Alejandro Martínez-Mingo & Manuele Leonelli"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 ---
-
-# Down the rabbit-hole
-
