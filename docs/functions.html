@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Simulation and Modeling to Understand the Change</title>
+  <title>2.5 Functions | Simulation and Modeling to Understand the Change</title>
   <meta name="description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Simulation and Modeling to Understand the Change" />
+  <meta property="og:title" content="2.5 Functions | Simulation and Modeling to Understand the Change" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/Rplot.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="manueleleonelli/SimBook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Simulation and Modeling to Understand the Change" />
+  <meta name="twitter:title" content="2.5 Functions | Simulation and Modeling to Understand the Change" />
   
   <meta name="twitter:description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
   <meta name="twitter:image" content="/images/Rplot.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="intro.html"/>
+<link rel="prev" href="loops-and-conditions.html"/>
+<link rel="next" href="the-apply-family-of-functions.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -293,23 +293,88 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Simulation and Modeling to Understand the Change</h1>
-<p class="author"><em>Alejandro Martínez-Mingo &amp; Manuele Leonelli</em></p>
-<p class="date"><em>2021-12-09</em></p>
+<div id="functions" class="section level2" number="2.5">
+<h2><span class="header-section-number">2.5</span> Functions</h2>
+<p>Functions are chunks of code that are given a name so that they can be easily used multiple times. Perhaps without realising it, you have used functions already many times!</p>
+<div id="defining-your-own-function" class="section level3" number="2.5.1">
+<h3><span class="header-section-number">2.5.1</span> Defining your own function</h3>
+<p>A function is composed of the following elements:</p>
+<ul>
+<li><p>a name: in R functions are objects just like vectors or matrices and they are given a name.</p></li>
+<li><p>arguments: these are objects that will be used within the function.</p></li>
+<li><p>body: a chunk of code which is run within the function.</p></li>
+<li><p>output: an object that the function returns.</p></li>
+</ul>
+<p>Let’s consider an example.</p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="functions.html#cb91-1" aria-hidden="true" tabindex="-1"></a>my.function <span class="ot">&lt;-</span> <span class="cf">function</span>(x,y){</span>
+<span id="cb91-2"><a href="functions.html#cb91-2" aria-hidden="true" tabindex="-1"></a>  z <span class="ot">&lt;-</span> x <span class="sc">+</span> y</span>
+<span id="cb91-3"><a href="functions.html#cb91-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(z)</span>
+<span id="cb91-4"><a href="functions.html#cb91-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>The above function computes the sum of two numbers <code>x</code> and <code>y</code>. Let’s call it.</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="functions.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">my.function</span>(<span class="dv">2</span>,<span class="dv">3</span>)</span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+<p>The sum between 2 and 3 is indeed 5.</p>
+<p>Let’s look at the code line by line. In the first line, we assigned a function using the command <code>function</code> to an object called <code>my.function</code>. <code>my.function</code> has two arguments called <code>x</code> and <code>y</code>. Then there is an opening curly bracket <code>{</code>. The last line of code has a closing curly bracket <code>}</code>: whatever is in between the two brackets is a chunk of code which is run when the function is run. The second line computes a new variable called <code>z</code> which stores the sum of <code>x</code> and <code>y</code>. The third line of code tells us that the function should return <code>z</code> as output.</p>
+<p>Let’s consider a slightly more complicated function.</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="functions.html#cb94-1" aria-hidden="true" tabindex="-1"></a>new.function <span class="ot">&lt;-</span> <span class="cf">function</span>(x,y){</span>
+<span id="cb94-2"><a href="functions.html#cb94-2" aria-hidden="true" tabindex="-1"></a>  z1 <span class="ot">&lt;-</span> x<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb94-3"><a href="functions.html#cb94-3" aria-hidden="true" tabindex="-1"></a>  z2 <span class="ot">&lt;-</span> z1 <span class="sc">+</span> y</span>
+<span id="cb94-4"><a href="functions.html#cb94-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(z2)</span>
+<span id="cb94-5"><a href="functions.html#cb94-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>The <code>new.function</code> returns the sum between the square of the first input <code>x</code> and the second input <code>y</code>. Let’s call the function.</p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="functions.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">new.function</span>(<span class="dv">2</span>,<span class="dv">3</span>)</span></code></pre></div>
+<pre><code>## [1] 7</code></pre>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="functions.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">new.function</span>(<span class="dv">3</span>,<span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 11</code></pre>
+<p>Notice that <code>new.function(2,3)</code> is different from <code>new.function(3,2)</code>: indeed in the fist case the sum between 2^2 and 3 is computed, whilst in the second the sum between 3^2 and 2 is computed. Furthermore, that the variable <code>z1</code> exists only within the function: when you call the function the output does not create a variable <code>z1</code>. The output does not create either a variable <code>z2</code> it simply returns the value that is stored in <code>z2</code>, which can the be assigned as in the following example.</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="functions.html#cb99-1" aria-hidden="true" tabindex="-1"></a>value <span class="ot">&lt;-</span> <span class="fu">new.function</span>(<span class="dv">2</span>,<span class="dv">3</span>)</span>
+<span id="cb99-2"><a href="functions.html#cb99-2" aria-hidden="true" tabindex="-1"></a>value</span></code></pre></div>
+<pre><code>## [1] 7</code></pre>
+<p>We stored in <code>value</code> the output of <code>new.function(2,3)</code>.</p>
+<p>An equivalent way to write <code>new.function</code> is as follows:</p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="functions.html#cb101-1" aria-hidden="true" tabindex="-1"></a>new.function <span class="ot">&lt;-</span> <span class="cf">function</span>(x,y){</span>
+<span id="cb101-2"><a href="functions.html#cb101-2" aria-hidden="true" tabindex="-1"></a>  x<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> y</span>
+<span id="cb101-3"><a href="functions.html#cb101-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb101-4"><a href="functions.html#cb101-4" aria-hidden="true" tabindex="-1"></a><span class="fu">new.function</span>(<span class="dv">2</span>,<span class="dv">3</span>)</span></code></pre></div>
+<pre><code>## [1] 7</code></pre>
+<p>The output is the same. We did not create any variable within the function and we did not explicitly use the <code>return</code> command. R understands that the last line of code is what the function should return.</p>
 </div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>These are lecture notes for the module <em>Simulation and Modelling to Understand Change</em> given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data &amp; Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed.</p>
-
+<div id="calling-functions" class="section level3" number="2.5.2">
+<h3><span class="header-section-number">2.5.2</span> Calling functions</h3>
+<p>In R functions can be called in various ways. Before we have seen function calls as</p>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="functions.html#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">new.function</span>(<span class="dv">2</span>,<span class="dv">3</span>)</span></code></pre></div>
+<p>How did it work?</p>
+<ul>
+<li><p>The function <code>new.function</code> has a first argument <code>x</code> and a second argument <code>y</code>.</p></li>
+<li><p>R matched the first argument in <code>new.function(2,3)</code> to <code>x</code>, that is <code>x=2</code>, and the second argument to <code>y</code>, that is <code>y=3</code>.</p></li>
+</ul>
+<p>We could have also been more explicit and state what <code>x</code> and <code>y</code> were.</p>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="functions.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">new.function</span>(<span class="at">x=</span><span class="dv">2</span>, <span class="at">y=</span><span class="dv">3</span>)</span></code></pre></div>
+<pre><code>## [1] 7</code></pre>
+<p>So now explicitly we state that the input <code>x</code> of <code>new.function</code> is 2 and that the input <code>y</code> is 3. Notice that the two ways of specifying inputs give the exact same results.</p>
+</div>
+<div id="mathematical-and-statistical-functions" class="section level3" number="2.5.3">
+<h3><span class="header-section-number">2.5.3</span> Mathematical and statistical functions</h3>
+<p>The number of functions available in R is massive and it would be impossible to mention them all. Here I just give you a list of mathematical and statistical functions that we may use in the following.</p>
+<ul>
+<li><p><code>exp</code> computes the exponential of the entries of an object</p></li>
+<li><p><code>log</code> computes the logarithm of the entries of an object</p></li>
+<li><p><code>sqrt</code> computes the square root of the entries of an</p></li>
+<li><p><code>sum</code> computes the sum of the entries of an object</p></li>
+<li><p><code>abs</code> computes the absolute value of the entries of an object</p></li>
+<li><p><code>mean</code> computes the mean of the entries of an object</p></li>
+<li><p><code>sd</code> computes the standard deviation of the entries of an object</p></li>
+<li><p><code>var</code> computes the variance of the entries of an object</p></li>
+</ul>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="intro.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="loops-and-conditions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="the-apply-family-of-functions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -340,7 +405,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/amartinezm90/SMUCbook/edit/master/index.Rmd",
+"link": "https://github.com/amartinezm90/SMUCbook/edit/master/02-R.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -348,7 +413,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/amartinezm90/SMUCbook/blob/master/index.Rmd",
+"link": "https://github.com/amartinezm90/SMUCbook/blob/master/02-R.Rmd",
 "text": null
 },
 "download": null,

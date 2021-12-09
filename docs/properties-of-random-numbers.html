@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Simulation and Modeling to Understand the Change</title>
+  <title>4.1 Properties of Random Numbers | Simulation and Modeling to Understand the Change</title>
   <meta name="description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Simulation and Modeling to Understand the Change" />
+  <meta property="og:title" content="4.1 Properties of Random Numbers | Simulation and Modeling to Understand the Change" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/Rplot.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="manueleleonelli/SimBook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Simulation and Modeling to Understand the Change" />
+  <meta name="twitter:title" content="4.1 Properties of Random Numbers | Simulation and Modeling to Understand the Change" />
   
   <meta name="twitter:description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
   <meta name="twitter:image" content="/images/Rplot.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="intro.html"/>
+<link rel="prev" href="random-number-generation.html"/>
+<link rel="next" href="pseudo-random-numbers.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -293,23 +293,59 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Simulation and Modeling to Understand the Change</h1>
-<p class="author"><em>Alejandro Martínez-Mingo &amp; Manuele Leonelli</em></p>
-<p class="date"><em>2021-12-09</em></p>
+<div id="properties-of-random-numbers" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Properties of Random Numbers</h2>
+<p>The first step to simulate numbers from a distribution is to be able to independently simulate random numbers <span class="math inline">\(u_1,u_2,\dots,u_N\)</span> from a continuous uniform distribution between zero and one. From the previous chapter, you should remember that such a random variables has pdf
+<span class="math display">\[
+f(x)=\left\{
+\begin{array}{ll}
+1, &amp; 0\leq x \leq 1\\
+0, &amp;\mbox{otherwise}
+\end{array}
+\right.
+\]</span>
+and cdf
+<span class="math display">\[
+F(x)=\left\{
+\begin{array}{ll}
+0, &amp; x&lt;0\\
+x, &amp; 0\leq x \leq 1\\
+1, &amp;\mbox{otherwise}
+\end{array}
+\right.
+\]</span>
+These two are plotted in Figure <a href="properties-of-random-numbers.html#fig:uplot">4.2</a>.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:uplot"></span>
+<img src="bookdownproj_files/figure-html/uplot-1.png" alt="Pdf (left) and cdf (right) of the continuous uniform between zero and one." width="50%" />
+<p class="caption">
+Figure 4.2: Pdf (left) and cdf (right) of the continuous uniform between zero and one.
+</p>
 </div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>These are lecture notes for the module <em>Simulation and Modelling to Understand Change</em> given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data &amp; Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed.</p>
-
+<p>Its expectation is 1/2 and its variance is 1/12.</p>
+<p>This implies that if we were to divide the interval <span class="math inline">\([0,1]\)</span> into <span class="math inline">\(n\)</span> sub-intervals of equal length, then we would expect in each interval to have <span class="math inline">\(N/n\)</span> observations, where <span class="math inline">\(N\)</span> is the total number of observations.</p>
+<p>Figure <a href="properties-of-random-numbers.html#fig:uhist">4.3</a> shows the histograms of two sequences of numbers between zero and one: whilst the one on the left resembles the pdf of a uniform distribution, the one on the right clearly does not (it is far from being flat) and therefore it is hard to believe that such numbers follow a uniform distribution.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:uhist"></span>
+<img src="bookdownproj_files/figure-html/uhist-1.png" alt="Histograms from two sequences of numbers between zero and one." width="50%" />
+<p class="caption">
+Figure 4.3: Histograms from two sequences of numbers between zero and one.
+</p>
+</div>
+<p>The second requirement the numbers <span class="math inline">\(u_1,\dots,u_N\)</span> need to respect is independence. This means that the probability of observing a value in a particular sub-interval of <span class="math inline">\((0,1)\)</span> is independent of the previous values drawn.</p>
+<p>Consider the following sequence of numbers:
+<span class="math display">\[
+\begin{array}{cccccccccc}
+0.25 &amp; 0.72 &amp; 0.18 &amp; 0.63 &amp; 0.49 &amp; 0.88 &amp; 0.23 &amp; 0.78 &amp; 0.02 &amp; 0.52
+\end{array}
+\]</span>
+We can notice that numbers below and above 0.5 are alternating in the sequence. We would therefore believe that after a number less than 0.5 it is much more likely to observe a number above it. This breaks the assumption of independence.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="intro.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="random-number-generation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="pseudo-random-numbers.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -340,7 +376,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/amartinezm90/SMUCbook/edit/master/index.Rmd",
+"link": "https://github.com/amartinezm90/SMUCbook/edit/master/04-Random.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -348,7 +384,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/amartinezm90/SMUCbook/blob/master/index.Rmd",
+"link": "https://github.com/amartinezm90/SMUCbook/blob/master/04-Random.Rmd",
 "text": null
 },
 "download": null,

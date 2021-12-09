@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Simulation and Modeling to Understand the Change</title>
+  <title>1.4 The donut shop example | Simulation and Modeling to Understand the Change</title>
   <meta name="description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Simulation and Modeling to Understand the Change" />
+  <meta property="og:title" content="1.4 The donut shop example | Simulation and Modeling to Understand the Change" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/Rplot.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="manueleleonelli/SimBook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Simulation and Modeling to Understand the Change" />
+  <meta name="twitter:title" content="1.4 The donut shop example | Simulation and Modeling to Understand the Change" />
   
   <meta name="twitter:description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
   <meta name="twitter:image" content="/images/Rplot.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="intro.html"/>
+<link rel="prev" href="elements-of-a-simulation-model.html"/>
+<link rel="next" href="simulating-a-little-health-center.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -293,23 +293,67 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Simulation and Modeling to Understand the Change</h1>
-<p class="author"><em>Alejandro Martínez-Mingo &amp; Manuele Leonelli</em></p>
-<p class="date"><em>2021-12-09</em></p>
+<div id="the-donut-shop-example" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> The donut shop example</h2>
+<p>Let’s consider in more details the donut shop example and let’s construct and implement our first simulation model. At this stage, you should not worry about the implementation details. These will be formalized in more details in later chapters.</p>
+<p>Let’s make some assumptions:</p>
+<ul>
+<li><p>the queue in the shop is possibly infinite: whenever a customer arrives she will stay in the queue independent of how many customers are already queuing and she will wait until she is served.</p></li>
+<li><p>customers are served on a first-come, first-served basis.</p></li>
+<li><p>there are two employees. On average they take the same time to serve a customer. Whenever an employee is free, a customer is allocated to that employee. If both employees are free, either of the two starts serving a customer.</p></li>
+</ul>
+<p>The components of the simulation model are the following:</p>
+<ul>
+<li><p><strong>System state</strong>: <span class="math inline">\(N_C(t)\)</span> number of customers waiting to be served at time <span class="math inline">\(t\)</span>; <span class="math inline">\(N_E(t)\)</span> number of employees busy at time <span class="math inline">\(t\)</span>.</p></li>
+<li><p><strong>Resources</strong>: customers and employees;</p></li>
+<li><p><strong>Events</strong>: arrival of a customer; service completion by an employee.</p></li>
+<li><p><strong>Activities</strong>: time between a customer arrival and the next; service time by an employee.</p></li>
+<li><p><strong>Delay</strong>: customers’ waiting time in the queue until an employee is available.</p></li>
+</ul>
+<p>From an abstract point of view we have now defined all components of our simulation model. Before implementing, we need to choose the length of the activities. This is usually done using common sense, intuition or historical data. Suppose for instance that the time between the arrival of customers is modeled as an Exponential distribution with parameter 1/3 (that is on average a customer arrives every three minutes) and the service time is modeled as a continuous Uniform distribution between 1 and 5 (on average a service takes three minutes).</p>
+<p>With this information we can now implement the workings of our donut shop. It does not matter the specific code itself, we will learn about it in later chapters. At this stage it is only important to notice that we use the <code>simmer</code> package together with the functionalities of <code>magrittr</code>. We simulate our donut shop for two hours.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="the-donut-shop-example.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(simmer)</span>
+<span id="cb2-2"><a href="the-donut-shop-example.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
+<span id="cb2-3"><a href="the-donut-shop-example.html#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2021</span>)</span>
+<span id="cb2-4"><a href="the-donut-shop-example.html#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="the-donut-shop-example.html#cb2-5" aria-hidden="true" tabindex="-1"></a>env <span class="ot">&lt;-</span>  <span class="fu">simmer</span>(<span class="st">&quot;donut shop&quot;</span>)</span>
+<span id="cb2-6"><a href="the-donut-shop-example.html#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="the-donut-shop-example.html#cb2-7" aria-hidden="true" tabindex="-1"></a>customer <span class="ot">&lt;-</span> <span class="fu">trajectory</span>(<span class="st">&quot;customer&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">seize</span>(<span class="st">&quot;employee&quot;</span>, <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-8"><a href="the-donut-shop-example.html#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">timeout</span>(<span class="cf">function</span>() <span class="fu">runif</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">5</span>)) <span class="sc">%&gt;%</span> <span class="fu">release</span>(<span class="st">&quot;employee&quot;</span>, <span class="dv">1</span>) </span>
+<span id="cb2-9"><a href="the-donut-shop-example.html#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="the-donut-shop-example.html#cb2-10" aria-hidden="true" tabindex="-1"></a>env <span class="sc">%&gt;%</span></span>
+<span id="cb2-11"><a href="the-donut-shop-example.html#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_resource</span>(<span class="st">&quot;employee&quot;</span>, <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-12"><a href="the-donut-shop-example.html#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_generator</span>(<span class="st">&quot;customer&quot;</span>, customer, <span class="cf">function</span>() <span class="fu">rexp</span>(<span class="dv">1</span>,<span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>))</span>
+<span id="cb2-13"><a href="the-donut-shop-example.html#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="the-donut-shop-example.html#cb2-14" aria-hidden="true" tabindex="-1"></a>env <span class="sc">%&gt;%</span></span>
+<span id="cb2-15"><a href="the-donut-shop-example.html#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">run</span>(<span class="at">until=</span><span class="dv">120</span>)</span></code></pre></div>
+<p>The above code creates a simulation of the donut shop for two hours. Next we report some graphical summaries that describe how the system worked.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="the-donut-shop-example.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(simmer.plot)</span>
+<span id="cb3-2"><a href="the-donut-shop-example.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
+<span id="cb3-3"><a href="the-donut-shop-example.html#cb3-3" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">plot</span>(<span class="fu">get_mon_resources</span>(env), <span class="at">metric =</span> <span class="st">&quot;usage&quot;</span>, <span class="at">items =</span> <span class="st">&quot;server&quot;</span>,<span class="at">step =</span> T)</span>
+<span id="cb3-4"><a href="the-donut-shop-example.html#cb3-4" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">plot</span>(<span class="fu">get_mon_arrivals</span>(env), <span class="at">metric =</span> <span class="st">&quot;waiting_time&quot;</span>)</span>
+<span id="cb3-5"><a href="the-donut-shop-example.html#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="the-donut-shop-example.html#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1,p2,<span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:donut"></span>
+<img src="bookdownproj_files/figure-html/donut-1.png" alt="Graphical summaries from the simulation of the donut shop" width="672" />
+<p class="caption">
+Figure 1.3: Graphical summaries from the simulation of the donut shop
+</p>
 </div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>These are lecture notes for the module <em>Simulation and Modelling to Understand Change</em> given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data &amp; Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed.</p>
-
+<p>The left plot in Figure 1.3 reports the number of busy employees busy throughout the simulation. We can observe that often no employees were busy, but sometimes both of them are busy. The right plot in Figure 1.3 reports the waiting time of customers throughout the simulation. Most often customers do not wait in our shop and the largest waiting time is of about four minutes.</p>
+<p>Some observations:</p>
+<ul>
+<li><p>this is the result of a single simulation where inputs are random and described by a random variable (for instance, Poisson and Uniform). If we were to run the simulation again we would observe different results.</p></li>
+<li><p>given that we have built the simulation model, it is straightforward to change some of the inputs and observe the results under different conditions. For instance, we could investigate what would happen if we had only one employee. We could also investigate the use of different input parameters for the customer arrival times and the service times.</p></li>
+</ul>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="intro.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="elements-of-a-simulation-model.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="simulating-a-little-health-center.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -340,7 +384,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/amartinezm90/SMUCbook/edit/master/index.Rmd",
+"link": "https://github.com/amartinezm90/SMUCbook/edit/master/01-intro.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -348,7 +392,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/amartinezm90/SMUCbook/blob/master/index.Rmd",
+"link": "https://github.com/amartinezm90/SMUCbook/blob/master/01-intro.Rmd",
 "text": null
 },
 "download": null,

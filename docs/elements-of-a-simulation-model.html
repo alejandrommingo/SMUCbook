@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Simulation and Modeling to Understand the Change</title>
+  <title>1.3 Elements of a simulation model | Simulation and Modeling to Understand the Change</title>
   <meta name="description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Simulation and Modeling to Understand the Change" />
+  <meta property="og:title" content="1.3 Elements of a simulation model | Simulation and Modeling to Understand the Change" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/Rplot.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="manueleleonelli/SimBook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Simulation and Modeling to Understand the Change" />
+  <meta name="twitter:title" content="1.3 Elements of a simulation model | Simulation and Modeling to Understand the Change" />
   
   <meta name="twitter:description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
   <meta name="twitter:image" content="/images/Rplot.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="intro.html"/>
+<link rel="prev" href="types-of-simulations.html"/>
+<link rel="next" href="the-donut-shop-example.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -293,23 +293,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Simulation and Modeling to Understand the Change</h1>
-<p class="author"><em>Alejandro Martínez-Mingo &amp; Manuele Leonelli</em></p>
-<p class="date"><em>2021-12-09</em></p>
+<div id="elements-of-a-simulation-model" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Elements of a simulation model</h2>
+<p>We next introduce some terminology which we will need in the following.</p>
+<div id="objects-of-the-model" class="section level3" number="1.3.1">
+<h3><span class="header-section-number">1.3.1</span> Objects of the model</h3>
+<p>There are two types of objects a simulation model is often made of:</p>
+<ul>
+<li><p><em>Entities</em>: individual elements of the system that are being simulated and whose behavior is being explicitly tracked. Each entity can be individually identified;</p></li>
+<li><p><em>Resources</em>: also individual elements of the system but they are not modelled individually. They are treated as countable items whose behavior is not tracked.</p></li>
+</ul>
+<p>Whether an element should be treated as an entity or as a resource is something that the modeller must decide and depends on the purpose of the simulation. Consider our simple donut shop. Clients will be most likely be resources since we are not really interested in what each of them do. Employees may either be considered as entities or resources: in the former case we want to track the amount of time each of them are working; in the latter the model would only be able to output an overview of how busy overall the employees are.</p>
 </div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>These are lecture notes for the module <em>Simulation and Modelling to Understand Change</em> given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data &amp; Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed.</p>
-
+<div id="organization-of-entities-and-resources" class="section level3" number="1.3.2">
+<h3><span class="header-section-number">1.3.2</span> Organization of entities and resources</h3>
+<ul>
+<li><p><em>Attributes</em>: properties of objects (that is entities and resources). This is often used to control the behavior of the object. In our donut shop an attribute may be the state of an employee: whether she is busy or available. In a more comprehensive simulation, an attribute might be the type of donut a customer will buy (for instance, chocolate, vanilla or jam).</p></li>
+<li><p><em>State</em>: collection of variables necessary to describe the system at any time point. In our donut shop, in the simplest case the necessary variables are number of customers queuing and number of busy employees. This fully characterizes the system.</p></li>
+<li><p><em>List</em>: collection of entites or resources ordered in some logical fashion. For instance, the customers waiting in our shop may be ordered in the so-called ``fist-come, first-served" scheme, that is customers will be served in the order they arrived in the shop.</p></li>
+</ul>
+</div>
+<div id="operations-of-the-objects" class="section level3" number="1.3.3">
+<h3><span class="header-section-number">1.3.3</span> Operations of the objects</h3>
+<p>During a simulation study, entities and resources will cooperate and therefore change state. The following terminology describe this as well as the flow of time:</p>
+<ul>
+<li><p><em>Event</em>: instant of time where the state of the system changes. In the donut shop suppose that there are currently two customers being served. An event is when a customer has finished being served: the number of busy employees decreases by one and there is one less customer queuing.</p></li>
+<li><p><em>Activity</em>: a time period of specified length which is known when it begins (although its length may be random). The time an employee takes to serve a customer is an example of an activity: this may be specified in terms of a random distribution.</p></li>
+<li><p><em>Delay</em>: duration of time of unspecified length, which is not known until it ends. This is not specified by the modeller ahead of time but is determined by the conditions of the system. Very often this is one of the desired output of a simulation. For instance, a delay is the waiting time of a customer in the queue of our donut shop.</p></li>
+<li><p><em>Clock</em>: variable representing simulated time.</p></li>
+</ul>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="intro.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="types-of-simulations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="the-donut-shop-example.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -340,7 +361,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/amartinezm90/SMUCbook/edit/master/index.Rmd",
+"link": "https://github.com/amartinezm90/SMUCbook/edit/master/01-intro.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -348,7 +369,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/amartinezm90/SMUCbook/blob/master/index.Rmd",
+"link": "https://github.com/amartinezm90/SMUCbook/blob/master/01-intro.Rmd",
 "text": null
 },
 "download": null,

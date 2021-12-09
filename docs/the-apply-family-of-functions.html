@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Simulation and Modeling to Understand the Change</title>
+  <title>2.6 The apply family of functions | Simulation and Modeling to Understand the Change</title>
   <meta name="description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Simulation and Modeling to Understand the Change" />
+  <meta property="og:title" content="2.6 The apply family of functions | Simulation and Modeling to Understand the Change" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/Rplot.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="manueleleonelli/SimBook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Simulation and Modeling to Understand the Change" />
+  <meta name="twitter:title" content="2.6 The apply family of functions | Simulation and Modeling to Understand the Change" />
   
   <meta name="twitter:description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
   <meta name="twitter:image" content="/images/Rplot.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="intro.html"/>
+<link rel="prev" href="functions.html"/>
+<link rel="next" href="the-pipe-operator.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -293,23 +293,61 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Simulation and Modeling to Understand the Change</h1>
-<p class="author"><em>Alejandro Martínez-Mingo &amp; Manuele Leonelli</em></p>
-<p class="date"><em>2021-12-09</em></p>
+<div id="the-apply-family-of-functions" class="section level2" number="2.6">
+<h2><span class="header-section-number">2.6</span> The <code>apply</code> family of functions</h2>
+<p>One of the biggest limitation of R is that it is slow in performing cycles. For this reason, one should aim at avoiding as much as possible to use of loops.</p>
+<p>There are various functions which are designed to help you in avoiding these loops and they are in the family of so called <code>apply</code> functions. There are many of these but we will only see two here.</p>
+<div id="the-function-apply" class="section level3" number="2.6.1">
+<h3><span class="header-section-number">2.6.1</span> The function <code>apply</code></h3>
+<p>Consider the following code.</p>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="the-apply-family-of-functions.html#cb106-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>), <span class="at">ncol=</span><span class="dv">3</span> , <span class="at">nrow =</span> <span class="dv">3</span>)</span>
+<span id="cb106-2"><a href="the-apply-family-of-functions.html#cb106-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb106-3"><a href="the-apply-family-of-functions.html#cb106-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>){</span>
+<span id="cb106-4"><a href="the-apply-family-of-functions.html#cb106-4" aria-hidden="true" tabindex="-1"></a>  y[i] <span class="ot">&lt;-</span> <span class="fu">sum</span>(x[i,])</span>
+<span id="cb106-5"><a href="the-apply-family-of-functions.html#cb106-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb106-6"><a href="the-apply-family-of-functions.html#cb106-6" aria-hidden="true" tabindex="-1"></a>y</span></code></pre></div>
+<pre><code>## [1] 12 15 18</code></pre>
+<p>The code first defines a matrix <code>x</code> and an empty vector <code>y</code> (recall that this is bad practice, but for this example it does not matter). Then there is a <code>for</code> cycle which assigns to the i-th entry of <code>y</code> the sum of the entries of the i-th row of <code>x</code>. So the vector <code>y</code> includes the row-totals.</p>
+<p>For this simple example the <code>for</code> cycle is extremely quick, but this is just to illustrate how we can replace it using the <code>apply</code> function.</p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="the-apply-family-of-functions.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(x, <span class="dv">1</span>, sum)</span></code></pre></div>
+<pre><code>## [1] 12 15 18</code></pre>
+<p>Let’s look at the above code. The first input of <code>apply</code> is the object we want to operate upon, in this case the matrix <code>x</code>. The second input specifies if the operation has to act over the rows of the matrix (input equal to 1) or over the columns (input equal to 2). The third input is the operation we want to use, in this case <code>sum</code>.</p>
+<p>Beside being faster, the above code is also a lot more compact than using a for loop.</p>
+<p>The following example computes the mean of each column of <code>x</code>.</p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="the-apply-family-of-functions.html#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(x, <span class="dv">2</span>, mean)</span></code></pre></div>
+<pre><code>## [1] 2 5 8</code></pre>
 </div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>These are lecture notes for the module <em>Simulation and Modelling to Understand Change</em> given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data &amp; Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed.</p>
-
+<div id="the-function-sapply" class="section level3" number="2.6.2">
+<h3><span class="header-section-number">2.6.2</span> The function <code>sapply</code></h3>
+<p>Consider again our function <code>new.function</code> which computes the sum of the squared of a number <code>x</code> with another number <code>y</code>.</p>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="the-apply-family-of-functions.html#cb112-1" aria-hidden="true" tabindex="-1"></a>new.function <span class="ot">&lt;-</span> <span class="cf">function</span>(x,y){ x<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> y}</span></code></pre></div>
+<p>Suppose that we want to compute such a sum for all numbers <code>x</code> from 1 to 10. Suppose that <code>y</code> is chosen as 2. We can achieve this with a <code>for</code> cycle as follows.</p>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="the-apply-family-of-functions.html#cb113-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb113-2"><a href="the-apply-family-of-functions.html#cb113-2" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb113-3"><a href="the-apply-family-of-functions.html#cb113-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>){</span>
+<span id="cb113-4"><a href="the-apply-family-of-functions.html#cb113-4" aria-hidden="true" tabindex="-1"></a>  z[i] <span class="ot">&lt;-</span> <span class="fu">new.function</span>(x[i],<span class="dv">2</span>)</span>
+<span id="cb113-5"><a href="the-apply-family-of-functions.html#cb113-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb113-6"><a href="the-apply-family-of-functions.html#cb113-6" aria-hidden="true" tabindex="-1"></a>z</span></code></pre></div>
+<pre><code>##  [1]   3   6  11  18  27  38  51  66  83 102</code></pre>
+<p>The function <code>sapply</code> can be used for this specific purpose.</p>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="the-apply-family-of-functions.html#cb115-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb115-2"><a href="the-apply-family-of-functions.html#cb115-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(x,new.function, <span class="at">y=</span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##  [1]   3   6  11  18  27  38  51  66  83 102</code></pre>
+<p>The first argument of <code>sapply</code> is a vector of values we want to use as input of a function. The second argument is the function we want to apply multiple times. If the function has more than one input we can then specify what their value is, in this specific case <code>y=2</code>.</p>
+<p>Notice that a function can also be defined within <code>sapply</code>.</p>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="the-apply-family-of-functions.html#cb117-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb117-2"><a href="the-apply-family-of-functions.html#cb117-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(x, <span class="cf">function</span>(i) i<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##  [1]   3   6  11  18  27  38  51  66  83 102</code></pre>
+<p>So we defined the vector <code>x</code> and we want to apply the function defined within <code>sapply</code> multiple times: once for each entry in the vector <code>x</code>.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="intro.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="functions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="the-pipe-operator.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -340,7 +378,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/amartinezm90/SMUCbook/edit/master/index.Rmd",
+"link": "https://github.com/amartinezm90/SMUCbook/edit/master/02-R.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -348,7 +386,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/amartinezm90/SMUCbook/blob/master/index.Rmd",
+"link": "https://github.com/amartinezm90/SMUCbook/blob/master/02-R.Rmd",
 "text": null
 },
 "download": null,

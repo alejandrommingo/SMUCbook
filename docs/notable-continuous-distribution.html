@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Simulation and Modeling to Understand the Change</title>
+  <title>3.4 Notable Continuous Distribution | Simulation and Modeling to Understand the Change</title>
   <meta name="description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Simulation and Modeling to Understand the Change" />
+  <meta property="og:title" content="3.4 Notable Continuous Distribution | Simulation and Modeling to Understand the Change" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/Rplot.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="manueleleonelli/SimBook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Simulation and Modeling to Understand the Change" />
+  <meta name="twitter:title" content="3.4 Notable Continuous Distribution | Simulation and Modeling to Understand the Change" />
   
   <meta name="twitter:description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
   <meta name="twitter:image" content="/images/Rplot.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="intro.html"/>
+<link rel="prev" href="continuous-random-variables.html"/>
+<link rel="next" href="the-central-limit-theorem.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -293,23 +293,197 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Simulation and Modeling to Understand the Change</h1>
-<p class="author"><em>Alejandro Martínez-Mingo &amp; Manuele Leonelli</em></p>
-<p class="date"><em>2021-12-09</em></p>
+<div id="notable-continuous-distribution" class="section level2" number="3.4">
+<h2><span class="header-section-number">3.4</span> Notable Continuous Distribution</h2>
+<p>As in the discrete case, there are some types of continuous random variables that are used frequently and therefore are given a name and their proprieties are well-studied.</p>
+<div id="uniform-distribution" class="section level3" number="3.4.1">
+<h3><span class="header-section-number">3.4.1</span> Uniform Distribution</h3>
+<p>The first, and simplest, continuous random variable we study is the so-called (continuous) <em>uniform</em> distribution. We say that a random variable <span class="math inline">\(X\)</span> is uniformly distributed on the interval <span class="math inline">\([a,b]\)</span> if its pdf is
+<span class="math display">\[
+f(x)=\left\{ 
+\begin{array}{ll}
+\frac{1}{b-a}, &amp; a\leq x \leq b\\
+0, &amp; \mbox{otherwise} 
+\end{array}
+\right.
+\]</span>
+This is plotted in Figure <a href="notable-continuous-distribution.html#fig:unipdf">3.9</a> for choices of parameters <span class="math inline">\(a=2\)</span> and <span class="math inline">\(b=6\)</span></p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unipdf"></span>
+<img src="bookdownproj_files/figure-html/unipdf-1.png" alt="Probability density function for a uniform random variable with parameters a = 2 and b = 6" width="50%" />
+<p class="caption">
+Figure 3.9: Probability density function for a uniform random variable with parameters a = 2 and b = 6
+</p>
 </div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>These are lecture notes for the module <em>Simulation and Modelling to Understand Change</em> given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data &amp; Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed.</p>
-
+<p>By looking at the pdf we see that it is a flat, constant line between the values <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>. This implies that the probability that <span class="math inline">\(X\)</span> takes values between two values <span class="math inline">\(x_0\)</span> and <span class="math inline">\(x_1\)</span> only dependens on the length of the interval <span class="math inline">\((x_0,x_1)\)</span>.</p>
+<p>Its cdf can be derived as
+<span class="math display">\[
+F(x)=\left\{
+\begin{array}{ll}
+0, &amp; x&lt;a\\
+\frac{x-a}{b-a}, &amp; a\leq x \leq b\\
+1, &amp; x&gt;b
+\end{array}
+\right.
+\]</span>
+and this is plotted in Figure <a href="notable-continuous-distribution.html#fig:unicdf">3.10</a>.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unicdf"></span>
+<img src="bookdownproj_files/figure-html/unicdf-1.png" alt="Cumulative distribution function for a uniform random variable with parameters a = 2 and b = 6" width="50%" />
+<p class="caption">
+Figure 3.10: Cumulative distribution function for a uniform random variable with parameters a = 2 and b = 6
+</p>
+</div>
+<p>The mean and variance of a uniform can be derived as
+<span class="math display">\[
+E(X)=\frac{a+b}{2}, \hspace{1cm} V(X)=\frac{(b-a)^2}{12}.
+\]</span>
+So the mean is equal to the middle point of the interval <span class="math inline">\((a,b)\)</span>.</p>
+<p>The uniform distribution will be fundamental in simulation. We will see that the starting point to simulate random numbers from any distribution will require the simulation of random numbers uniformly distributed between 0 and 1.</p>
+<p>R provides an implementation of the uniform random variable with the functions <code>dunif</code> and <code>punif</code> whose details are as follows:</p>
+<ul>
+<li><p>the first argument is the value at which to compute the function;</p></li>
+<li><p>the second argument, <code>min</code>, is the parameter <span class="math inline">\(a\)</span>, by default equal to zero;</p></li>
+<li><p>the third argument, <code>max</code>, is the parameter <span class="math inline">\(b\)</span>, by default equal to one.</p></li>
+</ul>
+<p>So for instance</p>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="notable-continuous-distribution.html#cb145-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dunif</span>(<span class="dv">5</span>, <span class="at">min =</span> <span class="dv">2</span>, <span class="at">max =</span> <span class="dv">6</span>)</span></code></pre></div>
+<pre><code>## [1] 0.25</code></pre>
+<p>computes the pdf at the point 5 of a uniform random variable with parameters <span class="math inline">\(a=2\)</span> and <span class="math inline">\(b=6\)</span>.</p>
+<p>Conversely,</p>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="notable-continuous-distribution.html#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="fu">punif</span>(<span class="fl">0.5</span>)</span></code></pre></div>
+<pre><code>## [1] 0.5</code></pre>
+<p>computes the cdf at the point 0.5 of a uniform random variable with parameters <span class="math inline">\(a=0\)</span> and <span class="math inline">\(b=1\)</span>.</p>
+</div>
+<div id="exponential-distribution" class="section level3" number="3.4.2">
+<h3><span class="header-section-number">3.4.2</span> Exponential Distribution</h3>
+<p>The second class of continuous random variables we will study are the so-called <em>exponential</em> random variables. We have actually already seen such a random variable in the donut shop example. More generally, we say that a continuous random variable <span class="math inline">\(X\)</span> is exponential with parameter <span class="math inline">\(\lambda&gt;0\)</span> if its pdf is
+<span class="math display">\[
+f(x) = \left\{
+\begin{array}{ll}
+\lambda e^{-\lambda x}, &amp; x\geq 0\\
+0, &amp; \mbox{otherwise}
+\end{array}
+\right.
+\]</span></p>
+<p>Figure <a href="notable-continuous-distribution.html#fig:exppdf1">3.11</a> reports the pdf of exponential random variables for various choices of the parameter <span class="math inline">\(\lambda\)</span>.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:exppdf1"></span>
+<img src="bookdownproj_files/figure-html/exppdf1-1.png" alt="Probability density function for exponential random variables" width="50%" />
+<p class="caption">
+Figure 3.11: Probability density function for exponential random variables
+</p>
+</div>
+<p>Exponential random variables are very often used in dynamic simulations since they are very often used to model interarrival times in process: for instance the time between arrivals of customers at the donut shop.</p>
+<p>Its cdf can be derived as
+<span class="math display">\[
+F(x)=\left\{
+\begin{array}{ll}
+0, &amp; x &lt;0\\
+1-e^{-\lambda x}, &amp; x\geq 0
+\end{array}
+\right.
+\]</span>
+and is reported in Figure <a href="notable-continuous-distribution.html#fig:expcdf1">3.12</a> for the same choices of parameters.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:expcdf1"></span>
+<img src="bookdownproj_files/figure-html/expcdf1-1.png" alt="Cumulative distribution function for exponential random variables" width="50%" />
+<p class="caption">
+Figure 3.12: Cumulative distribution function for exponential random variables
+</p>
+</div>
+<p>The mean and the variance of exponential random variables can be computed as</p>
+<p><span class="math display">\[
+E(X)=\frac{1}{\lambda}, \hspace{1cm} V(X)=\frac{1}{\lambda^2}
+\]</span></p>
+<p>R provides an implementation of the uniform random variable with the functions <code>dexp</code> and <code>pexp</code> whose details are as follows:</p>
+<ul>
+<li><p>the first argument is the value at which to compute the function;</p></li>
+<li><p>the second argument, <code>rate</code>, is the parameter <span class="math inline">\(\lambda\)</span>, by default equal to one;</p></li>
+</ul>
+<p>So for instance</p>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="notable-continuous-distribution.html#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dexp</span>(<span class="dv">2</span>, <span class="at">rate =</span> <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>## [1] 0.007436257</code></pre>
+<p>computes the pdf at the point 2 of an exponential random variable with parameter <span class="math inline">\(\lambda =3\)</span>.</p>
+<p>Conversely</p>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="notable-continuous-distribution.html#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pexp</span>(<span class="dv">4</span>)</span></code></pre></div>
+<pre><code>## [1] 0.9816844</code></pre>
+<p>computes the cdf at the point 4 of an exponential random variable with parameter <span class="math inline">\(\lambda =1\)</span>.</p>
+</div>
+<div id="normal-distribution" class="section level3" number="3.4.3">
+<h3><span class="header-section-number">3.4.3</span> Normal Distribution</h3>
+<p>The last class of continuous random variables we consider is the so-called <em>Normal</em> or <em>Gaussian</em> random variable. They are the most used and well-known random variable in statistics and we will see why this is the case.</p>
+<p>A continuous random variable <span class="math inline">\(X\)</span> is said to have a Normal distribution with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span> if its pdf is
+<span class="math display">\[
+f(x) = \frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{1}{2}\frac{(x-\mu)^2}{\sigma^2}\right).
+\]</span>
+Recall that
+<span class="math display">\[
+E(X)=\mu, \hspace{1cm} V(X)=\sigma^2,
+\]</span>
+and so the parameters have a straightforward interpretation in terms of mean and variance.</p>
+<p>Figure <a href="notable-continuous-distribution.html#fig:norm">3.13</a> shows the form of the pdf of the Normal distribution for various choices of the parameters. On the left we have Normal pdfs for <span class="math inline">\(\sigma^2=1\)</span> and various choices of <span class="math inline">\(\mu\)</span>: we can see that <span class="math inline">\(\mu\)</span> shifts the plot on the x-axis. On the right we have Normal pdfs for <span class="math inline">\(\mu=1\)</span> and various choices of <span class="math inline">\(\sigma^2\)</span>: we can see that all distributions are centered around the same value while they have a different spread/variability.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:norm"></span>
+<img src="bookdownproj_files/figure-html/norm-1.png" alt="Probability density function for normal random variables" width="50%" />
+<p class="caption">
+Figure 3.13: Probability density function for normal random variables
+</p>
+</div>
+<p>The form of the Normal pdf is the well-known so-called bell-shaped function. We can notice some properties:</p>
+<ul>
+<li><p>it is symmetric around the mean: the function on the left-hand side and on the right-hand side of the mean is mirrored. This implies that the median is equal to the mean ;</p></li>
+<li><p>the maximum value of the pdf occurs at the mean. This implies that the mode is equal to the mean (and therefore also the median).</p></li>
+</ul>
+<p>The cdf of the Normal random variable with parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span> is
+<span class="math display">\[
+F(x) = P(X\leq x)=\int_{-\infty}^{+\infty}\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{1}{2}\frac{(x-\mu)^2}{\sigma^2}\right)dx
+\]</span></p>
+<p>The cdf of the Normal for various choices of parameters is reported in Figure <a href="notable-continuous-distribution.html#fig:pnorm">3.14</a>.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:pnorm"></span>
+<img src="bookdownproj_files/figure-html/pnorm-1.png" alt="Cumulative distribution function for normal random variables" width="50%" />
+<p class="caption">
+Figure 3.14: Cumulative distribution function for normal random variables
+</p>
+</div>
+<p>Unfortunately it is not possible to solve such an integral (as for example for the Uniform and the Exponential), and in general it is approximated using some numerical techniques. This is surprising considering that the Normal distribution is so widely used!!!</p>
+<p>However, notice that we would need to compute such an approximation for every possible value of <span class="math inline">\((\mu,\sigma^2)\)</span>, depending on the distribution we want to use. This is unfeasible to do in practice.</p>
+<p>There is a trick here, that you must have used multiple times already. We can transform a Normal <span class="math inline">\(X\)</span> with parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span> to the so-called <em>standard Normal</em> random variable <span class="math inline">\(Z\)</span>, and viceversa, using the relationship:
+<span class="math display" id="eq:standard">\[\begin{equation}
+ \tag{3.1}
+Z = \frac{X-\mu}{\sigma}, \hspace{1cm} X= \mu + \sigma Z.
+\end{equation}\]</span>
+It can be shown that <span class="math inline">\(Z\)</span> is a Normal random variable with parameter <span class="math inline">\(\mu=0\)</span> and <span class="math inline">\(\sigma^2=1\)</span>.</p>
+<p>The values of the cdf of the standard Normal random variable then need to be computed only once since <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span> are fixed. You have seen these numbers many many times in what are usually called the tables of the Normal distribution.</p>
+<p>As a matter of fact you have also computed many times the cdf of a generic Normal random variable. First you computed <span class="math inline">\(Z\)</span> using equation <a href="notable-continuous-distribution.html#eq:standard">(3.1)</a> and then looked at the Normal tables to derive that number.</p>
+<p>Let’s give some details about the standard Normal. Its pdf is
+<span class="math display">\[
+\phi(z)=\frac{1}{\sqrt{2\pi}}\exp\left(-z^2/2\right).
+\]</span>
+It can be seen that it is the same as the one of the Normal by setting <span class="math inline">\(\mu=0\)</span> and <span class="math inline">\(\sigma^2=1\)</span>. Such a function is so important that it is given its own symbol <span class="math inline">\(\phi\)</span>.</p>
+<p>The cdf is
+<span class="math display">\[
+\Phi(z)=\int_{-\infty}^z\frac{1}{\sqrt{2\pi}}\exp\left(-x^2/2\right)dx
+\]</span>
+Again this cannot be computed exactly, there is no closed-form expression. This is why you had to look at the tables instead of using a simple formula. The cdf of the standard Normal is also so important that it is given its own symbol <span class="math inline">\(\phi\)</span>.</p>
+<p>Instead of using the tables, we can use R to tell us the values of Normal probabilities. R provides an implementation of the Normal random variable with the functions <code>dnorm</code> and <code>pnorm</code> whose details are as follows:</p>
+<ul>
+<li><p>the first argument is the value at which to compute the function;</p></li>
+<li><p>the second argument, <code>mean</code>, is the parameter <span class="math inline">\(\mu\)</span>, by default equal to zero;</p></li>
+<li><p>the third argument, <code>sd</code>, is the standard deviation, that is <span class="math inline">\(\sqrt{\sigma^2}\)</span>, by default equal to one.</p></li>
+</ul>
+<p>So for instance</p>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="notable-continuous-distribution.html#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dnorm</span>(<span class="dv">3</span>)</span></code></pre></div>
+<pre><code>## [1] 0.004431848</code></pre>
+<p>computes the value of the standard Normal pdf at the value three.</p>
+<p>Similarly,</p>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="notable-continuous-distribution.html#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="fl">0.4</span>,<span class="dv">1</span>,<span class="fl">0.5</span>)</span></code></pre></div>
+<pre><code>## [1] 0.1150697</code></pre>
+<p>compute the value of the Normal cdf with parameters <span class="math inline">\(\mu=1\)</span> and <span class="math inline">\(\sqrt{\sigma^2}=0.5\)</span> at the value 0.4.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="intro.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="continuous-random-variables.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="the-central-limit-theorem.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -340,7 +514,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/amartinezm90/SMUCbook/edit/master/index.Rmd",
+"link": "https://github.com/amartinezm90/SMUCbook/edit/master/03-Probability.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -348,7 +522,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/amartinezm90/SMUCbook/blob/master/index.Rmd",
+"link": "https://github.com/amartinezm90/SMUCbook/blob/master/03-Probability.Rmd",
 "text": null
 },
 "download": null,

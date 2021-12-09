@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Simulation and Modeling to Understand the Change</title>
+  <title>3.3 Continuous Random Variables | Simulation and Modeling to Understand the Change</title>
   <meta name="description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Simulation and Modeling to Understand the Change" />
+  <meta property="og:title" content="3.3 Continuous Random Variables | Simulation and Modeling to Understand the Change" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/Rplot.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="manueleleonelli/SimBook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Simulation and Modeling to Understand the Change" />
+  <meta name="twitter:title" content="3.3 Continuous Random Variables | Simulation and Modeling to Understand the Change" />
   
   <meta name="twitter:description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
   <meta name="twitter:image" content="/images/Rplot.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="intro.html"/>
+<link rel="prev" href="notable-discrete-variables.html"/>
+<link rel="next" href="notable-continuous-distribution.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -293,23 +293,128 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Simulation and Modeling to Understand the Change</h1>
-<p class="author"><em>Alejandro Martínez-Mingo &amp; Manuele Leonelli</em></p>
-<p class="date"><em>2021-12-09</em></p>
+<div id="continuous-random-variables" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Continuous Random Variables</h2>
+<p>Our attention now turns to continuous random variables. These are in general more technical and less intuitive than discrete ones. You should not worry about all the technical details, since these are in general not important, and focus on the interpretation.</p>
+<p>A continuous random variable <span class="math inline">\(X\)</span> is a random variable whose sample space <span class="math inline">\(\mathbb{X}\)</span> is an interval or a collection of intervals. In general <span class="math inline">\(\mathbb{X}\)</span> may coincide with the set of real numbers <span class="math inline">\(\mathbb{R}\)</span> or some subset of it. Examples of continuous random variables:</p>
+<ul>
+<li><p>the pressure of a tire of a car: it can be any positive real number;</p></li>
+<li><p>the current temperature in the city of Madrid: it can be any real number;</p></li>
+<li><p>the height of the students of Simulation and Modeling to understand change: it can be any real number.</p></li>
+</ul>
+<p>Whilst for discrete random variables we considered summations over the elements of <span class="math inline">\(\mathbb{X}\)</span>, i.e. <span class="math inline">\(\sum_{x\in\mathbb{X}}\)</span>, for continuous random variables we need to consider integrals over appropriate intervals.</p>
+<p>You should be more or less familiar with these from previous studies of calculus. But let’s give an example. Consider the function <span class="math inline">\(f(x)=x^2\)</span> computing the squared of a number <span class="math inline">\(x\)</span>. Suppose we are interested in this function between the values -1 and 1, which is plotted by the red line in Figure <a href="continuous-random-variables.html#fig:x-sq">3.6</a>. Consider the so-called integral <span class="math inline">\(\int_{-1}^{1}x^2dx\)</span>: this coincides with the area delimited by the function and the x-axis. In Figure <a href="continuous-random-variables.html#fig:x-sq">3.6</a> the blue area is therefore equal to <span class="math inline">\(\int_{-1}^{1}x^2dx\)</span>.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:x-sq"></span>
+<img src="bookdownproj_files/figure-html/x-sq-1.png" alt="Plot of the squared function and the area under its curve" width="50%" />
+<p class="caption">
+Figure 3.6: Plot of the squared function and the area under its curve
+</p>
 </div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>These are lecture notes for the module <em>Simulation and Modelling to Understand Change</em> given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data &amp; Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed.</p>
-
+<p>We will not be interested in computing integrals ourselves, so if you do not know/remember how to do it, there is no problem!</p>
+<div id="probability-density-function" class="section level3" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> Probability Density Function</h3>
+<p>Discrete random variable are easy to work with in the sense that there exists a function, that we called probability mass function, such that <span class="math inline">\(p(x)=P(X=x)\)</span>, that is the value of that function in the point <span class="math inline">\(x\)</span> is exactly the probability that <span class="math inline">\(X=x\)</span>.</p>
+<p>Therefore we may wonder if this is true for a continuous random variable too. Sadly, the answer is no and probabilities for continuous random variables are defined in a slightly more involved way.</p>
+<p>Let <span class="math inline">\(X\)</span> be a continuous random variable with sample space <span class="math inline">\(\mathbb{X}\)</span>. The probability that <span class="math inline">\(X\)</span> takes values in the interval <span class="math inline">\([a,b]\)</span> is given by
+<span class="math display">\[
+P(a\leq X \leq b) = \int_{a}^bf(x)dx
+\]</span>
+where <span class="math inline">\(f(x)\)</span> is called the <em>probability density function</em> (pdf in short). Pdfs, just like pmfs must obey two conditions:</p>
+<ul>
+<li><p><span class="math inline">\(f(x)\geq 0\)</span> for all <span class="math inline">\(x\in\mathbb{X}\)</span>;</p></li>
+<li><p><span class="math inline">\(\int_{x\in\mathbb{X}}f(x)dx=1\)</span>.</p></li>
+</ul>
+<p>So in the discrete case the pmf is defined exactly as the probability. In the continuous case the pdf is the function such that its integral is the probability that random variable takes values in a specific interval.</p>
+<p>As a consequence of this definition notice that for any specific value <span class="math inline">\(x_0\in\mathbb{X}\)</span>, <span class="math inline">\(P(X=x_0)=0\)</span> since
+<span class="math display">\[
+\int_{x_0}^{x_0}f(x)dx = 0.
+\]</span></p>
+<p>Let’s consider an example. The waiting time of customers of a donuts shop is believed to be random and to follow a random variable whose pdf is
+<span class="math display">\[
+f(x) = \left\{
+\begin{array}{ll}
+\frac{1}{4}e^{-x/4}, &amp; x\geq 0\\
+0, &amp; \mbox{otherwise}
+\end{array}
+\right.
+\]</span></p>
+<p>The pdf is drawn in Figure <a href="continuous-random-variables.html#fig:exp">3.7</a> by the red line. One can see that <span class="math inline">\(f(x)\geq 0\)</span> for all <span class="math inline">\(x\geq 0\)</span> and one could also compute that it integrates to one.</p>
+<p>Therefore the probability that the waiting time is between any two values <span class="math inline">\((a,b)\)</span> can be computed as
+<span class="math display">\[
+\int_a^b\frac{1}{4}e^{-x/4}dx.
+\]</span>
+In particular if we were interested in the probability that the waiting time is between two and five minutes, corresponding to the shaded area in Figure <a href="continuous-random-variables.html#fig:exp">3.7</a>, we could compute it as
+<span class="math display">\[
+P(2&lt;X&lt;5)=\int_2^5f(x)dx=\int_{2}^5\frac{1}{4}e^{-x/4}dx= 0.32
+\]</span></p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:exp"></span>
+<img src="bookdownproj_files/figure-html/exp-1.png" alt="Probability density function for the waiting time in the donut shop example" width="50%" />
+<p class="caption">
+Figure 3.7: Probability density function for the waiting time in the donut shop example
+</p>
+</div>
+<p>Notice that since <span class="math inline">\(P(X=x_0)=0\)</span> for any <span class="math inline">\(x_0\in\mathbb{X}\)</span>, we also have that
+<span class="math display">\[
+P(a\leq X \leq b)=P(a &lt; X \leq b) = P(a\leq X &lt; b) = P(a&lt;X&lt;b).
+\]</span></p>
+</div>
+<div id="cumulative-distribution-function-1" class="section level3" number="3.3.2">
+<h3><span class="header-section-number">3.3.2</span> Cumulative Distribution Function</h3>
+<p>For a continuous random variable <span class="math inline">\(X\)</span> the cumulative distribution function (cdf) is equally defined as
+<span class="math display">\[
+F(x) = P(X \leq x),
+\]</span>
+where now
+<span class="math display">\[
+P(X \leq x) = P(X &lt; x) = \int_{-\infty}^xf(t)dt.
+\]</span>
+so the summation is substituted by an integral.</p>
+<p>Let’s consider again the donut shop example as an illustration. The cdf is defined as
+<span class="math display">\[
+F(x)=\int_{-\infty}^xf(t)dt = \int_{-\infty}^x\frac{1}{4}e^{-x/4}.
+\]</span>
+This integral can be solved and <span class="math inline">\(F(x)\)</span> can be calculated as
+<span class="math display">\[
+F(x)= 1- e^{-x/4},
+\]</span>
+which is plotted in Figure <a href="continuous-random-variables.html#fig:expcdf">3.8</a>.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:expcdf"></span>
+<img src="bookdownproj_files/figure-html/expcdf-1.png" alt="Cumulative distribution function for the waiting time at the donut shop" width="50%" />
+<p class="caption">
+Figure 3.8: Cumulative distribution function for the waiting time at the donut shop
+</p>
+</div>
+<p>We can notice that the cdf has similar properties as in the discrete case: it is non-decreasing, on the left-hand side is zero and on the right-hand side tends to zero.</p>
+<p>In the continuous case, one can prove that cdfs and pdfs are related as
+<span class="math display">\[
+f(x)=\frac{d}{dx}F(x).
+\]</span></p>
+</div>
+<div id="summaries-1" class="section level3" number="3.3.3">
+<h3><span class="header-section-number">3.3.3</span> Summaries</h3>
+<p>Just as for discrete random variables, we may want to summarize some features of a continuous random variable into a unique number. The same set of summaries exists for continuous random variables, which are almost exactly defined as in the discrete case (integrals are used instead of summations).</p>
+<ul>
+<li><p><em>mean</em>: the mean of a continuous random variable <span class="math inline">\(X\)</span> is defined as
+<span class="math display">\[
+ E(X) = \int_{-\infty}^{+\infty}xf(x)dx
+ \]</span></p></li>
+<li><p><em>median</em>: the median of a continuous random variable <span class="math inline">\(X\)</span> is defined as the value <span class="math inline">\(x\)</span> such that <span class="math inline">\(P(X\leq x) = 0.5\)</span> or equally <span class="math inline">\(F(x)=0.5\)</span>.</p></li>
+<li><p><em>mode</em>: the mode of a continuous random variable <span class="math inline">\(X\)</span> is defined the value <span class="math inline">\(x\)</span> such that <span class="math inline">\(f(x)\)</span> is largest.</p></li>
+<li><p><em>variance</em>: the variance of a continuous random variable <span class="math inline">\(X\)</span> is defined as
+<span class="math display">\[
+ V(X)=\int_{-\infty}^{+\infty}(x-E(X))^2f(x)dx
+ \]</span></p></li>
+<li><p><em>standard deviation</em>: the standard deviation of a continuous random variable <span class="math inline">\(X\)</span> is defined as <span class="math inline">\(\sqrt{V(X)}\)</span>.</p></li>
+</ul>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="intro.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="notable-discrete-variables.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="notable-continuous-distribution.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -340,7 +445,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/amartinezm90/SMUCbook/edit/master/index.Rmd",
+"link": "https://github.com/amartinezm90/SMUCbook/edit/master/03-Probability.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -348,7 +453,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/amartinezm90/SMUCbook/blob/master/index.Rmd",
+"link": "https://github.com/amartinezm90/SMUCbook/blob/master/03-Probability.Rmd",
 "text": null
 },
 "download": null,

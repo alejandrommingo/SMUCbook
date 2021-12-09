@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Simulation and Modeling to Understand the Change</title>
+  <title>1.5 Simulating a little health center | Simulation and Modeling to Understand the Change</title>
   <meta name="description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Simulation and Modeling to Understand the Change" />
+  <meta property="og:title" content="1.5 Simulating a little health center | Simulation and Modeling to Understand the Change" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/Rplot.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="manueleleonelli/SimBook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Simulation and Modeling to Understand the Change" />
+  <meta name="twitter:title" content="1.5 Simulating a little health center | Simulation and Modeling to Understand the Change" />
   
   <meta name="twitter:description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
   <meta name="twitter:image" content="/images/Rplot.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="intro.html"/>
+<link rel="prev" href="the-donut-shop-example.html"/>
+<link rel="next" href="whats-next.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -293,23 +293,93 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Simulation and Modeling to Understand the Change</h1>
-<p class="author"><em>Alejandro Martínez-Mingo &amp; Manuele Leonelli</em></p>
-<p class="date"><em>2021-12-09</em></p>
+<div id="simulating-a-little-health-center" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> Simulating a little health center</h2>
+<p>Consider now a slightly more complex example where we want to simulate the workings of a little health center. Patients arrive at the health center and are first visited by a nurse. Once they are visited by the nurse they have an actual consultation with a doctor. Once they are finished with the doctor, they meet the administrative staff to schedule a follow-up appointment.</p>
+<p>We make the following assumptions:</p>
+<ul>
+<li><p>as before we assume queues to be infinite and that patients do not leave the health center until they are served by the administrative staff;</p></li>
+<li><p>at all steps patients are visited using a first-come, first-served basis</p></li>
+<li><p>the health center has one nurse, two doctors and one administrative staff. The two doctors take on average the same time to visit a patient.</p></li>
+</ul>
+<p>The components of the simulation model are the following:</p>
+<ul>
+<li><p><strong>System state</strong>:</p>
+<ul>
+<li><p><span class="math inline">\(Q_N(t)\)</span>: number of patients queuing to see the nurse;</p></li>
+<li><p><span class="math inline">\(Q_D(t)\)</span>: number of patients queing to see a doctor;</p></li>
+<li><p><span class="math inline">\(Q_A(t)\)</span>: number of patients queuing to see the staff;</p></li>
+<li><p><span class="math inline">\(N_N(t)\)</span>: number of nurses available to visit patients;</p></li>
+<li><p><span class="math inline">\(N_D(t)\)</span>: number of doctors available to visit patients;</p></li>
+<li><p><span class="math inline">\(N_A(t)\)</span>: number of administrative staff available to visit patients.</p></li>
+</ul></li>
+<li><p><strong>Resources</strong>: patients, nurses, doctors and administrative staff;</p></li>
+<li><p><strong>Events</strong>: arrival of a patient, completion of nurse’s visit, completation of doctor’s visit, completion of administrative staff’s visit.</p></li>
+<li><p><strong>Activities</strong>: time between the arrival of a patient and the next, visit’s times of nurses, doctors and admin staff.</p></li>
+<li><p><strong>Delay</strong>: customers’ waiting time for nurses, doctors and administrative staff</p></li>
+</ul>
+<p>We further assume the following activities:</p>
+<ul>
+<li><p>Nurse visit times follow a Normal distribution with mean 15 and variance 1;</p></li>
+<li><p>Doctor visit times follow a Normal distribution with mean 20 and variance 1;</p></li>
+<li><p>Administrative staff visit times follow a Normal distribution with mean 5 and variance 1;</p></li>
+<li><p>Time between the arrival of patients is modeled as a Normal with mean 10 and variance 4.</p></li>
+</ul>
+<p>The model above can be implemented using the following code (we run the simulation for four hours). Again do not worry about it now!</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="simulating-a-little-health-center.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2021</span>)</span>
+<span id="cb4-2"><a href="simulating-a-little-health-center.html#cb4-2" aria-hidden="true" tabindex="-1"></a>env <span class="ot">&lt;-</span> <span class="fu">simmer</span>(<span class="st">&quot;HealthCenter&quot;</span>)</span>
+<span id="cb4-3"><a href="simulating-a-little-health-center.html#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="simulating-a-little-health-center.html#cb4-4" aria-hidden="true" tabindex="-1"></a>patient <span class="ot">&lt;-</span> <span class="fu">trajectory</span>(<span class="st">&quot;patients&#39; path&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-5"><a href="simulating-a-little-health-center.html#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">seize</span>(<span class="st">&quot;nurse&quot;</span>, <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-6"><a href="simulating-a-little-health-center.html#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">timeout</span>(<span class="cf">function</span>() <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="dv">15</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-7"><a href="simulating-a-little-health-center.html#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">release</span>(<span class="st">&quot;nurse&quot;</span>, <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-8"><a href="simulating-a-little-health-center.html#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">seize</span>(<span class="st">&quot;doctor&quot;</span>, <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-9"><a href="simulating-a-little-health-center.html#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">timeout</span>(<span class="cf">function</span>() <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="dv">20</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-10"><a href="simulating-a-little-health-center.html#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">release</span>(<span class="st">&quot;doctor&quot;</span>, <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-11"><a href="simulating-a-little-health-center.html#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">seize</span>(<span class="st">&quot;administration&quot;</span>, <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-12"><a href="simulating-a-little-health-center.html#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">timeout</span>(<span class="cf">function</span>() <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="dv">5</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-13"><a href="simulating-a-little-health-center.html#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">release</span>(<span class="st">&quot;administration&quot;</span>, <span class="dv">1</span>)</span>
+<span id="cb4-14"><a href="simulating-a-little-health-center.html#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="simulating-a-little-health-center.html#cb4-15" aria-hidden="true" tabindex="-1"></a>env <span class="sc">%&gt;%</span></span>
+<span id="cb4-16"><a href="simulating-a-little-health-center.html#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_resource</span>(<span class="st">&quot;nurse&quot;</span>, <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-17"><a href="simulating-a-little-health-center.html#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_resource</span>(<span class="st">&quot;doctor&quot;</span>, <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-18"><a href="simulating-a-little-health-center.html#cb4-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_resource</span>(<span class="st">&quot;administration&quot;</span>, <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-19"><a href="simulating-a-little-health-center.html#cb4-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_generator</span>(<span class="st">&quot;patient&quot;</span>, patient, <span class="cf">function</span>() <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">2</span>))</span>
+<span id="cb4-20"><a href="simulating-a-little-health-center.html#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="simulating-a-little-health-center.html#cb4-21" aria-hidden="true" tabindex="-1"></a>env <span class="sc">%&gt;%</span> <span class="fu">run</span>(<span class="dv">240</span>)</span></code></pre></div>
+<p>Let’s look at some summary statistics.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="simulating-a-little-health-center.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">get_mon_resources</span>(env), <span class="at">metric =</span> <span class="st">&quot;utilization&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-4"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-4-1.png" alt="Utilization of the resources in the health center" width="672" />
+<p class="caption">
+Figure 1.4: Utilization of the resources in the health center
+</p>
 </div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>These are lecture notes for the module <em>Simulation and Modelling to Understand Change</em> given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data &amp; Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed.</p>
-
+<p>Figure 1.4 shows the utilization of the different resources in the system. Nurses are most busy, doctors are overall fairly available, whilst the administration is more than half of the time available.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="simulating-a-little-health-center.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">get_mon_resources</span>(env), <span class="at">metric =</span> <span class="st">&quot;usage&quot;</span>, <span class="at">item =</span> <span class="st">&quot;server&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-5"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-5-1.png" alt="Usage of the resources in the health center" width="672" />
+<p class="caption">
+Figure 1.5: Usage of the resources in the health center
+</p>
+</div>
+<p>Figure 1.5 confirms this. We see that the usage of nurses is almost 1, whilst for doctors and administrative staff we are below the number of doctors and staff available.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="simulating-a-little-health-center.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">get_mon_arrivals</span>(env), <span class="at">metric =</span> <span class="st">&quot;flow_time&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-6"></span>
+<img src="bookdownproj_files/figure-html/unnamed-chunk-6-1.png" alt="Time spent in the health center" width="672" />
+<p class="caption">
+Figure 1.6: Time spent in the health center
+</p>
+</div>
+<p>Last Figure 1.6 reports the average time spent by patients in the health center. We can see that as the simulation clock increases, patients spend more time in the health center. From the previous plots, we can deduce that in general patients wait for the nurse, who has been busy all the time during the simulation.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="intro.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="the-donut-shop-example.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="whats-next.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -340,7 +410,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/amartinezm90/SMUCbook/edit/master/index.Rmd",
+"link": "https://github.com/amartinezm90/SMUCbook/edit/master/01-intro.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -348,7 +418,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/amartinezm90/SMUCbook/blob/master/index.Rmd",
+"link": "https://github.com/amartinezm90/SMUCbook/blob/master/01-intro.Rmd",
 "text": null
 },
 "download": null,

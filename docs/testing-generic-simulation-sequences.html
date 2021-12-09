@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Simulation and Modeling to Understand the Change</title>
+  <title>4.6 Testing Generic Simulation Sequences | Simulation and Modeling to Understand the Change</title>
   <meta name="description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Simulation and Modeling to Understand the Change" />
+  <meta property="og:title" content="4.6 Testing Generic Simulation Sequences | Simulation and Modeling to Understand the Change" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/Rplot.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="manueleleonelli/SimBook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Simulation and Modeling to Understand the Change" />
+  <meta name="twitter:title" content="4.6 Testing Generic Simulation Sequences | Simulation and Modeling to Understand the Change" />
   
   <meta name="twitter:description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
   <meta name="twitter:image" content="/images/Rplot.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="intro.html"/>
+<link rel="prev" href="random-variate-generation.html"/>
+<link rel="next" href="monte-carlo-simulation.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -293,23 +293,183 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Simulation and Modeling to Understand the Change</h1>
-<p class="author"><em>Alejandro Martínez-Mingo &amp; Manuele Leonelli</em></p>
-<p class="date"><em>2021-12-09</em></p>
+<div id="testing-generic-simulation-sequences" class="section level2" number="4.6">
+<h2><span class="header-section-number">4.6</span> Testing Generic Simulation Sequences</h2>
+<p>In previous sections we spent a lot of effort in assesing if a sequence of numbers could have been a random sequence of independent numbers from a Uniform distribution between zero and one.</p>
+<p>Now we will look at the same question, but considering generic distributions we might be interested in. Recall that we had to check two aspects:</p>
+<ol style="list-style-type: decimal">
+<li><p>if the random sequence had the same distribution as the theoretical one (in previous sections Uniform between zero and one);</p></li>
+<li><p>if the sequence was of independent numbers</p></li>
+</ol>
+<p>We will see that the tools to perform these steps are basically the same.</p>
+<div id="testing-distribution-fit" class="section level3" number="4.6.1">
+<h3><span class="header-section-number">4.6.1</span> Testing Distribution Fit</h3>
+<p>There are various ways to check if the random sequence of observations has the same distribution as the theoretical one.</p>
+<div id="histogram" class="section level4" number="4.6.1.1">
+<h4><span class="header-section-number">4.6.1.1</span> Histogram</h4>
+<p>First, we could construct an histogram of the data sequence and compare it to the theoretical distribution. Suppose we have a sequence of numbers <code>x1</code> that we want to assess if it simulated from a Standard Normal distribution.</p>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="testing-generic-simulation-sequences.html#cb188-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(x1, <span class="fu">aes</span>(x1)) <span class="sc">+</span></span>
+<span id="cb188-2"><a href="testing-generic-simulation-sequences.html#cb188-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> ..density.., <span class="at">colour =</span> <span class="st">&#39;Empirical&#39;</span>), <span class="at">stat =</span> <span class="st">&#39;density&#39;</span>) <span class="sc">+</span></span>
+<span id="cb188-3"><a href="testing-generic-simulation-sequences.html#cb188-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">stat_function</span>(<span class="at">fun =</span> dnorm, <span class="fu">aes</span>(<span class="at">colour =</span> <span class="st">&#39;Normal&#39;</span>)) <span class="sc">+</span>      </span>
+<span id="cb188-4"><a href="testing-generic-simulation-sequences.html#cb188-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> ..density..), <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span>      </span>
+<span id="cb188-5"><a href="testing-generic-simulation-sequences.html#cb188-5" aria-hidden="true" tabindex="-1"></a>   <span class="fu">scale_colour_manual</span>(<span class="at">name =</span> <span class="st">&#39;Density&#39;</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&#39;red&#39;</span>, <span class="st">&#39;blue&#39;</span>)) <span class="sc">+</span></span>
+<span id="cb188-6"><a href="testing-generic-simulation-sequences.html#cb188-6" aria-hidden="true" tabindex="-1"></a>   <span class="fu">theme_bw</span>()</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:normhist"></span>
+<img src="bookdownproj_files/figure-html/normhist-1.png" alt="Histogram of the sequence x1 together with theoretical pdf of the standard Normal" width="50%" />
+<p class="caption">
+Figure 4.9: Histogram of the sequence x1 together with theoretical pdf of the standard Normal
+</p>
 </div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>These are lecture notes for the module <em>Simulation and Modelling to Understand Change</em> given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data &amp; Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed.</p>
+<p>Figure <a href="testing-generic-simulation-sequences.html#fig:normhist">4.9</a> reports the histogram of the sequence <code>x1</code> together with a smooth estimate of the histogram, often called density plot, in the red line. The blue line denotes the theoretical pdf of the standard Normal distribution. We can see that the sequence seems to follow quite closely a Normal distribution and therefore we could be convinced that the numbers are indeed Normal.</p>
+<p>Let’s consider a different sequence <code>x2</code>. Figure <a href="testing-generic-simulation-sequences.html#fig:exphist">4.10</a> clearly shows that there is a poor fit between the sequence and the standard Normal distribution. So we would in general not believe that these observations came from a Standard Normal.</p>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="testing-generic-simulation-sequences.html#cb189-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(x2, <span class="fu">aes</span>(x2)) <span class="sc">+</span></span>
+<span id="cb189-2"><a href="testing-generic-simulation-sequences.html#cb189-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> ..density.., <span class="at">colour =</span> <span class="st">&#39;Empirical&#39;</span>), <span class="at">stat =</span> <span class="st">&#39;density&#39;</span>) <span class="sc">+</span></span>
+<span id="cb189-3"><a href="testing-generic-simulation-sequences.html#cb189-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">stat_function</span>(<span class="at">fun =</span> dnorm, <span class="fu">aes</span>(<span class="at">colour =</span> <span class="st">&#39;Normal&#39;</span>)) <span class="sc">+</span>      </span>
+<span id="cb189-4"><a href="testing-generic-simulation-sequences.html#cb189-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> ..density..), <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span>      </span>
+<span id="cb189-5"><a href="testing-generic-simulation-sequences.html#cb189-5" aria-hidden="true" tabindex="-1"></a>   <span class="fu">scale_colour_manual</span>(<span class="at">name =</span> <span class="st">&#39;Density&#39;</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&#39;red&#39;</span>, <span class="st">&#39;blue&#39;</span>)) <span class="sc">+</span></span>
+<span id="cb189-6"><a href="testing-generic-simulation-sequences.html#cb189-6" aria-hidden="true" tabindex="-1"></a>   <span class="fu">theme_bw</span>()</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:exphist"></span>
+<img src="bookdownproj_files/figure-html/exphist-1.png" alt="Histogram of the sequence x2 together with theoretical pdf of the standard Normal" width="50%" />
+<p class="caption">
+Figure 4.10: Histogram of the sequence x2 together with theoretical pdf of the standard Normal
+</p>
+</div>
+</div>
+<div id="empirical-cumulative-distribution-function" class="section level4" number="4.6.1.2">
+<h4><span class="header-section-number">4.6.1.2</span> Empirical Cumulative Distribution Function</h4>
+<p>We have already seen for uniform numbers that we can use the empirical cdf to assess if a sequence of numbers is uniformly distributed. We can use the exact same method for any other distribution.</p>
+<p>Figure <a href="testing-generic-simulation-sequences.html#fig:normecdf">4.11</a> reports the ecdf of the sequence of numbers <code>x1</code> (in red) together with the theoretical cdf of the standard Normal (in blue). We can see that the two functions match closely and therefore we could assume that the sequence is distributed as a standard Normal.</p>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="testing-generic-simulation-sequences.html#cb190-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(x1, <span class="fu">aes</span>(x1)) <span class="sc">+</span></span>
+<span id="cb190-2"><a href="testing-generic-simulation-sequences.html#cb190-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">stat_ecdf</span>(<span class="at">geom =</span> <span class="st">&quot;step&quot;</span>,<span class="fu">aes</span>(<span class="at">colour =</span> <span class="st">&#39;Empirical&#39;</span>)) <span class="sc">+</span></span>
+<span id="cb190-3"><a href="testing-generic-simulation-sequences.html#cb190-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">stat_function</span>(<span class="at">fun =</span> pnorm,<span class="fu">aes</span>(<span class="at">colour =</span> <span class="st">&#39;Theoretical&#39;</span>)) <span class="sc">+</span></span>
+<span id="cb190-4"><a href="testing-generic-simulation-sequences.html#cb190-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">theme_bw</span>() <span class="sc">+</span>      </span>
+<span id="cb190-5"><a href="testing-generic-simulation-sequences.html#cb190-5" aria-hidden="true" tabindex="-1"></a>   <span class="fu">scale_colour_manual</span>(<span class="at">name =</span> <span class="st">&#39;Density&#39;</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&#39;red&#39;</span>, <span class="st">&#39;blue&#39;</span>))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:normecdf"></span>
+<img src="bookdownproj_files/figure-html/normecdf-1.png" alt="Empirical cdf the sequence x1 together with theoretical cdf of the standard Normal" width="50%" />
+<p class="caption">
+Figure 4.11: Empirical cdf the sequence x1 together with theoretical cdf of the standard Normal
+</p>
+</div>
+<p>Figure <a href="testing-generic-simulation-sequences.html#fig:expecdf">4.12</a> reports the same plot but for the sequence <code>x2</code>. The two lines strongly differ and therefore it cannot be assume that the sequence is distributed as a standard Normal.</p>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="testing-generic-simulation-sequences.html#cb191-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(x2, <span class="fu">aes</span>(x2)) <span class="sc">+</span></span>
+<span id="cb191-2"><a href="testing-generic-simulation-sequences.html#cb191-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">stat_ecdf</span>(<span class="at">geom =</span> <span class="st">&quot;step&quot;</span>,<span class="fu">aes</span>(<span class="at">colour =</span> <span class="st">&#39;Empirical&#39;</span>)) <span class="sc">+</span></span>
+<span id="cb191-3"><a href="testing-generic-simulation-sequences.html#cb191-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">stat_function</span>(<span class="at">fun =</span> pnorm,<span class="fu">aes</span>(<span class="at">colour =</span> <span class="st">&#39;Theoretical&#39;</span>)) <span class="sc">+</span></span>
+<span id="cb191-4"><a href="testing-generic-simulation-sequences.html#cb191-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">theme_bw</span>() <span class="sc">+</span>      </span>
+<span id="cb191-5"><a href="testing-generic-simulation-sequences.html#cb191-5" aria-hidden="true" tabindex="-1"></a>   <span class="fu">scale_colour_manual</span>(<span class="at">name =</span> <span class="st">&#39;Density&#39;</span>, <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&#39;red&#39;</span>, <span class="st">&#39;blue&#39;</span>))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:expecdf"></span>
+<img src="bookdownproj_files/figure-html/expecdf-1.png" alt="Empirical cdf the sequence x2 together with theoretical cdf of the standard Normal" width="50%" />
+<p class="caption">
+Figure 4.12: Empirical cdf the sequence x2 together with theoretical cdf of the standard Normal
+</p>
+</div>
+</div>
+<div id="qq-plot" class="section level4" number="4.6.1.3">
+<h4><span class="header-section-number">4.6.1.3</span> QQ-Plot</h4>
+<p>A third visualization of the distribution of a sequence of numbers is the so called <em>QQ-plot</em>. You may have already seen this when checking if the residuals of a linear regression follow a Normal distribution. But more generally, qq-plots can be used to check if a sequence of numbers is distributed according to any distribution.</p>
+<p>We will not the details about how these are constructed but just their interpretation and implementation. Let’s consider Figure <a href="testing-generic-simulation-sequences.html#fig:qqnorm">4.13</a>. The plot is composed of a series of points, where each point is associated to a number in our random sequence, and a line, which describes the theoretical distribution we are targeting. The closest the points and the line are, the better the fit to that distribution.</p>
+<p>In particular, in Figure <a href="testing-generic-simulation-sequences.html#fig:qqnorm">4.13</a> we are checking if the sequence <code>x1</code> is distributed according to a standard Normal (represented by the straight line). Since the points are placed almost in a straight line over the theoretical line of the standard Normal, we can assume the sequence to be Normal.</p>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="testing-generic-simulation-sequences.html#cb192-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(x1, <span class="fu">aes</span>(<span class="at">sample =</span> x1)) <span class="sc">+</span></span>
+<span id="cb192-2"><a href="testing-generic-simulation-sequences.html#cb192-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">stat_qq</span>(<span class="at">distribution =</span> qnorm) <span class="sc">+</span></span>
+<span id="cb192-3"><a href="testing-generic-simulation-sequences.html#cb192-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">stat_qq_line</span>(<span class="at">distribution =</span> qnorm) <span class="sc">+</span></span>
+<span id="cb192-4"><a href="testing-generic-simulation-sequences.html#cb192-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">theme_bw</span>()</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:qqnorm"></span>
+<img src="bookdownproj_files/figure-html/qqnorm-1.png" alt="QQ-plot for the sequence x1 checking against the standard Normal" width="50%" />
+<p class="caption">
+Figure 4.13: QQ-plot for the sequence x1 checking against the standard Normal
+</p>
+</div>
+<p>Figure <a href="testing-generic-simulation-sequences.html#fig:qqexp">4.14</a> reports the qq-plot for the sequence <code>x2</code> to check if the data can be following a standard Normal. We can see that the points do not differ too much from the straight line and in this case we could assume the data to be Normal (notice that the histograms and the cdf strongly suggested that this sequence was not Normal).</p>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="testing-generic-simulation-sequences.html#cb193-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(x2, <span class="fu">aes</span>(<span class="at">sample =</span> x2)) <span class="sc">+</span></span>
+<span id="cb193-2"><a href="testing-generic-simulation-sequences.html#cb193-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">stat_qq</span>(<span class="at">distribution =</span> qnorm) <span class="sc">+</span></span>
+<span id="cb193-3"><a href="testing-generic-simulation-sequences.html#cb193-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">stat_qq_line</span>(<span class="at">distribution =</span> qnorm) <span class="sc">+</span></span>
+<span id="cb193-4"><a href="testing-generic-simulation-sequences.html#cb193-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">theme_bw</span>()</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:qqexp"></span>
+<img src="bookdownproj_files/figure-html/qqexp-1.png" alt="QQ-plot for the sequence x2 checking against the standard Normal" width="50%" />
+<p class="caption">
+Figure 4.14: QQ-plot for the sequence x2 checking against the standard Normal
+</p>
+</div>
+<p>Notice that the form of the qq-plot does not only depend on the sequence of numbers we are considering, but also on the distribution we are testing it against. Figure <a href="testing-generic-simulation-sequences.html#fig:qqnorm">4.13</a> reports the qq-plot for the sequence <code>x1</code> when checked against an Exponential random variable with parameter <span class="math inline">\(\lambda =3\)</span>. Given that the sequence also includes negative numbers, it does not make sense to check if it is distributed as an Exponential (since it can only model non-negative data), but this is just an illustration.</p>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="testing-generic-simulation-sequences.html#cb194-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(x1, <span class="fu">aes</span>(<span class="at">sample =</span> x1)) <span class="sc">+</span></span>
+<span id="cb194-2"><a href="testing-generic-simulation-sequences.html#cb194-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">stat_qq</span>(<span class="at">distribution =</span> qexp, <span class="at">dparams =</span> (<span class="at">rate =</span> <span class="dv">3</span>)) <span class="sc">+</span></span>
+<span id="cb194-3"><a href="testing-generic-simulation-sequences.html#cb194-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">stat_qq_line</span>(<span class="at">distribution =</span> qexp, <span class="at">dparams =</span> (<span class="at">rate =</span> <span class="dv">3</span>)) <span class="sc">+</span></span>
+<span id="cb194-4"><a href="testing-generic-simulation-sequences.html#cb194-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">theme_bw</span>()</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:qqnorm1"></span>
+<img src="bookdownproj_files/figure-html/qqnorm1-1.png" alt="QQ-plot for the sequence x1 checking against an Exponential" width="50%" />
+<p class="caption">
+Figure 4.15: QQ-plot for the sequence x1 checking against an Exponential
+</p>
+</div>
+</div>
+<div id="formal-testing" class="section level4" number="4.6.1.4">
+<h4><span class="header-section-number">4.6.1.4</span> Formal Testing</h4>
+<p>The above plots are highly informative since they provide insights into the shape of the data distribution, but these are not formal. Again, we can carry out tests of hypothesis to check if data is distributed as a specific random variable, just like we did for the Uniform.</p>
+<p>Again, there are many tests one could use, but here we focus only on the Kolmogorov-Smirnov Test which checks how close the empirical and the theoretical cdfs are. It is implemented in the <code>ks.test</code> R function.</p>
+<p>Let’s check if the sequences <code>x1</code> and <code>x2</code> are distributed as a standard Normal.</p>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="testing-generic-simulation-sequences.html#cb195-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(x1,pnorm)</span></code></pre></div>
+<pre><code>## 
+##  One-sample Kolmogorov-Smirnov test
+## 
+## data:  x1
+## D = 0.041896, p-value = 0.3439
+## alternative hypothesis: two-sided</code></pre>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="testing-generic-simulation-sequences.html#cb197-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(x2,pnorm)</span></code></pre></div>
+<pre><code>## 
+##  One-sample Kolmogorov-Smirnov test
+## 
+## data:  x2
+## D = 0.2997, p-value &lt; 2.2e-16
+## alternative hypothesis: two-sided</code></pre>
+<p>The conclusion is that <code>x1</code> is distributed as a standard Normal since the p-value of the test is large and for instance bigger than 0.10. On the other hand, the p-value for the Kolmogorov-Smirnov test over the sequence <code>x2</code> has a very small p-value thus leading us to reject the null hypothesis that the sequence is Normally distributed.</p>
+<p>Notice that we can add extra inputs to the function. For instance we can check if <code>x1</code> is distributed as a Normal with <code>mean = 2</code> and <code>sd = 2</code> using:</p>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="testing-generic-simulation-sequences.html#cb199-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(x1, pnorm, <span class="at">mean =</span> <span class="dv">2</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## 
+##  One-sample Kolmogorov-Smirnov test
+## 
+## data:  x1
+## D = 0.54604, p-value &lt; 2.2e-16
+## alternative hypothesis: two-sided</code></pre>
+<p>The p-value is small and therefore we would reject the null hypothesis that the sequence is distributed as a Normal with mean two and standard deviation two.</p>
+</div>
+</div>
+<div id="testing-independence-1" class="section level3" number="4.6.2">
+<h3><span class="header-section-number">4.6.2</span> Testing Independence</h3>
+<p>The other step in assessing if a sequence of numbers is pseudo-random is checking if independence holds. We have already learned that one possible way to do this is by computing the auto-correlation function with the R function <code>acf</code>. Let’s compute the auto-correlations of various lags for the sequences <code>x1</code> and <code>x2</code>, reported in Figure <a href="testing-generic-simulation-sequences.html#fig:acf12">4.16</a>. We can see that for <code>x2</code> all bars are within the confidence bands (recall that the first bar for lag <span class="math inline">\(k=0\)</span> should not be considered). For <code>x1</code> the bar corresponding to lag 1 is slightly outside the confidence bands, indicating that there may be some dependence.</p>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="testing-generic-simulation-sequences.html#cb201-1" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(x1)</span>
+<span id="cb201-2"><a href="testing-generic-simulation-sequences.html#cb201-2" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(x2)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:acf12"></span>
+<img src="bookdownproj_files/figure-html/acf12-1.png" alt="Autocorrelations for the sequences x1 and x2." width="50%" /><img src="bookdownproj_files/figure-html/acf12-2.png" alt="Autocorrelations for the sequences x1 and x2." width="50%" />
+<p class="caption">
+Figure 4.16: Autocorrelations for the sequences x1 and x2.
+</p>
+</div>
+<p>Let’s run the Box test to assess if the assumption of independence is tenable for both sequences.</p>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="testing-generic-simulation-sequences.html#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Box.test</span>(x1, <span class="at">lag =</span> <span class="dv">5</span>)</span></code></pre></div>
+<pre><code>## 
+##  Box-Pierce test
+## 
+## data:  x1
+## X-squared = 8.4212, df = 5, p-value = 0.1345</code></pre>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="testing-generic-simulation-sequences.html#cb204-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Box.test</span>(x2, <span class="at">lag =</span> <span class="dv">5</span>)</span></code></pre></div>
+<pre><code>## 
+##  Box-Pierce test
+## 
+## data:  x2
+## X-squared = 4.2294, df = 5, p-value = 0.5169</code></pre>
+<p>In both cases the p-values are larger than 0.10, thus we would not reject the null hypothesis of independence for both sequences. Recall that <code>x1</code> is distributed as a standard Normal, whilst <code>x2</code> is not.</p>
+<p>For the sequence <code>x1</code> we observed that one bar was slightly outside the confidence bands: this sometimes happens even when data is actually (pseudo-) random - I created <code>x1</code> using <code>rnorm</code>. The autocorrelations below are an instance of a case where independence is not tenable since we see that multiple bars are outside the confidence bands.
+<img src="bookdownproj_files/figure-html/unnamed-chunk-93-1.png" width="50%" style="display: block; margin: auto;" /></p>
 
 </div>
+</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="intro.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="random-variate-generation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="monte-carlo-simulation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -340,7 +500,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/amartinezm90/SMUCbook/edit/master/index.Rmd",
+"link": "https://github.com/amartinezm90/SMUCbook/edit/master/04-Random.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -348,7 +508,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/amartinezm90/SMUCbook/blob/master/index.Rmd",
+"link": "https://github.com/amartinezm90/SMUCbook/blob/master/04-Random.Rmd",
 "text": null
 },
 "download": null,

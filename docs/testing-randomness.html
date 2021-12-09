@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Simulation and Modeling to Understand the Change</title>
+  <title>4.4 Testing Randomness | Simulation and Modeling to Understand the Change</title>
   <meta name="description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Simulation and Modeling to Understand the Change" />
+  <meta property="og:title" content="4.4 Testing Randomness | Simulation and Modeling to Understand the Change" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/Rplot.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="manueleleonelli/SimBook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Simulation and Modeling to Understand the Change" />
+  <meta name="twitter:title" content="4.4 Testing Randomness | Simulation and Modeling to Understand the Change" />
   
   <meta name="twitter:description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
   <meta name="twitter:image" content="/images/Rplot.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="intro.html"/>
+<link rel="prev" href="generating-pseudo-random-numbers.html"/>
+<link rel="next" href="random-variate-generation.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -293,23 +293,128 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Simulation and Modeling to Understand the Change</h1>
-<p class="author"><em>Alejandro Martínez-Mingo &amp; Manuele Leonelli</em></p>
-<p class="date"><em>2021-12-09</em></p>
+<div id="testing-randomness" class="section level2" number="4.4">
+<h2><span class="header-section-number">4.4</span> Testing Randomness</h2>
+<p>Now we turn to the following question: given a sequence of numbers <span class="math inline">\(u_1,\dots,u_N\)</span> how can we test if they are independent realizations of a Uniform random variable between zero and one?</p>
+<p>We therefore need to check if the distribution of the numbers is uniform and if they are actually independent.</p>
+<div id="testing-uniformity" class="section level3" number="4.4.1">
+<h3><span class="header-section-number">4.4.1</span> Testing Uniformity</h3>
+<p>A simple first method to check if the numbers are uniform is to create an histogram of the data and to see if the histogram is reasonably flat. We already saw how to assess this, but let’s check if <code>runif</code> works well. Simple histograms can be created in <code>R</code> using <code>hist</code> (or if you want you can use <code>ggplot</code>).</p>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="testing-randomness.html#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2021</span>)</span>
+<span id="cb167-2"><a href="testing-randomness.html#cb167-2" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">5000</span>)</span>
+<span id="cb167-3"><a href="testing-randomness.html#cb167-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(u)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:hist"></span>
+<img src="bookdownproj_files/figure-html/hist-1.png" alt="Histogram of a sequence of uniform numbers" width="50%" />
+<p class="caption">
+Figure 4.4: Histogram of a sequence of uniform numbers
+</p>
 </div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>These are lecture notes for the module <em>Simulation and Modelling to Understand Change</em> given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data &amp; Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed.</p>
-
+<p>We can see that the histogram is reasonably flat and therefore the assumption of uniformity seems to hold.</p>
+<p>Although the histogram is quite informative, it is not a fairly formal method. We could on the other hand look at tests of hypotheses of this form:
+<span class="math display">\[\begin{align*}
+H_0: &amp; \;\;u_i \mbox{ is uniform between zero and one, } i=1,2,\dots\\
+H_a: &amp; \;\;u_i \mbox{ is not uniform between zero and one, } i=1,2,\dots\\
+\end{align*}\]</span></p>
+<p>The null hypothesis is thus that the numbers are indeed uniform, whilst the alternative states that the numbers are not. If we reject the null hypothesis, which happens if the p-value of the test is very small (or smaller than a critical value <span class="math inline">\(\alpha\)</span> of our choice), then we would believe that the sequence of numbers is not uniform.</p>
+<p>There are various ways to carry out such a test, but we will consider here only one: the so-called <em>Kolmogorov-Smirnov Test</em>. We will not give all details of this test, but only its interpretation and implementation.</p>
+<p>In order to understand how the test works we need to briefly introduce the concept of <em>empirical cumulative distribution function</em> or <em>ecdf</em>. The ecdf <span class="math inline">\(\hat{F}\)</span> is the cumulative distribution function computed from a sequence of <span class="math inline">\(N\)</span> numbers as
+<span class="math display">\[
+\hat{F}(t)= \frac{\mbox{numbers in the sequence }\leq t}{N}
+\]</span></p>
+<p>Let’s consider the following example.</p>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="testing-randomness.html#cb168-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">u=</span> <span class="fu">c</span>(<span class="fl">0.1</span>,<span class="fl">0.2</span>,<span class="fl">0.4</span>,<span class="fl">0.8</span>,<span class="fl">0.9</span>))</span>
+<span id="cb168-2"><a href="testing-randomness.html#cb168-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data,<span class="fu">aes</span>(u)) <span class="sc">+</span> <span class="fu">stat_ecdf</span>(<span class="at">geom =</span> <span class="st">&quot;step&quot;</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;ECDF&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:ecdf"></span>
+<img src="bookdownproj_files/figure-html/ecdf-1.png" alt="Ecdf of a simple sequence of numbers" width="50%" />
+<p class="caption">
+Figure 4.5: Ecdf of a simple sequence of numbers
+</p>
+</div>
+<p>For instance, since there are 3 numbers out of 5 in the vector <code>u</code> that are less than 0.7, then <span class="math inline">\(\hat{F}(0.7)=3/5\)</span>.</p>
+<p>The idea behind the Kolmogorov-Smirnov test is to quantify how similar the ecdf computed from a sequence of data is to the one of the uniform distribution which is represented by a straight line (see Figure <a href="properties-of-random-numbers.html#fig:uplot">4.2</a>).</p>
+<p>As an example consider Figure <a href="testing-randomness.html#fig:Kol">4.6</a>. The step functions are computed from two different sequences of numbers between one and zero, whilst the straight line is the cdf of the uniform distribution. By looking at the plots, we would more strongly believe that the sequence in the left plot is uniformly distributed, since the step function is much more closer to the theoretical straight line.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:Kol"></span>
+<img src="bookdownproj_files/figure-html/Kol-1.png" alt="Comparison between ecdf and cdf of the uniform for two sequences of numbers" width="672" />
+<p class="caption">
+Figure 4.6: Comparison between ecdf and cdf of the uniform for two sequences of numbers
+</p>
+</div>
+<p>The Kolmogorov-Smirnov test formally embeds this idea of similarity between the ecdf and the cdf of the uniform in a test of hypothesis. The function <code>ks.test</code> implements this test in R. For the two sequences in Figure @ref{fig:Kol} <code>u1</code> (left plot) and <code>u2</code> (right plot), the test can be implemented as following:</p>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="testing-randomness.html#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(u1,<span class="st">&quot;punif&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+##  One-sample Kolmogorov-Smirnov test
+## 
+## data:  u1
+## D = 0.11499, p-value = 0.142
+## alternative hypothesis: two-sided</code></pre>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="testing-randomness.html#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(u2,<span class="st">&quot;punif&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+##  One-sample Kolmogorov-Smirnov test
+## 
+## data:  u2
+## D = 0.56939, p-value &lt; 2.2e-16
+## alternative hypothesis: two-sided</code></pre>
+<p>From the results that the p-value of the test for the sequence <code>u1</code> is 0.142 and so we would not reject the null hypothesis that the sequence is uniformly distributed. On the other hand the p-value for the test over the sequence <code>u2</code> has an extremely small p-value therefore suggesting that we reject the null hypothesis and conclude that the sequence is not uniformly distributed. This confirms our intuition by looking at the plots in Figure <a href="testing-randomness.html#fig:Kol">4.6</a>.</p>
+</div>
+<div id="testing-independence" class="section level3" number="4.4.2">
+<h3><span class="header-section-number">4.4.2</span> Testing Independence</h3>
+<p>The second requirement that a sequence of pseudo-random numbers must have is independence. We already saw an example of when this might happen: a high number was followed by a low number and vice versa.</p>
+<p>We will consider tests of the form:</p>
+<p><span class="math display">\[\begin{align*}
+H_0: &amp; \;\;u_1,\dots,u_N \mbox{ are independent }\\
+H_a: &amp; \;\;u_1,\dots,u_N \mbox{ are not independent }
+\end{align*}\]</span></p>
+<p>So the null hypothesis is that the sequence is of independent numbers against the alternative that they are not. If the p-value of such a test is small we would then reject the null-hypothesis of independence.</p>
+<p>In order to devise such a test, we need to come up with a way to quantify how dependent numbers in a sequence are with each other. Again, there are many ways one could do this, but we consider here only one.</p>
+<p>You should already be familiar with the idea of <em>correlation</em>: this tells you how to variables are linearly dependent of each other. There is a similar idea which extends in a way correlation to the case when it is computed between a sequence of numbers and itself, which is called <em>autocorrelation</em>. We will not give the details about this, but just the interpretation (you will learn a lot more about this in Time Series).</p>
+<p>Let’s briefly recall the idea behind correlation. Suppose you have two sequences of numbers <span class="math inline">\(u_1,\dots,u_N\)</span> and <span class="math inline">\(w_1,\dots,w_N\)</span>. To compute the correlation you would look at the pairs <span class="math inline">\((u_1,w_1),(u_2,w_2),\dots, (u_N,w_N)\)</span> and assess how related the numbers within a pair <span class="math inline">\((u_i,w_i)\)</span> are. Correlation, which is a number between -1 and 1, assesses how related the sequences are: the closer the number is to one in absolute value, the stronger the relationship.</p>
+<p>Now however we have just one sequence of numbers <span class="math inline">\(u_1,\dots,u_N\)</span>. So for instance we could look at pairs <span class="math inline">\((u_1,u_2), (u_2,u_3), \dots, (u_{N-1},u_{N})\)</span> which consider two consecutive numbers and compute their correlation. Similarly we could compute the correlation between <span class="math inline">\((u_1,u_{1+k}), (u_2,u_{2+k}),\dots, (u_{N-k},u_N)\)</span> between each number in the sequence and the one k-positions ahead. This is what we call <em>autocorrelation of lag k</em>.</p>
+<p>If autocorrelations of various lags are close to zero, this gives an indication that the data is independent. If on the other hand, the autocorrelation at some lags is large, then there is an indication of dependence in the sequence of random numbers. Autocorrelations are computed and plotted in <code>R</code> using <code>acf</code> and reported in Figure <a href="testing-randomness.html#fig:acf">4.7</a>.</p>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="testing-randomness.html#cb173-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2021</span>)</span>
+<span id="cb173-2"><a href="testing-randomness.html#cb173-2" aria-hidden="true" tabindex="-1"></a>u1 <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">200</span>)</span>
+<span id="cb173-3"><a href="testing-randomness.html#cb173-3" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(u1)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:acf"></span>
+<img src="bookdownproj_files/figure-html/acf-1.png" alt="Autocorrelations for a sequence of random uniform numbers" width="50%" />
+<p class="caption">
+Figure 4.7: Autocorrelations for a sequence of random uniform numbers
+</p>
+</div>
+<p>The bars in Figure <a href="testing-randomness.html#fig:acf">4.7</a> are the autocorrelations at various lags, whilst the dashed blue lines are confidence bands: if a bar is within the bands it means that we cannot reject the hypothesis that the autocorrelation of the associated lag is equal to zero. Notice that the first bar is lag 0: it computes the correlation for the sample <span class="math inline">\((u_1,u_1),(u_2,u_2),\dots,(u_N,u_N)\)</span> and therefore it is always equal to one. You should never worry about this bar. Since all the bars are within the confidence bands, we believe that all autocorrelations are not different from zero and consequently that the data is independent (it was indeed generated using `runif``).</p>
+<p>Figure <a href="testing-randomness.html#fig:acf2">4.8</a> reports the autocorrelations of a sequence of numbers which is not independent. Although the histogram shows that the data is uniformly distributed, we would not believe that the sequence is of independent numbers since autocorrelations are very large and outside the bands.</p>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="testing-randomness.html#cb174-1" aria-hidden="true" tabindex="-1"></a>u2 <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,<span class="at">each =</span> <span class="dv">4</span>,<span class="at">times =</span> <span class="dv">10</span>)<span class="sc">/</span><span class="dv">10</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">400</span>,<span class="dv">0</span>,<span class="fl">0.02</span>) </span>
+<span id="cb174-2"><a href="testing-randomness.html#cb174-2" aria-hidden="true" tabindex="-1"></a>u2 <span class="ot">&lt;-</span> (u2 <span class="sc">-</span> <span class="fu">min</span>(u2))<span class="sc">/</span>(<span class="fu">max</span>(u2)<span class="sc">-</span><span class="fu">min</span>(u2))</span>
+<span id="cb174-3"><a href="testing-randomness.html#cb174-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb174-4"><a href="testing-randomness.html#cb174-4" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(u2)</span>
+<span id="cb174-5"><a href="testing-randomness.html#cb174-5" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(u2)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:acf2"></span>
+<img src="bookdownproj_files/figure-html/acf2-1.png" alt="Histogram and autocorrelations of a sequence of uniform numbers which are not independent" width="672" />
+<p class="caption">
+Figure 4.8: Histogram and autocorrelations of a sequence of uniform numbers which are not independent
+</p>
+</div>
+<p>A test of hypothesis for independence can be created by checking if any of the autocorrelations up to a specific lag are different from zero. This is implemented in the function <code>Box.test</code> in R. The first input is the sequence of numbers to consider, the second is the largest lag we want to consider. Let’s compute it for the two sequences <code>u1</code> and <code>u2</code> above.</p>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="testing-randomness.html#cb175-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Box.test</span>(u1, <span class="at">lag =</span> <span class="dv">5</span>)</span></code></pre></div>
+<pre><code>## 
+##  Box-Pierce test
+## 
+## data:  u1
+## X-squared = 4.8518, df = 5, p-value = 0.4342</code></pre>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="testing-randomness.html#cb177-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Box.test</span>(u2, <span class="at">lag =</span> <span class="dv">5</span>)</span></code></pre></div>
+<pre><code>## 
+##  Box-Pierce test
+## 
+## data:  u2
+## X-squared = 807.1, df = 5, p-value &lt; 2.2e-16</code></pre>
+<p>Here we chose a lag up to 5 (it is usually not useful to consider larger lags). The test confirms our observations of the autocorrelations. For the sequence <code>u1</code> generated with <code>runif</code> the test has a high p-value and therefore we cannot reject the hypothesis of independence. For the second sequence <code>u2</code> which had very large autocorrelations the p-value is very small and therefore we reject the hypothesis of independence.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="intro.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="generating-pseudo-random-numbers.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="random-variate-generation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -340,7 +445,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/amartinezm90/SMUCbook/edit/master/index.Rmd",
+"link": "https://github.com/amartinezm90/SMUCbook/edit/master/04-Random.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -348,7 +453,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/amartinezm90/SMUCbook/blob/master/index.Rmd",
+"link": "https://github.com/amartinezm90/SMUCbook/blob/master/04-Random.Rmd",
 "text": null
 },
 "download": null,

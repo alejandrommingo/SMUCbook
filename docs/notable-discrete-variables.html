@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Simulation and Modeling to Understand the Change</title>
+  <title>3.2 Notable Discrete Variables | Simulation and Modeling to Understand the Change</title>
   <meta name="description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Simulation and Modeling to Understand the Change" />
+  <meta property="og:title" content="3.2 Notable Discrete Variables | Simulation and Modeling to Understand the Change" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/Rplot.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="manueleleonelli/SimBook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Simulation and Modeling to Understand the Change" />
+  <meta name="twitter:title" content="3.2 Notable Discrete Variables | Simulation and Modeling to Understand the Change" />
   
   <meta name="twitter:description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
   <meta name="twitter:image" content="/images/Rplot.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="intro.html"/>
+<link rel="prev" href="discrete-random-variables.html"/>
+<link rel="next" href="continuous-random-variables.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -293,23 +293,192 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Simulation and Modeling to Understand the Change</h1>
-<p class="author"><em>Alejandro Martínez-Mingo &amp; Manuele Leonelli</em></p>
-<p class="date"><em>2021-12-09</em></p>
+<div id="notable-discrete-variables" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Notable Discrete Variables</h2>
+<p>In the previous section we gave a generic definition of discrete random variables and discussed the conditions that a pmf must obey. We considered the example of a biased dice and constructed a pmf for that specific example.</p>
+<p>There are situations that often happen in practice: for instance the case of experiments with binary outcomes. For such cases random variables with specific pmfs are given a name and their properties are well known and studied.</p>
+<p>In this section we will consider three such distributions: Bernoulli, Binomial and Poisson.</p>
+<div id="bernoulli-distribution" class="section level3" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Bernoulli Distribution</h3>
+<p>Consider an experiment or a real-world system where there can only be two outcomes:</p>
+<ul>
+<li><p>a toss of a coin: heads or tails;</p></li>
+<li><p>the result of a COVID test: positive or negative;</p></li>
+<li><p>the status of a machine: broken or working;</p></li>
+</ul>
+<p>By default one outcome happens with some probability, that we denote as <span class="math inline">\(\theta\in [0,1]\)</span> and the other with probability <span class="math inline">\(1-\theta\)</span>.</p>
+<p>Such a situation is in general modeled using the so-called <em>Bernoulli distribution</em> with parameter <span class="math inline">\(\theta\)</span>. One outcome is associated to the number 1 (usually referred to as sucess) and the other is associated to the number 0 (usually referred to as failure). So <span class="math inline">\(P(X=1)=p(1)=\theta\)</span> and <span class="math inline">\(P(X=0)=p(0)=1-\theta\)</span>.</p>
+<p>The above pmf can be more coincisely written as
+<span class="math display">\[
+p(x)=\left\{
+\begin{array}{ll}
+\theta^x(1-\theta)^{1-x}, &amp; x=0,1\\
+0, &amp; \mbox{otherwise}
+\end{array}
+\right.
+\]</span>
+The mean and variance of the Bernoulli distribution can be easily computed as
+<span class="math display">\[
+E(X)=0\cdot(1-\theta)+ 1\cdot\theta=\theta,
+\]</span>
+and
+<span class="math display">\[
+V(X)=(0-\theta)^2(1-\theta)+(1-\theta)^2\theta=\theta^2(1-\theta)+(1-\theta)^2\theta=\cdots = \theta(1-\theta)
+\]</span></p>
+<p>Figure <a href="notable-discrete-variables.html#fig:bernoulli">3.3</a> reports the pmf and the cdf of a Bernoulli random variable with parameter 0.3.</p>
+<div class="figure"><span style="display:block;" id="fig:bernoulli"></span>
+<img src="bookdownproj_files/figure-html/bernoulli-1.png" alt="PMF (left) and CDF (right) of a Bernoulli random variable with parameter 0.3" width="672" />
+<p class="caption">
+Figure 3.3: PMF (left) and CDF (right) of a Bernoulli random variable with parameter 0.3
+</p>
 </div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>These are lecture notes for the module <em>Simulation and Modelling to Understand Change</em> given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data &amp; Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed.</p>
-
+</div>
+<div id="binomial-distribution" class="section level3" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> Binomial Distribution</h3>
+<p>The Bernoulli random variable is actually a very special case of the so-called <em>Binomial</em> random variable. Consider experiments of the type discussed for Bernoullis: coin tosses, COVID tests etc. Now suppose that instead of having just one trial, each of these experiments are repeated multiple times. Consider the following assumptions:</p>
+<ul>
+<li><p>each experiment is repeated <span class="math inline">\(n\)</span> times;</p></li>
+<li><p>each time there is a probability of success <span class="math inline">\(\theta\)</span>;</p></li>
+<li><p>the outcome of each experiment is independent of the others.</p></li>
+</ul>
+<p>Let’s think of tossing a coin <span class="math inline">\(n\)</span> times. Then we would expect that the probability of showing heads is the same for all tosses and that the result of previous tosses does not affect others. So this situation appears to meet the above assumptions and can be modeled by what we call a Binomial random variable.</p>
+<p>Formally, the random variable <span class="math inline">\(X\)</span> is a Binomial random variable with parameters <span class="math inline">\(n\)</span> and <span class="math inline">\(\theta\)</span> if it denotes the number of successes of <span class="math inline">\(n\)</span> independent Bernoulli random variables, all with parameter <span class="math inline">\(\theta\)</span>.</p>
+<p>The pmf of a Binomial random variable with parameters <span class="math inline">\(n\)</span> and <span class="math inline">\(\theta\)</span> can be written as:
+<span class="math display">\[
+p(x)=\left\{
+\begin{array}{ll}
+\binom{n}{x}\theta^{x}(1-\theta)^{n-x}, &amp; x = 0,1,\dots,n\\
+0, &amp; \mbox{otherwise}
+\end{array}
+\right.
+\]</span>
+Let’s try and understand the formula by looking term by term.</p>
+<ul>
+<li><p>if <span class="math inline">\(X=x\)</span> there are <span class="math inline">\(x\)</span> successes and each success has probability <span class="math inline">\(\theta\)</span> - so <span class="math inline">\(\theta^x\)</span> counts the overall probability of successes</p></li>
+<li><p>if <span class="math inline">\(X=x\)</span> there are <span class="math inline">\(n-x\)</span> failures and each failure has probability <span class="math inline">\(1-\theta\)</span> - so <span class="math inline">\((1-\theta)^{n-x}\)</span> counts the overall probability of failures</p></li>
+<li><p>failures and successes can appear according to many orders. To see this, suppose that <span class="math inline">\(x=1\)</span>: there is only one success out of <span class="math inline">\(n\)</span> trials. This could have been the first attempt, the second attempt or the <span class="math inline">\(n\)</span>-th attempt. The term <span class="math inline">\(\binom{n}{x}\)</span> counts all possible ways the outcome <span class="math inline">\(x\)</span> could have happened.</p></li>
+</ul>
+<p>The Bernoulli distribution can be seen as a special case of the Binomial where the parameter <span class="math inline">\(n\)</span> is fixed to 1.</p>
+<p>We will not show why this is the case but the expectation and the variance of the Binomial random variable with parameters <span class="math inline">\(n\)</span> and <span class="math inline">\(\theta\)</span> can be derived as
+<span class="math display">\[
+E(X)=np, \hspace{2cm} V(X)=np(1-p)
+\]</span>
+The formulae for the Bernoulli can be retrieved by setting <span class="math inline">\(n=1\)</span>.</p>
+<p>Figure <a href="notable-discrete-variables.html#fig:binom">3.4</a> shows the pmf of two Binomial distributions both with parameter <span class="math inline">\(n=10\)</span> and with <span class="math inline">\(\theta=0.3\)</span> (left) and <span class="math inline">\(\theta=0.8\)</span>. For the case <span class="math inline">\(\theta=0.3\)</span> we can see that it is more likely that there are a small number of successes, whilst for <span class="math inline">\(\theta=0.8\)</span> a large number of successes is more likely.</p>
+<div class="figure"><span style="display:block;" id="fig:binom"></span>
+<img src="bookdownproj_files/figure-html/binom-1.png" alt="PMF of a Binomial random variable with parameters n = 10 and theta =  0.3 (left) and theta = 0.8 (right)" width="672" />
+<p class="caption">
+Figure 3.4: PMF of a Binomial random variable with parameters n = 10 and theta = 0.3 (left) and theta = 0.8 (right)
+</p>
+</div>
+<p>R provides a straightforward implementation of the Binomial distribution through the functions <code>dbinom</code> for the pmf and <code>pbinom</code> for the cdf. They require three arguments:</p>
+<ul>
+<li><p>first argument is the value at which to compute the pmf or the cdf;</p></li>
+<li><p><code>size</code> is the parameter <span class="math inline">\(n\)</span> of the Binomial;</p></li>
+<li><p><code>prob</code> is the parameter <span class="math inline">\(\theta\)</span> of the Binomial.</p></li>
+</ul>
+<p>So for instance</p>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="notable-discrete-variables.html#cb125-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="dv">3</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span></code></pre></div>
+<pre><code>## [1] 0.1171875</code></pre>
+<p>returns <span class="math inline">\(P(X=3)=p(3)\)</span> for a Binomial random variable with parameter <span class="math inline">\(n=10\)</span> and <span class="math inline">\(\theta = 0.5\)</span>.</p>
+<p>Similarly,</p>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="notable-discrete-variables.html#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(<span class="dv">8</span>, <span class="at">size =</span> <span class="dv">20</span>, <span class="at">prob =</span> <span class="fl">0.2</span>)</span></code></pre></div>
+<pre><code>## [1] 0.9900182</code></pre>
+<p>returns <span class="math inline">\(P(X\leq 8) = F(8)\)</span> for a Binomial random variable with parameter <span class="math inline">\(n=20\)</span> and <span class="math inline">\(\theta = 0.2\)</span>.</p>
+</div>
+<div id="poisson-distribution" class="section level3" number="3.2.3">
+<h3><span class="header-section-number">3.2.3</span> Poisson Distribution</h3>
+<p>The last class of discrete random variables we discuss is the so-called <em>Poisson</em> distribution. Whilst for Bernoulli and Binomial we had an interpretation of why the pmf took its specific form by associating it to independent binary experiments each with an equal probability of success, for the Poisson there is no such an interpretation.</p>
+<p>A discrete random variable <span class="math inline">\(X\)</span> has a Poisson distribution with parameter <span class="math inline">\(\lambda\)</span> if its pmf is
+<span class="math display">\[
+p(x)=\left\{
+\begin{array}{ll}
+\frac{e^{-\lambda}\lambda^x}{x!}, &amp; x = 0,1,2,3,\dots\\
+0, &amp; \mbox{otherwise}
+\end{array}
+\right.
+\]</span>
+where <span class="math inline">\(\lambda &gt; 0\)</span>.</p>
+<p>So the sample space of a Poisson random variable is the set of all non-negative integers.</p>
+<p>One important characteristic of the Poisson distribution is that its mean and variance are equal to the parameter <span class="math inline">\(\lambda\)</span>, that is
+<span class="math display">\[
+E(X)= V(X) = \lambda.
+\]</span></p>
+<p>Figure @ref{fig:poisson} gives an illustration of the form of the pmf of the Poisson distribution for two parameter choices: <span class="math inline">\(\lambda=1\)</span> (left) and <span class="math inline">\(\lambda = 4\)</span> (right). The x-axis is shown until <span class="math inline">\(x=10\)</span> but recall that the Poisson is defined over all non-negative integers. For the case <span class="math inline">\(\lambda=1\)</span> we can see that the outcomes 0 and 1 have the largest probability - recall that <span class="math inline">\(E(X)=0\)</span>. For the case <span class="math inline">\(\lambda = 4\)</span> the outcomes <span class="math inline">\(x = 2,3,4,5\)</span> have the largest probability.</p>
+<div class="figure"><span style="display:block;" id="fig:poisson"></span>
+<img src="bookdownproj_files/figure-html/poisson-1.png" alt="PMF of a Poisson random variable with parameter 1 (left) and 4 (right)" width="672" />
+<p class="caption">
+Figure 3.5: PMF of a Poisson random variable with parameter 1 (left) and 4 (right)
+</p>
+</div>
+<p>R provides a straightforward implementation of the Poisson distribution through the functions <code>dpois</code> for the pmf and <code>ppois</code> for the cdf. They require three arguments:</p>
+<ul>
+<li><p>first argument is the value at which to compute the pmf or the cdf;</p></li>
+<li><p><code>lambda</code> is the parameter <span class="math inline">\(\lambda\)</span> of the Poisson;</p></li>
+</ul>
+<p>So for instance</p>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="notable-discrete-variables.html#cb129-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dpois</span>(<span class="dv">3</span>, <span class="at">lambda =</span> <span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [1] 0.06131324</code></pre>
+<p>returns <span class="math inline">\(P(X=3)=p(3)\)</span> for a Poisson random variable with parameter <span class="math inline">\(\lambda = 1\)</span>.</p>
+<p>Similarly,</p>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="notable-discrete-variables.html#cb131-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ppois</span>(<span class="dv">8</span>, <span class="at">lambda =</span> <span class="dv">4</span>)</span></code></pre></div>
+<pre><code>## [1] 0.9786366</code></pre>
+<p>returns <span class="math inline">\(P(X\leq 8) = F(8)\)</span> for a Poisson random variable with parameter <span class="math inline">\(\lambda = 4\)</span>.</p>
+</div>
+<div id="some-examples" class="section level3" number="3.2.4">
+<h3><span class="header-section-number">3.2.4</span> Some Examples</h3>
+<p>We next consider two examples to see in practice the use of the Binomial and Poisson distributions.</p>
+<div id="probability-of-marriage" class="section level4" number="3.2.4.1">
+<h4><span class="header-section-number">3.2.4.1</span> Probability of Marriage</h4>
+<p>A recent survey indicated that 82% of single women aged 25 years old will be married in their lifetime. Compute</p>
+<ul>
+<li><p>the probability of at most 3 women will be married in a sample of 20;</p></li>
+<li><p>the probability of at least 90 women will be married in sample of 100;</p></li>
+<li><p>the probability of two or three women in a sample of 20 will never be married.</p></li>
+</ul>
+<p>The above situation can be modeled by a Binomial random variable where the parameter <span class="math inline">\(n\)</span> depends on the question and <span class="math inline">\(\theta = 0.82\)</span>.</p>
+<p>The first question requires us to compute <span class="math inline">\(P(X\leq 3)= F(3)\)</span> where <span class="math inline">\(X\)</span> is Binomial with parameters <span class="math inline">\(n=20\)</span> and <span class="math inline">\(\theta =0.82\)</span>. Using R</p>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="notable-discrete-variables.html#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(<span class="dv">3</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.82</span>)</span></code></pre></div>
+<pre><code>## [1] 0.0004400767</code></pre>
+<p>The second question requires us to compute <span class="math inline">\(P(X\geq 90)\)</span> where <span class="math inline">\(X\)</span> is a Binomial random variable with parameters <span class="math inline">\(n=100\)</span> and <span class="math inline">\(\theta = 0.82\)</span>. Notice that
+<span class="math display">\[
+P(X\geq 90) = 1 - P(X&lt; 90) = 1 - P(X\leq 89) = 1 - F(89).
+\]</span>
+Using R</p>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="notable-discrete-variables.html#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pbinom</span>(<span class="dv">89</span>, <span class="at">size =</span> <span class="dv">100</span>,  <span class="at">prob =</span> <span class="fl">0.82</span>)</span></code></pre></div>
+<pre><code>## [1] 0.02003866</code></pre>
+<p>For the third question, notice that saying two women out of 20 will never be married is equal to 18 out of 20 will be married. Therefore we need to compute <span class="math inline">\(P(X=17) + P(X=18)= p(17) + p(18)\)</span> where <span class="math inline">\(X\)</span> is a Binomial random variable with parameters <span class="math inline">\(n=20\)</span> and <span class="math inline">\(\theta = 0.82\)</span>. Using R</p>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="notable-discrete-variables.html#cb137-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">dbinom</span>(<span class="dv">17</span><span class="sc">:</span><span class="dv">18</span>, <span class="at">size =</span> <span class="dv">20</span>, <span class="at">prob =</span> <span class="fl">0.82</span>))</span></code></pre></div>
+<pre><code>## [1] 0.4007631</code></pre>
+</div>
+<div id="the-bad-stuntman" class="section level4" number="3.2.4.2">
+<h4><span class="header-section-number">3.2.4.2</span> The Bad Stuntman</h4>
+<p>A stuntman injures himself an average of three times a year. Use the Poisson probability formula to calculate the probability that he will be injured:</p>
+<ul>
+<li><p>4 times a year</p></li>
+<li><p>Less than twice this year.</p></li>
+<li><p>More than three times this year.</p></li>
+</ul>
+<p>The above situation can be modeled as a Poisson distribution <span class="math inline">\(X\)</span> with parameter <span class="math inline">\(\lambda = 3\)</span>.</p>
+<p>The first question requires us to compute <span class="math inline">\(P(X=4)\)</span> which using R can be computed as</p>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="notable-discrete-variables.html#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dpois</span>(<span class="dv">4</span>, <span class="at">lambda =</span><span class="dv">3</span>)</span></code></pre></div>
+<pre><code>## [1] 0.1680314</code></pre>
+<p>The second question requires us to compute <span class="math inline">\(P(X&lt;2) = P(X=0)+P(X=1)= F(1)\)</span> which using R can be computed as</p>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="notable-discrete-variables.html#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ppois</span>(<span class="dv">1</span>,<span class="at">lambda=</span><span class="dv">3</span>)</span></code></pre></div>
+<pre><code>## [1] 0.1991483</code></pre>
+<p>The third question requires us to compute <span class="math inline">\(P(X&gt;3) = 1 - P(X\leq 2) = 1 - F(2)\)</span> which using R can be computed as</p>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="notable-discrete-variables.html#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">ppois</span>(<span class="dv">2</span>, <span class="at">lambda =</span> <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>## [1] 0.5768099</code></pre>
+</div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="intro.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="discrete-random-variables.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="continuous-random-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -340,7 +509,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/amartinezm90/SMUCbook/edit/master/index.Rmd",
+"link": "https://github.com/amartinezm90/SMUCbook/edit/master/03-Probability.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -348,7 +517,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/amartinezm90/SMUCbook/blob/master/index.Rmd",
+"link": "https://github.com/amartinezm90/SMUCbook/blob/master/03-Probability.Rmd",
 "text": null
 },
 "download": null,

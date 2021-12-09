@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Simulation and Modeling to Understand the Change</title>
+  <title>2.3 Accessing and manipulating variables | Simulation and Modeling to Understand the Change</title>
   <meta name="description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Simulation and Modeling to Understand the Change" />
+  <meta property="og:title" content="2.3 Accessing and manipulating variables | Simulation and Modeling to Understand the Change" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/Rplot.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="manueleleonelli/SimBook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Simulation and Modeling to Understand the Change" />
+  <meta name="twitter:title" content="2.3 Accessing and manipulating variables | Simulation and Modeling to Understand the Change" />
   
   <meta name="twitter:description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
   <meta name="twitter:image" content="/images/Rplot.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="intro.html"/>
+<link rel="prev" href="r-basics.html"/>
+<link rel="next" href="loops-and-conditions.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -293,23 +293,143 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Simulation and Modeling to Understand the Change</h1>
-<p class="author"><em>Alejandro Martínez-Mingo &amp; Manuele Leonelli</em></p>
-<p class="date"><em>2021-12-09</em></p>
+<div id="accessing-and-manipulating-variables" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Accessing and manipulating variables</h2>
+<p>Now that we have described the main objects we will work with in R, we can discuss how to access specific information.</p>
+<div id="accessing-a-single-element" class="section level3" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> Accessing a single element</h3>
+<p>Given a vector <code>vec</code> we can access its i-th entry with <code>vec[i]</code>.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="accessing-and-manipulating-variables.html#cb42-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>)</span>
+<span id="cb42-2"><a href="accessing-and-manipulating-variables.html#cb42-2" aria-hidden="true" tabindex="-1"></a>vec[<span class="dv">2</span>]</span></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<p>For a matrix or a dataframe we need to specify the associated row and column. If we have a matrix <code>mat</code> we can access the element in entry (i,j) with <code>mat[i,j]</code>.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="accessing-and-manipulating-variables.html#cb44-1" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>), <span class="at">ncol=</span><span class="dv">3</span>, <span class="at">nrow =</span><span class="dv">3</span>)</span>
+<span id="cb44-2"><a href="accessing-and-manipulating-variables.html#cb44-2" aria-hidden="true" tabindex="-1"></a>mat[<span class="dv">1</span>,<span class="dv">3</span>]</span></code></pre></div>
+<pre><code>## [1] 7</code></pre>
 </div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>These are lecture notes for the module <em>Simulation and Modelling to Understand Change</em> given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data &amp; Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed.</p>
-
+<div id="acessing-multiple-entries" class="section level3" number="2.3.2">
+<h3><span class="header-section-number">2.3.2</span> Acessing multiple entries</h3>
+<p>To access multiple entries we can on the other hand define a vector of indexes of the elements we want to access. Consider the following examples:</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="accessing-and-manipulating-variables.html#cb46-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>)</span>
+<span id="cb46-2"><a href="accessing-and-manipulating-variables.html#cb46-2" aria-hidden="true" tabindex="-1"></a>vec[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)]</span></code></pre></div>
+<pre><code>## [1] 1 3</code></pre>
+<p>The above code accesses the first two entries of the vector <code>vec</code>. To do this we had to define a vector using <code>c(1,2)</code> stating the entries we wanted to look at. For matrices consider:</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="accessing-and-manipulating-variables.html#cb48-1" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>), <span class="at">ncol=</span><span class="dv">3</span>, <span class="at">nrow =</span><span class="dv">3</span>)</span>
+<span id="cb48-2"><a href="accessing-and-manipulating-variables.html#cb48-2" aria-hidden="true" tabindex="-1"></a>mat[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>)]</span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    4    7
+## [2,]    5    8</code></pre>
+<p>The syntax is very similar as before. We defined to index vectors, one for the rows and one for columns. The two statements <code>c(1,2)</code> and <code>c(2,3)</code> are separated by a comma to denote that the first selects the first and second row, whilst the second selects the second and third column.</p>
+<p>If one wants to access full rows or full columns, the argument associated to rows or columns is left blank. Consider the following examples.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="accessing-and-manipulating-variables.html#cb50-1" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>), <span class="at">ncol=</span><span class="dv">3</span>, <span class="at">nrow =</span><span class="dv">3</span>)</span>
+<span id="cb50-2"><a href="accessing-and-manipulating-variables.html#cb50-2" aria-hidden="true" tabindex="-1"></a>mat[<span class="dv">1</span>,]</span></code></pre></div>
+<pre><code>## [1] 1 4 7</code></pre>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="accessing-and-manipulating-variables.html#cb52-1" aria-hidden="true" tabindex="-1"></a>mat[,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)]</span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    1    4
+## [2,]    2    5
+## [3,]    3    6</code></pre>
+<p>The code <code>mat[1,]</code> selects the first full row of <code>mat</code>. The code <code>mat[,c(1,2)]</code> selects the first and second column of <code>mat</code>. Notice that the comma has always to be included!</p>
+<p>To access multiple entries it is often useful to define sequences of number quickly. The following command defines the sequence of integer numbers from 1 to 9.</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="accessing-and-manipulating-variables.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">9</span></span></code></pre></div>
+<pre><code>## [1] 1 2 3 4 5 6 7 8 9</code></pre>
+<p>More generally, one can define sequences of numbers using <code>seq</code> (see <code>?seq</code>).</p>
+</div>
+<div id="accessing-entries-with-logical-operators" class="section level3" number="2.3.3">
+<h3><span class="header-section-number">2.3.3</span> Accessing entries with logical operators</h3>
+<p>If we want to access elements of an object based on a condition it is often easier to use logical operators. This means comparing entries using the comparisons you would usually use in mathematical reasoning, for instance being equal to, or being larger to. The syntax is as follows:</p>
+<ul>
+<li><p><code>==</code> to check equality (notice the two equal signs)</p></li>
+<li><p><code>!=</code> to check non-equality</p></li>
+<li><p><code>&gt;</code> bigger to</p></li>
+<li><p><code>&gt;=</code> bigger or equal to</p></li>
+<li><p><code>&lt;</code> less to</p></li>
+<li><p><code>&lt;=</code> less or equal to</p></li>
+</ul>
+<p>Let’s see some examples.</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="accessing-and-manipulating-variables.html#cb56-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>)</span>
+<span id="cb56-2"><a href="accessing-and-manipulating-variables.html#cb56-2" aria-hidden="true" tabindex="-1"></a>vec <span class="sc">&gt;</span> <span class="dv">4</span></span></code></pre></div>
+<pre><code>## [1] FALSE FALSE FALSE  TRUE  TRUE</code></pre>
+<p>We constructed a vector <code>vec</code> and check which entries were larger than 4. The output is a Boolean vector with the same number of entries as <code>vec</code> where only the last two entries are <code>TRUE</code>. Similarly,</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="accessing-and-manipulating-variables.html#cb58-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>)</span>
+<span id="cb58-2"><a href="accessing-and-manipulating-variables.html#cb58-2" aria-hidden="true" tabindex="-1"></a>vec <span class="sc">==</span> <span class="dv">4</span></span></code></pre></div>
+<pre><code>## [1] FALSE FALSE  TRUE FALSE FALSE</code></pre>
+<p>has a <code>TRUE</code> in the third entry only.</p>
+<p>So if we were to be interested in returning the elements of <code>vec</code> that are larger than 4 we could use the code</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="accessing-and-manipulating-variables.html#cb60-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>)</span>
+<span id="cb60-2"><a href="accessing-and-manipulating-variables.html#cb60-2" aria-hidden="true" tabindex="-1"></a>vec[vec <span class="sc">&gt;</span> <span class="dv">4</span>]</span></code></pre></div>
+<pre><code>## [1] 5 6</code></pre>
+<p>So we have a vector with only elements 5 and 6.</p>
+</div>
+<div id="manipulating-dataframes" class="section level3" number="2.3.4">
+<h3><span class="header-section-number">2.3.4</span> Manipulating dataframes</h3>
+<p>We have seen in the previous section that dataframes are special types of matrices where columns can include a different data type. For this reason they have special way to manipulate and access their entries.</p>
+<p>First, specific columns of a dataframe can be accessed using its name and the <code>$</code> sign as follows.</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="accessing-and-manipulating-variables.html#cb62-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">X1 =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="at">X2 =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">FALSE</span>,<span class="cn">FALSE</span>),</span>
+<span id="cb62-2"><a href="accessing-and-manipulating-variables.html#cb62-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">X3 =</span> <span class="fu">c</span>(<span class="st">&quot;male&quot;</span>,<span class="st">&quot;male&quot;</span>,<span class="st">&quot;female&quot;</span>))</span>
+<span id="cb62-3"><a href="accessing-and-manipulating-variables.html#cb62-3" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>X1</span></code></pre></div>
+<pre><code>## [1] 1 2 3</code></pre>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="accessing-and-manipulating-variables.html#cb64-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>X3</span></code></pre></div>
+<pre><code>## [1] &quot;male&quot;   &quot;male&quot;   &quot;female&quot;</code></pre>
+<p>So using the name of the dataframe <code>data</code> followed by <code>$</code> and then the name of the column, for instance <code>X1</code>, we access that specific column of the dataframe.</p>
+<p>Second, we can use the <code>$</code> sign to add new columns to a dataframe. Consider the following code.</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="accessing-and-manipulating-variables.html#cb66-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">X1 =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="at">X2 =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">FALSE</span>,<span class="cn">FALSE</span>),</span>
+<span id="cb66-2"><a href="accessing-and-manipulating-variables.html#cb66-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">X3 =</span> <span class="fu">c</span>(<span class="st">&quot;male&quot;</span>,<span class="st">&quot;male&quot;</span>,<span class="st">&quot;female&quot;</span>))</span>
+<span id="cb66-3"><a href="accessing-and-manipulating-variables.html#cb66-3" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>X4 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;yes&quot;</span>,<span class="st">&quot;no&quot;</span>,<span class="st">&quot;no&quot;</span>)</span>
+<span id="cb66-4"><a href="accessing-and-manipulating-variables.html#cb66-4" aria-hidden="true" tabindex="-1"></a>data</span></code></pre></div>
+<pre><code>##   X1    X2     X3  X4
+## 1  1  TRUE   male yes
+## 2  2 FALSE   male  no
+## 3  3 FALSE female  no</code></pre>
+<p><code>data</code> now includes a fourth column called <code>X4</code> coinciding to the vector <code>c("yes","no","no")</code>.</p>
+<p>Third, we can select specific rows of a dataframe using the command <code>subset</code>. Consider the following example.</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="accessing-and-manipulating-variables.html#cb68-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">X1 =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="at">X2 =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">FALSE</span>,<span class="cn">FALSE</span>),</span>
+<span id="cb68-2"><a href="accessing-and-manipulating-variables.html#cb68-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">X3 =</span> <span class="fu">c</span>(<span class="st">&quot;male&quot;</span>,<span class="st">&quot;male&quot;</span>,<span class="st">&quot;female&quot;</span>))</span>
+<span id="cb68-3"><a href="accessing-and-manipulating-variables.html#cb68-3" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(data, X1 <span class="sc">&lt;=</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##   X1    X2   X3
+## 1  1  TRUE male
+## 2  2 FALSE male</code></pre>
+<p>The above code returns the rows of <code>data</code> such that <code>X1</code> is less or equal to 2. More complex rules to subset a dataframe can be combined using the and operator <code>&amp;</code> and the or operator <code>|</code>. Let’s see an example.</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="accessing-and-manipulating-variables.html#cb70-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">X1 =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="at">X2 =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">FALSE</span>,<span class="cn">FALSE</span>),</span>
+<span id="cb70-2"><a href="accessing-and-manipulating-variables.html#cb70-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">X3 =</span> <span class="fu">c</span>(<span class="st">&quot;male&quot;</span>,<span class="st">&quot;male&quot;</span>,<span class="st">&quot;female&quot;</span>))</span>
+<span id="cb70-3"><a href="accessing-and-manipulating-variables.html#cb70-3" aria-hidden="true" tabindex="-1"></a><span class="fu">subset</span>(data, X1 <span class="sc">&lt;=</span> <span class="dv">2</span> <span class="sc">&amp;</span> X2 <span class="sc">==</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>##   X1   X2   X3
+## 1  1 TRUE male</code></pre>
+<p>So the above code selects the rows such that <code>X1</code> is less or equal to 2 and <code>X2</code> is <code>TRUE</code>. This is the case only for the first row of <code>data</code>.</p>
+</div>
+<div id="information-about-objects" class="section level3" number="2.3.5">
+<h3><span class="header-section-number">2.3.5</span> Information about objects</h3>
+<p>Here is a list of functions which are often useful to get information about objects in R.</p>
+<ul>
+<li><p><code>length</code> returns the number of entries in a vector.</p></li>
+<li><p><code>dim</code> returns the number of rows and columns of a matrix or a dataframe</p></li>
+<li><p><code>unique</code> returns the unique elements of a vector or the unique rows of a matrix or a dataframe.</p></li>
+<li><p><code>head</code> returns the first entries of a vector or the first rows of a matrix or a dataframe</p></li>
+<li><p><code>order</code> returns a re-ordering of a vector or a data.frame in ascending order.</p></li>
+</ul>
+<p>Let’s see some examples.</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="accessing-and-manipulating-variables.html#cb72-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">7</span>,<span class="dv">5</span>,<span class="dv">5</span>)</span>
+<span id="cb72-2"><a href="accessing-and-manipulating-variables.html#cb72-2" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(vec)</span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="accessing-and-manipulating-variables.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(vec)</span></code></pre></div>
+<pre><code>## [1] 4 2 7 5</code></pre>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="accessing-and-manipulating-variables.html#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">order</span>(vec)</span></code></pre></div>
+<pre><code>## [1] 2 1 4 5 3</code></pre>
+<p><code>length</code> gives the number of elements of <code>vec</code>, <code>unique</code> returns the different values in <code>vec</code> (so 5 is not repeated), <code>order</code> returns in entry i the ordering of the i-th entry of <code>vec</code>. So the first entry of <code>order(vec)</code> is 2 since 4 is the second-smallest entry of <code>vec</code>.</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="accessing-and-manipulating-variables.html#cb78-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">X1 =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>), <span class="at">X2 =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">FALSE</span>,<span class="cn">FALSE</span>,<span class="cn">FALSE</span>),</span>
+<span id="cb78-2"><a href="accessing-and-manipulating-variables.html#cb78-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">X3 =</span> <span class="fu">c</span>(<span class="st">&quot;male&quot;</span>,<span class="st">&quot;male&quot;</span>,<span class="st">&quot;female&quot;</span>,<span class="st">&quot;female&quot;</span>))</span>
+<span id="cb78-3"><a href="accessing-and-manipulating-variables.html#cb78-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(data)</span></code></pre></div>
+<pre><code>## [1] 4 3</code></pre>
+<p>So <code>dim</code> tells us that <code>data</code> has four rows and three columns.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="intro.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="r-basics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="loops-and-conditions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -340,7 +460,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/amartinezm90/SMUCbook/edit/master/index.Rmd",
+"link": "https://github.com/amartinezm90/SMUCbook/edit/master/02-R.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -348,7 +468,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/amartinezm90/SMUCbook/blob/master/index.Rmd",
+"link": "https://github.com/amartinezm90/SMUCbook/blob/master/02-R.Rmd",
 "text": null
 },
 "download": null,

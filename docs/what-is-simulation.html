@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Simulation and Modeling to Understand the Change</title>
+  <title>1.1 What is simulation | Simulation and Modeling to Understand the Change</title>
   <meta name="description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Simulation and Modeling to Understand the Change" />
+  <meta property="og:title" content="1.1 What is simulation | Simulation and Modeling to Understand the Change" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/Rplot.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="manueleleonelli/SimBook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Simulation and Modeling to Understand the Change" />
+  <meta name="twitter:title" content="1.1 What is simulation | Simulation and Modeling to Understand the Change" />
   
   <meta name="twitter:description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
   <meta name="twitter:image" content="/images/Rplot.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="intro.html"/>
+<link rel="prev" href="intro.html"/>
+<link rel="next" href="types-of-simulations.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -293,23 +293,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Simulation and Modeling to Understand the Change</h1>
-<p class="author"><em>Alejandro Martínez-Mingo &amp; Manuele Leonelli</em></p>
-<p class="date"><em>2021-12-09</em></p>
+<div id="what-is-simulation" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> What is simulation</h2>
+<p>A <em>simulation</em> is an imitation of the dynamics of a real-world process or system over time. Although simulation could potentially still be done “by hand,” nowadays it almost always implicitly requires the use of a computer to create an artificial history of a system to draw inferences about its characteristics and workings.</p>
+<p>The behavior of the system is studied by constructing a <em>simulation model</em>, which usually takes the form of a set of assumptions about the workings of the system. Once developed, a simulation model can be used for a variety of tasks, including:</p>
+<ul>
+<li><p>Investigate the behaviour of the system under a wide array of scenarios. This is also often referred to as “what-if” analyses;</p></li>
+<li><p>Changes to the system can be simulated before implementation to predict their impact in real-world;</p></li>
+<li><p>During the design stage of a system, meaning while it is being built, simulation can be used to guide its construction.</p></li>
+</ul>
+<p>Computer simulation has been used in a variety of domains, including manifacturing, health care, transport system, defense and management science, among many others.</p>
+<div id="a-simple-simulation-model" class="section level3" number="1.1.1">
+<h3><span class="header-section-number">1.1.1</span> A simple simulation model</h3>
+<p>Suppose we decided to open a donut shop and are unsure about how many employees to hire to sell donuts to costumers. The operations of our little shop is the real-world system whose behavior we want to understand. Given that the shop is not operating yet, only a simulation model can provide us with insights.</p>
+<p>We could of course devise models of different complexities, but for now suppose that we are happy with a simple model where we have the following elements:</p>
+<ul>
+<li><p>costumers that arrive at our shop at a particular rate;</p></li>
+<li><p>employees (of a number to be given as input) that take a specific time to serve costumers.</p></li>
+</ul>
+<p>Implicitly, we are completely disregarding the number of donuts available in our shop and assuming that we have an infinite availability of these. Of course, in a more complex simulation model we may want to also include this element to give a more realistic description of the system.</p>
 </div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>These are lecture notes for the module <em>Simulation and Modelling to Understand Change</em> given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data &amp; Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed.</p>
-
+<div id="why-simulate" class="section level3" number="1.1.2">
+<h3><span class="header-section-number">1.1.2</span> Why simulate?</h3>
+<p>An alternative approach to computer simulation is direct experimentation. In the bagel shop setting, we could wait for the shop to open and observe its workings by having a different number of employees on different days. Considered against real experimentation, simulation has the following advantages:</p>
+<ul>
+<li><p>It is <em>cheaper</em> to implement and does not require a disruption of the real-world system;</p></li>
+<li><p>It is <em>faster</em> to implement and time can be compressed or expanded to allow for a speed-up or a slow-down of the system of interest;</p></li>
+<li><p>It can be <em>replicated</em> multiple times and the workings of the systems can be observed a large number of times;</p></li>
+<li><p>It is <em>safe</em> since it does not require an actual disruption of the system;</p></li>
+<li><p>It is <em>ethical</em> and <em>legal</em> since it can implement changes in policies that would be unethical or illegal to do in real-world.</p></li>
+</ul>
+<p>Another alternative is to use a mathematical model representing the system. However, it is often infeasible, if not impossible, to come up with an exact mathematical model which can faithfully represent the system under study.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="intro.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="types-of-simulations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -340,7 +363,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/amartinezm90/SMUCbook/edit/master/index.Rmd",
+"link": "https://github.com/amartinezm90/SMUCbook/edit/master/01-intro.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -348,7 +371,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/amartinezm90/SMUCbook/blob/master/index.Rmd",
+"link": "https://github.com/amartinezm90/SMUCbook/blob/master/01-intro.Rmd",
 "text": null
 },
 "download": null,
