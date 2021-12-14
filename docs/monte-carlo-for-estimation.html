@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3.5 The Central Limit Theorem | Simulation and Modeling to Understand the Change</title>
+  <title>6.1 Monte Carlo for estimation | Simulation and Modeling to Understand the Change</title>
   <meta name="description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3.5 The Central Limit Theorem | Simulation and Modeling to Understand the Change" />
+  <meta property="og:title" content="6.1 Monte Carlo for estimation | Simulation and Modeling to Understand the Change" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/Rplot.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="manueleleonelli/SimBook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3.5 The Central Limit Theorem | Simulation and Modeling to Understand the Change" />
+  <meta name="twitter:title" content="6.1 Monte Carlo for estimation | Simulation and Modeling to Understand the Change" />
   
   <meta name="twitter:description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
   <meta name="twitter:image" content="/images/Rplot.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="notable-continuous-distribution.html"/>
-<link rel="next" href="random-number-generation.html"/>
+<link rel="prev" href="monte-carlo-methods-for-inference.html"/>
+<link rel="next" href="general-case-with-standard-normal-distributions.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -303,41 +303,55 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="the-central-limit-theorem" class="section level2" number="3.5">
-<h2><span class="header-section-number">3.5</span> The Central Limit Theorem</h2>
-<p>As a final topic in probability we will briefly discuss why the Normal distribution is so important and widely known. The reason behind this is the existence of a theorem, called the <em>Central Limit Theorem</em> which is perhaps the most important theorem in probability which has far-reaching consequences in the world of statistics.</p>
-<p>Let’s first state theorem. Suppose you have random variables <span class="math inline">\(X_1,\dots, X_n\)</span> which have the following properties:</p>
+<div id="monte-carlo-for-estimation" class="section level2" number="6.1">
+<h2><span class="header-section-number">6.1</span> Monte Carlo for estimation</h2>
+<p>Let’s begin with simply estimating a probability. Sometimes this is referred to as computing an expectation of a random variable. If you have a random variable <span class="math inline">\(X\)</span> with a density function <span class="math inline">\(f_X(x)\)</span> and we want to compute the expectation of a function <span class="math inline">\(g(x)\)</span> which models the probability of <span class="math inline">\(f_X(x)\)</span>, (or the area under the curve of <span class="math inline">\(f_X(x)\)</span>), then <span class="math inline">\(g(x)\)</span> can be expressed as the integral of <span class="math inline">\(f_X(x)\)</span>.</p>
+<div id="sam-and-annie-from-sleepless-in-seattle" class="section level3" number="6.1.1">
+<h3><span class="header-section-number">6.1.1</span> Sam and Annie from ‘Sleepless in Seattle’</h3>
+<p>We can take a look to the <a href="https://www.youtube.com/watch?v=L4Ll-xXjjXc">Sleepless in Seattle</a> video to understand the problem. It is a 1993 American romantic comedy.</p>
+<p>Now, let <span class="math inline">\(A\)</span> and <span class="math inline">\(S\)</span> represent Sam’s and Annie’s arrival times at the Empire State Building, where we measure the arrival time as the number of hours after noon. We assume:</p>
 <ul>
-<li><p>they are all independent of each other;</p></li>
-<li><p>they all have the same mean <span class="math inline">\(\mu\)</span>;</p></li>
-<li><p>the all have the same standard deviation <span class="math inline">\(\sigma^2\)</span>.</p></li>
+<li><span class="math inline">\(A\)</span> and <span class="math inline">\(S\)</span> are independent and uniformly distributed</li>
+<li>Annie arrives somewhere between 10:30 and midnight</li>
+<li>Sam arrives somewhere between 10:00 and 11:30PM.</li>
 </ul>
-<p>Consider the random variable
-<span class="math display">\[
-\bar{X}_n= \frac{X_1+\cdots X_n}{n}.
-\]</span>
-Then it holds that
-<span class="math display">\[
-\lim_{n\rightarrow + \infty} \frac{\bar{X}_n-\mu}{\sigma/\sqrt{n}} = Z
-\]</span>
-where <span class="math inline">\(Z\)</span> is the standard normal random variable.</p>
-<p>We can also state the theorem as
-<span class="math display">\[
-\lim_{n\rightarrow + \infty} \bar{X}_n = Y
-\]</span>
-where <span class="math inline">\(Y\)</span> is a Normal random variable with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2/n\)</span>.</p>
-<p>The interpretation of the Central Limit Theorem is as follows. The sample mean <span class="math inline">\(\bar{X}_n\)</span> of independent random variables with the same mean and variance can be approximated by a Normal distribution, if the sample size <span class="math inline">\(n\)</span> is large. Notice that we made no assumption whatsoever about the distribution of the <span class="math inline">\(X_i\)</span>’s and still we were able to deduce the distribution of the sample mean.</p>
-<p>The existence of this theorem is the reason why you used so often Normal probabilities to construct confidence intervals or to carry out tests of hypothesis. As you will continue study statistics, you will see that the assumption of Normality of data is made most often and is justified by the central limit theorem.</p>
-
+<p>Our Questions are:
+1) What is the probability that Annie arrives before Sam?
+2) What is expected difference in arrival times?</p>
+<p>We start simulating a large number of values from distribution of <span class="math inline">\((A,S)\)</span> say, <code>1000</code>, where <span class="math inline">\(A\)</span> and <span class="math inline">\(S\)</span> are independent:</p>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="monte-carlo-for-estimation.html#cb252-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2021</span>)</span>
+<span id="cb252-2"><a href="monte-carlo-for-estimation.html#cb252-2" aria-hidden="true" tabindex="-1"></a>sam <span class="ot">=</span> <span class="fu">runif</span>(<span class="dv">1000</span>, <span class="dv">10</span>, <span class="fl">11.5</span>)</span>
+<span id="cb252-3"><a href="monte-carlo-for-estimation.html#cb252-3" aria-hidden="true" tabindex="-1"></a>annie <span class="ot">=</span> <span class="fu">runif</span>(<span class="dv">1000</span>, <span class="fl">10.5</span>, <span class="dv">12</span>)</span></code></pre></div>
+<p>We want the probability <span class="math inline">\(P(A &lt; S)\)</span> which is estimated by the proportion of simulated pairs <span class="math inline">\((a,s)\)</span> where <span class="math inline">\(a\)</span> is smaller than <span class="math inline">\(s\)</span></p>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="monte-carlo-for-estimation.html#cb253-1" aria-hidden="true" tabindex="-1"></a>prob <span class="ot">=</span> <span class="fu">sum</span>(annie <span class="sc">&lt;</span> sam) <span class="sc">/</span> <span class="dv">1000</span></span>
+<span id="cb253-2"><a href="monte-carlo-for-estimation.html#cb253-2" aria-hidden="true" tabindex="-1"></a>prob</span></code></pre></div>
+<pre><code>## [1] 0.223</code></pre>
+<p>The estimated probability that Annie arrives before Sam is 0.223, and the <em>standard error</em> of this estimation is:</p>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="monte-carlo-for-estimation.html#cb255-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(prob <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> prob) <span class="sc">/</span> <span class="dv">1000</span>)</span></code></pre></div>
+<pre><code>## [1] 0.01316324</code></pre>
+<p>In the next plot we can see that the shaded region shows the area in which <span class="math inline">\(A &lt; S\)</span></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-120-1.png" width="672" /></p>
+<p>Now, what is the expected difference in the arrival times? Annie is more likely to arrive later, so we model <span class="math inline">\(E(A-S)\)</span></p>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="monte-carlo-for-estimation.html#cb257-1" aria-hidden="true" tabindex="-1"></a>difference <span class="ot">=</span> annie <span class="sc">-</span> sam</span></code></pre></div>
+<p>Now we can estimate the mean of the differences using Monte Carlo methods</p>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="monte-carlo-for-estimation.html#cb258-1" aria-hidden="true" tabindex="-1"></a>estimatedMean <span class="ot">=</span> <span class="fu">mean</span>(difference)</span>
+<span id="cb258-2"><a href="monte-carlo-for-estimation.html#cb258-2" aria-hidden="true" tabindex="-1"></a>estimatedMean</span></code></pre></div>
+<pre><code>## [1] 0.5079882</code></pre>
+<p>The estimated standard error is the standard desviation of the difference divided by the square root of the simulation sample size:</p>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="monte-carlo-for-estimation.html#cb260-1" aria-hidden="true" tabindex="-1"></a>SE <span class="ot">=</span> <span class="fu">sd</span>(difference) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">1000</span>)</span>
+<span id="cb260-2"><a href="monte-carlo-for-estimation.html#cb260-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="st">&quot;Mean&quot;</span> <span class="ot">=</span> estimatedMean, <span class="st">&quot;Standard Error&quot;</span> <span class="ot">=</span> SE)</span></code></pre></div>
+<pre><code>##           Mean Standard Error 
+##     0.50798819     0.01972754</code></pre>
+<p>So we estimate that Annie will arrive 0.508 hours after Sam arrives. Since standard error is only 0.02 hours, we can be 95% confident that the true difference is between 0.528 and 0.488 hours</p>
 </div>
-<!-- </div> -->
+</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="notable-continuous-distribution.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="random-number-generation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="monte-carlo-methods-for-inference.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="general-case-with-standard-normal-distributions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -368,7 +382,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/amartinezm90/SMUCbook/edit/master/03-Probability.Rmd",
+"link": "https://github.com/amartinezm90/SMUCbook/edit/master/06-Montecarlo-Inference.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -376,7 +390,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/amartinezm90/SMUCbook/blob/master/03-Probability.Rmd",
+"link": "https://github.com/amartinezm90/SMUCbook/blob/master/06-Montecarlo-Inference.Rmd",
 "text": null
 },
 "download": null,

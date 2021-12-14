@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3.5 The Central Limit Theorem | Simulation and Modeling to Understand the Change</title>
+  <title>6.2 General Case with Standard Normal Distributions | Simulation and Modeling to Understand the Change</title>
   <meta name="description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3.5 The Central Limit Theorem | Simulation and Modeling to Understand the Change" />
+  <meta property="og:title" content="6.2 General Case with Standard Normal Distributions | Simulation and Modeling to Understand the Change" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/Rplot.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="manueleleonelli/SimBook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3.5 The Central Limit Theorem | Simulation and Modeling to Understand the Change" />
+  <meta name="twitter:title" content="6.2 General Case with Standard Normal Distributions | Simulation and Modeling to Understand the Change" />
   
   <meta name="twitter:description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
   <meta name="twitter:image" content="/images/Rplot.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="notable-continuous-distribution.html"/>
-<link rel="next" href="random-number-generation.html"/>
+<link rel="prev" href="monte-carlo-for-estimation.html"/>
+<link rel="next" href="the-taxi-problem-comparing-estimators.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -303,41 +303,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="the-central-limit-theorem" class="section level2" number="3.5">
-<h2><span class="header-section-number">3.5</span> The Central Limit Theorem</h2>
-<p>As a final topic in probability we will briefly discuss why the Normal distribution is so important and widely known. The reason behind this is the existence of a theorem, called the <em>Central Limit Theorem</em> which is perhaps the most important theorem in probability which has far-reaching consequences in the world of statistics.</p>
-<p>Let’s first state theorem. Suppose you have random variables <span class="math inline">\(X_1,\dots, X_n\)</span> which have the following properties:</p>
-<ul>
-<li><p>they are all independent of each other;</p></li>
-<li><p>they all have the same mean <span class="math inline">\(\mu\)</span>;</p></li>
-<li><p>the all have the same standard deviation <span class="math inline">\(\sigma^2\)</span>.</p></li>
-</ul>
-<p>Consider the random variable
-<span class="math display">\[
-\bar{X}_n= \frac{X_1+\cdots X_n}{n}.
-\]</span>
-Then it holds that
-<span class="math display">\[
-\lim_{n\rightarrow + \infty} \frac{\bar{X}_n-\mu}{\sigma/\sqrt{n}} = Z
-\]</span>
-where <span class="math inline">\(Z\)</span> is the standard normal random variable.</p>
-<p>We can also state the theorem as
-<span class="math display">\[
-\lim_{n\rightarrow + \infty} \bar{X}_n = Y
-\]</span>
-where <span class="math inline">\(Y\)</span> is a Normal random variable with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2/n\)</span>.</p>
-<p>The interpretation of the Central Limit Theorem is as follows. The sample mean <span class="math inline">\(\bar{X}_n\)</span> of independent random variables with the same mean and variance can be approximated by a Normal distribution, if the sample size <span class="math inline">\(n\)</span> is large. Notice that we made no assumption whatsoever about the distribution of the <span class="math inline">\(X_i\)</span>’s and still we were able to deduce the distribution of the sample mean.</p>
-<p>The existence of this theorem is the reason why you used so often Normal probabilities to construct confidence intervals or to carry out tests of hypothesis. As you will continue study statistics, you will see that the assumption of Normality of data is made most often and is justified by the central limit theorem.</p>
-
+<div id="general-case-with-standard-normal-distributions" class="section level2" number="6.2">
+<h2><span class="header-section-number">6.2</span> General Case with Standard Normal Distributions</h2>
+<p>In probability theory and statistics, a collection of random variables is independent and identically distributed (iid) if each random variable has the same probability distribution as the others and all are mutually independent. Following, we are going to perform a Monte Carlo simulation to check two main iid properties:
+- The expected value of absolute difference is: <span class="math inline">\(E(|X-Y|)=\frac{2}{\sqrt{\pi}}\)</span>
+- The variance of absolute difference is: <span class="math inline">\(V(|X-Y|) = 2- \frac{4}{\pi}\)</span></p>
+<p>We generate a large number of random samples of size 2 from a standard normal distribution, then compute the replicate pairs’ differences, and then the mean of those differences:</p>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="general-case-with-standard-normal-distributions.html#cb262-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2021</span>)</span>
+<span id="cb262-2"><a href="general-case-with-standard-normal-distributions.html#cb262-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">=</span> <span class="dv">10000</span></span>
+<span id="cb262-3"><a href="general-case-with-standard-normal-distributions.html#cb262-3" aria-hidden="true" tabindex="-1"></a>g <span class="ot">=</span> <span class="fu">numeric</span>(n)</span>
+<span id="cb262-4"><a href="general-case-with-standard-normal-distributions.html#cb262-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb262-5"><a href="general-case-with-standard-normal-distributions.html#cb262-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
+<span id="cb262-6"><a href="general-case-with-standard-normal-distributions.html#cb262-6" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">2</span>)</span>
+<span id="cb262-7"><a href="general-case-with-standard-normal-distributions.html#cb262-7" aria-hidden="true" tabindex="-1"></a>  g[i] <span class="ot">=</span> <span class="fu">abs</span>(x[<span class="dv">1</span>] <span class="sc">-</span> x[<span class="dv">2</span>])</span>
+<span id="cb262-8"><a href="general-case-with-standard-normal-distributions.html#cb262-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb262-9"><a href="general-case-with-standard-normal-distributions.html#cb262-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb262-10"><a href="general-case-with-standard-normal-distributions.html#cb262-10" aria-hidden="true" tabindex="-1"></a>estMean <span class="ot">=</span> <span class="fu">mean</span>(g)</span>
+<span id="cb262-11"><a href="general-case-with-standard-normal-distributions.html#cb262-11" aria-hidden="true" tabindex="-1"></a>expectedValue <span class="ot">=</span> <span class="dv">2</span><span class="sc">/</span><span class="fu">sqrt</span>(pi)</span>
+<span id="cb262-12"><a href="general-case-with-standard-normal-distributions.html#cb262-12" aria-hidden="true" tabindex="-1"></a>diffMeanExpectation <span class="ot">=</span> <span class="fu">abs</span>(estMean<span class="sc">-</span>expectedValue)</span>
+<span id="cb262-13"><a href="general-case-with-standard-normal-distributions.html#cb262-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb262-14"><a href="general-case-with-standard-normal-distributions.html#cb262-14" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="st">&quot;Estimated Mean&quot;</span> <span class="ot">=</span> estMean, <span class="st">&quot;Expected Value&quot;</span> <span class="ot">=</span> expectedValue, <span class="st">&quot;Difference&quot;</span> <span class="ot">=</span> diffMeanExpectation)</span></code></pre></div>
+<pre><code>## Estimated Mean Expected Value     Difference 
+##     1.11782094     1.12837917     0.01055823</code></pre>
+<p>Next, we can see a plot that represents the results.</p>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="general-case-with-standard-normal-distributions.html#cb264-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb264-2"><a href="general-case-with-standard-normal-distributions.html#cb264-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb264-3"><a href="general-case-with-standard-normal-distributions.html#cb264-3" aria-hidden="true" tabindex="-1"></a>dataPlot <span class="ot">=</span> <span class="fu">c</span>(estMean, expectedValue, diffMeanExpectation)</span>
+<span id="cb264-4"><a href="general-case-with-standard-normal-distributions.html#cb264-4" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(dataPlot, <span class="at">main =</span> <span class="st">&quot;Statistics&quot;</span>, <span class="at">border=</span><span class="st">&quot;red&quot;</span>, <span class="at">col=</span><span class="st">&quot;blue&quot;</span>, <span class="at">density=</span><span class="dv">12</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-125-1.png" width="672" /></p>
 </div>
-<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="notable-continuous-distribution.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="random-number-generation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="monte-carlo-for-estimation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="the-taxi-problem-comparing-estimators.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -368,7 +369,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/amartinezm90/SMUCbook/edit/master/03-Probability.Rmd",
+"link": "https://github.com/amartinezm90/SMUCbook/edit/master/06-Montecarlo-Inference.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -376,7 +377,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/amartinezm90/SMUCbook/blob/master/03-Probability.Rmd",
+"link": "https://github.com/amartinezm90/SMUCbook/blob/master/06-Montecarlo-Inference.Rmd",
 "text": null
 },
 "download": null,

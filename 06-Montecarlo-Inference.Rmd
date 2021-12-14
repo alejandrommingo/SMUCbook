@@ -1,0 +1,187 @@
+# Monte Carlo methods for inference
+
+Monte Carlo Methods may refer to any statistical or numerical method where simulation is used. When we talk about Monte Carlo methods for inference we just look at these inference processes. In this way, we can use Monte Carlo to estimate:
+  - Parameters of sampling
+  - Distribution of a statistic
+  - Mean squared error (MSE)
+  - Percentiles
+  - Other measures of interest.
+
+In statistical inference there is uncertainty in any estimate. The methods we are going to see use repeated sampling from a given probability model, known as parametric bootstrap. We simulate the stochastic process that generated the data, repeatedly drawing samples under identical conditions. Other MC methods known as nonparametric use repeated sampling from an observed sample.
+
+## Monte Carlo for estimation
+
+Let's begin with simply estimating a probability. Sometimes this is referred to as computing an expectation of a random variable. If you have a random variable $X$ with a density function $f_X(x)$ and we want to compute the expectation of a function $g(x)$ which models the probability of $f_X(x)$, (or the area under the curve of $f_X(x)$), then $g(x)$ can be expressed as the integral of $f_X(x)$.
+
+### Sam and Annie from 'Sleepless in Seattle'
+
+We can take a look to the [Sleepless in Seattle](https://www.youtube.com/watch?v=L4Ll-xXjjXc) video to understand the problem. It is a 1993 American romantic comedy.
+
+Now, let $A$ and $S$ represent Sam's and Annie's arrival times at the Empire State Building, where we measure the arrival time as the number of hours after noon. We assume:
+
+  - $A$ and $S$ are independent and uniformly distributed
+  - Annie arrives somewhere between 10:30 and midnight
+  - Sam arrives somewhere between 10:00 and 11:30PM.
+
+Our Questions are:
+  1) What is the probability that Annie arrives before Sam?
+  2) What is expected difference in arrival times?
+
+We start simulating a large number of values from distribution of $(A,S)$ say, `1000`, where $A$ and $S$ are independent:
+
+```{r}
+set.seed(2021)
+sam = runif(1000, 10, 11.5)
+annie = runif(1000, 10.5, 12)
+```
+
+We want the probability $P(A < S)$ which is estimated by the proportion of simulated pairs $(a,s)$ where $a$ is smaller than $s$
+
+```{r}
+prob = sum(annie < sam) / 1000
+prob
+```
+
+The estimated probability that Annie arrives before Sam is 0.223, and the *standard error* of this estimation is:
+
+```{r}
+sqrt(prob * (1 - prob) / 1000)
+```
+
+In the next plot we can see that the shaded region shows the area in which $A < S$
+
+```{r, echo=FALSE}
+plot(sam,annie)
+polygon(c(10.5, 11.5, 11.5, 10.5),
+        c(10.5, 10.5, 11.5, 10.5), density = 10, angle = 135)
+
+```
+
+Now, what is the expected difference in the arrival times? Annie is more likely to arrive later, so we model $E(A-S)$ 
+
+```{r}
+difference = annie - sam
+```
+
+Now we can estimate the mean of the differences using Monte Carlo methods
+
+```{r}
+estimatedMean = mean(difference)
+estimatedMean
+```
+
+The estimated standard error is the standard desviation of the difference divided by the square root of the simulation sample size:
+
+```{r}
+SE = sd(difference) / sqrt(1000)
+c("Mean" = estimatedMean, "Standard Error" = SE)
+```
+
+So we estimate that Annie will arrive 0.508 hours after Sam arrives. Since standard error is only 0.02 hours, we can be 95% confident that the true difference is between 0.528 and 0.488 hours
+
+## General Case with Standard Normal Distributions
+
+In probability theory and statistics, a collection of random variables is independent and identically distributed (iid) if each random variable has the same probability distribution as the others and all are mutually independent. Following, we are going to perform a Monte Carlo simulation to check two main iid properties:
+- The expected value of absolute difference is: $E(|X-Y|)=\frac{2}{\sqrt{\pi}}$
+- The variance of absolute difference is: $V(|X-Y|) =  2- \frac{4}{\pi}$
+
+We generate a large number of random samples of size 2 from a standard normal distribution, then compute the replicate pairs' differences, and then the mean of those differences:
+
+```{r}
+set.seed(2021)
+n = 10000
+g = numeric(n)
+
+for (i in 1:n) {
+  x = rnorm(2)
+  g[i] = abs(x[1] - x[2])
+}
+
+estMean = mean(g)
+expectedValue = 2/sqrt(pi)
+diffMeanExpectation = abs(estMean-expectedValue)
+
+c("Estimated Mean" = estMean, "Expected Value" = expectedValue, "Difference" = diffMeanExpectation)
+```
+
+Next, we can see a plot that represents the results.
+
+```{r}
+library(ggplot2)
+
+dataPlot = c(estMean, expectedValue, diffMeanExpectation)
+barplot(dataPlot, main = "Statistics", border="red", col="blue", density=12)
+
+```
+
+
+## The taxi problem (comparing estimators)
+
+Finally, we will see a case in which we want to compare two different estimators. Imagine that a person is walking through the streets of a city and notices the following numbers of 5 taxis that pass by: 34,100,65,81,120. Can he/she make an intelligent guess at the number of taxis in the city?: Is a problem of statistical inference where population is collection of taxis driven in city and one wishes to know unknown number of taxis $N$.
+
+Assume taxis are numbered from $1$ to $N$, each equally likely to be observed and consider two possible estimates: 
+  1. The largest taxi number observed
+  2. Twice the sample mean. 
+
+Which is a better estimator of the number of taxis $N$? We will compare these two estimators using a Monte Carlo Simulation:
+  1. Simulate taxi numbers from a uniform distribution with a known number of taxis $N$ and compute the two estimates. 
+  2. Repeat many times and obtain two empirical sampling distributions.
+  3. Then we can compare the two estimators by examining various properties of their respective sampling distributions
+
+The `taxi()` function will implement a single simulation. We have two arguments: 
+  1. The actual number of taxis `N`.
+  2. The sample size `n`.
+
+```{r}
+taxi = function(N, n){
+  y = sample(N, size=n, replace=TRUE)
+  estimate1 = max(y)
+  estimate2 = 2 * mean(y)
+  c(estimate1=estimate1, estimate2=estimate2)
+}
+```
+
+The `sample()` function simulates the observed taxi numbers and values of the two estimates are stored in variables `estimate1` and `estimate2`. Let's say actual number of taxis in city is `100` and we observe numbers of `n=5` taxis.
+
+```{r}
+set.seed(2021)
+taxi(100, 5)
+```
+
+We get values `estimate1=58` and `estimate2=64.4`
+
+Let's simulate sampling process 1000 times. We are going to create a matrix with two rows (`estimate1` and `estimate2`), and `1000` columns. This colums will hold the estimated values of `estimate1` and `estimate2` for `1000` simulated experiments.
+
+```{r}
+set.seed(2021)
+EST = replicate(1000, taxi(100, 5))
+```
+
+Here we are looking for "unbiasedness", which means that the average value of the estimator must be equal to the parameter. We know that the number of taxis is 100. So we can calculate the mean standard error for our estimators as follows:
+
+```{r}
+c(mean(EST["estimate1", ]) -100, sd(EST["estimate1", ]) / sqrt(1000))
+```
+
+```{r}
+c(mean(EST["estimate2", ]) -100, sd(EST["estimate2", ]) / sqrt(1000))
+```
+
+Seems that `estimate2` is "less biased", but we can also compare them with respect to the mean distance from the parameter `N` (mean absolute error). Now, we are going to compute the mean absolute error and draw a boxplot:
+
+```{r}
+absolute.error = abs(EST - 100)
+boxplot(t(absolute.error))
+```
+
+In this case, seems that `estimate1` has smaller estimation errors. We can also find the sample mean of the absolute errors and its standard error:
+
+```{r}
+c(mean(absolute.error["estimate1", ]), sd(absolute.error["estimate1", ]) / sqrt(1000))
+```
+
+```{r}
+c(mean(absolute.error["estimate2", ]), sd(absolute.error["estimate2", ]) / sqrt(1000))
+```
+
+Again, the `estimate1` looks better than the `estimate2`.

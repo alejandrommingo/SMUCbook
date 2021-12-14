@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3.5 The Central Limit Theorem | Simulation and Modeling to Understand the Change</title>
+  <title>6.3 The taxi problem (comparing estimators) | Simulation and Modeling to Understand the Change</title>
   <meta name="description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3.5 The Central Limit Theorem | Simulation and Modeling to Understand the Change" />
+  <meta property="og:title" content="6.3 The taxi problem (comparing estimators) | Simulation and Modeling to Understand the Change" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/Rplot.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="manueleleonelli/SimBook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3.5 The Central Limit Theorem | Simulation and Modeling to Understand the Change" />
+  <meta name="twitter:title" content="6.3 The taxi problem (comparing estimators) | Simulation and Modeling to Understand the Change" />
   
   <meta name="twitter:description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
   <meta name="twitter:image" content="/images/Rplot.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="notable-continuous-distribution.html"/>
-<link rel="next" href="random-number-generation.html"/>
+<link rel="prev" href="general-case-with-standard-normal-distributions.html"/>
+
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -303,31 +303,49 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="the-central-limit-theorem" class="section level2" number="3.5">
-<h2><span class="header-section-number">3.5</span> The Central Limit Theorem</h2>
-<p>As a final topic in probability we will briefly discuss why the Normal distribution is so important and widely known. The reason behind this is the existence of a theorem, called the <em>Central Limit Theorem</em> which is perhaps the most important theorem in probability which has far-reaching consequences in the world of statistics.</p>
-<p>Let’s first state theorem. Suppose you have random variables <span class="math inline">\(X_1,\dots, X_n\)</span> which have the following properties:</p>
-<ul>
-<li><p>they are all independent of each other;</p></li>
-<li><p>they all have the same mean <span class="math inline">\(\mu\)</span>;</p></li>
-<li><p>the all have the same standard deviation <span class="math inline">\(\sigma^2\)</span>.</p></li>
-</ul>
-<p>Consider the random variable
-<span class="math display">\[
-\bar{X}_n= \frac{X_1+\cdots X_n}{n}.
-\]</span>
-Then it holds that
-<span class="math display">\[
-\lim_{n\rightarrow + \infty} \frac{\bar{X}_n-\mu}{\sigma/\sqrt{n}} = Z
-\]</span>
-where <span class="math inline">\(Z\)</span> is the standard normal random variable.</p>
-<p>We can also state the theorem as
-<span class="math display">\[
-\lim_{n\rightarrow + \infty} \bar{X}_n = Y
-\]</span>
-where <span class="math inline">\(Y\)</span> is a Normal random variable with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2/n\)</span>.</p>
-<p>The interpretation of the Central Limit Theorem is as follows. The sample mean <span class="math inline">\(\bar{X}_n\)</span> of independent random variables with the same mean and variance can be approximated by a Normal distribution, if the sample size <span class="math inline">\(n\)</span> is large. Notice that we made no assumption whatsoever about the distribution of the <span class="math inline">\(X_i\)</span>’s and still we were able to deduce the distribution of the sample mean.</p>
-<p>The existence of this theorem is the reason why you used so often Normal probabilities to construct confidence intervals or to carry out tests of hypothesis. As you will continue study statistics, you will see that the assumption of Normality of data is made most often and is justified by the central limit theorem.</p>
+<div id="the-taxi-problem-comparing-estimators" class="section level2" number="6.3">
+<h2><span class="header-section-number">6.3</span> The taxi problem (comparing estimators)</h2>
+<p>Finally, we will see a case in which we want to compare two different estimators. Imagine that a person is walking through the streets of a city and notices the following numbers of 5 taxis that pass by: 34,100,65,81,120. Can he/she make an intelligent guess at the number of taxis in the city?: Is a problem of statistical inference where population is collection of taxis driven in city and one wishes to know unknown number of taxis <span class="math inline">\(N\)</span>.</p>
+<p>Assume taxis are numbered from <span class="math inline">\(1\)</span> to <span class="math inline">\(N\)</span>, each equally likely to be observed and consider two possible estimates:
+1. The largest taxi number observed
+2. Twice the sample mean.</p>
+<p>Which is a better estimator of the number of taxis <span class="math inline">\(N\)</span>? We will compare these two estimators using a Monte Carlo Simulation:
+1. Simulate taxi numbers from a uniform distribution with a known number of taxis <span class="math inline">\(N\)</span> and compute the two estimates.
+2. Repeat many times and obtain two empirical sampling distributions.
+3. Then we can compare the two estimators by examining various properties of their respective sampling distributions</p>
+<p>The <code>taxi()</code> function will implement a single simulation. We have two arguments:
+1. The actual number of taxis <code>N</code>.
+2. The sample size <code>n</code>.</p>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="the-taxi-problem-comparing-estimators.html#cb265-1" aria-hidden="true" tabindex="-1"></a>taxi <span class="ot">=</span> <span class="cf">function</span>(N, n){</span>
+<span id="cb265-2"><a href="the-taxi-problem-comparing-estimators.html#cb265-2" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">=</span> <span class="fu">sample</span>(N, <span class="at">size=</span>n, <span class="at">replace=</span><span class="cn">TRUE</span>)</span>
+<span id="cb265-3"><a href="the-taxi-problem-comparing-estimators.html#cb265-3" aria-hidden="true" tabindex="-1"></a>  estimate1 <span class="ot">=</span> <span class="fu">max</span>(y)</span>
+<span id="cb265-4"><a href="the-taxi-problem-comparing-estimators.html#cb265-4" aria-hidden="true" tabindex="-1"></a>  estimate2 <span class="ot">=</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">mean</span>(y)</span>
+<span id="cb265-5"><a href="the-taxi-problem-comparing-estimators.html#cb265-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="at">estimate1=</span>estimate1, <span class="at">estimate2=</span>estimate2)</span>
+<span id="cb265-6"><a href="the-taxi-problem-comparing-estimators.html#cb265-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>The <code>sample()</code> function simulates the observed taxi numbers and values of the two estimates are stored in variables <code>estimate1</code> and <code>estimate2</code>. Let’s say actual number of taxis in city is <code>100</code> and we observe numbers of <code>n=5</code> taxis.</p>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="the-taxi-problem-comparing-estimators.html#cb266-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2021</span>)</span>
+<span id="cb266-2"><a href="the-taxi-problem-comparing-estimators.html#cb266-2" aria-hidden="true" tabindex="-1"></a><span class="fu">taxi</span>(<span class="dv">100</span>, <span class="dv">5</span>)</span></code></pre></div>
+<pre><code>## estimate1 estimate2 
+##      58.0      64.4</code></pre>
+<p>We get values <code>estimate1=58</code> and <code>estimate2=64.4</code></p>
+<p>Let’s simulate sampling process 1000 times. We are going to create a matrix with two rows (<code>estimate1</code> and <code>estimate2</code>), and <code>1000</code> columns. This colums will hold the estimated values of <code>estimate1</code> and <code>estimate2</code> for <code>1000</code> simulated experiments.</p>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="the-taxi-problem-comparing-estimators.html#cb268-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2021</span>)</span>
+<span id="cb268-2"><a href="the-taxi-problem-comparing-estimators.html#cb268-2" aria-hidden="true" tabindex="-1"></a>EST <span class="ot">=</span> <span class="fu">replicate</span>(<span class="dv">1000</span>, <span class="fu">taxi</span>(<span class="dv">100</span>, <span class="dv">5</span>))</span></code></pre></div>
+<p>Here we are looking for “unbiasedness,” which means that the average value of the estimator must be equal to the parameter. We know that the number of taxis is 100. So we can calculate the mean standard error for our estimators as follows:</p>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="the-taxi-problem-comparing-estimators.html#cb269-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="fu">mean</span>(EST[<span class="st">&quot;estimate1&quot;</span>, ]) <span class="sc">-</span><span class="dv">100</span>, <span class="fu">sd</span>(EST[<span class="st">&quot;estimate1&quot;</span>, ]) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">1000</span>))</span></code></pre></div>
+<pre><code>## [1] -15.7170000   0.4511901</code></pre>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="the-taxi-problem-comparing-estimators.html#cb271-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="fu">mean</span>(EST[<span class="st">&quot;estimate2&quot;</span>, ]) <span class="sc">-</span><span class="dv">100</span>, <span class="fu">sd</span>(EST[<span class="st">&quot;estimate2&quot;</span>, ]) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">1000</span>))</span></code></pre></div>
+<pre><code>## [1] 1.4248000 0.8360629</code></pre>
+<p>Seems that <code>estimate2</code> is “less biased,” but we can also compare them with respect to the mean distance from the parameter <code>N</code> (mean absolute error). Now, we are going to compute the mean absolute error and draw a boxplot:</p>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="the-taxi-problem-comparing-estimators.html#cb273-1" aria-hidden="true" tabindex="-1"></a>absolute.error <span class="ot">=</span> <span class="fu">abs</span>(EST <span class="sc">-</span> <span class="dv">100</span>)</span>
+<span id="cb273-2"><a href="the-taxi-problem-comparing-estimators.html#cb273-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(<span class="fu">t</span>(absolute.error))</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-131-1.png" width="672" /></p>
+<p>In this case, seems that <code>estimate1</code> has smaller estimation errors. We can also find the sample mean of the absolute errors and its standard error:</p>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="the-taxi-problem-comparing-estimators.html#cb274-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="fu">mean</span>(absolute.error[<span class="st">&quot;estimate1&quot;</span>, ]), <span class="fu">sd</span>(absolute.error[<span class="st">&quot;estimate1&quot;</span>, ]) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">1000</span>))</span></code></pre></div>
+<pre><code>## [1] 15.7170000  0.4511901</code></pre>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="the-taxi-problem-comparing-estimators.html#cb276-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="fu">mean</span>(absolute.error[<span class="st">&quot;estimate2&quot;</span>, ]), <span class="fu">sd</span>(absolute.error[<span class="st">&quot;estimate2&quot;</span>, ]) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">1000</span>))</span></code></pre></div>
+<pre><code>## [1] 21.463200  0.489799</code></pre>
+<p>Again, the <code>estimate1</code> looks better than the <code>estimate2</code>.</p>
 
 </div>
 <!-- </div> -->
@@ -336,8 +354,8 @@ where <span class="math inline">\(Y\)</span> is a Normal random variable with me
           </div>
         </div>
       </div>
-<a href="notable-continuous-distribution.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="random-number-generation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="general-case-with-standard-normal-distributions.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -368,7 +386,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/amartinezm90/SMUCbook/edit/master/03-Probability.Rmd",
+"link": "https://github.com/amartinezm90/SMUCbook/edit/master/06-Montecarlo-Inference.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -376,7 +394,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/amartinezm90/SMUCbook/blob/master/03-Probability.Rmd",
+"link": "https://github.com/amartinezm90/SMUCbook/blob/master/06-Montecarlo-Inference.Rmd",
 "text": null
 },
 "download": null,
