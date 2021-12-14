@@ -306,16 +306,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="the-taxi-problem-comparing-estimators" class="section level2" number="6.3">
 <h2><span class="header-section-number">6.3</span> The taxi problem (comparing estimators)</h2>
 <p>Finally, we will see a case in which we want to compare two different estimators. Imagine that a person is walking through the streets of a city and notices the following numbers of 5 taxis that pass by: 34,100,65,81,120. Can he/she make an intelligent guess at the number of taxis in the city?: Is a problem of statistical inference where population is collection of taxis driven in city and one wishes to know unknown number of taxis <span class="math inline">\(N\)</span>.</p>
-<p>Assume taxis are numbered from <span class="math inline">\(1\)</span> to <span class="math inline">\(N\)</span>, each equally likely to be observed and consider two possible estimates:
-1. The largest taxi number observed
-2. Twice the sample mean.</p>
-<p>Which is a better estimator of the number of taxis <span class="math inline">\(N\)</span>? We will compare these two estimators using a Monte Carlo Simulation:
-1. Simulate taxi numbers from a uniform distribution with a known number of taxis <span class="math inline">\(N\)</span> and compute the two estimates.
-2. Repeat many times and obtain two empirical sampling distributions.
-3. Then we can compare the two estimators by examining various properties of their respective sampling distributions</p>
-<p>The <code>taxi()</code> function will implement a single simulation. We have two arguments:
-1. The actual number of taxis <code>N</code>.
-2. The sample size <code>n</code>.</p>
+<p>Assume taxis are numbered from <span class="math inline">\(1\)</span> to <span class="math inline">\(N\)</span>, each equally likely to be observed and consider two possible estimates:</p>
+<ol style="list-style-type: decimal">
+<li>The largest taxi number observed</li>
+<li>Twice the sample mean.</li>
+</ol>
+<p>Which is a better estimator of the number of taxis <span class="math inline">\(N\)</span>? We will compare these two estimators using a Monte Carlo Simulation:</p>
+<ol style="list-style-type: decimal">
+<li>Simulate taxi numbers from a uniform distribution with a known number of taxis <span class="math inline">\(N\)</span> and compute the two estimates.</li>
+<li>Repeat many times and obtain two empirical sampling distributions.</li>
+<li>Then we can compare the two estimators by examining various properties of their respective sampling distributions</li>
+</ol>
+<p>The <code>taxi()</code> function will implement a single simulation. We have two arguments:</p>
+<ol style="list-style-type: decimal">
+<li>The actual number of taxis <code>N</code>.</li>
+<li>The sample size <code>n</code>.</li>
+</ol>
 <div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="the-taxi-problem-comparing-estimators.html#cb265-1" aria-hidden="true" tabindex="-1"></a>taxi <span class="ot">=</span> <span class="cf">function</span>(N, n){</span>
 <span id="cb265-2"><a href="the-taxi-problem-comparing-estimators.html#cb265-2" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">=</span> <span class="fu">sample</span>(N, <span class="at">size=</span>n, <span class="at">replace=</span><span class="cn">TRUE</span>)</span>
 <span id="cb265-3"><a href="the-taxi-problem-comparing-estimators.html#cb265-3" aria-hidden="true" tabindex="-1"></a>  estimate1 <span class="ot">=</span> <span class="fu">max</span>(y)</span>

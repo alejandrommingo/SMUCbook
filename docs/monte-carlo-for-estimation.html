@@ -315,9 +315,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Annie arrives somewhere between 10:30 and midnight</li>
 <li>Sam arrives somewhere between 10:00 and 11:30PM.</li>
 </ul>
-<p>Our Questions are:
-1) What is the probability that Annie arrives before Sam?
-2) What is expected difference in arrival times?</p>
+<p>Our Questions are:</p>
+<ol style="list-style-type: decimal">
+<li>What is the probability that Annie arrives before Sam?</li>
+<li>What is expected difference in arrival times?</li>
+</ol>
 <p>We start simulating a large number of values from distribution of <span class="math inline">\((A,S)\)</span> say, <code>1000</code>, where <span class="math inline">\(A\)</span> and <span class="math inline">\(S\)</span> are independent:</p>
 <div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="monte-carlo-for-estimation.html#cb252-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2021</span>)</span>
 <span id="cb252-2"><a href="monte-carlo-for-estimation.html#cb252-2" aria-hidden="true" tabindex="-1"></a>sam <span class="ot">=</span> <span class="fu">runif</span>(<span class="dv">1000</span>, <span class="dv">10</span>, <span class="fl">11.5</span>)</span>
