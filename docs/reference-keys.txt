@@ -138,3 +138,4 @@ estimating-pi-step-5
 estimating-pi-conclusions
 the-sample-function
 a-game-of-chance
+takeaways

@@ -335,3 +335,12 @@ experiment <- replicate(10000,peter.paul())
 length(experiment[experiment==0])/1000
 ```
  
+## Takeaways
+
+Throughout this session we have understood:
+
+- What the Monte Carlo method is, and how it differs from Monte Carlo simulation.
+- The history of the creation of the Monte Carlo method
+- To generate random numbers and random variables with R
+- To establish a seed
+- To conduct a simulation experiment using the Monte Carlo method.
