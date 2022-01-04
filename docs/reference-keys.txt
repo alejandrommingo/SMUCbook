@@ -19,7 +19,6 @@ fig:exppdf1
 fig:expcdf1
 fig:norm
 fig:pnorm
-eq:standard
 fig:seq
 fig:uplot
 fig:uhist
@@ -57,7 +56,7 @@ r-programming
 why-r
 section-bibliography
 r-basics
-introduction-to
+introduction-to-r
 r-history
 r-advantages
 what-do-we-mean-by-r

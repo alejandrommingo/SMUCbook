@@ -34,7 +34,7 @@ These notes are intended to provide a unique view of simulation with specific im
 
 So let's get started with R programming!
 
-### Introduction to ![](https://www.r-project.org/Rlogo.png)
+### Introduction to R
 
 **R** is an *Open Source*, powerful, flexible and extensible statistical language. It is used by many companies (Google, Microsoft, Facebook, BBVA, etc...) and universities by Statisticians and Data Scientists in software development. Unlike traditional spreadsheets, in R programming sentences are written instead of the classic formulas. It is necessary to know the structure of the data. Prototypes can be made with a few lines of code.
 

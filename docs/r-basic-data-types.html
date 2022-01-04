@@ -171,7 +171,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2" data-path="section-bibliography.html"><a href="section-bibliography.html"><i class="fa fa-check"></i><b>2.2</b> Section Bibliography</a></li>
 <li class="chapter" data-level="2.3" data-path="r-basics.html"><a href="r-basics.html"><i class="fa fa-check"></i><b>2.3</b> R basics</a>
 <ul>
-<li class="chapter" data-level="2.3.1" data-path="r-basics.html"><a href="r-basics.html#introduction-to"><i class="fa fa-check"></i><b>2.3.1</b> Introduction to <img src="https://www.r-project.org/Rlogo.png" /></a></li>
+<li class="chapter" data-level="2.3.1" data-path="r-basics.html"><a href="r-basics.html#introduction-to-r"><i class="fa fa-check"></i><b>2.3.1</b> Introduction to R</a></li>
 <li class="chapter" data-level="2.3.2" data-path="r-basics.html"><a href="r-basics.html#r-history"><i class="fa fa-check"></i><b>2.3.2</b> R History</a></li>
 <li class="chapter" data-level="2.3.3" data-path="r-basics.html"><a href="r-basics.html#r-advantages"><i class="fa fa-check"></i><b>2.3.3</b> R Advantages</a></li>
 <li class="chapter" data-level="2.3.4" data-path="r-basics.html"><a href="r-basics.html#what-do-we-mean-by-r"><i class="fa fa-check"></i><b>2.3.4</b> What do we mean by R?</a></li>
@@ -405,6 +405,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="31" data-path="discrete-events-simulation-improving-the-system-4.html"><a href="discrete-events-simulation-improving-the-system-4.html"><i class="fa fa-check"></i><b>31</b> Discrete Events Simulation: Improving the system</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
 </ul>
 
       </nav>
@@ -674,12 +675,12 @@ case (LETTERS):</p>
 <p>All these things mean that working with dates and times is extremely complicated. Fortunately, R has a robust system for dealing with this complexity.</p>
 <p>To see how R handles dates and times, have a look at Sys.time():</p>
 <div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="r-basic-data-types.html#cb221-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>()</span></code></pre></div>
-<pre><code>## [1] &quot;2022-01-04 13:10:06 CET&quot;</code></pre>
+<pre><code>## [1] &quot;2022-01-04 13:44:04 CET&quot;</code></pre>
 <p>This description of date and time is strictly hierarchical from left to right: the longest time scale (years) comes first, then month, then day, separated by hyphens, then there is a blank space, followed by the time, with hours first (using the 24-hour clock), then minutes, then seconds, separated by colons. Finally, there is a character string explaining the time zone (CET stands for Central Europe Time)</p>
 <p>This representation of the date and time as a character string is user-friendly and familiar, but it is no good for calculations. For that, we need a single numeric representation of the combined date and time. The convention in R is to base this on seconds (the smallest time scale that is accommodated in Sys.time)</p>
 <p>The baseline for expressing today’s date and time in seconds is 1 January 1970:</p>
 <div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="r-basic-data-types.html#cb223-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">Sys.time</span>())</span></code></pre></div>
-<pre><code>## [1] 1641298206</code></pre>
+<pre><code>## [1] 1641300245</code></pre>
 <p>This is fine for plotting time series graphs, but it is not much good for computing monthly means (e.g. is the mean for June significantly different from the July mean?) or daily means (e.g. is the Monday mean significantly different from the Friday mean?).</p>
 <p>To answer questions like these we have to be able to access a broad set of categorical variables associated with the date: the year, the month, the day of the week, and so forth. To accommodate this, R uses the POSIX system for representing times and dates:</p>
 <div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="r-basic-data-types.html#cb225-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(<span class="fu">Sys.time</span>())</span></code></pre></div>
@@ -691,7 +692,7 @@ the effort. Naturally, you can easily convert to one representation to the other
 <div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="r-basic-data-types.html#cb227-1" aria-hidden="true" tabindex="-1"></a>time.list <span class="ot">=</span> <span class="fu">as.POSIXlt</span>(<span class="fu">Sys.time</span>())</span>
 <span id="cb227-2"><a href="r-basic-data-types.html#cb227-2" aria-hidden="true" tabindex="-1"></a><span class="fu">unlist</span>(time.list)</span></code></pre></div>
 <pre><code>##                sec                min               hour               mday 
-## &quot;6.14109110832214&quot;               &quot;10&quot;               &quot;13&quot;                &quot;4&quot; 
+## &quot;4.79849576950073&quot;               &quot;44&quot;               &quot;13&quot;                &quot;4&quot; 
 ##                mon               year               wday               yday 
 ##                &quot;0&quot;              &quot;122&quot;                &quot;2&quot;                &quot;3&quot; 
 ##              isdst               zone             gmtoff 
@@ -889,7 +890,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/amartinezm90/SMUCbook/edit/master/02-R.Rmd",
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/02-R.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -900,7 +901,7 @@ gitbook.start({
 "link": "https://github.com/amartinezm90/SMUCbook/blob/master/02-R.Rmd",
 "text": null
 },
-"download": null,
+"download": ["bookdownproj.pdf", "bookdownproj.epub"],
 "search": {
 "engine": "fuse",
 "options": null
