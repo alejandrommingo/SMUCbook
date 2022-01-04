@@ -24,7 +24,7 @@
 <meta name="author" content="Alejandro Martínez-Mingo &amp; Manuele Leonelli" />
 
 
-<meta name="date" content="2021-12-14" />
+<meta name="date" content="2022-01-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -53,6 +53,10 @@
 
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/viz-1.8.2/viz.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/grViz-binding-1.0.6.1/grViz.js"></script>
 
 
 <style type="text/css">
@@ -164,43 +168,100 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2" data-path="r-programming.html"><a href="r-programming.html"><i class="fa fa-check"></i><b>2</b> R programming</a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="why-r.html"><a href="why-r.html"><i class="fa fa-check"></i><b>2.1</b> Why R?</a></li>
-<li class="chapter" data-level="2.2" data-path="r-basics.html"><a href="r-basics.html"><i class="fa fa-check"></i><b>2.2</b> R basics</a>
+<li class="chapter" data-level="2.2" data-path="section-bibliography.html"><a href="section-bibliography.html"><i class="fa fa-check"></i><b>2.2</b> Section Bibliography</a></li>
+<li class="chapter" data-level="2.3" data-path="r-basics.html"><a href="r-basics.html"><i class="fa fa-check"></i><b>2.3</b> R basics</a>
 <ul>
-<li class="chapter" data-level="2.2.1" data-path="r-basics.html"><a href="r-basics.html#r-as-a-calculator"><i class="fa fa-check"></i><b>2.2.1</b> R as a calculator</a></li>
-<li class="chapter" data-level="2.2.2" data-path="r-basics.html"><a href="r-basics.html#variable-assignment"><i class="fa fa-check"></i><b>2.2.2</b> Variable assignment</a></li>
-<li class="chapter" data-level="2.2.3" data-path="r-basics.html"><a href="r-basics.html#data-types"><i class="fa fa-check"></i><b>2.2.3</b> Data types</a></li>
-<li class="chapter" data-level="2.2.4" data-path="r-basics.html"><a href="r-basics.html#vectors"><i class="fa fa-check"></i><b>2.2.4</b> Vectors</a></li>
-<li class="chapter" data-level="2.2.5" data-path="r-basics.html"><a href="r-basics.html#matrices"><i class="fa fa-check"></i><b>2.2.5</b> Matrices</a></li>
-<li class="chapter" data-level="2.2.6" data-path="r-basics.html"><a href="r-basics.html#dataframes"><i class="fa fa-check"></i><b>2.2.6</b> Dataframes</a></li>
-<li class="chapter" data-level="2.2.7" data-path="r-basics.html"><a href="r-basics.html#null-and-na"><i class="fa fa-check"></i><b>2.2.7</b> <code>NULL</code> and <code>NA</code></a></li>
+<li class="chapter" data-level="2.3.1" data-path="r-basics.html"><a href="r-basics.html#introduction-to"><i class="fa fa-check"></i><b>2.3.1</b> Introduction to <img src="https://www.r-project.org/Rlogo.png" /></a></li>
+<li class="chapter" data-level="2.3.2" data-path="r-basics.html"><a href="r-basics.html#r-history"><i class="fa fa-check"></i><b>2.3.2</b> R History</a></li>
+<li class="chapter" data-level="2.3.3" data-path="r-basics.html"><a href="r-basics.html#r-advantages"><i class="fa fa-check"></i><b>2.3.3</b> R Advantages</a></li>
+<li class="chapter" data-level="2.3.4" data-path="r-basics.html"><a href="r-basics.html#what-do-we-mean-by-r"><i class="fa fa-check"></i><b>2.3.4</b> What do we mean by R?</a></li>
+<li class="chapter" data-level="2.3.5" data-path="r-basics.html"><a href="r-basics.html#console-mode"><i class="fa fa-check"></i><b>2.3.5</b> Console Mode</a></li>
+<li class="chapter" data-level="2.3.6" data-path="r-basics.html"><a href="r-basics.html#getting-help-in-r"><i class="fa fa-check"></i><b>2.3.6</b> Getting help in R</a></li>
+<li class="chapter" data-level="2.3.7" data-path="r-basics.html"><a href="r-basics.html#packages-in-r"><i class="fa fa-check"></i><b>2.3.7</b> Packages in R</a></li>
+<li class="chapter" data-level="2.3.8" data-path="r-basics.html"><a href="r-basics.html#built-in-r-libraries"><i class="fa fa-check"></i><b>2.3.8</b> Built-in R libraries</a></li>
+<li class="chapter" data-level="2.3.9" data-path="r-basics.html"><a href="r-basics.html#contents-of-packages"><i class="fa fa-check"></i><b>2.3.9</b> Contents of Packages</a></li>
+<li class="chapter" data-level="2.3.10" data-path="r-basics.html"><a href="r-basics.html#installing-packages"><i class="fa fa-check"></i><b>2.3.10</b> Installing Packages</a></li>
+<li class="chapter" data-level="2.3.11" data-path="r-basics.html"><a href="r-basics.html#command-line-versus-scripts"><i class="fa fa-check"></i><b>2.3.11</b> Command line versus scripts</a></li>
+<li class="chapter" data-level="2.3.12" data-path="r-basics.html"><a href="r-basics.html#rstudio"><i class="fa fa-check"></i><b>2.3.12</b> RStudio</a></li>
+<li class="chapter" data-level="2.3.13" data-path="r-basics.html"><a href="r-basics.html#working-directory"><i class="fa fa-check"></i><b>2.3.13</b> Working Directory</a></li>
+<li class="chapter" data-level="2.3.14" data-path="r-basics.html"><a href="r-basics.html#exercise-set-up-your-working-directory"><i class="fa fa-check"></i><b>2.3.14</b> Exercise: Set up your Working Directory</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="accessing-and-manipulating-variables.html"><a href="accessing-and-manipulating-variables.html"><i class="fa fa-check"></i><b>2.3</b> Accessing and manipulating variables</a>
+<li class="chapter" data-level="2.4" data-path="expressions-objects-and-symbols.html"><a href="expressions-objects-and-symbols.html"><i class="fa fa-check"></i><b>2.4</b> Expressions, Objects and Symbols</a>
 <ul>
-<li class="chapter" data-level="2.3.1" data-path="accessing-and-manipulating-variables.html"><a href="accessing-and-manipulating-variables.html#accessing-a-single-element"><i class="fa fa-check"></i><b>2.3.1</b> Accessing a single element</a></li>
-<li class="chapter" data-level="2.3.2" data-path="accessing-and-manipulating-variables.html"><a href="accessing-and-manipulating-variables.html#acessing-multiple-entries"><i class="fa fa-check"></i><b>2.3.2</b> Acessing multiple entries</a></li>
-<li class="chapter" data-level="2.3.3" data-path="accessing-and-manipulating-variables.html"><a href="accessing-and-manipulating-variables.html#accessing-entries-with-logical-operators"><i class="fa fa-check"></i><b>2.3.3</b> Accessing entries with logical operators</a></li>
-<li class="chapter" data-level="2.3.4" data-path="accessing-and-manipulating-variables.html"><a href="accessing-and-manipulating-variables.html#manipulating-dataframes"><i class="fa fa-check"></i><b>2.3.4</b> Manipulating dataframes</a></li>
-<li class="chapter" data-level="2.3.5" data-path="accessing-and-manipulating-variables.html"><a href="accessing-and-manipulating-variables.html#information-about-objects"><i class="fa fa-check"></i><b>2.3.5</b> Information about objects</a></li>
+<li class="chapter" data-level="2.4.1" data-path="expressions-objects-and-symbols.html"><a href="expressions-objects-and-symbols.html#some-examples-to-start-with"><i class="fa fa-check"></i><b>2.4.1</b> Some examples to start with</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="loops-and-conditions.html"><a href="loops-and-conditions.html"><i class="fa fa-check"></i><b>2.4</b> Loops and conditions</a>
+<li class="chapter" data-level="2.5" data-path="r-as-a-calculator.html"><a href="r-as-a-calculator.html"><i class="fa fa-check"></i><b>2.5</b> R as a Calculator</a>
 <ul>
-<li class="chapter" data-level="2.4.1" data-path="loops-and-conditions.html"><a href="loops-and-conditions.html#if-statements"><i class="fa fa-check"></i><b>2.4.1</b> <code>if</code> statements</a></li>
-<li class="chapter" data-level="2.4.2" data-path="loops-and-conditions.html"><a href="loops-and-conditions.html#ifelse"><i class="fa fa-check"></i><b>2.4.2</b> <code>ifelse</code></a></li>
-<li class="chapter" data-level="2.4.3" data-path="loops-and-conditions.html"><a href="loops-and-conditions.html#loops"><i class="fa fa-check"></i><b>2.4.3</b> Loops</a></li>
+<li class="chapter" data-level="2.5.1" data-path="r-as-a-calculator.html"><a href="r-as-a-calculator.html#complex-numbers-in-r"><i class="fa fa-check"></i><b>2.5.1</b> Complex numbers in R</a></li>
+<li class="chapter" data-level="2.5.2" data-path="r-as-a-calculator.html"><a href="r-as-a-calculator.html#rounding"><i class="fa fa-check"></i><b>2.5.2</b> Rounding</a></li>
+<li class="chapter" data-level="2.5.3" data-path="r-as-a-calculator.html"><a href="r-as-a-calculator.html#arithmetics"><i class="fa fa-check"></i><b>2.5.3</b> Arithmetics</a></li>
+<li class="chapter" data-level="2.5.4" data-path="r-as-a-calculator.html"><a href="r-as-a-calculator.html#modulo-and-integer-quotients"><i class="fa fa-check"></i><b>2.5.4</b> Modulo and integer quotients</a></li>
+<li class="chapter" data-level="2.5.5" data-path="r-as-a-calculator.html"><a href="r-as-a-calculator.html#operators"><i class="fa fa-check"></i><b>2.5.5</b> Operators</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i><b>2.5</b> Functions</a>
+<li class="chapter" data-level="2.6" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html"><i class="fa fa-check"></i><b>2.6</b> R Basic Data types</a>
 <ul>
-<li class="chapter" data-level="2.5.1" data-path="functions.html"><a href="functions.html#defining-your-own-function"><i class="fa fa-check"></i><b>2.5.1</b> Defining your own function</a></li>
-<li class="chapter" data-level="2.5.2" data-path="functions.html"><a href="functions.html#calling-functions"><i class="fa fa-check"></i><b>2.5.2</b> Calling functions</a></li>
-<li class="chapter" data-level="2.5.3" data-path="functions.html"><a href="functions.html#mathematical-and-statistical-functions"><i class="fa fa-check"></i><b>2.5.3</b> Mathematical and statistical functions</a></li>
+<li class="chapter" data-level="2.6.1" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#integers"><i class="fa fa-check"></i><b>2.6.1</b> Integers</a></li>
+<li class="chapter" data-level="2.6.2" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#integer-vs.-double"><i class="fa fa-check"></i><b>2.6.2</b> Integer vs. Double</a></li>
+<li class="chapter" data-level="2.6.3" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#logical-operators"><i class="fa fa-check"></i><b>2.6.3</b> Logical operators</a></li>
+<li class="chapter" data-level="2.6.4" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#real-numbers-equality"><i class="fa fa-check"></i><b>2.6.4</b> Real numbers equality</a></li>
+<li class="chapter" data-level="2.6.5" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#logical-arithmetic"><i class="fa fa-check"></i><b>2.6.5</b> Logical arithmetic</a></li>
+<li class="chapter" data-level="2.6.6" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#characters"><i class="fa fa-check"></i><b>2.6.6</b> Characters</a></li>
+<li class="chapter" data-level="2.6.7" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#characters-letters-vectors"><i class="fa fa-check"></i><b>2.6.7</b> Characters: letters vectors</a></li>
+<li class="chapter" data-level="2.6.8" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#characters-pasting-strings-together"><i class="fa fa-check"></i><b>2.6.8</b> Characters: Pasting strings together</a></li>
+<li class="chapter" data-level="2.6.9" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#characters-extracting-parts-of-strings"><i class="fa fa-check"></i><b>2.6.9</b> Characters: Extracting parts of strings</a></li>
+<li class="chapter" data-level="2.6.10" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#characters-counting-things-within-strings"><i class="fa fa-check"></i><b>2.6.10</b> Characters: Counting things within strings</a></li>
+<li class="chapter" data-level="2.6.11" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#characters-upper--and-lower-case-text"><i class="fa fa-check"></i><b>2.6.11</b> Characters: Upper- and lower-case text</a></li>
+<li class="chapter" data-level="2.6.12" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#dates-and-times"><i class="fa fa-check"></i><b>2.6.12</b> Dates and times</a></li>
+<li class="chapter" data-level="2.6.13" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#dates-and-times-reading-time-data-from-files"><i class="fa fa-check"></i><b>2.6.13</b> Dates and times: Reading time data from files</a></li>
+<li class="chapter" data-level="2.6.14" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#dates-and-times-the-strptime-function"><i class="fa fa-check"></i><b>2.6.14</b> Dates and times: The <code>strptime</code> function</a></li>
+<li class="chapter" data-level="2.6.15" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#dates-and-times-summary"><i class="fa fa-check"></i><b>2.6.15</b> Dates and times: Summary</a></li>
+<li class="chapter" data-level="2.6.16" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#testing-and-coercing"><i class="fa fa-check"></i><b>2.6.16</b> Testing and coercing</a></li>
+<li class="chapter" data-level="2.6.17" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#missing-values-infinity-and-things-that-are-not-numbers"><i class="fa fa-check"></i><b>2.6.17</b> Missing values, infinity and things that are not numbers</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="the-apply-family-of-functions.html"><a href="the-apply-family-of-functions.html"><i class="fa fa-check"></i><b>2.6</b> The <code>apply</code> family of functions</a>
+<li class="chapter" data-level="2.7" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html"><i class="fa fa-check"></i><b>2.7</b> R Basic Data Structures</a>
 <ul>
-<li class="chapter" data-level="2.6.1" data-path="the-apply-family-of-functions.html"><a href="the-apply-family-of-functions.html#the-function-apply"><i class="fa fa-check"></i><b>2.6.1</b> The function <code>apply</code></a></li>
-<li class="chapter" data-level="2.6.2" data-path="the-apply-family-of-functions.html"><a href="the-apply-family-of-functions.html#the-function-sapply"><i class="fa fa-check"></i><b>2.6.2</b> The function <code>sapply</code></a></li>
+<li class="chapter" data-level="2.7.1" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#vectors"><i class="fa fa-check"></i><b>2.7.1</b> Vectors</a></li>
+<li class="chapter" data-level="2.7.2" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#sequences"><i class="fa fa-check"></i><b>2.7.2</b> Sequences</a></li>
+<li class="chapter" data-level="2.7.3" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#vector-and-subscripts"><i class="fa fa-check"></i><b>2.7.3</b> Vector and Subscripts</a></li>
+<li class="chapter" data-level="2.7.4" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#vector-operations"><i class="fa fa-check"></i><b>2.7.4</b> Vector Operations</a></li>
+<li class="chapter" data-level="2.7.5" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#vector-functions"><i class="fa fa-check"></i><b>2.7.5</b> Vector Functions</a></li>
+<li class="chapter" data-level="2.7.6" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#sets"><i class="fa fa-check"></i><b>2.7.6</b> Sets</a></li>
+<li class="chapter" data-level="2.7.7" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#factors"><i class="fa fa-check"></i><b>2.7.7</b> Factors</a></li>
+<li class="chapter" data-level="2.7.8" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#matrices-and-arrays"><i class="fa fa-check"></i><b>2.7.8</b> Matrices and Arrays</a></li>
+<li class="chapter" data-level="2.7.9" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#matrices"><i class="fa fa-check"></i><b>2.7.9</b> Matrices</a></li>
+<li class="chapter" data-level="2.7.10" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#lists"><i class="fa fa-check"></i><b>2.7.10</b> Lists</a></li>
+<li class="chapter" data-level="2.7.11" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#vectors-1"><i class="fa fa-check"></i><b>2.7.11</b> Vectors</a></li>
+<li class="chapter" data-level="2.7.12" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#matrices-1"><i class="fa fa-check"></i><b>2.7.12</b> Matrices</a></li>
+<li class="chapter" data-level="2.7.13" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#dataframes"><i class="fa fa-check"></i><b>2.7.13</b> Dataframes</a></li>
+<li class="chapter" data-level="2.7.14" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#null-and-na"><i class="fa fa-check"></i><b>2.7.14</b> <code>NULL</code> and <code>NA</code></a></li>
 </ul></li>
-<li class="chapter" data-level="2.7" data-path="the-pipe-operator.html"><a href="the-pipe-operator.html"><i class="fa fa-check"></i><b>2.7</b> The pipe operator</a></li>
-<li class="chapter" data-level="2.8" data-path="plotting.html"><a href="plotting.html"><i class="fa fa-check"></i><b>2.8</b> Plotting</a></li>
+<li class="chapter" data-level="2.8" data-path="accessing-and-manipulating-variables.html"><a href="accessing-and-manipulating-variables.html"><i class="fa fa-check"></i><b>2.8</b> Accessing and manipulating variables</a>
+<ul>
+<li class="chapter" data-level="2.8.1" data-path="accessing-and-manipulating-variables.html"><a href="accessing-and-manipulating-variables.html#accessing-a-single-element"><i class="fa fa-check"></i><b>2.8.1</b> Accessing a single element</a></li>
+<li class="chapter" data-level="2.8.2" data-path="accessing-and-manipulating-variables.html"><a href="accessing-and-manipulating-variables.html#acessing-multiple-entries"><i class="fa fa-check"></i><b>2.8.2</b> Acessing multiple entries</a></li>
+<li class="chapter" data-level="2.8.3" data-path="accessing-and-manipulating-variables.html"><a href="accessing-and-manipulating-variables.html#accessing-entries-with-logical-operators"><i class="fa fa-check"></i><b>2.8.3</b> Accessing entries with logical operators</a></li>
+<li class="chapter" data-level="2.8.4" data-path="accessing-and-manipulating-variables.html"><a href="accessing-and-manipulating-variables.html#manipulating-dataframes"><i class="fa fa-check"></i><b>2.8.4</b> Manipulating dataframes</a></li>
+<li class="chapter" data-level="2.8.5" data-path="accessing-and-manipulating-variables.html"><a href="accessing-and-manipulating-variables.html#information-about-objects"><i class="fa fa-check"></i><b>2.8.5</b> Information about objects</a></li>
+</ul></li>
+<li class="chapter" data-level="2.9" data-path="loops-and-conditions.html"><a href="loops-and-conditions.html"><i class="fa fa-check"></i><b>2.9</b> Loops and conditions</a>
+<ul>
+<li class="chapter" data-level="2.9.1" data-path="loops-and-conditions.html"><a href="loops-and-conditions.html#if-statements"><i class="fa fa-check"></i><b>2.9.1</b> <code>if</code> statements</a></li>
+<li class="chapter" data-level="2.9.2" data-path="loops-and-conditions.html"><a href="loops-and-conditions.html#ifelse"><i class="fa fa-check"></i><b>2.9.2</b> <code>ifelse</code></a></li>
+<li class="chapter" data-level="2.9.3" data-path="loops-and-conditions.html"><a href="loops-and-conditions.html#loops"><i class="fa fa-check"></i><b>2.9.3</b> Loops</a></li>
+</ul></li>
+<li class="chapter" data-level="2.10" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i><b>2.10</b> Functions</a>
+<ul>
+<li class="chapter" data-level="2.10.1" data-path="functions.html"><a href="functions.html#defining-your-own-function"><i class="fa fa-check"></i><b>2.10.1</b> Defining your own function</a></li>
+<li class="chapter" data-level="2.10.2" data-path="functions.html"><a href="functions.html#calling-functions"><i class="fa fa-check"></i><b>2.10.2</b> Calling functions</a></li>
+<li class="chapter" data-level="2.10.3" data-path="functions.html"><a href="functions.html#mathematical-and-statistical-functions"><i class="fa fa-check"></i><b>2.10.3</b> Mathematical and statistical functions</a></li>
+</ul></li>
+<li class="chapter" data-level="2.11" data-path="the-apply-family-of-functions.html"><a href="the-apply-family-of-functions.html"><i class="fa fa-check"></i><b>2.11</b> The <code>apply</code> family of functions</a>
+<ul>
+<li class="chapter" data-level="2.11.1" data-path="the-apply-family-of-functions.html"><a href="the-apply-family-of-functions.html#the-function-apply"><i class="fa fa-check"></i><b>2.11.1</b> The function <code>apply</code></a></li>
+<li class="chapter" data-level="2.11.2" data-path="the-apply-family-of-functions.html"><a href="the-apply-family-of-functions.html#the-function-sapply"><i class="fa fa-check"></i><b>2.11.2</b> The function <code>sapply</code></a></li>
+</ul></li>
+<li class="chapter" data-level="2.12" data-path="the-pipe-operator.html"><a href="the-pipe-operator.html"><i class="fa fa-check"></i><b>2.12</b> The pipe operator</a></li>
+<li class="chapter" data-level="2.13" data-path="plotting.html"><a href="plotting.html"><i class="fa fa-check"></i><b>2.13</b> Plotting</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="probability-basics.html"><a href="probability-basics.html"><i class="fa fa-check"></i><b>3</b> Probability Basics</a>
 <ul>
@@ -284,6 +345,64 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2" data-path="general-case-with-standard-normal-distributions.html"><a href="general-case-with-standard-normal-distributions.html"><i class="fa fa-check"></i><b>6.2</b> General Case with Standard Normal Distributions</a></li>
 <li class="chapter" data-level="6.3" data-path="the-taxi-problem-comparing-estimators.html"><a href="the-taxi-problem-comparing-estimators.html"><i class="fa fa-check"></i><b>6.3</b> The taxi problem (comparing estimators)</a></li>
 </ul></li>
+<li class="chapter" data-level="7" data-path="discrete-events-simulation.html"><a href="discrete-events-simulation.html"><i class="fa fa-check"></i><b>7</b> Discrete Events Simulation</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="simmer-terminology.html"><a href="simmer-terminology.html"><i class="fa fa-check"></i><b>7.1</b> <code>simmer</code> terminology</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="simmer-terminology.html"><a href="simmer-terminology.html#the-trajectory-object"><i class="fa fa-check"></i><b>7.1.1</b> <strong>The Trajectory Object</strong></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="discrete-events-simulation-1.html"><a href="discrete-events-simulation-1.html"><i class="fa fa-check"></i><b>8</b> Discrete Events Simulation</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="the-simmer-api.html"><a href="the-simmer-api.html"><i class="fa fa-check"></i><b>8.1</b> The <code>simmer</code> API</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="discrete-events-simulation-2.html"><a href="discrete-events-simulation-2.html"><i class="fa fa-check"></i><b>9</b> Discrete Events Simulation</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="the-simmer-api-1.html"><a href="the-simmer-api-1.html"><i class="fa fa-check"></i><b>9.1</b> The <code>simmer</code> API</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="discrete-events-simulation-3.html"><a href="discrete-events-simulation-3.html"><i class="fa fa-check"></i><b>10</b> Discrete Events Simulation</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="the-simmer-api-2.html"><a href="the-simmer-api-2.html"><i class="fa fa-check"></i><b>10.1</b> The <code>simmer</code> API</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="discrete-events-simulation-4.html"><a href="discrete-events-simulation-4.html"><i class="fa fa-check"></i><b>11</b> Discrete Events Simulation</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="the-simmer-api-3.html"><a href="the-simmer-api-3.html"><i class="fa fa-check"></i><b>11.1</b> The <code>simmer</code> API</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="discrete-events-simulation-5.html"><a href="discrete-events-simulation-5.html"><i class="fa fa-check"></i><b>12</b> Discrete Events Simulation</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="the-simmer-api-4.html"><a href="the-simmer-api-4.html"><i class="fa fa-check"></i><b>12.1</b> The <code>simmer</code> API</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="discrete-events-simulation-6.html"><a href="discrete-events-simulation-6.html"><i class="fa fa-check"></i><b>13</b> Discrete Events Simulation</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="the-simmer-api-5.html"><a href="the-simmer-api-5.html"><i class="fa fa-check"></i><b>13.1</b> The <code>simmer</code> API</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="discrete-events-simulation-7.html"><a href="discrete-events-simulation-7.html"><i class="fa fa-check"></i><b>14</b> Discrete Events Simulation</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="the-simmer-api-6.html"><a href="the-simmer-api-6.html"><i class="fa fa-check"></i><b>14.1</b> The <code>simmer</code> API</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="discrete-events-simulation-8.html"><a href="discrete-events-simulation-8.html"><i class="fa fa-check"></i><b>15</b> Discrete Events Simulation</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="the-simmer-api-7.html"><a href="the-simmer-api-7.html"><i class="fa fa-check"></i><b>15.1</b> The <code>simmer</code> API</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="discrete-events-simulation-9.html"><a href="discrete-events-simulation-9.html"><i class="fa fa-check"></i><b>16</b> Discrete Events Simulation</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="the-simmer-api-8.html"><a href="the-simmer-api-8.html"><i class="fa fa-check"></i><b>16.1</b> The <code>simmer</code> API</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="discrete-events-simulation-10.html"><a href="discrete-events-simulation-10.html"><i class="fa fa-check"></i><b>17</b> Discrete Events Simulation</a></li>
+<li class="chapter" data-level="18" data-path="discrete-events-simulation-11.html"><a href="discrete-events-simulation-11.html"><i class="fa fa-check"></i><b>18</b> Discrete Events Simulation</a></li>
+<li class="chapter" data-level="19" data-path="discrete-events-simulation-12.html"><a href="discrete-events-simulation-12.html"><i class="fa fa-check"></i><b>19</b> Discrete Events Simulation</a></li>
+<li class="chapter" data-level="20" data-path="discrete-events-simulation-13.html"><a href="discrete-events-simulation-13.html"><i class="fa fa-check"></i><b>20</b> Discrete Events Simulation</a></li>
+<li class="chapter" data-level="21" data-path="discrete-events-simulation-14.html"><a href="discrete-events-simulation-14.html"><i class="fa fa-check"></i><b>21</b> Discrete Events Simulation</a></li>
+<li class="chapter" data-level="22" data-path="discrete-events-simulation-replication.html"><a href="discrete-events-simulation-replication.html"><i class="fa fa-check"></i><b>22</b> Discrete Events Simulation: Replication</a></li>
+<li class="chapter" data-level="23" data-path="discrete-events-simulation-plots.html"><a href="discrete-events-simulation-plots.html"><i class="fa fa-check"></i><b>23</b> Discrete Events Simulation: Plots</a></li>
+<li class="chapter" data-level="24" data-path="discrete-events-simulation-plot-of-resources.html"><a href="discrete-events-simulation-plot-of-resources.html"><i class="fa fa-check"></i><b>24</b> Discrete Events Simulation: Plot of resources</a></li>
+<li class="chapter" data-level="25" data-path="discrete-events-simulation-plot-of-arrivals.html"><a href="discrete-events-simulation-plot-of-arrivals.html"><i class="fa fa-check"></i><b>25</b> Discrete Events Simulation: Plot of arrivals</a></li>
+<li class="chapter" data-level="26" data-path="discrete-events-simulation-plot-of-trayectories.html"><a href="discrete-events-simulation-plot-of-trayectories.html"><i class="fa fa-check"></i><b>26</b> Discrete Events Simulation: Plot of trayectories</a></li>
+<li class="chapter" data-level="27" data-path="discrete-events-simulation-improving-the-system.html"><a href="discrete-events-simulation-improving-the-system.html"><i class="fa fa-check"></i><b>27</b> Discrete Events Simulation: Improving the system</a></li>
+<li class="chapter" data-level="28" data-path="discrete-events-simulation-improving-the-system-1.html"><a href="discrete-events-simulation-improving-the-system-1.html"><i class="fa fa-check"></i><b>28</b> Discrete Events Simulation: Improving the system</a></li>
+<li class="chapter" data-level="29" data-path="discrete-events-simulation-improving-the-system-2.html"><a href="discrete-events-simulation-improving-the-system-2.html"><i class="fa fa-check"></i><b>29</b> Discrete Events Simulation: Improving the system</a></li>
+<li class="chapter" data-level="30" data-path="discrete-events-simulation-improving-the-system-3.html"><a href="discrete-events-simulation-improving-the-system-3.html"><i class="fa fa-check"></i><b>30</b> Discrete Events Simulation: Improving the system</a></li>
+<li class="chapter" data-level="31" data-path="discrete-events-simulation-improving-the-system-4.html"><a href="discrete-events-simulation-improving-the-system-4.html"><i class="fa fa-check"></i><b>31</b> Discrete Events Simulation: Improving the system</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -388,11 +507,11 @@ Figure 3.4: PMF of a Binomial random variable with parameters n = 10 and theta =
 <li><p><code>prob</code> is the parameter <span class="math inline">\(\theta\)</span> of the Binomial.</p></li>
 </ul>
 <p>So for instance</p>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="notable-discrete-variables.html#cb125-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="dv">3</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb784"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb784-1"><a href="notable-discrete-variables.html#cb784-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="dv">3</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span></code></pre></div>
 <pre><code>## [1] 0.1171875</code></pre>
 <p>returns <span class="math inline">\(P(X=3)=p(3)\)</span> for a Binomial random variable with parameter <span class="math inline">\(n=10\)</span> and <span class="math inline">\(\theta = 0.5\)</span>.</p>
 <p>Similarly,</p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="notable-discrete-variables.html#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(<span class="dv">8</span>, <span class="at">size =</span> <span class="dv">20</span>, <span class="at">prob =</span> <span class="fl">0.2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb786"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb786-1"><a href="notable-discrete-variables.html#cb786-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(<span class="dv">8</span>, <span class="at">size =</span> <span class="dv">20</span>, <span class="at">prob =</span> <span class="fl">0.2</span>)</span></code></pre></div>
 <pre><code>## [1] 0.9900182</code></pre>
 <p>returns <span class="math inline">\(P(X\leq 8) = F(8)\)</span> for a Binomial random variable with parameter <span class="math inline">\(n=20\)</span> and <span class="math inline">\(\theta = 0.2\)</span>.</p>
 </div>
@@ -427,11 +546,11 @@ Figure 3.5: PMF of a Poisson random variable with parameter 1 (left) and 4 (righ
 <li><p><code>lambda</code> is the parameter <span class="math inline">\(\lambda\)</span> of the Poisson;</p></li>
 </ul>
 <p>So for instance</p>
-<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="notable-discrete-variables.html#cb129-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dpois</span>(<span class="dv">3</span>, <span class="at">lambda =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb788"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb788-1"><a href="notable-discrete-variables.html#cb788-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dpois</span>(<span class="dv">3</span>, <span class="at">lambda =</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## [1] 0.06131324</code></pre>
 <p>returns <span class="math inline">\(P(X=3)=p(3)\)</span> for a Poisson random variable with parameter <span class="math inline">\(\lambda = 1\)</span>.</p>
 <p>Similarly,</p>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="notable-discrete-variables.html#cb131-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ppois</span>(<span class="dv">8</span>, <span class="at">lambda =</span> <span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb790"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb790-1"><a href="notable-discrete-variables.html#cb790-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ppois</span>(<span class="dv">8</span>, <span class="at">lambda =</span> <span class="dv">4</span>)</span></code></pre></div>
 <pre><code>## [1] 0.9786366</code></pre>
 <p>returns <span class="math inline">\(P(X\leq 8) = F(8)\)</span> for a Poisson random variable with parameter <span class="math inline">\(\lambda = 4\)</span>.</p>
 </div>
@@ -448,17 +567,17 @@ Figure 3.5: PMF of a Poisson random variable with parameter 1 (left) and 4 (righ
 </ul>
 <p>The above situation can be modeled by a Binomial random variable where the parameter <span class="math inline">\(n\)</span> depends on the question and <span class="math inline">\(\theta = 0.82\)</span>.</p>
 <p>The first question requires us to compute <span class="math inline">\(P(X\leq 3)= F(3)\)</span> where <span class="math inline">\(X\)</span> is Binomial with parameters <span class="math inline">\(n=20\)</span> and <span class="math inline">\(\theta =0.82\)</span>. Using R</p>
-<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="notable-discrete-variables.html#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(<span class="dv">3</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.82</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb792"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb792-1"><a href="notable-discrete-variables.html#cb792-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(<span class="dv">3</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.82</span>)</span></code></pre></div>
 <pre><code>## [1] 0.0004400767</code></pre>
 <p>The second question requires us to compute <span class="math inline">\(P(X\geq 90)\)</span> where <span class="math inline">\(X\)</span> is a Binomial random variable with parameters <span class="math inline">\(n=100\)</span> and <span class="math inline">\(\theta = 0.82\)</span>. Notice that
 <span class="math display">\[
 P(X\geq 90) = 1 - P(X&lt; 90) = 1 - P(X\leq 89) = 1 - F(89).
 \]</span>
 Using R</p>
-<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="notable-discrete-variables.html#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pbinom</span>(<span class="dv">89</span>, <span class="at">size =</span> <span class="dv">100</span>,  <span class="at">prob =</span> <span class="fl">0.82</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb794"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb794-1"><a href="notable-discrete-variables.html#cb794-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pbinom</span>(<span class="dv">89</span>, <span class="at">size =</span> <span class="dv">100</span>,  <span class="at">prob =</span> <span class="fl">0.82</span>)</span></code></pre></div>
 <pre><code>## [1] 0.02003866</code></pre>
 <p>For the third question, notice that saying two women out of 20 will never be married is equal to 18 out of 20 will be married. Therefore we need to compute <span class="math inline">\(P(X=17) + P(X=18)= p(17) + p(18)\)</span> where <span class="math inline">\(X\)</span> is a Binomial random variable with parameters <span class="math inline">\(n=20\)</span> and <span class="math inline">\(\theta = 0.82\)</span>. Using R</p>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="notable-discrete-variables.html#cb137-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">dbinom</span>(<span class="dv">17</span><span class="sc">:</span><span class="dv">18</span>, <span class="at">size =</span> <span class="dv">20</span>, <span class="at">prob =</span> <span class="fl">0.82</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb796"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb796-1"><a href="notable-discrete-variables.html#cb796-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">dbinom</span>(<span class="dv">17</span><span class="sc">:</span><span class="dv">18</span>, <span class="at">size =</span> <span class="dv">20</span>, <span class="at">prob =</span> <span class="fl">0.82</span>))</span></code></pre></div>
 <pre><code>## [1] 0.4007631</code></pre>
 </div>
 <div id="the-bad-stuntman" class="section level4" number="3.2.4.2">
@@ -471,13 +590,13 @@ Using R</p>
 </ul>
 <p>The above situation can be modeled as a Poisson distribution <span class="math inline">\(X\)</span> with parameter <span class="math inline">\(\lambda = 3\)</span>.</p>
 <p>The first question requires us to compute <span class="math inline">\(P(X=4)\)</span> which using R can be computed as</p>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="notable-discrete-variables.html#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dpois</span>(<span class="dv">4</span>, <span class="at">lambda =</span><span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb798"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb798-1"><a href="notable-discrete-variables.html#cb798-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dpois</span>(<span class="dv">4</span>, <span class="at">lambda =</span><span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## [1] 0.1680314</code></pre>
 <p>The second question requires us to compute <span class="math inline">\(P(X&lt;2) = P(X=0)+P(X=1)= F(1)\)</span> which using R can be computed as</p>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="notable-discrete-variables.html#cb141-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ppois</span>(<span class="dv">1</span>,<span class="at">lambda=</span><span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb800"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb800-1"><a href="notable-discrete-variables.html#cb800-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ppois</span>(<span class="dv">1</span>,<span class="at">lambda=</span><span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## [1] 0.1991483</code></pre>
 <p>The third question requires us to compute <span class="math inline">\(P(X&gt;3) = 1 - P(X\leq 2) = 1 - F(2)\)</span> which using R can be computed as</p>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="notable-discrete-variables.html#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">ppois</span>(<span class="dv">2</span>, <span class="at">lambda =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb802"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb802-1"><a href="notable-discrete-variables.html#cb802-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">ppois</span>(<span class="dv">2</span>, <span class="at">lambda =</span> <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## [1] 0.5768099</code></pre>
 </div>
 </div>

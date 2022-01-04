@@ -258,7 +258,7 @@ We can simulate this game using the R `sample()` function. Peter's winning on a 
 
 ```{r}
 set.seed(2021)
-win <- sample(c(-1,1),size = 50, replace = T)
+win <- sample(c(-1,1),size = 50, replace = TRUE)
 head(win)
 ```
 
@@ -281,7 +281,7 @@ Of course this is the result of a single simulation and the outcome may be total
 set.seed(2021)
 par(mfrow=c(2, 2))
 for(j in 1:4){
-  plot(cumsum(sample(c(-1, 1),size=50,replace=T)),type="l" ,ylim=c(-25, 25), ylab="Outcome")
+  plot(cumsum(sample(c(-1, 1),size=50,replace=TRUE)),type="l" ,ylim=c(-25, 25), ylab="Outcome")
   abline(h=0)}
 ```
 

@@ -324,7 +324,7 @@ Not surprisingly we can generate observations from any random variable using the
 Each of these functions takes as first input the number of observations that we want to simulate. They then have additional inputs that can be given, which depend on the random variable chosen and are the same that we saw in the past. 
 
 So for instance
-```{r eval = F}
+```{r, eval = FALSE}
 rnorm(10, mean = 1, sd = 2)
 ```
 generates ten observations from a Normal distribution with mean 1 and standard deviation 2.
