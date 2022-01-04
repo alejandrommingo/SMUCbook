@@ -441,12 +441,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>The actual number of taxis <code>N</code>.</li>
 <li>The sample size <code>n</code>.</li>
 </ol>
+<<<<<<< HEAD
 <div class="sourceCode" id="cb943"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb943-1"><a href="the-taxi-problem-comparing-estimators.html#cb943-1" aria-hidden="true" tabindex="-1"></a>taxi <span class="ot">=</span> <span class="cf">function</span>(N, n){</span>
 <span id="cb943-2"><a href="the-taxi-problem-comparing-estimators.html#cb943-2" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">=</span> <span class="fu">sample</span>(N, <span class="at">size=</span>n, <span class="at">replace=</span><span class="cn">TRUE</span>)</span>
 <span id="cb943-3"><a href="the-taxi-problem-comparing-estimators.html#cb943-3" aria-hidden="true" tabindex="-1"></a>  estimate1 <span class="ot">=</span> <span class="fu">max</span>(y)</span>
 <span id="cb943-4"><a href="the-taxi-problem-comparing-estimators.html#cb943-4" aria-hidden="true" tabindex="-1"></a>  estimate2 <span class="ot">=</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">mean</span>(y)</span>
 <span id="cb943-5"><a href="the-taxi-problem-comparing-estimators.html#cb943-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="at">estimate1=</span>estimate1, <span class="at">estimate2=</span>estimate2)</span>
 <span id="cb943-6"><a href="the-taxi-problem-comparing-estimators.html#cb943-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+=======
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="the-taxi-problem-comparing-estimators.html#cb265-1" aria-hidden="true" tabindex="-1"></a>taxi <span class="ot">=</span> <span class="cf">function</span>(N, n){</span>
+<span id="cb265-2"><a href="the-taxi-problem-comparing-estimators.html#cb265-2" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">=</span> <span class="fu">sample</span>(N, <span class="at">size=</span>n, <span class="at">replace=</span><span class="cn">TRUE</span>)</span>
+<span id="cb265-3"><a href="the-taxi-problem-comparing-estimators.html#cb265-3" aria-hidden="true" tabindex="-1"></a>  estimate1 <span class="ot">=</span> <span class="fu">max</span>(y)</span>
+<span id="cb265-4"><a href="the-taxi-problem-comparing-estimators.html#cb265-4" aria-hidden="true" tabindex="-1"></a>  estimate2 <span class="ot">=</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">mean</span>(y)</span>
+<span id="cb265-5"><a href="the-taxi-problem-comparing-estimators.html#cb265-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="at">estimate1=</span>estimate1, <span class="at">estimate2=</span>estimate2)</span>
+<span id="cb265-6"><a href="the-taxi-problem-comparing-estimators.html#cb265-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+>>>>>>> 8dbc43f2583e184f718dfe1d4639c2d3f42046e6
 <p>The <code>sample()</code> function simulates the observed taxi numbers and values of the two estimates are stored in variables <code>estimate1</code> and <code>estimate2</code>. Let’s say actual number of taxis in city is <code>100</code> and we observe numbers of <code>n=5</code> taxis.</p>
 <div class="sourceCode" id="cb944"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb944-1"><a href="the-taxi-problem-comparing-estimators.html#cb944-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2021</span>)</span>
 <span id="cb944-2"><a href="the-taxi-problem-comparing-estimators.html#cb944-2" aria-hidden="true" tabindex="-1"></a><span class="fu">taxi</span>(<span class="dv">100</span>, <span class="dv">5</span>)</span></code></pre></div>
