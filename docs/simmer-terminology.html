@@ -441,13 +441,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="the-trajectory-object" class="section level3" number="7.1.1">
 <h3><span class="header-section-number">7.1.1</span> <strong>The Trajectory Object</strong></h3>
 <p>A trajectory can be defined as a recipe and consists of an ordered set of activities. The <code>trajectory()</code> method instantiates the object, and activities can be appended using the <code>%&gt;%</code> operator:</p>
-<div class="sourceCode" id="cb956"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb956-1"><a href="simmer-terminology.html#cb956-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(simmer)</span>
-<span id="cb956-2"><a href="simmer-terminology.html#cb956-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
-<span id="cb956-3"><a href="simmer-terminology.html#cb956-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb956-4"><a href="simmer-terminology.html#cb956-4" aria-hidden="true" tabindex="-1"></a>traj0 <span class="ot">&lt;-</span> <span class="fu">trajectory</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb956-5"><a href="simmer-terminology.html#cb956-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log_</span>(<span class="st">&quot;Entering the trajectory&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb956-6"><a href="simmer-terminology.html#cb956-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">timeout</span>(<span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb956-7"><a href="simmer-terminology.html#cb956-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log_</span>(<span class="st">&quot;Leaving the trajectory&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb912"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb912-1"><a href="simmer-terminology.html#cb912-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(simmer)</span>
+<span id="cb912-2"><a href="simmer-terminology.html#cb912-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
+<span id="cb912-3"><a href="simmer-terminology.html#cb912-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb912-4"><a href="simmer-terminology.html#cb912-4" aria-hidden="true" tabindex="-1"></a>traj0 <span class="ot">&lt;-</span> <span class="fu">trajectory</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb912-5"><a href="simmer-terminology.html#cb912-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log_</span>(<span class="st">&quot;Entering the trajectory&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb912-6"><a href="simmer-terminology.html#cb912-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">timeout</span>(<span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb912-7"><a href="simmer-terminology.html#cb912-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log_</span>(<span class="st">&quot;Leaving the trajectory&quot;</span>)</span></code></pre></div>
 </div>
 </div>
 <!-- </div> -->

@@ -427,10 +427,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The <code>R</code> API (Application Programming Interface) exposed by <code>simmer</code> comprises two main elements: the <strong>simmer environment</strong> (or simulation environment) and the <strong>trajectory object</strong>.</p>
 <p><strong>The Simulation Enviroment</strong></p>
 <p>The simulation environment manages resources and sources, and controls the simulation execution. The <code>simmer()</code> method instantiates the object, after which resources and sources can be appended using the <code>%&gt;%</code> operator:</p>
-<div class="sourceCode" id="cb960"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb960-1"><a href="the-simmer-api-5.html#cb960-1" aria-hidden="true" tabindex="-1"></a>env <span class="ot">&lt;-</span> <span class="fu">simmer</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb960-2"><a href="the-simmer-api-5.html#cb960-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_resource</span>(<span class="st">&quot;res_name&quot;</span>, <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb960-3"><a href="the-simmer-api-5.html#cb960-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_generator</span>(<span class="st">&quot;arrival&quot;</span>, traj0, <span class="cf">function</span>() <span class="dv">25</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb960-4"><a href="the-simmer-api-5.html#cb960-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb916"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb916-1"><a href="the-simmer-api-5.html#cb916-1" aria-hidden="true" tabindex="-1"></a>env <span class="ot">&lt;-</span> <span class="fu">simmer</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb916-2"><a href="the-simmer-api-5.html#cb916-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_resource</span>(<span class="st">&quot;res_name&quot;</span>, <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb916-3"><a href="the-simmer-api-5.html#cb916-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_generator</span>(<span class="st">&quot;arrival&quot;</span>, traj0, <span class="cf">function</span>() <span class="dv">25</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb916-4"><a href="the-simmer-api-5.html#cb916-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>()</span></code></pre></div>
 <pre><code>## simmer environment: anonymous | now: 0 | next: 0
 ## { Monitor: in memory }
 ## { Resource: res_name | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }

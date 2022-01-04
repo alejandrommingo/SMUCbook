@@ -435,50 +435,50 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>output: an object that the function returns.</p></li>
 </ul>
 <p>Let’s consider an example.</p>
-<div class="sourceCode" id="cb750"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb750-1"><a href="functions.html#cb750-1" aria-hidden="true" tabindex="-1"></a>my.function <span class="ot">&lt;-</span> <span class="cf">function</span>(x,y){</span>
-<span id="cb750-2"><a href="functions.html#cb750-2" aria-hidden="true" tabindex="-1"></a>  z <span class="ot">&lt;-</span> x <span class="sc">+</span> y</span>
-<span id="cb750-3"><a href="functions.html#cb750-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(z)</span>
-<span id="cb750-4"><a href="functions.html#cb750-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb706"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb706-1"><a href="functions.html#cb706-1" aria-hidden="true" tabindex="-1"></a>my.function <span class="ot">&lt;-</span> <span class="cf">function</span>(x,y){</span>
+<span id="cb706-2"><a href="functions.html#cb706-2" aria-hidden="true" tabindex="-1"></a>  z <span class="ot">&lt;-</span> x <span class="sc">+</span> y</span>
+<span id="cb706-3"><a href="functions.html#cb706-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(z)</span>
+<span id="cb706-4"><a href="functions.html#cb706-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>The above function computes the sum of two numbers <code>x</code> and <code>y</code>. Let’s call it.</p>
-<div class="sourceCode" id="cb751"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb751-1"><a href="functions.html#cb751-1" aria-hidden="true" tabindex="-1"></a><span class="fu">my.function</span>(<span class="dv">2</span>,<span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb707"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb707-1"><a href="functions.html#cb707-1" aria-hidden="true" tabindex="-1"></a><span class="fu">my.function</span>(<span class="dv">2</span>,<span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## [1] 5</code></pre>
 <p>The sum between 2 and 3 is indeed 5.</p>
 <p>Let’s look at the code line by line. In the first line, we assigned a function using the command <code>function</code> to an object called <code>my.function</code>. <code>my.function</code> has two arguments called <code>x</code> and <code>y</code>. Then there is an opening curly bracket <code>{</code>. The last line of code has a closing curly bracket <code>}</code>: whatever is in between the two brackets is a chunk of code which is run when the function is run. The second line computes a new variable called <code>z</code> which stores the sum of <code>x</code> and <code>y</code>. The third line of code tells us that the function should return <code>z</code> as output.</p>
 <p>Let’s consider a slightly more complicated function.</p>
-<div class="sourceCode" id="cb753"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb753-1"><a href="functions.html#cb753-1" aria-hidden="true" tabindex="-1"></a>new.function <span class="ot">&lt;-</span> <span class="cf">function</span>(x,y){</span>
-<span id="cb753-2"><a href="functions.html#cb753-2" aria-hidden="true" tabindex="-1"></a>  z1 <span class="ot">&lt;-</span> x<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb753-3"><a href="functions.html#cb753-3" aria-hidden="true" tabindex="-1"></a>  z2 <span class="ot">&lt;-</span> z1 <span class="sc">+</span> y</span>
-<span id="cb753-4"><a href="functions.html#cb753-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(z2)</span>
-<span id="cb753-5"><a href="functions.html#cb753-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb709"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb709-1"><a href="functions.html#cb709-1" aria-hidden="true" tabindex="-1"></a>new.function <span class="ot">&lt;-</span> <span class="cf">function</span>(x,y){</span>
+<span id="cb709-2"><a href="functions.html#cb709-2" aria-hidden="true" tabindex="-1"></a>  z1 <span class="ot">&lt;-</span> x<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb709-3"><a href="functions.html#cb709-3" aria-hidden="true" tabindex="-1"></a>  z2 <span class="ot">&lt;-</span> z1 <span class="sc">+</span> y</span>
+<span id="cb709-4"><a href="functions.html#cb709-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(z2)</span>
+<span id="cb709-5"><a href="functions.html#cb709-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>The <code>new.function</code> returns the sum between the square of the first input <code>x</code> and the second input <code>y</code>. Let’s call the function.</p>
-<div class="sourceCode" id="cb754"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb754-1"><a href="functions.html#cb754-1" aria-hidden="true" tabindex="-1"></a><span class="fu">new.function</span>(<span class="dv">2</span>,<span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb710"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb710-1"><a href="functions.html#cb710-1" aria-hidden="true" tabindex="-1"></a><span class="fu">new.function</span>(<span class="dv">2</span>,<span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## [1] 7</code></pre>
-<div class="sourceCode" id="cb756"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb756-1"><a href="functions.html#cb756-1" aria-hidden="true" tabindex="-1"></a><span class="fu">new.function</span>(<span class="dv">3</span>,<span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb712"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb712-1"><a href="functions.html#cb712-1" aria-hidden="true" tabindex="-1"></a><span class="fu">new.function</span>(<span class="dv">3</span>,<span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 11</code></pre>
 <p>Notice that <code>new.function(2,3)</code> is different from <code>new.function(3,2)</code>: indeed in the fist case the sum between 2^2 and 3 is computed, whilst in the second the sum between 3^2 and 2 is computed. Furthermore, that the variable <code>z1</code> exists only within the function: when you call the function the output does not create a variable <code>z1</code>. The output does not create either a variable <code>z2</code> it simply returns the value that is stored in <code>z2</code>, which can the be assigned as in the following example.</p>
-<div class="sourceCode" id="cb758"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb758-1"><a href="functions.html#cb758-1" aria-hidden="true" tabindex="-1"></a>value <span class="ot">&lt;-</span> <span class="fu">new.function</span>(<span class="dv">2</span>,<span class="dv">3</span>)</span>
-<span id="cb758-2"><a href="functions.html#cb758-2" aria-hidden="true" tabindex="-1"></a>value</span></code></pre></div>
+<div class="sourceCode" id="cb714"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb714-1"><a href="functions.html#cb714-1" aria-hidden="true" tabindex="-1"></a>value <span class="ot">&lt;-</span> <span class="fu">new.function</span>(<span class="dv">2</span>,<span class="dv">3</span>)</span>
+<span id="cb714-2"><a href="functions.html#cb714-2" aria-hidden="true" tabindex="-1"></a>value</span></code></pre></div>
 <pre><code>## [1] 7</code></pre>
 <p>We stored in <code>value</code> the output of <code>new.function(2,3)</code>.</p>
 <p>An equivalent way to write <code>new.function</code> is as follows:</p>
-<div class="sourceCode" id="cb760"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb760-1"><a href="functions.html#cb760-1" aria-hidden="true" tabindex="-1"></a>new.function <span class="ot">&lt;-</span> <span class="cf">function</span>(x,y){</span>
-<span id="cb760-2"><a href="functions.html#cb760-2" aria-hidden="true" tabindex="-1"></a>  x<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> y</span>
-<span id="cb760-3"><a href="functions.html#cb760-3" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb760-4"><a href="functions.html#cb760-4" aria-hidden="true" tabindex="-1"></a><span class="fu">new.function</span>(<span class="dv">2</span>,<span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb716"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb716-1"><a href="functions.html#cb716-1" aria-hidden="true" tabindex="-1"></a>new.function <span class="ot">&lt;-</span> <span class="cf">function</span>(x,y){</span>
+<span id="cb716-2"><a href="functions.html#cb716-2" aria-hidden="true" tabindex="-1"></a>  x<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> y</span>
+<span id="cb716-3"><a href="functions.html#cb716-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb716-4"><a href="functions.html#cb716-4" aria-hidden="true" tabindex="-1"></a><span class="fu">new.function</span>(<span class="dv">2</span>,<span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## [1] 7</code></pre>
 <p>The output is the same. We did not create any variable within the function and we did not explicitly use the <code>return</code> command. R understands that the last line of code is what the function should return.</p>
 </div>
 <div id="calling-functions" class="section level3" number="2.10.2">
 <h3><span class="header-section-number">2.10.2</span> Calling functions</h3>
 <p>In R functions can be called in various ways. Before we have seen function calls as</p>
-<div class="sourceCode" id="cb762"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb762-1"><a href="functions.html#cb762-1" aria-hidden="true" tabindex="-1"></a><span class="fu">new.function</span>(<span class="dv">2</span>,<span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb718"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb718-1"><a href="functions.html#cb718-1" aria-hidden="true" tabindex="-1"></a><span class="fu">new.function</span>(<span class="dv">2</span>,<span class="dv">3</span>)</span></code></pre></div>
 <p>How did it work?</p>
 <ul>
 <li><p>The function <code>new.function</code> has a first argument <code>x</code> and a second argument <code>y</code>.</p></li>
 <li><p>R matched the first argument in <code>new.function(2,3)</code> to <code>x</code>, that is <code>x=2</code>, and the second argument to <code>y</code>, that is <code>y=3</code>.</p></li>
 </ul>
 <p>We could have also been more explicit and state what <code>x</code> and <code>y</code> were.</p>
-<div class="sourceCode" id="cb763"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb763-1"><a href="functions.html#cb763-1" aria-hidden="true" tabindex="-1"></a><span class="fu">new.function</span>(<span class="at">x=</span><span class="dv">2</span>, <span class="at">y=</span><span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb719"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb719-1"><a href="functions.html#cb719-1" aria-hidden="true" tabindex="-1"></a><span class="fu">new.function</span>(<span class="at">x=</span><span class="dv">2</span>, <span class="at">y=</span><span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## [1] 7</code></pre>
 <p>So now explicitly we state that the input <code>x</code> of <code>new.function</code> is 2 and that the input <code>y</code> is 3. Notice that the two ways of specifying inputs give the exact same results.</p>
 </div>

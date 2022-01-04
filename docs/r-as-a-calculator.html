@@ -425,16 +425,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="r-as-a-calculator" class="section level2" number="2.5">
 <h2><span class="header-section-number">2.5</span> R as a Calculator</h2>
 <p>The screen prompt <code>&gt;</code> is an invitation to put R to work. You can use the Rstudio command line as a calculator, like this:</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="r-as-a-calculator.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">42</span><span class="sc">/</span><span class="fl">7.3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="r-as-a-calculator.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">42</span><span class="sc">/</span><span class="fl">7.3</span>)</span></code></pre></div>
 <pre><code>## [1] 1.749795</code></pre>
 <p>Each line can have at most 8192 characters, but if you want to see a lengthy instruction or a complicated expression on the screen, you can continue it on one or more further lines simply by ending the line at a place where the line is obviously incomplete (e.g. with a trailing comma, operator, or with more left parentheses than right parentheses, implying that more right parentheses will follow).</p>
 <p>When continuation is expected, the prompt changes from &gt; to +:</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="r-as-a-calculator.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span><span class="sc">+</span><span class="dv">6</span><span class="sc">+</span><span class="dv">3</span><span class="sc">+</span><span class="dv">6</span><span class="sc">+</span><span class="dv">4</span><span class="sc">+</span><span class="dv">2</span><span class="sc">+</span><span class="dv">4</span><span class="sc">+</span><span class="dv">8</span><span class="sc">+</span></span>
-<span id="cb42-2"><a href="r-as-a-calculator.html#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span><span class="sc">+</span><span class="dv">2</span><span class="sc">+</span><span class="dv">7</span></span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="r-as-a-calculator.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span><span class="sc">+</span><span class="dv">6</span><span class="sc">+</span><span class="dv">3</span><span class="sc">+</span><span class="dv">6</span><span class="sc">+</span><span class="dv">4</span><span class="sc">+</span><span class="dv">2</span><span class="sc">+</span><span class="dv">4</span><span class="sc">+</span><span class="dv">8</span><span class="sc">+</span></span>
+<span id="cb46-2"><a href="r-as-a-calculator.html#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span><span class="sc">+</span><span class="dv">2</span><span class="sc">+</span><span class="dv">7</span></span></code></pre></div>
 <pre><code>## [1] 50</code></pre>
 <p>Note that the + continuation prompt does not carry out arithmetic plus. If you have made a mistake, and you want to get rid of the + prompt and return to the &gt; prompt, then press the Esc key and use the Up arrow to edit the last (incomplete) line.</p>
 <p>Two or more expressions can be placed on a single line so long as they are separated by semi-colons:</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="r-as-a-calculator.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">+</span><span class="dv">3</span>; <span class="dv">5</span><span class="sc">*</span><span class="dv">7</span>; <span class="dv">3-7</span></span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="r-as-a-calculator.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">+</span><span class="dv">3</span>; <span class="dv">5</span><span class="sc">*</span><span class="dv">7</span>; <span class="dv">3-7</span></span></code></pre></div>
 <pre><code>## [1] 5</code></pre>
 <pre><code>## [1] 35</code></pre>
 <pre><code>## [1] -4</code></pre>
@@ -447,115 +447,115 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="complex-numbers-in-r" class="section level3" number="2.5.1">
 <h3><span class="header-section-number">2.5.1</span> Complex numbers in R</h3>
 <p>Complex numbers consist of a real part and an imaginary part, which is identified by lower-case i like this:</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="r-as-a-calculator.html#cb48-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">=</span> <span class="fl">3.5</span><span class="sc">-</span>8i</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="r-as-a-calculator.html#cb52-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">=</span> <span class="fl">3.5</span><span class="sc">-</span>8i</span></code></pre></div>
 <p>The elementary trigonometric, logarithmic, exponential, square root and hyperbolic functions are all
 implemented for complex values. The following are the special R functions that you can use with com-
 plex numbers:</p>
 <ul>
 <li>Determine the real part:</li>
 </ul>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="r-as-a-calculator.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Re</span>(z)</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="r-as-a-calculator.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Re</span>(z)</span></code></pre></div>
 <pre><code>## [1] 3.5</code></pre>
 <ul>
 <li>Determine the imaginary part:</li>
 </ul>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="r-as-a-calculator.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Im</span>(z)</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="r-as-a-calculator.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Im</span>(z)</span></code></pre></div>
 <pre><code>## [1] -8</code></pre>
 <ul>
 <li>Calculate the modulus (if x is the real part and y is the imaginary part, then the modulus is <span class="math inline">\(\sqrt(x^2 + y^2)\)</span>):</li>
 </ul>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="r-as-a-calculator.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Mod</span>(z)</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="r-as-a-calculator.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Mod</span>(z)</span></code></pre></div>
 <pre><code>## [1] 8.732125</code></pre>
 <ul>
 <li>Calculate the argument (<code>Arg(x+ yi)= atan(y/x)</code>):</li>
 </ul>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="r-as-a-calculator.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Arg</span>(z)</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="r-as-a-calculator.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Arg</span>(z)</span></code></pre></div>
 <pre><code>## [1] -1.158386</code></pre>
 <ul>
 <li>Work out the complex conjugate (change the sign of the imaginary part):</li>
 </ul>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="r-as-a-calculator.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Conj</span>(z)</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="r-as-a-calculator.html#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Conj</span>(z)</span></code></pre></div>
 <pre><code>## [1] 3.5+8i</code></pre>
 <ul>
 <li>Check if the object is a complex number:</li>
 </ul>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="r-as-a-calculator.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.complex</span>(z)</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="r-as-a-calculator.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.complex</span>(z)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <ul>
 <li>Coerce a number into a complex number:</li>
 </ul>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="r-as-a-calculator.html#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.complex</span>(<span class="fl">3.8</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="r-as-a-calculator.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.complex</span>(<span class="fl">3.8</span>)</span></code></pre></div>
 <pre><code>## [1] 3.8+0i</code></pre>
 </div>
 <div id="rounding" class="section level3" number="2.5.2">
 <h3><span class="header-section-number">2.5.2</span> Rounding</h3>
 <p>Various sorts of rounding (rounding up, rounding down, rounding to the nearest integer) can be done easily. Take the number <code>5.7</code> as an example. The ‘greatest integer less than’ function is <code>floor</code>:</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="r-as-a-calculator.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">floor</span>(<span class="fl">5.7</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="r-as-a-calculator.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">floor</span>(<span class="fl">5.7</span>)</span></code></pre></div>
 <pre><code>## [1] 5</code></pre>
 <p>The ‘next integer’ function is ceiling:</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="r-as-a-calculator.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ceiling</span>(<span class="fl">5.7</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="r-as-a-calculator.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ceiling</span>(<span class="fl">5.7</span>)</span></code></pre></div>
 <pre><code>## [1] 6</code></pre>
 <p>You can round to the nearest integer by adding 0.5 to the number, then using floor. There is a built-in function for this, but we can easily write one of our own to introduce the notion of function writing. Call it <code>rounded</code>, then define it as a function like this:</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="r-as-a-calculator.html#cb67-1" aria-hidden="true" tabindex="-1"></a>rounded <span class="ot">=</span> <span class="cf">function</span>(x){<span class="fu">floor</span>(x<span class="fl">+0.5</span>)}</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="r-as-a-calculator.html#cb71-1" aria-hidden="true" tabindex="-1"></a>rounded <span class="ot">=</span> <span class="cf">function</span>(x){<span class="fu">floor</span>(x<span class="fl">+0.5</span>)}</span></code></pre></div>
 <p>Now we can use the new function:</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="r-as-a-calculator.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rounded</span>(<span class="fl">5.7</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="r-as-a-calculator.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rounded</span>(<span class="fl">5.7</span>)</span></code></pre></div>
 <pre><code>## [1] 6</code></pre>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="r-as-a-calculator.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rounded</span>(<span class="fl">5.4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="r-as-a-calculator.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rounded</span>(<span class="fl">5.4</span>)</span></code></pre></div>
 <pre><code>## [1] 5</code></pre>
 <p>There is an R function called round that you can use by specifying 0 decimal places in the second
 argument:</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="r-as-a-calculator.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">5.7</span>,<span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="r-as-a-calculator.html#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">5.7</span>,<span class="dv">0</span>)</span></code></pre></div>
 <pre><code>## [1] 6</code></pre>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="r-as-a-calculator.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">5.4</span>,<span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="r-as-a-calculator.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">5.4</span>,<span class="dv">0</span>)</span></code></pre></div>
 <pre><code>## [1] 5</code></pre>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="r-as-a-calculator.html#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="sc">-</span><span class="fl">5.7</span>,<span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="r-as-a-calculator.html#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="sc">-</span><span class="fl">5.7</span>,<span class="dv">0</span>)</span></code></pre></div>
 <pre><code>## [1] -6</code></pre>
 </div>
 <div id="arithmetics" class="section level3" number="2.5.3">
 <h3><span class="header-section-number">2.5.3</span> Arithmetics</h3>
 <p>The screen prompt in R is a fully functional calculator. You can add and subtract using the obvious <code>+</code> and <code>-</code> symbols, while division is achieved with a forward slash <code>/</code> and multiplication is done by using an asterisk <code>*</code> like this:</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="r-as-a-calculator.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">-</span> <span class="dv">5</span> <span class="sc">*</span> <span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="r-as-a-calculator.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">-</span> <span class="dv">5</span> <span class="sc">*</span> <span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
 <p>Notice from this example that multiplication <code>(5 × 2)</code> is done <em>before</em> the additions and subtractions.</p>
 <p>Powers (like squared or cube root) use the caret symbol <code>ˆ</code> and are done before multiplication or division, as you can see from this example:</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="r-as-a-calculator.html#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> <span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="r-as-a-calculator.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> <span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] 4.5</code></pre>
 <p>All the mathematical functions you could ever want are here (see Table 2.1).</p>
 <p align="center">
 <img src="images/R-programming/2.1table.png" width="1050">
 </p>
 <p>The <code>log</code> function gives logs to the base e (e = 2.718 282), for which the antilog function is <code>exp</code>:</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="r-as-a-calculator.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="r-as-a-calculator.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">10</span>)</span></code></pre></div>
 <pre><code>## [1] 2.302585</code></pre>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="r-as-a-calculator.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="r-as-a-calculator.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## [1] 2.718282</code></pre>
 <p>Logs to other bases are possible by providing the <code>log</code> function with a second argument which is the base of the logs you want to take. Suppose you want log to base 3 of 9:</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="r-as-a-calculator.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">9</span>,<span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="r-as-a-calculator.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">9</span>,<span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
 <p>The trigonometric functions in R measure angles in radians. A circle is <span class="math inline">\(2\pi\)</span> radians, and this is <span class="math inline">\(360^\circ\)</span> , so a right angle (<span class="math inline">\(90^\circ\)</span>) is <span class="math inline">\(\pi / 2\)</span> radians. R knows the value of <span class="math inline">\(\pi\)</span> as <code>pi</code>:</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="r-as-a-calculator.html#cb88-1" aria-hidden="true" tabindex="-1"></a>pi</span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="r-as-a-calculator.html#cb92-1" aria-hidden="true" tabindex="-1"></a>pi</span></code></pre></div>
 <pre><code>## [1] 3.141593</code></pre>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="r-as-a-calculator.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sin</span>(pi<span class="sc">/</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="r-as-a-calculator.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sin</span>(pi<span class="sc">/</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="r-as-a-calculator.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cos</span>(pi<span class="sc">/</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="r-as-a-calculator.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cos</span>(pi<span class="sc">/</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 6.123234e-17</code></pre>
 <p>Notice that the cosine of a right angle does not come out as exactly zero, even though the sine came out as exactly 1. The <code>e-017</code> means ‘times <span class="math inline">\(10^{–17}\)</span>.’ While this is a very small number, it is clearly not exactly zero.</p>
 </div>
 <div id="modulo-and-integer-quotients" class="section level3" number="2.5.4">
 <h3><span class="header-section-number">2.5.4</span> Modulo and integer quotients</h3>
 <p>Integer quotients and remainders are obtained using the notation <code>%/%</code> (percent, divide, percent) and <code>%%</code> (percent, percent) respectively. Suppose we want to know the integer part of a division: say, how many 13s are there in 119:</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="r-as-a-calculator.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="dv">119</span> <span class="sc">%/%</span> <span class="dv">13</span></span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="r-as-a-calculator.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="dv">119</span> <span class="sc">%/%</span> <span class="dv">13</span></span></code></pre></div>
 <pre><code>## [1] 9</code></pre>
 <p>Now suppose we wanted to know the remainder (what is left over when 119 is divided by 13): in maths this is known as <strong>modulo</strong>:</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="r-as-a-calculator.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="dv">119</span> <span class="sc">%%</span> <span class="dv">13</span></span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="r-as-a-calculator.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="dv">119</span> <span class="sc">%%</span> <span class="dv">13</span></span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
 <p>Modulo is very useful for testing whether numbers are odd or even: odd numbers have modulo 2 value 1 and even numbers have modulo 2 value 0:</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="r-as-a-calculator.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="dv">9</span> <span class="sc">%%</span> <span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="r-as-a-calculator.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="dv">9</span> <span class="sc">%%</span> <span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="r-as-a-calculator.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="dv">8</span> <span class="sc">%%</span> <span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="r-as-a-calculator.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="dv">8</span> <span class="sc">%%</span> <span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
 <p>Likewise, you use modulo to test if one number is an exact multiple of some other number. For instance, to find out whether 15 421 is a multiple of 7 (which it is), then ask:</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="r-as-a-calculator.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="dv">15421</span> <span class="sc">%%</span> <span class="dv">7</span></span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="r-as-a-calculator.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="dv">15421</span> <span class="sc">%%</span> <span class="dv">7</span></span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
 </div>
 <div id="operators" class="section level3" number="2.5.5">

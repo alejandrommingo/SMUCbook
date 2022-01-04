@@ -428,16 +428,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="generating-pseudo-random-numbers-in-r" class="section level3" number="4.3.1">
 <h3><span class="header-section-number">4.3.1</span> Generating Pseudo-Random Numbers in R</h3>
 <p>R has all the capabilities to generate such numbers. This can be done with the function <code>runif</code>, which takes one input: the number of observations to generate. So for instance:</p>
-<div class="sourceCode" id="cb831"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb831-1"><a href="generating-pseudo-random-numbers.html#cb831-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2021</span>)</span>
-<span id="cb831-2"><a href="generating-pseudo-random-numbers.html#cb831-2" aria-hidden="true" tabindex="-1"></a><span class="fu">runif</span>(<span class="dv">10</span>)</span></code></pre></div>
-<pre><code>##  [1] 0.4512674 0.7837798 0.7096822 0.3817443 0.6363238 0.7013460 0.6404389 0.2666797 0.8154215 0.9829869</code></pre>
+<div class="sourceCode" id="cb787"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb787-1"><a href="generating-pseudo-random-numbers.html#cb787-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2021</span>)</span>
+<span id="cb787-2"><a href="generating-pseudo-random-numbers.html#cb787-2" aria-hidden="true" tabindex="-1"></a><span class="fu">runif</span>(<span class="dv">10</span>)</span></code></pre></div>
+<pre><code>##  [1] 0.4512674 0.7837798 0.7096822 0.3817443 0.6363238 0.7013460 0.6404389
+##  [8] 0.2666797 0.8154215 0.9829869</code></pre>
 <p>generates ten random numbers between zero and one. Notice that if we repeat the same code we get the same result since we fixed the so-called <em>seed</em> of the simulation.</p>
-<div class="sourceCode" id="cb833"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb833-1"><a href="generating-pseudo-random-numbers.html#cb833-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2021</span>)</span>
-<span id="cb833-2"><a href="generating-pseudo-random-numbers.html#cb833-2" aria-hidden="true" tabindex="-1"></a><span class="fu">runif</span>(<span class="dv">10</span>)</span></code></pre></div>
-<pre><code>##  [1] 0.4512674 0.7837798 0.7096822 0.3817443 0.6363238 0.7013460 0.6404389 0.2666797 0.8154215 0.9829869</code></pre>
+<div class="sourceCode" id="cb789"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb789-1"><a href="generating-pseudo-random-numbers.html#cb789-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2021</span>)</span>
+<span id="cb789-2"><a href="generating-pseudo-random-numbers.html#cb789-2" aria-hidden="true" tabindex="-1"></a><span class="fu">runif</span>(<span class="dv">10</span>)</span></code></pre></div>
+<pre><code>##  [1] 0.4512674 0.7837798 0.7096822 0.3817443 0.6363238 0.7013460 0.6404389
+##  [8] 0.2666797 0.8154215 0.9829869</code></pre>
 <p>Conversely, if we were to simply run the code <code>runif(10)</code> we would get a different result.</p>
-<div class="sourceCode" id="cb835"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb835-1"><a href="generating-pseudo-random-numbers.html#cb835-1" aria-hidden="true" tabindex="-1"></a><span class="fu">runif</span>(<span class="dv">10</span>)</span></code></pre></div>
-<pre><code>##  [1] 0.02726706 0.83749040 0.60324073 0.56745337 0.82005281 0.25157128 0.50549403 0.86753810 0.95818157 0.54569770</code></pre>
+<div class="sourceCode" id="cb791"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb791-1"><a href="generating-pseudo-random-numbers.html#cb791-1" aria-hidden="true" tabindex="-1"></a><span class="fu">runif</span>(<span class="dv">10</span>)</span></code></pre></div>
+<pre><code>##  [1] 0.02726706 0.83749040 0.60324073 0.56745337 0.82005281 0.25157128
+##  [7] 0.50549403 0.86753810 0.95818157 0.54569770</code></pre>
 </div>
 <div id="linear-congruential-method" class="section level3" number="4.3.2">
 <h3><span class="header-section-number">4.3.2</span> Linear Congruential Method</h3>
@@ -459,14 +462,14 @@ u_i= x_i/m.
 \]</span></p>
 <p>It can be shown that the method works well for specific choices of <span class="math inline">\(a\)</span>, <span class="math inline">\(c\)</span> and <span class="math inline">\(m\)</span>, which we will not discuss here.</p>
 <p>Let’s look at an implementation.</p>
-<div class="sourceCode" id="cb837"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb837-1"><a href="generating-pseudo-random-numbers.html#cb837-1" aria-hidden="true" tabindex="-1"></a>lcm <span class="ot">&lt;-</span> <span class="cf">function</span>(N, x0, a, c, m){</span>
-<span id="cb837-2"><a href="generating-pseudo-random-numbers.html#cb837-2" aria-hidden="true" tabindex="-1"></a>   x <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>,N)</span>
-<span id="cb837-3"><a href="generating-pseudo-random-numbers.html#cb837-3" aria-hidden="true" tabindex="-1"></a>   x[<span class="dv">1</span>] <span class="ot">&lt;-</span> x0</span>
-<span id="cb837-4"><a href="generating-pseudo-random-numbers.html#cb837-4" aria-hidden="true" tabindex="-1"></a>   <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>N) x[i] <span class="ot">&lt;-</span> (a<span class="sc">*</span>x[i<span class="dv">-1</span>]<span class="sc">+</span>c)<span class="sc">%%</span>m</span>
-<span id="cb837-5"><a href="generating-pseudo-random-numbers.html#cb837-5" aria-hidden="true" tabindex="-1"></a>   u <span class="ot">&lt;-</span> x<span class="sc">/</span>m</span>
-<span id="cb837-6"><a href="generating-pseudo-random-numbers.html#cb837-6" aria-hidden="true" tabindex="-1"></a>   <span class="fu">return</span>(u)</span>
-<span id="cb837-7"><a href="generating-pseudo-random-numbers.html#cb837-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb838"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb838-1"><a href="generating-pseudo-random-numbers.html#cb838-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lcm</span>(<span class="at">N =</span> <span class="dv">8</span>, <span class="at">x0 =</span> <span class="dv">4</span>, <span class="at">a =</span> <span class="dv">13</span>, <span class="at">c =</span> <span class="dv">0</span>, <span class="at">m =</span> <span class="dv">64</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb793"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb793-1"><a href="generating-pseudo-random-numbers.html#cb793-1" aria-hidden="true" tabindex="-1"></a>lcm <span class="ot">&lt;-</span> <span class="cf">function</span>(N, x0, a, c, m){</span>
+<span id="cb793-2"><a href="generating-pseudo-random-numbers.html#cb793-2" aria-hidden="true" tabindex="-1"></a>   x <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>,N)</span>
+<span id="cb793-3"><a href="generating-pseudo-random-numbers.html#cb793-3" aria-hidden="true" tabindex="-1"></a>   x[<span class="dv">1</span>] <span class="ot">&lt;-</span> x0</span>
+<span id="cb793-4"><a href="generating-pseudo-random-numbers.html#cb793-4" aria-hidden="true" tabindex="-1"></a>   <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>N) x[i] <span class="ot">&lt;-</span> (a<span class="sc">*</span>x[i<span class="dv">-1</span>]<span class="sc">+</span>c)<span class="sc">%%</span>m</span>
+<span id="cb793-5"><a href="generating-pseudo-random-numbers.html#cb793-5" aria-hidden="true" tabindex="-1"></a>   u <span class="ot">&lt;-</span> x<span class="sc">/</span>m</span>
+<span id="cb793-6"><a href="generating-pseudo-random-numbers.html#cb793-6" aria-hidden="true" tabindex="-1"></a>   <span class="fu">return</span>(u)</span>
+<span id="cb793-7"><a href="generating-pseudo-random-numbers.html#cb793-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb794"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb794-1"><a href="generating-pseudo-random-numbers.html#cb794-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lcm</span>(<span class="at">N =</span> <span class="dv">8</span>, <span class="at">x0 =</span> <span class="dv">4</span>, <span class="at">a =</span> <span class="dv">13</span>, <span class="at">c =</span> <span class="dv">0</span>, <span class="at">m =</span> <span class="dv">64</span>)</span></code></pre></div>
 <pre><code>## [1] 0.0625 0.8125 0.5625 0.3125 0.0625 0.8125 0.5625 0.3125</code></pre>
 <p>We can see that this specific choice of parameters is quite bad: it has cycle 4! After 4 numbers the sequence repeats itself and we surely would not like to use this in practice.</p>
 <p>In general you should not worry of these issues, R does things properly for you!</p>

@@ -443,25 +443,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="some-examples-to-start-with" class="section level3" number="2.4.1">
 <h3><span class="header-section-number">2.4.1</span> Some examples to start with</h3>
 <p>We can use R for many things, but there are certain basics that need to be learned. When we enter a code in the R console, this code will provide us with an output. Let’s look at an example: If we enter a number or a word, R will return the same number or word.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="expressions-objects-and-symbols.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="dv">23</span></span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="expressions-objects-and-symbols.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="dv">23</span></span></code></pre></div>
 <pre><code>## [1] 23</code></pre>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="expressions-objects-and-symbols.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;Baby Yoda&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="expressions-objects-and-symbols.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;Baby Yoda&quot;</span></span></code></pre></div>
 <pre><code>## [1] &quot;Baby Yoda&quot;</code></pre>
 <p>Each of these codes we have generated is interpreted by R, sent to our computer in a low level language, and returned in an understandable format for us.</p>
 <p>Each code can be understood as an object (not stored) that R is interpreting for us. If we want to store that objects in our computer RAM to use them later in the same R session we need to create an assignment (we assign something to a symbol). Example:</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="expressions-objects-and-symbols.html#cb30-1" aria-hidden="true" tabindex="-1"></a>my_number <span class="ot">=</span> <span class="dv">23</span></span>
-<span id="cb30-2"><a href="expressions-objects-and-symbols.html#cb30-2" aria-hidden="true" tabindex="-1"></a>my_character <span class="ot">=</span> <span class="st">&quot;Baby Yoda&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="expressions-objects-and-symbols.html#cb34-1" aria-hidden="true" tabindex="-1"></a>my_number <span class="ot">=</span> <span class="dv">23</span></span>
+<span id="cb34-2"><a href="expressions-objects-and-symbols.html#cb34-2" aria-hidden="true" tabindex="-1"></a>my_character <span class="ot">=</span> <span class="st">&quot;Baby Yoda&quot;</span></span></code></pre></div>
 <p>So we can use them later. For example, let’s just print them:</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="expressions-objects-and-symbols.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_number)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="expressions-objects-and-symbols.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_number)</span></code></pre></div>
 <pre><code>## [1] 23</code></pre>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="expressions-objects-and-symbols.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_character)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="expressions-objects-and-symbols.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_character)</span></code></pre></div>
 <pre><code>## [1] &quot;Baby Yoda&quot;</code></pre>
 <p>Notice that to assign something to a symbol we can use <code>=</code> or <code>&lt;-</code>:</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="expressions-objects-and-symbols.html#cb35-1" aria-hidden="true" tabindex="-1"></a>my_number <span class="ot">=</span> <span class="dv">23</span></span>
-<span id="cb35-2"><a href="expressions-objects-and-symbols.html#cb35-2" aria-hidden="true" tabindex="-1"></a>my_character <span class="ot">=</span> <span class="st">&quot;Baby Yoda&quot;</span></span></code></pre></div>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="expressions-objects-and-symbols.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_number)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="expressions-objects-and-symbols.html#cb39-1" aria-hidden="true" tabindex="-1"></a>my_number <span class="ot">=</span> <span class="dv">23</span></span>
+<span id="cb39-2"><a href="expressions-objects-and-symbols.html#cb39-2" aria-hidden="true" tabindex="-1"></a>my_character <span class="ot">=</span> <span class="st">&quot;Baby Yoda&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="expressions-objects-and-symbols.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_number)</span></code></pre></div>
 <pre><code>## [1] 23</code></pre>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="expressions-objects-and-symbols.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_character)</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="expressions-objects-and-symbols.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_character)</span></code></pre></div>
 <pre><code>## [1] &quot;Baby Yoda&quot;</code></pre>
 </div>
 </div>

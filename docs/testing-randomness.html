@@ -429,9 +429,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="testing-uniformity" class="section level3" number="4.4.1">
 <h3><span class="header-section-number">4.4.1</span> Testing Uniformity</h3>
 <p>A simple first method to check if the numbers are uniform is to create an histogram of the data and to see if the histogram is reasonably flat. We already saw how to assess this, but let’s check if <code>runif</code> works well. Simple histograms can be created in <code>R</code> using <code>hist</code> (or if you want you can use <code>ggplot</code>).</p>
-<div class="sourceCode" id="cb840"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb840-1"><a href="testing-randomness.html#cb840-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2021</span>)</span>
-<span id="cb840-2"><a href="testing-randomness.html#cb840-2" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">5000</span>)</span>
-<span id="cb840-3"><a href="testing-randomness.html#cb840-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(u)</span></code></pre></div>
+<div class="sourceCode" id="cb796"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb796-1"><a href="testing-randomness.html#cb796-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2021</span>)</span>
+<span id="cb796-2"><a href="testing-randomness.html#cb796-2" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">5000</span>)</span>
+<span id="cb796-3"><a href="testing-randomness.html#cb796-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(u)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:hist"></span>
 <img src="bookdownproj_files/figure-html/hist-1.png" alt="Histogram of a sequence of uniform numbers" width="50%" />
 <p class="caption">
@@ -451,8 +451,8 @@ H_a: &amp; \;\;u_i \mbox{ is not uniform between zero and one, } i=1,2,\dots\\
 \hat{F}(t)= \frac{\mbox{numbers in the sequence }\leq t}{N}
 \]</span></p>
 <p>Let’s consider the following example.</p>
-<div class="sourceCode" id="cb841"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb841-1"><a href="testing-randomness.html#cb841-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">u=</span> <span class="fu">c</span>(<span class="fl">0.1</span>,<span class="fl">0.2</span>,<span class="fl">0.4</span>,<span class="fl">0.8</span>,<span class="fl">0.9</span>))</span>
-<span id="cb841-2"><a href="testing-randomness.html#cb841-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data,<span class="fu">aes</span>(u)) <span class="sc">+</span> <span class="fu">stat_ecdf</span>(<span class="at">geom =</span> <span class="st">&quot;step&quot;</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;ECDF&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb797"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb797-1"><a href="testing-randomness.html#cb797-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">u=</span> <span class="fu">c</span>(<span class="fl">0.1</span>,<span class="fl">0.2</span>,<span class="fl">0.4</span>,<span class="fl">0.8</span>,<span class="fl">0.9</span>))</span>
+<span id="cb797-2"><a href="testing-randomness.html#cb797-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data,<span class="fu">aes</span>(u)) <span class="sc">+</span> <span class="fu">stat_ecdf</span>(<span class="at">geom =</span> <span class="st">&quot;step&quot;</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;ECDF&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:ecdf"></span>
 <img src="bookdownproj_files/figure-html/ecdf-1.png" alt="Ecdf of a simple sequence of numbers" width="50%" />
 <p class="caption">
@@ -462,7 +462,7 @@ Figure 4.5: Ecdf of a simple sequence of numbers
 <p>For instance, since there are 3 numbers out of 5 in the vector <code>u</code> that are less than 0.7, then <span class="math inline">\(\hat{F}(0.7)=3/5\)</span>.</p>
 <p>The idea behind the Kolmogorov-Smirnov test is to quantify how similar the ecdf computed from a sequence of data is to the one of the uniform distribution which is represented by a straight line (see Figure <a href="properties-of-random-numbers.html#fig:uplot">4.2</a>).</p>
 <p>As an example consider Figure <a href="testing-randomness.html#fig:Kol">4.6</a>. The step functions are computed from two different sequences of numbers between one and zero, whilst the straight line is the cdf of the uniform distribution. By looking at the plots, we would more strongly believe that the sequence in the left plot is uniformly distributed, since the step function is much more closer to the theoretical straight line.</p>
-<div class="sourceCode" id="cb842"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb842-1"><a href="testing-randomness.html#cb842-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2021</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb798"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb798-1"><a href="testing-randomness.html#cb798-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2021</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:Kol"></span>
 <img src="bookdownproj_files/figure-html/Kol-1.png" alt="Comparison between ecdf and cdf of the uniform for two sequences of numbers" width="672" />
 <p class="caption">
@@ -470,14 +470,14 @@ Figure 4.6: Comparison between ecdf and cdf of the uniform for two sequences of 
 </p>
 </div>
 <p>The Kolmogorov-Smirnov test formally embeds this idea of similarity between the ecdf and the cdf of the uniform in a test of hypothesis. The function <code>ks.test</code> implements this test in R. For the two sequences in Figure @ref{fig:Kol} <code>u1</code> (left plot) and <code>u2</code> (right plot), the test can be implemented as following:</p>
-<div class="sourceCode" id="cb843"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb843-1"><a href="testing-randomness.html#cb843-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(u1,<span class="st">&quot;punif&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb799"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb799-1"><a href="testing-randomness.html#cb799-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(u1,<span class="st">&quot;punif&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ##  One-sample Kolmogorov-Smirnov test
 ## 
 ## data:  u1
 ## D = 0.11499, p-value = 0.142
 ## alternative hypothesis: two-sided</code></pre>
-<div class="sourceCode" id="cb845"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb845-1"><a href="testing-randomness.html#cb845-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(u2,<span class="st">&quot;punif&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb801"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb801-1"><a href="testing-randomness.html#cb801-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(u2,<span class="st">&quot;punif&quot;</span>)</span></code></pre></div>
 <pre><code>## 
 ##  One-sample Kolmogorov-Smirnov test
 ## 
@@ -500,9 +500,9 @@ H_a: &amp; \;\;u_1,\dots,u_N \mbox{ are not independent }
 <p>Let’s briefly recall the idea behind correlation. Suppose you have two sequences of numbers <span class="math inline">\(u_1,\dots,u_N\)</span> and <span class="math inline">\(w_1,\dots,w_N\)</span>. To compute the correlation you would look at the pairs <span class="math inline">\((u_1,w_1),(u_2,w_2),\dots, (u_N,w_N)\)</span> and assess how related the numbers within a pair <span class="math inline">\((u_i,w_i)\)</span> are. Correlation, which is a number between -1 and 1, assesses how related the sequences are: the closer the number is to one in absolute value, the stronger the relationship.</p>
 <p>Now however we have just one sequence of numbers <span class="math inline">\(u_1,\dots,u_N\)</span>. So for instance we could look at pairs <span class="math inline">\((u_1,u_2), (u_2,u_3), \dots, (u_{N-1},u_{N})\)</span> which consider two consecutive numbers and compute their correlation. Similarly we could compute the correlation between <span class="math inline">\((u_1,u_{1+k}), (u_2,u_{2+k}),\dots, (u_{N-k},u_N)\)</span> between each number in the sequence and the one k-positions ahead. This is what we call <em>autocorrelation of lag k</em>.</p>
 <p>If autocorrelations of various lags are close to zero, this gives an indication that the data is independent. If on the other hand, the autocorrelation at some lags is large, then there is an indication of dependence in the sequence of random numbers. Autocorrelations are computed and plotted in <code>R</code> using <code>acf</code> and reported in Figure <a href="testing-randomness.html#fig:acf">4.7</a>.</p>
-<div class="sourceCode" id="cb847"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb847-1"><a href="testing-randomness.html#cb847-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2021</span>)</span>
-<span id="cb847-2"><a href="testing-randomness.html#cb847-2" aria-hidden="true" tabindex="-1"></a>u1 <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">200</span>)</span>
-<span id="cb847-3"><a href="testing-randomness.html#cb847-3" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(u1)</span></code></pre></div>
+<div class="sourceCode" id="cb803"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb803-1"><a href="testing-randomness.html#cb803-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2021</span>)</span>
+<span id="cb803-2"><a href="testing-randomness.html#cb803-2" aria-hidden="true" tabindex="-1"></a>u1 <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">200</span>)</span>
+<span id="cb803-3"><a href="testing-randomness.html#cb803-3" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(u1)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:acf"></span>
 <img src="bookdownproj_files/figure-html/acf-1.png" alt="Autocorrelations for a sequence of random uniform numbers" width="50%" />
 <p class="caption">
@@ -511,11 +511,11 @@ Figure 4.7: Autocorrelations for a sequence of random uniform numbers
 </div>
 <p>The bars in Figure <a href="testing-randomness.html#fig:acf">4.7</a> are the autocorrelations at various lags, whilst the dashed blue lines are confidence bands: if a bar is within the bands it means that we cannot reject the hypothesis that the autocorrelation of the associated lag is equal to zero. Notice that the first bar is lag 0: it computes the correlation for the sample <span class="math inline">\((u_1,u_1),(u_2,u_2),\dots,(u_N,u_N)\)</span> and therefore it is always equal to one. You should never worry about this bar. Since all the bars are within the confidence bands, we believe that all autocorrelations are not different from zero and consequently that the data is independent (it was indeed generated using `runif``).</p>
 <p>Figure <a href="testing-randomness.html#fig:acf2">4.8</a> reports the autocorrelations of a sequence of numbers which is not independent. Although the histogram shows that the data is uniformly distributed, we would not believe that the sequence is of independent numbers since autocorrelations are very large and outside the bands.</p>
-<div class="sourceCode" id="cb848"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb848-1"><a href="testing-randomness.html#cb848-1" aria-hidden="true" tabindex="-1"></a>u2 <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,<span class="at">each =</span> <span class="dv">4</span>,<span class="at">times =</span> <span class="dv">10</span>)<span class="sc">/</span><span class="dv">10</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">400</span>,<span class="dv">0</span>,<span class="fl">0.02</span>) </span>
-<span id="cb848-2"><a href="testing-randomness.html#cb848-2" aria-hidden="true" tabindex="-1"></a>u2 <span class="ot">&lt;-</span> (u2 <span class="sc">-</span> <span class="fu">min</span>(u2))<span class="sc">/</span>(<span class="fu">max</span>(u2)<span class="sc">-</span><span class="fu">min</span>(u2))</span>
-<span id="cb848-3"><a href="testing-randomness.html#cb848-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb848-4"><a href="testing-randomness.html#cb848-4" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(u2)</span>
-<span id="cb848-5"><a href="testing-randomness.html#cb848-5" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(u2)</span></code></pre></div>
+<div class="sourceCode" id="cb804"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb804-1"><a href="testing-randomness.html#cb804-1" aria-hidden="true" tabindex="-1"></a>u2 <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,<span class="at">each =</span> <span class="dv">4</span>,<span class="at">times =</span> <span class="dv">10</span>)<span class="sc">/</span><span class="dv">10</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">400</span>,<span class="dv">0</span>,<span class="fl">0.02</span>) </span>
+<span id="cb804-2"><a href="testing-randomness.html#cb804-2" aria-hidden="true" tabindex="-1"></a>u2 <span class="ot">&lt;-</span> (u2 <span class="sc">-</span> <span class="fu">min</span>(u2))<span class="sc">/</span>(<span class="fu">max</span>(u2)<span class="sc">-</span><span class="fu">min</span>(u2))</span>
+<span id="cb804-3"><a href="testing-randomness.html#cb804-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb804-4"><a href="testing-randomness.html#cb804-4" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(u2)</span>
+<span id="cb804-5"><a href="testing-randomness.html#cb804-5" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(u2)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:acf2"></span>
 <img src="bookdownproj_files/figure-html/acf2-1.png" alt="Histogram and autocorrelations of a sequence of uniform numbers which are not independent" width="672" />
 <p class="caption">
@@ -523,13 +523,13 @@ Figure 4.8: Histogram and autocorrelations of a sequence of uniform numbers whic
 </p>
 </div>
 <p>A test of hypothesis for independence can be created by checking if any of the autocorrelations up to a specific lag are different from zero. This is implemented in the function <code>Box.test</code> in R. The first input is the sequence of numbers to consider, the second is the largest lag we want to consider. Let’s compute it for the two sequences <code>u1</code> and <code>u2</code> above.</p>
-<div class="sourceCode" id="cb849"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb849-1"><a href="testing-randomness.html#cb849-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Box.test</span>(u1, <span class="at">lag =</span> <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb805"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb805-1"><a href="testing-randomness.html#cb805-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Box.test</span>(u1, <span class="at">lag =</span> <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Box-Pierce test
 ## 
 ## data:  u1
 ## X-squared = 4.8518, df = 5, p-value = 0.4342</code></pre>
-<div class="sourceCode" id="cb851"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb851-1"><a href="testing-randomness.html#cb851-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Box.test</span>(u2, <span class="at">lag =</span> <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb807"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb807-1"><a href="testing-randomness.html#cb807-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Box.test</span>(u2, <span class="at">lag =</span> <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Box-Pierce test
 ## 

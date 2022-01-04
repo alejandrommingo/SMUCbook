@@ -440,7 +440,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Each of these functions takes as first input the number of observations that we want to simulate. They then have additional inputs that can be given, which depend on the random variable chosen and are the same that we saw in the past.</p>
 <p>So for instance</p>
-<div class="sourceCode" id="cb853"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb853-1"><a href="random-variate-generation.html#cb853-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb809"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb809-1"><a href="random-variate-generation.html#cb809-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p>generates ten observations from a Normal distribution with mean 1 and standard deviation 2.</p>
 </div>
 <div id="the-inverse-transform-method" class="section level3" number="4.5.2">
@@ -489,13 +489,13 @@ So <span class="math inline">\(F^{-1}(u)=-\log(1-u)/\lambda\)</span>.</p></li>
 <li><p>Last, we apply the inverse function to the randomly simulated observations.</p></li>
 </ol>
 <p>Let’s give the R code.</p>
-<div class="sourceCode" id="cb854"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb854-1"><a href="random-variate-generation.html#cb854-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2021</span>)</span>
-<span id="cb854-2"><a href="random-variate-generation.html#cb854-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Define inverse function</span></span>
-<span id="cb854-3"><a href="random-variate-generation.html#cb854-3" aria-hidden="true" tabindex="-1"></a>invF <span class="ot">&lt;-</span> <span class="cf">function</span>(u,lambda) <span class="sc">-</span><span class="fu">log</span>(<span class="dv">1</span><span class="sc">-</span>u)<span class="sc">/</span>lambda</span>
-<span id="cb854-4"><a href="random-variate-generation.html#cb854-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate 5 uniform observations</span></span>
-<span id="cb854-5"><a href="random-variate-generation.html#cb854-5" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">5</span>)</span>
-<span id="cb854-6"><a href="random-variate-generation.html#cb854-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute the inverse </span></span>
-<span id="cb854-7"><a href="random-variate-generation.html#cb854-7" aria-hidden="true" tabindex="-1"></a><span class="fu">invF</span>(u, <span class="at">lambda =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb810"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb810-1"><a href="random-variate-generation.html#cb810-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2021</span>)</span>
+<span id="cb810-2"><a href="random-variate-generation.html#cb810-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Define inverse function</span></span>
+<span id="cb810-3"><a href="random-variate-generation.html#cb810-3" aria-hidden="true" tabindex="-1"></a>invF <span class="ot">&lt;-</span> <span class="cf">function</span>(u,lambda) <span class="sc">-</span><span class="fu">log</span>(<span class="dv">1</span><span class="sc">-</span>u)<span class="sc">/</span>lambda</span>
+<span id="cb810-4"><a href="random-variate-generation.html#cb810-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate 5 uniform observations</span></span>
+<span id="cb810-5"><a href="random-variate-generation.html#cb810-5" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">5</span>)</span>
+<span id="cb810-6"><a href="random-variate-generation.html#cb810-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute the inverse </span></span>
+<span id="cb810-7"><a href="random-variate-generation.html#cb810-7" aria-hidden="true" tabindex="-1"></a><span class="fu">invF</span>(u, <span class="at">lambda =</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 0.3000720 0.7657289 0.6183896 0.2404265 0.5057456</code></pre>
 <p>First we defined the inverse function of an Exponential with parameter <code>lambda</code> in <code>invF</code>. Then we simulated five observations from a uniform. Last we applied the function <code>invF</code> for a parameter <code>lambda</code> equal to two. The output are therefore five observations from an Exponential random variable with parameter 2.</p>
 </div>
@@ -515,14 +515,14 @@ So given a sequence <span class="math inline">\(u_1,\dots,u_N\)</span> of random
 x_1 = a + (b-a)u_1,\dots, x_N=a+(b-a)u_N
 \]</span>
 In R:</p>
-<div class="sourceCode" id="cb856"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb856-1"><a href="random-variate-generation.html#cb856-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2021</span>)</span>
-<span id="cb856-2"><a href="random-variate-generation.html#cb856-2" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb856-3"><a href="random-variate-generation.html#cb856-3" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">6</span></span>
-<span id="cb856-4"><a href="random-variate-generation.html#cb856-4" aria-hidden="true" tabindex="-1"></a>a <span class="sc">+</span> (b<span class="sc">-</span>a)<span class="sc">*</span><span class="fu">runif</span>(<span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb812"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb812-1"><a href="random-variate-generation.html#cb812-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2021</span>)</span>
+<span id="cb812-2"><a href="random-variate-generation.html#cb812-2" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb812-3"><a href="random-variate-generation.html#cb812-3" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">6</span></span>
+<span id="cb812-4"><a href="random-variate-generation.html#cb812-4" aria-hidden="true" tabindex="-1"></a>a <span class="sc">+</span> (b<span class="sc">-</span>a)<span class="sc">*</span><span class="fu">runif</span>(<span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## [1] 3.805069 5.135119 4.838729 3.526977 4.545295</code></pre>
 <p>The code simulates five observations from a Uniform between two and six. This can be equally achieved by simply using:</p>
-<div class="sourceCode" id="cb858"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb858-1"><a href="random-variate-generation.html#cb858-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2021</span>)</span>
-<span id="cb858-2"><a href="random-variate-generation.html#cb858-2" aria-hidden="true" tabindex="-1"></a><span class="fu">runif</span>(<span class="dv">5</span>, <span class="at">min =</span> <span class="dv">2</span>, <span class="at">max =</span> <span class="dv">6</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb814"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb814-1"><a href="random-variate-generation.html#cb814-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2021</span>)</span>
+<span id="cb814-2"><a href="random-variate-generation.html#cb814-2" aria-hidden="true" tabindex="-1"></a><span class="fu">runif</span>(<span class="dv">5</span>, <span class="at">min =</span> <span class="dv">2</span>, <span class="at">max =</span> <span class="dv">6</span>)</span></code></pre></div>
 <pre><code>## [1] 3.805069 5.135119 4.838729 3.526977 4.545295</code></pre>
 <p>Notice that since we fixed the seed, the two methods return exactly the same sequence of numbers.</p>
 </div>
@@ -535,11 +535,11 @@ In R:</p>
 <li><p>if <span class="math inline">\(u&lt; \theta\)</span> set <span class="math inline">\(x=0\)</span>, otherwise <span class="math inline">\(x=1\)</span>.</p></li>
 </ol>
 <p>We will not prove that this actually works, but it intuitively does. Let’s code it in R.</p>
-<div class="sourceCode" id="cb860"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb860-1"><a href="random-variate-generation.html#cb860-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2021</span>)</span>
-<span id="cb860-2"><a href="random-variate-generation.html#cb860-2" aria-hidden="true" tabindex="-1"></a>theta <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
-<span id="cb860-3"><a href="random-variate-generation.html#cb860-3" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">5</span>)</span>
-<span id="cb860-4"><a href="random-variate-generation.html#cb860-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(u <span class="sc">&lt;</span> theta, <span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb860-5"><a href="random-variate-generation.html#cb860-5" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb816"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb816-1"><a href="random-variate-generation.html#cb816-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2021</span>)</span>
+<span id="cb816-2"><a href="random-variate-generation.html#cb816-2" aria-hidden="true" tabindex="-1"></a>theta <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb816-3"><a href="random-variate-generation.html#cb816-3" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">5</span>)</span>
+<span id="cb816-4"><a href="random-variate-generation.html#cb816-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(u <span class="sc">&lt;</span> theta, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb816-5"><a href="random-variate-generation.html#cb816-5" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>## [1] 0 1 1 0 1</code></pre>
 <p>So here we simulated five observations from a Bernoulli with parameter 0.5: the toss of a fair coin. Three times the coin showed head, and twice tails.</p>
 <p>From this comment, it is easy to see how to simulate one observation from a Binomial: by simply summing the randomly generated observations from Bernoullis. So if we were to sum the five numbers above, we would get one random observations from a Binomial with parameter <span class="math inline">\(n=5\)</span> and <span class="math inline">\(\theta=0.5\)</span>.</p>

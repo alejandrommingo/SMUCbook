@@ -428,36 +428,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="if-statements" class="section level3" number="2.9.1">
 <h3><span class="header-section-number">2.9.1</span> <code>if</code> statements</h3>
 <p>The basic form of an <code>if</code> statement in R is as follows:</p>
-<div class="sourceCode" id="cb739"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb739-1"><a href="loops-and-conditions.html#cb739-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(condition){true_action}</span></code></pre></div>
+<div class="sourceCode" id="cb695"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb695-1"><a href="loops-and-conditions.html#cb695-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(condition){true_action}</span></code></pre></div>
 <p>Condition must return a Boolean, either <code>TRUE</code> or <code>FALSE</code>. If <code>TRUE</code> then the code follows the code within the curly brackets and performs the <code>true_action</code>. If <code>condition</code> is <code>FALSE</code> the code does nothing.</p>
 <p>It is more customary to also give a chunk of code for the case <code>condition</code> is <code>FALSE</code>. This can be achieved with <code>else</code>.</p>
-<div class="sourceCode" id="cb740"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb740-1"><a href="loops-and-conditions.html#cb740-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(condition){true_action} <span class="cf">else</span> {false_action}</span></code></pre></div>
+<div class="sourceCode" id="cb696"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb696-1"><a href="loops-and-conditions.html#cb696-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(condition){true_action} <span class="cf">else</span> {false_action}</span></code></pre></div>
 <p>Let’s see an example.</p>
-<div class="sourceCode" id="cb741"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb741-1"><a href="loops-and-conditions.html#cb741-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb741-2"><a href="loops-and-conditions.html#cb741-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (a <span class="sc">&lt;</span> <span class="dv">2</span>){<span class="st">&quot;hello&quot;</span>} <span class="cf">else</span> {<span class="st">&quot;goodbye&quot;</span>}</span></code></pre></div>
+<div class="sourceCode" id="cb697"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb697-1"><a href="loops-and-conditions.html#cb697-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb697-2"><a href="loops-and-conditions.html#cb697-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (a <span class="sc">&lt;</span> <span class="dv">2</span>){<span class="st">&quot;hello&quot;</span>} <span class="cf">else</span> {<span class="st">&quot;goodbye&quot;</span>}</span></code></pre></div>
 <pre><code>## [1] &quot;goodbye&quot;</code></pre>
 <p>The variable <code>a</code> is assigned the number 5. Then we impose a condition: if <code>a</code> is less than 2, we print the text <code>"hello"</code>, otherwise <code>"goodbye"</code> is printed. Since <code>a &lt;- 5</code> the code prints correctly <code>"goodbye"</code>. On the other hand if <code>a</code> were assigned <code>1</code>.</p>
-<div class="sourceCode" id="cb743"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb743-1"><a href="loops-and-conditions.html#cb743-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb743-2"><a href="loops-and-conditions.html#cb743-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (a <span class="sc">&lt;</span> <span class="dv">2</span>){<span class="st">&quot;hello&quot;</span>} <span class="cf">else</span> {<span class="st">&quot;goodbye&quot;</span>}</span></code></pre></div>
+<div class="sourceCode" id="cb699"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb699-1"><a href="loops-and-conditions.html#cb699-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb699-2"><a href="loops-and-conditions.html#cb699-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (a <span class="sc">&lt;</span> <span class="dv">2</span>){<span class="st">&quot;hello&quot;</span>} <span class="cf">else</span> {<span class="st">&quot;goodbye&quot;</span>}</span></code></pre></div>
 <pre><code>## [1] &quot;hello&quot;</code></pre>
 </div>
 <div id="ifelse" class="section level3" number="2.9.2">
 <h3><span class="header-section-number">2.9.2</span> <code>ifelse</code></h3>
 <p><code>if</code> works when checking a single element and the condition returns either <code>TRUE</code> or <code>FALSE</code>. The command <code>ifelse</code> can be used to quickly check a condition over all elements of a vector. Consider the following example.</p>
-<div class="sourceCode" id="cb745"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb745-1"><a href="loops-and-conditions.html#cb745-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>)</span>
-<span id="cb745-2"><a href="loops-and-conditions.html#cb745-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ifelse</span>(vec <span class="sc">&gt;</span> <span class="dv">5</span>, <span class="st">&quot;bigger&quot;</span>, <span class="st">&quot;smaller&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb701"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb701-1"><a href="loops-and-conditions.html#cb701-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>)</span>
+<span id="cb701-2"><a href="loops-and-conditions.html#cb701-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ifelse</span>(vec <span class="sc">&gt;</span> <span class="dv">5</span>, <span class="st">&quot;bigger&quot;</span>, <span class="st">&quot;smaller&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;smaller&quot; &quot;smaller&quot; &quot;smaller&quot; &quot;bigger&quot;  &quot;bigger&quot;</code></pre>
 <p><code>vec</code> contains the values 1, 3, 5, 7, 9 and the <code>condition</code> is if an elemenent of <code>vec</code> is larger than 5. If <code>TRUE</code> the code returns the string <code>bigger</code> and otherwise returns <code>smaller</code>. The code above returns therefore a vector of the same length of <code>vec</code> including either the string <code>bigger</code> or the string <code>smaller</code>.</p>
 </div>
 <div id="loops" class="section level3" number="2.9.3">
 <h3><span class="header-section-number">2.9.3</span> Loops</h3>
 <p><code>for</code> loops are used to iterate over items in a vector. They have the following skeleton:</p>
-<div class="sourceCode" id="cb747"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb747-1"><a href="loops-and-conditions.html#cb747-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(item <span class="cf">in</span> vector) {perform_action}</span></code></pre></div>
+<div class="sourceCode" id="cb703"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb703-1"><a href="loops-and-conditions.html#cb703-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(item <span class="cf">in</span> vector) {perform_action}</span></code></pre></div>
 <p>For each <code>item</code> in <code>vector</code>, <code>perform_action</code> is performed once and the value of <code>item</code> is updated each time.</p>
 <p>Here is an example.</p>
-<div class="sourceCode" id="cb748"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb748-1"><a href="loops-and-conditions.html#cb748-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)){</span>
-<span id="cb748-2"><a href="loops-and-conditions.html#cb748-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(i)</span>
-<span id="cb748-3"><a href="loops-and-conditions.html#cb748-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb704"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb704-1"><a href="loops-and-conditions.html#cb704-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)){</span>
+<span id="cb704-2"><a href="loops-and-conditions.html#cb704-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(i)</span>
+<span id="cb704-3"><a href="loops-and-conditions.html#cb704-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <pre><code>## [1] 1
 ## [1] 2
 ## [1] 3</code></pre>

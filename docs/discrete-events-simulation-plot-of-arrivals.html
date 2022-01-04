@@ -426,8 +426,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 25</span> Discrete Events Simulation: Plot of arrivals</h1>
 <p>Next we can have a look at the evolution of the arrivals’ flow time during the simulation. In the plot below, each individual line represents a replication. A smooth line is drawn over them. All arrivals that didn’t finish their entire trajectory are excluded from the plot.</p>
 <p>Similarly one can have a look at the evolution of the activity times with <code>metric = "activity_time"</code> and waiting times with <code>metric = "waiting_time"</code>.</p>
-<div class="sourceCode" id="cb976"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb976-1"><a href="discrete-events-simulation-plot-of-arrivals.html#cb976-1" aria-hidden="true" tabindex="-1"></a>arrivals <span class="ot">&lt;-</span> <span class="fu">get_mon_arrivals</span>(envs)</span>
-<span id="cb976-2"><a href="discrete-events-simulation-plot-of-arrivals.html#cb976-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(arrivals, <span class="at">metric =</span> <span class="st">&quot;waiting_time&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb932"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb932-1"><a href="discrete-events-simulation-plot-of-arrivals.html#cb932-1" aria-hidden="true" tabindex="-1"></a>arrivals <span class="ot">&lt;-</span> <span class="fu">get_mon_arrivals</span>(envs)</span>
+<span id="cb932-2"><a href="discrete-events-simulation-plot-of-arrivals.html#cb932-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(arrivals, <span class="at">metric =</span> <span class="st">&quot;waiting_time&quot;</span>)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using method = &#39;gam&#39; and formula &#39;y ~ s(x, bs = &quot;cs&quot;)&#39;</code></pre>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-464-1.png" width="672" /></p>
 </div>

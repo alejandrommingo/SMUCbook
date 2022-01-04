@@ -427,10 +427,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The trajectory above illustrates the two most basic activities available: displaying a message (<code>log_()</code>) and spending some time in the system (<code>timeout()</code>).</p>
 <p>An arrival attached to this trajectory will execute the activities in the given order, i.e., it will display “Entering the trajectory,” then it will spend 10 units of (simulated) time, and finally it will display “Leaving the trajectory.”</p>
 <p>The example uses fixed parameters: a string and a numeric value respectively. However, at least the main parameter for all activities can also be what we will call a dynamical parameter, i.e., a function.</p>
-<div class="sourceCode" id="cb957"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb957-1"><a href="the-simmer-api.html#cb957-1" aria-hidden="true" tabindex="-1"></a>traj1 <span class="ot">&lt;-</span> <span class="fu">trajectory</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb957-2"><a href="the-simmer-api.html#cb957-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log_</span>(<span class="cf">function</span>() <span class="st">&quot;Entering the trajectory&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb957-3"><a href="the-simmer-api.html#cb957-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">timeout</span>(<span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb957-4"><a href="the-simmer-api.html#cb957-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log_</span>(<span class="cf">function</span>() <span class="st">&quot;Leaving the trajectory&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb913"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb913-1"><a href="the-simmer-api.html#cb913-1" aria-hidden="true" tabindex="-1"></a>traj1 <span class="ot">&lt;-</span> <span class="fu">trajectory</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb913-2"><a href="the-simmer-api.html#cb913-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log_</span>(<span class="cf">function</span>() <span class="st">&quot;Entering the trajectory&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb913-3"><a href="the-simmer-api.html#cb913-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">timeout</span>(<span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb913-4"><a href="the-simmer-api.html#cb913-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log_</span>(<span class="cf">function</span>() <span class="st">&quot;Leaving the trajectory&quot;</span>)</span></code></pre></div>
 </div>
 <!-- </div> -->
             </section>
