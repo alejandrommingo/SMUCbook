@@ -117,7 +117,7 @@
 
 \title{Simulation and Modeling to Understand the Change}
 \author{Alejandro Martínez-Mingo \& Manuele Leonelli}
-\date{2022-01-04}
+\date{2022-01-07}
 
 \begin{document}
 \maketitle
@@ -130,7 +130,7 @@
 \chapter*{Preface}\label{preface}}
 \addcontentsline{toc}{chapter}{Preface}
 
-These are lecture notes for the module \emph{Simulation and Modelling to Understand Change} given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data \& Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed.
+These are lecture notes for the module \emph{Simulation and Modelling to Understand Change} given in the School of Human Sciences and Technology at IE University, Madrid, Spain. Knowledge of basic elements of R programming as well as probability and statistics is assumed.
 
 \hypertarget{intro}{%
 \chapter{Introduction}\label{intro}}
@@ -294,7 +294,7 @@ Figure 1.1 further illustrates that for specific period of times the system does
 \caption{Example of a discrete dynamic simulation}\label{fig:fig-cont}
 \end{figure}
 
-In later chapters we will focus on discrete simulations, which are usually called \emph{discrete-event simulation}. Continuous simulations will not be discussed in these notes.
+In later chapters we will focus on discrete simulations, which are usually called \emph{discrete-event simulation}.
 
 \hypertarget{elements-of-a-simulation-model}{%
 \section{Elements of a simulation model}\label{elements-of-a-simulation-model}}
@@ -743,7 +743,7 @@ The \texttt{history()} command displays the history of commands entered during t
 ##     writeLines(rawhist[inds], file2)
 ##     file.show(file2, title = "R History", delete.file = TRUE)
 ## }
-## <bytecode: 0x55afa81179b8>
+## <bytecode: 0x55eb7e418520>
 ## <environment: namespace:utils>
 \end{verbatim}
 
@@ -1001,11 +1001,9 @@ setwd("C://User/Desktop/My_Working_Directory")
 \hypertarget{exercise-set-up-your-working-directory}{%
 \subsection{Exercise: Set up your Working Directory}\label{exercise-set-up-your-working-directory}}
 
-You have 10 minutes to start getting familiar with Rstudio and to set your working directory in a folder that is suitable for the rest of the course.
+Try to start getting familiar with Rstudio and to set your working directory in a folder that is suitable for the rest of the course.
 
 Remember, within this folder you can create sub-folders for each session in which you can include all the necessary material.
-
-To carry out this exercise you have a designated room with the rest of your work group. Try to solve the doubts together, and in case you don't find a solution you can call me to assist you during the exercise time.
 
 \hypertarget{expressions-objects-and-symbols}{%
 \section{Expressions, Objects and Symbols}\label{expressions-objects-and-symbols}}
@@ -2368,7 +2366,7 @@ To see how R handles dates and times, have a look at Sys.time():
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "2022-01-04 13:44:38 CET"
+## [1] "2022-01-07 11:46:33 CET"
 \end{verbatim}
 
 This description of date and time is strictly hierarchical from left to right: the longest time scale (years) comes first, then month, then day, separated by hyphens, then there is a blank space, followed by the time, with hours first (using the 24-hour clock), then minutes, then seconds, separated by colons. Finally, there is a character string explaining the time zone (CET stands for Central Europe Time)
@@ -2384,7 +2382,7 @@ The baseline for expressing today's date and time in seconds is 1 January 1970:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 1641300278
+## [1] 1641552393
 \end{verbatim}
 
 This is fine for plotting time series graphs, but it is not much good for computing monthly means (e.g.~is the mean for June significantly different from the July mean?) or daily means (e.g.~is the Monday mean significantly different from the Friday mean?).
@@ -2415,9 +2413,9 @@ the effort. Naturally, you can easily convert to one representation to the other
 
 \begin{verbatim}
 ##                sec                min               hour               mday 
-## "38.1203722953796"               "44"               "13"                "4" 
+## "33.2872455120087"               "46"               "11"                "7" 
 ##                mon               year               wday               yday 
-##                "0"              "122"                "2"                "3" 
+##                "0"              "122"                "5"                "6" 
 ##              isdst               zone             gmtoff 
 ##                "0"              "CET"             "3600"
 \end{verbatim}
@@ -5681,165 +5679,68 @@ Finally, the most useful overview of the contents of a list is obtained with str
 ##  $ fourth: cplx [1:2] 3.2-4.5i 12.8+2.2i
 \end{verbatim}
 
-\hypertarget{vectors-1}{%
-\subsection{Vectors}\label{vectors-1}}
+\hypertarget{data-frames}{%
+\subsection{Data Frames}\label{data-frames}}
 
-In all previous examples the variables included one element only. More generally we can define sequences of elements or so-called \emph{vectors}. They can be defined with the command \texttt{c}, which stands for combine.
+Data frame is a two dimensional data structure in R. It is a special case of a list which has each component of equal length.
+
+\hypertarget{check-if-a-variable-is-a-data-frame-or-not}{%
+\subsubsection{Check if a variable is a data frame or not}\label{check-if-a-variable-is-a-data-frame-or-not}}
+
+We can check if a variable is a data frame or not using the \texttt{class()} function.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{vec }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{7}\NormalTok{)}
-\NormalTok{vec}
+\FunctionTok{typeof}\NormalTok{(x)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 1 3 5 7
+## [1] "list"
 \end{verbatim}
-
-So \texttt{vec} includes the sequence of numbers 1, 3, 5, 7. Notice that a vector can only include one data type. Consider the following:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{vec }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\StringTok{"hello"}\NormalTok{, }\ConstantTok{TRUE}\NormalTok{)}
-\NormalTok{vec}
+\FunctionTok{class}\NormalTok{(x)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "1"     "hello" "TRUE"
+## [1] "data.frame"
 \end{verbatim}
 
-We created a variable \texttt{vec} where the first entry is a number, then a character string, then a Boolean. When we print \texttt{vec}, we get that its elements are \texttt{"1"}, \texttt{"hello"} and \texttt{"TRUE"}: it has transformed the number \texttt{1} into the string \texttt{"1"} and the Boolean \texttt{TRUE} into \texttt{"TRUE"}.
+In this example, x can be considered as a list of 3 components with each component having a two element vector.
 
-\hypertarget{matrices-1}{%
-\subsection{Matrices}\label{matrices-1}}
+\hypertarget{functions-of-data-frame}{%
+\subsubsection{Functions of data frame}\label{functions-of-data-frame}}
 
-Matrices are tables of elements that are organized in rows and columns. You can think of them as an arrangement of vectors into a table. Matrices must have the same data type in all its entries, as for vectors. Matrices can be constructed in multiple ways. One way is by stacking vectors into a matrix row-by-row with the command \texttt{rbind}. Consider the following example.
+Here you have some useful functions we can use to have a better understanding about the content we have inside our data frame:
+
+\begin{itemize}
+\tightlist
+\item
+  We can check the names of the variables using the \texttt{names()} function
+\end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{row1 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{)}
-\NormalTok{row2 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{)}
-\NormalTok{row3 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{7}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{9}\NormalTok{)}
-\NormalTok{mat }\OtherTok{\textless{}{-}} \FunctionTok{rbind}\NormalTok{(row1,row2,row3)}
-\NormalTok{mat}
+\FunctionTok{names}\NormalTok{(x)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##      [,1] [,2] [,3]
-## row1    1    2    3
-## row2    4    5    6
-## row3    7    8    9
+## [1] "SN"     "Age"    "Gender"
 \end{verbatim}
 
-So first we created vectors \texttt{row1\ =\ (1,2,3)}, \texttt{row2\ =\ (4,5,6)} and \texttt{row3\ =\ (7,8,9)} and then organizing them together into the matrix \texttt{mat}.
-
-The following code follows the same procedure but now organizes vectors by columns instead using the command \texttt{cbind}.
+\begin{itemize}
+\tightlist
+\item
+  We can know the number of columns and rows we have in our data frame (the \texttt{length()} function will return also the number of columns, it is taking the number of elements we are storing in the underlying list, which are the column vectors):
+\end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{col1 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{)}
-\NormalTok{col2 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{)}
-\NormalTok{col3 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{7}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{9}\NormalTok{)}
-\NormalTok{mat }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(col1,col2,col3)}
-\NormalTok{mat}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##      col1 col2 col3
-## [1,]    1    4    7
-## [2,]    2    5    8
-## [3,]    3    6    9
-\end{verbatim}
-
-Last, there is also a command called \texttt{matrix} to create a matrix. It takes a vector, defined using the command \texttt{c} and stores its entries into a matrix of \texttt{nrow} rows and \texttt{ncol} columns. Consider the following example.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{vec }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{7}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{9}\NormalTok{)}
-\NormalTok{mat }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(vec, }\AttributeTok{nrow =} \DecValTok{3}\NormalTok{, }\AttributeTok{ncol =} \DecValTok{3}\NormalTok{)}
-\NormalTok{mat}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##      [,1] [,2] [,3]
-## [1,]    1    4    7
-## [2,]    2    5    8
-## [3,]    3    6    9
-\end{verbatim}
-
-So first we created a vector \texttt{vec} with numbers from 1 to 9 and then stored them in a matrix with 3 rows and 3 columns. Number are stored by column: the first element of \texttt{vec} is in entry (1,1), the second element of \texttt{vec} is in entry (2,1), and so on.
-
-\hypertarget{dataframes}{%
-\subsection{Dataframes}\label{dataframes}}
-
-Dataframes are very similar as matrices, they are tables organized in rows and columns. However, different to matrices they can have columns with different data types. They can be created with the command \texttt{data.frame}.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{X1 =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{), }\AttributeTok{X2 =} \FunctionTok{c}\NormalTok{(}\ConstantTok{TRUE}\NormalTok{,}\ConstantTok{FALSE}\NormalTok{,}\ConstantTok{FALSE}\NormalTok{),}
-                   \AttributeTok{X3 =} \FunctionTok{c}\NormalTok{(}\StringTok{"male"}\NormalTok{,}\StringTok{"male"}\NormalTok{,}\StringTok{"female"}\NormalTok{))}
-\NormalTok{data}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##   X1    X2     X3
-## 1  1  TRUE   male
-## 2  2 FALSE   male
-## 3  3 FALSE female
-\end{verbatim}
-
-The dataframe \texttt{data} includes three columns: the first column \texttt{X1} of numbers, the second column \texttt{X2} of Boolean and the third column \texttt{X3} of characters. Dataframes are the objects that are most commonly used in real world data analysis.
-
-\hypertarget{null-and-na}{%
-\subsection{\texorpdfstring{\texttt{NULL} and \texttt{NA}}{NULL and NA}}\label{null-and-na}}
-
-The expression \texttt{NA} is used in R to denote a missing value. Consider the following example.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{vec }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\ConstantTok{NA}\NormalTok{, }\DecValTok{5}\NormalTok{)}
-\NormalTok{vec}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1]  3 NA  5
-\end{verbatim}
-
-Although the second element of \texttt{vec} is the expression \texttt{NA}, R recognizes that it is used for missing value and therefore the elements 3 and 5 are still considered numbers: indeed they are not printed as \texttt{"3"} and \texttt{"5"}.
-
-\texttt{NULL} is an additional datatype. This can have various uses. For instance, it is associated to a vector with no entries.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{c}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## NULL
-\end{verbatim}
-
-\hypertarget{accessing-and-manipulating-variables}{%
-\section{Accessing and manipulating variables}\label{accessing-and-manipulating-variables}}
-
-Now that we have described the main objects we will work with in R, we can discuss how to access specific information.
-
-\hypertarget{accessing-a-single-element}{%
-\subsection{Accessing a single element}\label{accessing-a-single-element}}
-
-Given a vector \texttt{vec} we can access its i-th entry with \texttt{vec{[}i{]}}.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{vec }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{5}\NormalTok{)}
-\NormalTok{vec[}\DecValTok{2}\NormalTok{]}
+\FunctionTok{ncol}\NormalTok{(x)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -5847,484 +5748,891 @@ Given a vector \texttt{vec} we can access its i-th entry with \texttt{vec{[}i{]}
 ## [1] 3
 \end{verbatim}
 
-For a matrix or a dataframe we need to specify the associated row and column. If we have a matrix \texttt{mat} we can access the element in entry (i,j) with \texttt{mat{[}i,j{]}}.
-
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{mat }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{7}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{9}\NormalTok{), }\AttributeTok{ncol=}\DecValTok{3}\NormalTok{, }\AttributeTok{nrow =}\DecValTok{3}\NormalTok{)}
-\NormalTok{mat[}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{]}
+\FunctionTok{nrow}\NormalTok{(x)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 7
-\end{verbatim}
-
-\hypertarget{acessing-multiple-entries}{%
-\subsection{Acessing multiple entries}\label{acessing-multiple-entries}}
-
-To access multiple entries we can on the other hand define a vector of indexes of the elements we want to access. Consider the following examples:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{vec }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{5}\NormalTok{)}
-\NormalTok{vec[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)]}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 1 3
-\end{verbatim}
-
-The above code accesses the first two entries of the vector \texttt{vec}. To do this we had to define a vector using \texttt{c(1,2)} stating the entries we wanted to look at. For matrices consider:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{mat }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{7}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{9}\NormalTok{), }\AttributeTok{ncol=}\DecValTok{3}\NormalTok{, }\AttributeTok{nrow =}\DecValTok{3}\NormalTok{)}
-\NormalTok{mat[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{),}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{)]}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##      [,1] [,2]
-## [1,]    4    7
-## [2,]    5    8
-\end{verbatim}
-
-The syntax is very similar as before. We defined to index vectors, one for the rows and one for columns. The two statements \texttt{c(1,2)} and \texttt{c(2,3)} are separated by a comma to denote that the first selects the first and second row, whilst the second selects the second and third column.
-
-If one wants to access full rows or full columns, the argument associated to rows or columns is left blank. Consider the following examples.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{mat }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{7}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{9}\NormalTok{), }\AttributeTok{ncol=}\DecValTok{3}\NormalTok{, }\AttributeTok{nrow =}\DecValTok{3}\NormalTok{)}
-\NormalTok{mat[}\DecValTok{1}\NormalTok{,]}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 1 4 7
+## [1] 2
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{mat[,}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{)]}
+\FunctionTok{length}\NormalTok{(x)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##      [,1] [,2]
-## [1,]    1    4
-## [2,]    2    5
-## [3,]    3    6
+## [1] 3
 \end{verbatim}
-
-The code \texttt{mat{[}1,{]}} selects the first full row of \texttt{mat}. The code \texttt{mat{[},c(1,2){]}} selects the first and second column of \texttt{mat}. Notice that the comma has always to be included!
-
-To access multiple entries it is often useful to define sequences of number quickly. The following command defines the sequence of integer numbers from 1 to 9.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\DecValTok{1}\SpecialCharTok{:}\DecValTok{9}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 1 2 3 4 5 6 7 8 9
-\end{verbatim}
-
-More generally, one can define sequences of numbers using \texttt{seq} (see \texttt{?seq}).
-
-\hypertarget{accessing-entries-with-logical-operators}{%
-\subsection{Accessing entries with logical operators}\label{accessing-entries-with-logical-operators}}
-
-If we want to access elements of an object based on a condition it is often easier to use logical operators. This means comparing entries using the comparisons you would usually use in mathematical reasoning, for instance being equal to, or being larger to. The syntax is as follows:
 
 \begin{itemize}
+\tightlist
 \item
-  \texttt{==} to check equality (notice the two equal signs)
-\item
-  \texttt{!=} to check non-equality
-\item
-  \texttt{\textgreater{}} bigger to
-\item
-  \texttt{\textgreater{}=} bigger or equal to
-\item
-  \texttt{\textless{}} less to
-\item
-  \texttt{\textless{}=} less or equal to
+  The \texttt{str()} and the \texttt{summary()} are the most useful functions to understand our data frames:
 \end{itemize}
 
-Let's see some examples.
-
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{vec }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{)}
-\NormalTok{vec }\SpecialCharTok{\textgreater{}} \DecValTok{4}
+\FunctionTok{str}\NormalTok{(x)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] FALSE FALSE FALSE  TRUE  TRUE
-\end{verbatim}
-
-We constructed a vector \texttt{vec} and check which entries were larger than 4. The output is a Boolean vector with the same number of entries as \texttt{vec} where only the last two entries are \texttt{TRUE}. Similarly,
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{vec }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{)}
-\NormalTok{vec }\SpecialCharTok{==} \DecValTok{4}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] FALSE FALSE  TRUE FALSE FALSE
-\end{verbatim}
-
-has a \texttt{TRUE} in the third entry only.
-
-So if we were to be interested in returning the elements of \texttt{vec} that are larger than 4 we could use the code
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{vec }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{)}
-\NormalTok{vec[vec }\SpecialCharTok{\textgreater{}} \DecValTok{4}\NormalTok{]}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 5 6
-\end{verbatim}
-
-So we have a vector with only elements 5 and 6.
-
-\hypertarget{manipulating-dataframes}{%
-\subsection{Manipulating dataframes}\label{manipulating-dataframes}}
-
-We have seen in the previous section that dataframes are special types of matrices where columns can include a different data type. For this reason they have special way to manipulate and access their entries.
-
-First, specific columns of a dataframe can be accessed using its name and the \texttt{\$} sign as follows.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{X1 =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{), }\AttributeTok{X2 =} \FunctionTok{c}\NormalTok{(}\ConstantTok{TRUE}\NormalTok{,}\ConstantTok{FALSE}\NormalTok{,}\ConstantTok{FALSE}\NormalTok{),}
-                   \AttributeTok{X3 =} \FunctionTok{c}\NormalTok{(}\StringTok{"male"}\NormalTok{,}\StringTok{"male"}\NormalTok{,}\StringTok{"female"}\NormalTok{))}
-\NormalTok{data}\SpecialCharTok{$}\NormalTok{X1}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 1 2 3
+## 'data.frame':    2 obs. of  3 variables:
+##  $ SN    : int  1 2
+##  $ Age   : num  21 15
+##  $ Gender: chr  "Male" "Female"
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{data}\SpecialCharTok{$}\NormalTok{X3}
+\FunctionTok{summary}\NormalTok{(x)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "male"   "male"   "female"
+##        SN            Age          Gender         
+##  Min.   :1.00   Min.   :15.0   Length:2          
+##  1st Qu.:1.25   1st Qu.:16.5   Class :character  
+##  Median :1.50   Median :18.0   Mode  :character  
+##  Mean   :1.50   Mean   :18.0                     
+##  3rd Qu.:1.75   3rd Qu.:19.5                     
+##  Max.   :2.00   Max.   :21.0
 \end{verbatim}
 
-So using the name of the dataframe \texttt{data} followed by \texttt{\$} and then the name of the column, for instance \texttt{X1}, we access that specific column of the dataframe.
+\hypertarget{how-to-create-a-data-frame}{%
+\subsubsection{How to create a data frame}\label{how-to-create-a-data-frame}}
 
-Second, we can use the \texttt{\$} sign to add new columns to a dataframe. Consider the following code.
+We can create a data frame using the \texttt{data.frame()} function. Below you can see how to create the data frame we are using for all the previous examples:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{X1 =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{), }\AttributeTok{X2 =} \FunctionTok{c}\NormalTok{(}\ConstantTok{TRUE}\NormalTok{,}\ConstantTok{FALSE}\NormalTok{,}\ConstantTok{FALSE}\NormalTok{),}
-                   \AttributeTok{X3 =} \FunctionTok{c}\NormalTok{(}\StringTok{"male"}\NormalTok{,}\StringTok{"male"}\NormalTok{,}\StringTok{"female"}\NormalTok{))}
-\NormalTok{data}\SpecialCharTok{$}\NormalTok{X4 }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"yes"}\NormalTok{,}\StringTok{"no"}\NormalTok{,}\StringTok{"no"}\NormalTok{)}
-\NormalTok{data}
+\NormalTok{x }\OtherTok{=} \FunctionTok{data.frame}\NormalTok{(}\StringTok{"SN"} \OtherTok{=} \DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{, }\StringTok{"Age"} \OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{21}\NormalTok{,}\DecValTok{15}\NormalTok{), }\StringTok{"Gender"} \OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{"Male"}\NormalTok{,}\StringTok{"Female"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-##   X1    X2     X3  X4
-## 1  1  TRUE   male yes
-## 2  2 FALSE   male  no
-## 3  3 FALSE female  no
-\end{verbatim}
-
-\texttt{data} now includes a fourth column called \texttt{X4} coinciding to the vector \texttt{c("yes","no","no")}.
-
-Third, we can select specific rows of a dataframe using the command \texttt{subset}. Consider the following example.
+Let's take another look to the data frame structure:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{X1 =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{), }\AttributeTok{X2 =} \FunctionTok{c}\NormalTok{(}\ConstantTok{TRUE}\NormalTok{,}\ConstantTok{FALSE}\NormalTok{,}\ConstantTok{FALSE}\NormalTok{),}
-                   \AttributeTok{X3 =} \FunctionTok{c}\NormalTok{(}\StringTok{"male"}\NormalTok{,}\StringTok{"male"}\NormalTok{,}\StringTok{"female"}\NormalTok{))}
-\FunctionTok{subset}\NormalTok{(data, X1 }\SpecialCharTok{\textless{}=} \DecValTok{2}\NormalTok{)}
+\FunctionTok{str}\NormalTok{(x)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##   X1    X2   X3
-## 1  1  TRUE male
-## 2  2 FALSE male
+## 'data.frame':    2 obs. of  3 variables:
+##  $ SN    : int  1 2
+##  $ Age   : num  21 15
+##  $ Gender: chr  "Male" "Female"
 \end{verbatim}
 
-The above code returns the rows of \texttt{data} such that \texttt{X1} is less or equal to 2. More complex rules to subset a dataframe can be combined using the and operator \texttt{\&} and the or operator \texttt{\textbar{}}. Let's see an example.
+Which is the type of the \texttt{Gender} variable? Do we need to change it? It is a character vector and, in order to use this variable in future models we will need to transform it into a factor. Remember that R3 automatically converts all the characters into factors, but we need to define those in R4.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{X1 =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{), }\AttributeTok{X2 =} \FunctionTok{c}\NormalTok{(}\ConstantTok{TRUE}\NormalTok{,}\ConstantTok{FALSE}\NormalTok{,}\ConstantTok{FALSE}\NormalTok{),}
-                   \AttributeTok{X3 =} \FunctionTok{c}\NormalTok{(}\StringTok{"male"}\NormalTok{,}\StringTok{"male"}\NormalTok{,}\StringTok{"female"}\NormalTok{))}
-\FunctionTok{subset}\NormalTok{(data, X1 }\SpecialCharTok{\textless{}=} \DecValTok{2} \SpecialCharTok{\&}\NormalTok{ X2 }\SpecialCharTok{==} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{x }\OtherTok{=} \FunctionTok{data.frame}\NormalTok{(}\StringTok{"SN"} \OtherTok{=} \DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{, }\StringTok{"Age"} \OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{21}\NormalTok{,}\DecValTok{15}\NormalTok{), }\StringTok{"Gender"} \OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{"Male"}\NormalTok{,}\StringTok{"Female"}\NormalTok{), }\AttributeTok{stringsAsFactors =}\NormalTok{ T)}
+\FunctionTok{str}\NormalTok{(x)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##   X1   X2   X3
-## 1  1 TRUE male
+## 'data.frame':    2 obs. of  3 variables:
+##  $ SN    : int  1 2
+##  $ Age   : num  21 15
+##  $ Gender: chr  "Male" "Female"
 \end{verbatim}
 
-So the above code selects the rows such that \texttt{X1} is less or equal to 2 and \texttt{X2} is \texttt{TRUE}. This is the case only for the first row of \texttt{data}.
+\textbf{NOTE}: Many data input functions of R like, \texttt{read.table()}, \texttt{read.csv()}, \texttt{read.delim()}, \texttt{read.fwf()} also read data into a data frame.
 
-\hypertarget{information-about-objects}{%
-\subsection{Information about objects}\label{information-about-objects}}
+\hypertarget{how-to-access-components-of-a-data-frame}{%
+\subsubsection{How to access components of a data frame}\label{how-to-access-components-of-a-data-frame}}
 
-Here is a list of functions which are often useful to get information about objects in R.
+Components of data frame can be accessed like a list or like a matrix.
+
+\hypertarget{accessing-like-a-list}{%
+\paragraph{Accessing like a list}\label{accessing-like-a-list}}
+
+We can use either \texttt{{[}}, \texttt{{[}{[}} or \texttt{\$} operator to access columns of data frame.
+
+Accessing with \texttt{{[}{[}} or \texttt{\$} is similar. However, it differs for \texttt{{[}} in that, indexing with \texttt{{[}} will return us a data frame but the other two will reduce it into a vector.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x[}\StringTok{"Gender"}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Gender
+## 1   Male
+## 2 Female
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x}\SpecialCharTok{$}\NormalTok{Age}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 21 15
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x[[}\StringTok{"Gender"}\NormalTok{]]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Male"   "Female"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x[}\DecValTok{2}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Age
+## 1  21
+## 2  15
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x[[}\DecValTok{3}\NormalTok{]]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Male"   "Female"
+\end{verbatim}
+
+\hypertarget{accessing-like-a-matrix}{%
+\paragraph{Accessing like a matrix}\label{accessing-like-a-matrix}}
+
+Data frames can be accessed like a matrix by providing index for row and column.
+
+To illustrate this, we use datasets already available in R. Datasets that are available can be listed with the command \texttt{library(help\ =\ "datasets")}.
+
+We will use the \texttt{trees} dataset which contains \texttt{Girth}, \texttt{Height} and \texttt{Volume} for Black Cherry Trees.
+
+A data frame can be examined using functions like \texttt{str()} and \texttt{head()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(trees)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    31 obs. of  3 variables:
+##  $ Girth : num  8.3 8.6 8.8 10.5 10.7 10.8 11 11 11.1 11.2 ...
+##  $ Height: num  70 65 63 72 81 83 66 75 80 75 ...
+##  $ Volume: num  10.3 10.3 10.2 16.4 18.8 19.7 15.6 18.2 22.6 19.9 ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(trees, }\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Girth Height Volume
+## 1   8.3     70   10.3
+## 2   8.6     65   10.3
+## 3   8.8     63   10.2
+\end{verbatim}
+
+We can see that trees is a data frame with 31 rows and 3 columns. We also display the first 3 rows of the data frame.
+
+Now we proceed to access the data frame like a matrix.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{trees[}\DecValTok{2}\SpecialCharTok{:}\DecValTok{3}\NormalTok{,]    }\CommentTok{\# select 2nd and 3rd row}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Girth Height Volume
+## 2   8.6     65   10.3
+## 3   8.8     63   10.2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{trees[trees}\SpecialCharTok{$}\NormalTok{Height }\SpecialCharTok{\textgreater{}} \DecValTok{82}\NormalTok{,]    }\CommentTok{\# selects rows with Height greater than 82}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Girth Height Volume
+## 6   10.8     83   19.7
+## 17  12.9     85   33.8
+## 18  13.3     86   27.4
+## 31  20.6     87   77.0
+\end{verbatim}
+
+\hypertarget{how-to-modify-a-data-frame}{%
+\subsubsection{How to modify a Data Frame}\label{how-to-modify-a-data-frame}}
+
+Data frames can be modified like we modified matrices through reassignment.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x[}\DecValTok{1}\NormalTok{,}\StringTok{"Age"}\NormalTok{] }\OtherTok{=} \DecValTok{20}\NormalTok{; x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   SN Age Gender
+## 1  1  20   Male
+## 2  2  15 Female
+\end{verbatim}
+
+\hypertarget{adding-components}{%
+\paragraph{Adding Components}\label{adding-components}}
+
+Rows can be added to a data frame using the \texttt{rbind()} function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(}\FunctionTok{rbind}\NormalTok{(x,}\FunctionTok{list}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{16}\NormalTok{,}\StringTok{"Female"}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   SN Age Gender
+## 1  1  20   Male
+## 2  2  15 Female
+## 3  1  16 Female
+\end{verbatim}
+
+Similarly, we can add columns using \texttt{cbind()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(}\FunctionTok{cbind}\NormalTok{(x,}\AttributeTok{State=}\FunctionTok{c}\NormalTok{(}\StringTok{"NY"}\NormalTok{,}\StringTok{"FL"}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   SN Age Gender State
+## 1  1  20   Male    NY
+## 2  2  15 Female    FL
+\end{verbatim}
+
+Since data frames are implemented as list, we can also add new columns through simple list-like assignments.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x}\SpecialCharTok{$}\NormalTok{State }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{"NY"}\NormalTok{,}\StringTok{"FL"}\NormalTok{); x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   SN Age Gender State
+## 1  1  20   Male    NY
+## 2  2  15 Female    FL
+\end{verbatim}
+
+\hypertarget{deleting-components}{%
+\paragraph{Deleting Components}\label{deleting-components}}
+
+Data frame columns can be deleted by assigning \texttt{NULL} to it.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x}\SpecialCharTok{$}\NormalTok{State }\OtherTok{=} \ConstantTok{NULL}\NormalTok{; x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   SN Age Gender
+## 1  1  20   Male
+## 2  2  15 Female
+\end{verbatim}
+
+Similarly, rows can be deleted through reassignments.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{=}\NormalTok{ x[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{,]; x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   SN Age Gender
+## 2  2  15 Female
+\end{verbatim}
+
+\hypertarget{exporting-a-data-frame}{%
+\subsubsection{Exporting a data frame}\label{exporting-a-data-frame}}
+
+As we have mentioned before, any data table we import in R will take the form of a data frame by default. This facilitates us enormously the work of data cleaning since there are many libraries that work on data frames and will help us in this process. We will see many of these resources in the ``Data Wrangling'' module.
+
+For now, we only need some knowledge of importing and exporting data tables in R. Let's start with a built-in dataframe like \texttt{trees}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(trees, }\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Girth Height Volume
+## 1   8.3     70   10.3
+## 2   8.6     65   10.3
+## 3   8.8     63   10.2
+\end{verbatim}
+
+This dataframe can be exported in different formats, but let's see only the two main ones that we will use in R, .csv and .txt. The basic function in R for exporting data is called \texttt{write.table()}, and it has a lot of parameters. My recommendation is that you take a look at the documentation of this function to familiarize yourself with it.
+
+The main parameters of the \texttt{write.table()} function are
 
 \begin{itemize}
+\tightlist
 \item
-  \texttt{length} returns the number of entries in a vector.
+  \texttt{x}: will be the object we want to export, in this case a data frame
 \item
-  \texttt{dim} returns the number of rows and columns of a matrix or a dataframe
+  \texttt{file}: is the name of the file to be exported. In this argument we can also enter a path to organize the file in our OS. The file will take the extension that we indicate in its name.
 \item
-  \texttt{unique} returns the unique elements of a vector or the unique rows of a matrix or a dataframe.
+  \texttt{append}: we will use it if the file already exists and we want to add new information. By default it is \texttt{FALSE}.
 \item
-  \texttt{head} returns the first entries of a vector or the first rows of a matrix or a dataframe
+  \texttt{quote}: by default it is also \texttt{FALSE.} If you set it to \texttt{TRUE} this parameter will return the factors and strings with quotes
 \item
-  \texttt{order} returns a re-ordering of a vector or a data.frame in ascending order.
+  \texttt{sep}: in this parameter we can decide how to separate the columns of our file. The default is a comma.
+\item
+  \texttt{dec}: this parameter will allow us to change the symbol of the decimals that by default is a dot.
+\item
+  \ldots{}
 \end{itemize}
 
-Let's see some examples.
+Let's see an example. Next we are going to export the data frame \texttt{trees} as a .txt file.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{vec }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{7}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{5}\NormalTok{)}
-\FunctionTok{length}\NormalTok{(vec)}
+\FunctionTok{write.table}\NormalTok{(}\AttributeTok{x =}\NormalTok{ trees, }\AttributeTok{file =} \StringTok{"./Data/trees.txt"}\NormalTok{, }\AttributeTok{quote =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{sep =} \StringTok{";"}\NormalTok{, }\AttributeTok{dec =} \StringTok{","}\NormalTok{, }\AttributeTok{row.names =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Although the function \texttt{write.table()} already provides a simple method to export data tables, we can also use the function \texttt{write.csv()}, which will facilitate the export of .csv files with a predetermined format to facilitate their subsequent use.
+
+This function \texttt{write.csv()} or \texttt{write.csv2()} (a second version that has different default parameters) use as a base the \texttt{write.table()} function, so its behavior is practically the same.
+
+Let's see the same example, but exporting the file in this case as a .csv:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{write.csv}\NormalTok{(}\AttributeTok{x =}\NormalTok{ trees, }\AttributeTok{file =} \StringTok{"./Data/trees.csv"}\NormalTok{)}
+\FunctionTok{write.csv2}\NormalTok{(}\AttributeTok{x =}\NormalTok{ trees, }\AttributeTok{file =} \StringTok{"./Data/trees2.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{importing-a-data-frame}{%
+\subsubsection{Importing a data frame}\label{importing-a-data-frame}}
+
+When importing data tables the operation will be exactly the same. In this case, the basic function of R is \texttt{read.table()}, and the functions \texttt{read.csv()} and \texttt{read.csv2()} use the previous one to define other behaviors focused on reading .csv files.
+
+The parameters of \texttt{read.table()} are the same as those of write.table() with some exceptions.
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{header}: is a logical parameter (TRUE/FALSE) that indicates if the file contains a header.
+\item
+  \texttt{quote}: it is not a logical parameter anymore, but it allows us to decide how we want to code the quotes.
+\item
+  \texttt{row.names} and \texttt{col.names}: they also existed in the previous function but in this case they make more sense. These parameters will take a vector the size of the number of rows or columns respectively, and set it as such in the data frame
+\item
+  \texttt{na.strings}: logical vector that by default is FALSE, and assigns as NA's to all character type elements.
+\item
+  \texttt{skip}: is a parameter that will skip the number of lines of the data table that we indicate with an integer.
+\item
+  \texttt{stringsAsFactors}: logical vector that by default is FALSE and helps us to code the character type vectors as factors. In some cases it will be useful, but in others we prefer to have the versatility that character vectors offer.
+\end{itemize}
+
+Let's see how to import the files that we have previously exported with the \texttt{read.table()} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\OtherTok{=} \FunctionTok{read.table}\NormalTok{(}\AttributeTok{file =} \StringTok{"./Data/trees.txt"}\NormalTok{, }\AttributeTok{header =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{sep =} \StringTok{";"}\NormalTok{, }\AttributeTok{dec =} \StringTok{","}\NormalTok{, }
+                \AttributeTok{na.strings =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{stringsAsFactors =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{str}\NormalTok{(df)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 5
+## 'data.frame':    31 obs. of  3 variables:
+##  $ Girth : num  8.3 8.6 8.8 10.5 10.7 10.8 11 11 11.1 11.2 ...
+##  $ Height: int  70 65 63 72 81 83 66 75 80 75 ...
+##  $ Volume: num  10.3 10.3 10.2 16.4 18.8 19.7 15.6 18.2 22.6 19.9 ...
 \end{verbatim}
+
+In the case of the functions \texttt{read.csv()} and r\texttt{ead.csv2()} we can ensure that the format in which we have exported the files will be the same as that in which we should read it:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{unique}\NormalTok{(vec)}
+\NormalTok{df1 }\OtherTok{=} \FunctionTok{read.csv}\NormalTok{(}\AttributeTok{file =} \StringTok{"./Data/trees.csv"}\NormalTok{)}
+\FunctionTok{str}\NormalTok{(df1)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 4 2 7 5
+## 'data.frame':    31 obs. of  4 variables:
+##  $ X     : int  1 2 3 4 5 6 7 8 9 10 ...
+##  $ Girth : num  8.3 8.6 8.8 10.5 10.7 10.8 11 11 11.1 11.2 ...
+##  $ Height: int  70 65 63 72 81 83 66 75 80 75 ...
+##  $ Volume: num  10.3 10.3 10.2 16.4 18.8 19.7 15.6 18.2 22.6 19.9 ...
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{order}\NormalTok{(vec)}
+\NormalTok{df2 }\OtherTok{=} \FunctionTok{read.csv2}\NormalTok{(}\AttributeTok{file =} \StringTok{"./Data/trees2.csv"}\NormalTok{)}
+\FunctionTok{str}\NormalTok{(df2)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 2 1 4 5 3
+## 'data.frame':    31 obs. of  4 variables:
+##  $ X     : int  1 2 3 4 5 6 7 8 9 10 ...
+##  $ Girth : num  8.3 8.6 8.8 10.5 10.7 10.8 11 11 11.1 11.2 ...
+##  $ Height: int  70 65 63 72 81 83 66 75 80 75 ...
+##  $ Volume: num  10.3 10.3 10.2 16.4 18.8 19.7 15.6 18.2 22.6 19.9 ...
 \end{verbatim}
 
-\texttt{length} gives the number of elements of \texttt{vec}, \texttt{unique} returns the different values in \texttt{vec} (so 5 is not repeated), \texttt{order} returns in entry i the ordering of the i-th entry of \texttt{vec}. So the first entry of \texttt{order(vec)} is 2 since 4 is the second-smallest entry of \texttt{vec}.
+\hypertarget{control-flow}{%
+\section{Control Flow}\label{control-flow}}
+
+Flow control statements allow us to generate portions of code that perform certain actions given certain conditions. Let's differentiate between: Conditional sentences and loops
+
+\hypertarget{conditional-statements}{%
+\subsection{Conditional statements}\label{conditional-statements}}
+
+Conditional statements allow us to perform actions based on specific conditions that we attribute to objects created in our R session. In this way, we can generate huge chains of conditionals that result in multiple different actions. To work with conditional statements in R we will use the following keywords: \texttt{if}, \texttt{else\ if} and \texttt{else}.
+
+The specific syntax to create conditional statements in R is the following
+
+Let's see some code examples. In this first example R will perform an action (to print something) in case \texttt{x} is a negative number:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{X1 =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{), }\AttributeTok{X2 =} \FunctionTok{c}\NormalTok{(}\ConstantTok{TRUE}\NormalTok{,}\ConstantTok{FALSE}\NormalTok{,}\ConstantTok{FALSE}\NormalTok{,}\ConstantTok{FALSE}\NormalTok{),}
-                   \AttributeTok{X3 =} \FunctionTok{c}\NormalTok{(}\StringTok{"male"}\NormalTok{,}\StringTok{"male"}\NormalTok{,}\StringTok{"female"}\NormalTok{,}\StringTok{"female"}\NormalTok{))}
-\FunctionTok{dim}\NormalTok{(data)}
+\NormalTok{x }\OtherTok{=} \SpecialCharTok{{-}}\DecValTok{3}
+\ControlFlowTok{if}\NormalTok{ (x }\SpecialCharTok{\textless{}} \DecValTok{0}\NormalTok{) \{}
+  \FunctionTok{print}\NormalTok{(}\StringTok{"x is a negative number"}\NormalTok{)}
+\NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 4 3
+## [1] "x is a negative number"
 \end{verbatim}
 
-So \texttt{dim} tells us that \texttt{data} has four rows and three columns.
-
-\hypertarget{loops-and-conditions}{%
-\section{Loops and conditions}\label{loops-and-conditions}}
-
-This section reviews two of the most basic elements of any programming language: \texttt{if} statements and \texttt{cycles} or \texttt{loops}.
-
-\hypertarget{if-statements}{%
-\subsection{\texorpdfstring{\texttt{if} statements}{if statements}}\label{if-statements}}
-
-The basic form of an \texttt{if} statement in R is as follows:
+In a second example we are using the \texttt{if} and \texttt{else} statements to print if \texttt{x} is negative or positive
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ControlFlowTok{if}\NormalTok{(condition)\{true\_action\}}
-\end{Highlighting}
-\end{Shaded}
-
-Condition must return a Boolean, either \texttt{TRUE} or \texttt{FALSE}. If \texttt{TRUE} then the code follows the code within the curly brackets and performs the \texttt{true\_action}. If \texttt{condition} is \texttt{FALSE} the code does nothing.
-
-It is more customary to also give a chunk of code for the case \texttt{condition} is \texttt{FALSE}. This can be achieved with \texttt{else}.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\ControlFlowTok{if}\NormalTok{(condition)\{true\_action\} }\ControlFlowTok{else}\NormalTok{ \{false\_action\}}
-\end{Highlighting}
-\end{Shaded}
-
-Let's see an example.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{a }\OtherTok{\textless{}{-}} \DecValTok{5}
-\ControlFlowTok{if}\NormalTok{ (a }\SpecialCharTok{\textless{}} \DecValTok{2}\NormalTok{)\{}\StringTok{"hello"}\NormalTok{\} }\ControlFlowTok{else}\NormalTok{ \{}\StringTok{"goodbye"}\NormalTok{\}}
+\NormalTok{x }\OtherTok{=} \DecValTok{5}
+\ControlFlowTok{if}\NormalTok{ (x }\SpecialCharTok{\textless{}} \DecValTok{0}\NormalTok{) \{}
+  \FunctionTok{print}\NormalTok{(}\StringTok{"x is a negative number"}\NormalTok{)}
+\NormalTok{\} }\ControlFlowTok{else}\NormalTok{ \{}
+  \FunctionTok{print}\NormalTok{(}\StringTok{"x is a positive number or zero"}\NormalTok{)}
+\NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "goodbye"
+## [1] "x is a positive number or zero"
 \end{verbatim}
 
-The variable \texttt{a} is assigned the number 5. Then we impose a condition: if \texttt{a} is less than 2, we print the text \texttt{"hello"}, otherwise \texttt{"goodbye"} is printed. Since \texttt{a\ \textless{}-\ 5} the code prints correctly \texttt{"goodbye"}. On the other hand if \texttt{a} were assigned \texttt{1}.
+In this third example we are using more conditions to print if \texttt{x} is negative, zero or positive.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{a }\OtherTok{\textless{}{-}} \DecValTok{1}
-\ControlFlowTok{if}\NormalTok{ (a }\SpecialCharTok{\textless{}} \DecValTok{2}\NormalTok{)\{}\StringTok{"hello"}\NormalTok{\} }\ControlFlowTok{else}\NormalTok{ \{}\StringTok{"goodbye"}\NormalTok{\}}
+\NormalTok{x }\OtherTok{=} \SpecialCharTok{{-}}\DecValTok{3}
+\ControlFlowTok{if}\NormalTok{ (x }\SpecialCharTok{\textless{}} \DecValTok{0}\NormalTok{) \{}
+  \FunctionTok{print}\NormalTok{(}\StringTok{"x is a negative number"}\NormalTok{)}
+\NormalTok{\} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{ (x }\SpecialCharTok{==} \DecValTok{0}\NormalTok{) \{}
+  \FunctionTok{print}\NormalTok{(}\StringTok{"x is zero"}\NormalTok{)}
+\NormalTok{\} }\ControlFlowTok{else}\NormalTok{ \{}
+  \FunctionTok{print}\NormalTok{(}\StringTok{"x is a positive number"}\NormalTok{)}
+\NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "hello"
+## [1] "x is a negative number"
 \end{verbatim}
-
-\hypertarget{ifelse}{%
-\subsection{\texorpdfstring{\texttt{ifelse}}{ifelse}}\label{ifelse}}
-
-\texttt{if} works when checking a single element and the condition returns either \texttt{TRUE} or \texttt{FALSE}. The command \texttt{ifelse} can be used to quickly check a condition over all elements of a vector. Consider the following example.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{vec }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{9}\NormalTok{)}
-\FunctionTok{ifelse}\NormalTok{(vec }\SpecialCharTok{\textgreater{}} \DecValTok{5}\NormalTok{, }\StringTok{"bigger"}\NormalTok{, }\StringTok{"smaller"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] "smaller" "smaller" "smaller" "bigger"  "bigger"
-\end{verbatim}
-
-\texttt{vec} contains the values 1, 3, 5, 7, 9 and the \texttt{condition} is if an elemenent of \texttt{vec} is larger than 5. If \texttt{TRUE} the code returns the string \texttt{bigger} and otherwise returns \texttt{smaller}. The code above returns therefore a vector of the same length of \texttt{vec} including either the string \texttt{bigger} or the string \texttt{smaller}.
 
 \hypertarget{loops}{%
 \subsection{Loops}\label{loops}}
 
-\texttt{for} loops are used to iterate over items in a vector. They have the following skeleton:
+The classic, Fortran-like loop is available in R. The syntax is a little different, but the idea is identical; you request that an index (e.g.~\texttt{i}), takes on a sequence of values, and that one or more lines of commands are executed as many times as there are different values of i. Here is a loop executed five times with the values of i from 1 to 5; we print the square of each value:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ControlFlowTok{for}\NormalTok{(item }\ControlFlowTok{in}\NormalTok{ vector) \{perform\_action\}}
+\CommentTok{\# This is the abbreviated way to write a for loop}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{) }\FunctionTok{print}\NormalTok{(i}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-For each \texttt{item} in \texttt{vector}, \texttt{perform\_action} is performed once and the value of \texttt{item} is updated each time.
+\begin{verbatim}
+## [1] 1
+## [1] 4
+## [1] 9
+## [1] 16
+## [1] 25
+\end{verbatim}
 
-Here is an example.
+For multiple lines of code, you use curly brackets \texttt{\{\}} to enclose material over which the loop is to work. Note that the `hard return' (the Enter key) at the end of each command line is an essential part of the structure (you can replace the hard returns by semicolons if you like, but clarity is improved if you put each command on a separate line):
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{))\{}
+\NormalTok{j }\OtherTok{=}\NormalTok{ k }\OtherTok{=} \DecValTok{0}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{) \{}
+\NormalTok{  j }\OtherTok{=}\NormalTok{ j}\SpecialCharTok{+}\DecValTok{1}
+\NormalTok{  k }\OtherTok{=}\NormalTok{ k}\SpecialCharTok{+}\NormalTok{i}\SpecialCharTok{*}\NormalTok{j}
+  \FunctionTok{print}\NormalTok{(i}\SpecialCharTok{+}\NormalTok{j}\SpecialCharTok{+}\NormalTok{k)}
+\NormalTok{  \}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3
+## [1] 9
+## [1] 20
+## [1] 38
+## [1] 65
+\end{verbatim}
+
+There are two types of loops:
+
+\begin{itemize}
+\item
+  \texttt{while} loops: they perform a certain action iteratively until a stop condition is met
+\item
+  \texttt{for} loops: they execute a certain action in an iterative way for each element of a vector (set of elements).
+\end{itemize}
+
+We must be very careful not to make an infinite loop. This will produce that our R session starts working without a stop condition and we will have to kill the process to finish it. To prevent this situation we can always use the \texttt{break} keyword in our loops.
+
+Here you can see the specific syntax we use in R to create loops:
+
+\hypertarget{while-loops-examples}{%
+\subsubsection{While loops examples}\label{while-loops-examples}}
+
+In this first example we are creating a \texttt{ctr} variable that starts in \texttt{1}. Inside our while loop we are going to print our variable and later add \texttt{1} in each iteration
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ctr }\OtherTok{=} \DecValTok{1}
+\ControlFlowTok{while}\NormalTok{ (ctr }\SpecialCharTok{\textless{}=} \DecValTok{7}\NormalTok{) \{}
+  \FunctionTok{print}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"ctr is"}\NormalTok{, ctr))}
+\NormalTok{  ctr }\OtherTok{=}\NormalTok{ ctr }\SpecialCharTok{+} \DecValTok{1}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "ctr is 1"
+## [1] "ctr is 2"
+## [1] "ctr is 3"
+## [1] "ctr is 4"
+## [1] "ctr is 5"
+## [1] "ctr is 6"
+## [1] "ctr is 7"
+\end{verbatim}
+
+We can apply the same logic to create a countdown to zero:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{count }\OtherTok{=} \DecValTok{10}
+\ControlFlowTok{while}\NormalTok{ (count }\SpecialCharTok{\textgreater{}=} \DecValTok{0}\NormalTok{)\{}
+    \FunctionTok{print}\NormalTok{ (count)}
+\NormalTok{    count }\OtherTok{=}\NormalTok{ count }\SpecialCharTok{{-}} \DecValTok{1}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 10
+## [1] 9
+## [1] 8
+## [1] 7
+## [1] 6
+## [1] 5
+## [1] 4
+## [1] 3
+## [1] 2
+## [1] 1
+## [1] 0
+\end{verbatim}
+
+\hypertarget{for-loops-example}{%
+\subsubsection{For loops example}\label{for-loops-example}}
+
+As we said, \texttt{for} loops are going to execute certain action for each element in any data structure (normally a vector). In this example we are just printing each element we have inside the cities vector.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Print each element in a vector}
+\NormalTok{cities }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{"New York"}\NormalTok{, }\StringTok{"Paris"}\NormalTok{, }\StringTok{"London"}\NormalTok{, }\StringTok{"Tokyo"}\NormalTok{, }\StringTok{"Rio de Janeiro"}\NormalTok{, }\StringTok{"Cape Town"}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in}\NormalTok{ cities) \{}
   \FunctionTok{print}\NormalTok{(i)}
 \NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 1
-## [1] 2
-## [1] 3
+## [1] "New York"
+## [1] "Paris"
+## [1] "London"
+## [1] "Tokyo"
+## [1] "Rio de Janeiro"
+## [1] "Cape Town"
 \end{verbatim}
 
-Item is the variable \texttt{i} (it is costumary to use just a letter) and at each step \texttt{i} is set equal to a value in the vector \texttt{c(1,2,3)}. At each of these iterations, the command \texttt{print(i)}, which simply returns the value that \texttt{i} takes is called. Indeed we see that the output is the sequence of numbers 1, 2, 3.
+\hypertarget{loops-and-conditional-statements-combination}{%
+\subsubsection{Loops and conditional statements combination}\label{loops-and-conditional-statements-combination}}
+
+Once we know the different flow control methods we can combine them to perform much more complex actions. Let's look at some examples.
+
+We can use a conditional statement to break our loops. In this example we are printing our \texttt{ctr} variable as we did before, but we will break the loop if the module obtained dividing ctr by 5 is equal to 0.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Using the break keyword with a condition}
+\NormalTok{ctr }\OtherTok{=} \DecValTok{1}
+\ControlFlowTok{while}\NormalTok{ (ctr }\SpecialCharTok{\textless{}=} \DecValTok{7}\NormalTok{) \{}
+  \ControlFlowTok{if}\NormalTok{ (ctr }\SpecialCharTok{\%\%} \DecValTok{5} \SpecialCharTok{==} \DecValTok{0}\NormalTok{)}
+    \ControlFlowTok{break}
+  \FunctionTok{print}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"ctr is"}\NormalTok{, ctr))}
+\NormalTok{  ctr }\OtherTok{=}\NormalTok{ ctr }\SpecialCharTok{+} \DecValTok{1}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "ctr is 1"
+## [1] "ctr is 2"
+## [1] "ctr is 3"
+## [1] "ctr is 4"
+\end{verbatim}
+
+We can also introduce the \texttt{next} statement inside our loops. This will skip the current iteration, not performing all the actions we have below it inside the loop. In this case we are printing all the cities with a number of characters different to 6.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Print cities with 6 characters}
+\NormalTok{cities }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\StringTok{"New York"}\NormalTok{, }\StringTok{"Paris"}\NormalTok{, }\StringTok{"London"}\NormalTok{, }\StringTok{"Tokyo"}\NormalTok{, }\StringTok{"Rio de Janeiro"}\NormalTok{, }\StringTok{"Cape Town"}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{ (city }\ControlFlowTok{in}\NormalTok{ cities) \{}
+  \ControlFlowTok{if}\NormalTok{ (}\FunctionTok{nchar}\NormalTok{(city) }\SpecialCharTok{==} \DecValTok{6}\NormalTok{)}
+    \ControlFlowTok{next}
+  \FunctionTok{print}\NormalTok{(city)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "New York"
+## [1] "Paris"
+## [1] "Tokyo"
+## [1] "Rio de Janeiro"
+## [1] "Cape Town"
+\end{verbatim}
+
+In this last example we are printing only the even numbers in the \texttt{numbers} list:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Print even numbers}
+\NormalTok{numbers }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{100}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{ (number }\ControlFlowTok{in}\NormalTok{ numbers)\{}
+    \ControlFlowTok{if}\NormalTok{ (number }\SpecialCharTok{\%\%} \DecValTok{2} \SpecialCharTok{==} \DecValTok{0}\NormalTok{)\{}
+        \FunctionTok{print}\NormalTok{(number)}
+\NormalTok{    \}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2
+## [1] 4
+## [1] 6
+## [1] 8
+## [1] 10
+## [1] 12
+## [1] 14
+## [1] 16
+## [1] 18
+## [1] 20
+## [1] 22
+## [1] 24
+## [1] 26
+## [1] 28
+## [1] 30
+## [1] 32
+## [1] 34
+## [1] 36
+## [1] 38
+## [1] 40
+## [1] 42
+## [1] 44
+## [1] 46
+## [1] 48
+## [1] 50
+## [1] 52
+## [1] 54
+## [1] 56
+## [1] 58
+## [1] 60
+## [1] 62
+## [1] 64
+## [1] 66
+## [1] 68
+## [1] 70
+## [1] 72
+## [1] 74
+## [1] 76
+## [1] 78
+## [1] 80
+## [1] 82
+## [1] 84
+## [1] 86
+## [1] 88
+## [1] 90
+## [1] 92
+## [1] 94
+## [1] 96
+## [1] 98
+## [1] 100
+\end{verbatim}
+
+\hypertarget{nested-for-loops}{%
+\subsubsection{Nested for loops}\label{nested-for-loops}}
+
+We can use a for loop within another for loop to iterate over two things at once (e.g., rows and columns of a matrix).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{)\{}
+  \ControlFlowTok{for}\NormalTok{(j }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{)\{}
+    \FunctionTok{print}\NormalTok{(}\FunctionTok{paste}\NormalTok{(i,j))}
+\NormalTok{  \}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "1 1"
+## [1] "1 2"
+## [1] "1 3"
+## [1] "1 4"
+## [1] "1 5"
+## [1] "2 1"
+## [1] "2 2"
+## [1] "2 3"
+## [1] "2 4"
+## [1] "2 5"
+## [1] "3 1"
+## [1] "3 2"
+## [1] "3 3"
+## [1] "3 4"
+## [1] "3 5"
+## [1] "4 1"
+## [1] "4 2"
+## [1] "4 3"
+## [1] "4 4"
+## [1] "4 5"
+## [1] "5 1"
+## [1] "5 2"
+## [1] "5 3"
+## [1] "5 4"
+## [1] "5 5"
+\end{verbatim}
+
+\hypertarget{the-ifelse-function}{%
+\subsubsection{\texorpdfstring{The \texttt{ifelse} function}{The ifelse function}}\label{the-ifelse-function}}
+
+Sometimes you want to do one thing if a condition is true and a different thing if the condition is false (rather than do nothing, as in previous examples). The \texttt{ifelse} function allows you to do this for entire vectors without using for loops.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{v }\OtherTok{=} \DecValTok{0}\SpecialCharTok{:}\DecValTok{10}
+\FunctionTok{ifelse}\NormalTok{(v}\SpecialCharTok{\textgreater{}}\DecValTok{5}\NormalTok{, }\AttributeTok{yes =}\NormalTok{ T, }\AttributeTok{no =}\NormalTok{ F)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 1 1 1 1 1 1 0 0 0 0 0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ifelse}\NormalTok{(v }\SpecialCharTok{\textgreater{}} \DecValTok{5}\NormalTok{, v}\SpecialCharTok{*}\DecValTok{2}\NormalTok{, v)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1]  0  1  2  3  4  5 12 14 16 18 20
+\end{verbatim}
+
+\texttt{ifelse} returns a value with the same shape as \texttt{v} which is filled with elements selected from either yes or no depending on whether the element of test is \texttt{TRUE} or \texttt{FALSE}.
 
 \hypertarget{functions}{%
-\section{Functions}\label{functions}}
+\subsection{Functions}\label{functions}}
 
-Functions are chunks of code that are given a name so that they can be easily used multiple times. Perhaps without realising it, you have used functions already many times!
+Functions are R objects that evaluate a set of input arguments and return an output. This is the syntax we use in R to create functions:
 
-\hypertarget{defining-your-own-function}{%
-\subsection{Defining your own function}\label{defining-your-own-function}}
+Arguments are a set of variable names that will be used within the function
 
-A function is composed of the following elements:
+Arguments can be:
 
 \begin{itemize}
+\tightlist
 \item
-  a name: in R functions are objects just like vectors or matrices and they are given a name.
+  Required.
 \item
-  arguments: these are objects that will be used within the function.
+  Optional (they are assigned a default value).
 \item
-  body: a chunk of code which is run within the function.
-\item
-  output: an object that the function returns.
+  Adjustable length (each of these parameters is accessed with ..1, ..2, etc.).
 \end{itemize}
 
-Let's consider an example.
+The function return is specified by calling the function \texttt{return(x)}. Sometimes it is not necessary, and the result of the last evaluated expression will be returned. It is recommended to use it for legibility.
+
+The function below has a required parameter (a) and an optional parameter (b).
+
+Parameter b, being optional, if it is not passed in the call, will take the value 1.
+
+The function has two returns:
+
+\begin{itemize}
+\tightlist
+\item
+  When b equals zero (with return)
+\item
+  When b is not equal to zero (without return)
+\end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{my.function }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x,y)\{}
-\NormalTok{  z }\OtherTok{\textless{}{-}}\NormalTok{ x }\SpecialCharTok{+}\NormalTok{ y}
-  \FunctionTok{return}\NormalTok{(z)}
+\NormalTok{z }\OtherTok{=} \DecValTok{1}
+\NormalTok{do\_something }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(a, }\AttributeTok{b =} \DecValTok{1}\NormalTok{) \{}
+    \ControlFlowTok{if}\NormalTok{ (b }\SpecialCharTok{==} \DecValTok{0}\NormalTok{)}
+        \FunctionTok{return}\NormalTok{(}\DecValTok{0}\NormalTok{)}
+\NormalTok{    z }\OtherTok{=}\NormalTok{ z }\SpecialCharTok{+}\NormalTok{ a}\SpecialCharTok{*}\NormalTok{b }\SpecialCharTok{+}\NormalTok{ a}\SpecialCharTok{/}\NormalTok{b}
+\NormalTok{    z}
 \NormalTok{\}}
-\end{Highlighting}
-\end{Shaded}
 
-The above function computes the sum of two numbers \texttt{x} and \texttt{y}. Let's call it.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{my.function}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 5
-\end{verbatim}
-
-The sum between 2 and 3 is indeed 5.
-
-Let's look at the code line by line. In the first line, we assigned a function using the command \texttt{function} to an object called \texttt{my.function}. \texttt{my.function} has two arguments called \texttt{x} and \texttt{y}. Then there is an opening curly bracket \texttt{\{}. The last line of code has a closing curly bracket \texttt{\}}: whatever is in between the two brackets is a chunk of code which is run when the function is run. The second line computes a new variable called \texttt{z} which stores the sum of \texttt{x} and \texttt{y}. The third line of code tells us that the function should return \texttt{z} as output.
-
-Let's consider a slightly more complicated function.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{new.function }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x,y)\{}
-\NormalTok{  z1 }\OtherTok{\textless{}{-}}\NormalTok{ x}\SpecialCharTok{\^{}}\DecValTok{2}
-\NormalTok{  z2 }\OtherTok{\textless{}{-}}\NormalTok{ z1 }\SpecialCharTok{+}\NormalTok{ y}
-  \FunctionTok{return}\NormalTok{(z2)}
-\NormalTok{\}}
-\end{Highlighting}
-\end{Shaded}
-
-The \texttt{new.function} returns the sum between the square of the first input \texttt{x} and the second input \texttt{y}. Let's call the function.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{new.function}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 7
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{new.function}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{2}\NormalTok{)}
+\FunctionTok{do\_something}\NormalTok{(}\DecValTok{5}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -6332,210 +6640,518 @@ The \texttt{new.function} returns the sum between the square of the first input 
 ## [1] 11
 \end{verbatim}
 
-Notice that \texttt{new.function(2,3)} is different from \texttt{new.function(3,2)}: indeed in the fist case the sum between 2\^{}2 and 3 is computed, whilst in the second the sum between 3\^{}2 and 2 is computed. Furthermore, that the variable \texttt{z1} exists only within the function: when you call the function the output does not create a variable \texttt{z1}. The output does not create either a variable \texttt{z2} it simply returns the value that is stored in \texttt{z2}, which can the be assigned as in the following example.
-
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{value }\OtherTok{\textless{}{-}} \FunctionTok{new.function}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{)}
-\NormalTok{value}
+\FunctionTok{do\_something}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{4}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 7
+## [1] 18
 \end{verbatim}
 
-We stored in \texttt{value} the output of \texttt{new.function(2,3)}.
+\hypertarget{domain-of-variables-in-functions}{%
+\subsubsection{Domain of variables in functions}\label{domain-of-variables-in-functions}}
 
-An equivalent way to write \texttt{new.function} is as follows:
+When a function is invoked, a new memory frame is created for it.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{new.function }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x,y)\{}
-\NormalTok{  x}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{+}\NormalTok{ y}
-\NormalTok{\}}
-\FunctionTok{new.function}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+Each memory frame is inside the call stack, the first frame corresponding to the global environment.
 
-\begin{verbatim}
-## [1] 7
-\end{verbatim}
+Each function call will create a local frame.
 
-The output is the same. We did not create any variable within the function and we did not explicitly use the \texttt{return} command. R understands that the last line of code is what the function should return.
-
-\hypertarget{calling-functions}{%
-\subsection{Calling functions}\label{calling-functions}}
-
-In R functions can be called in various ways. Before we have seen function calls as
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{new.function}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-How did it work?
+The names of the variables within a function are resolved in the following order:
 
 \begin{itemize}
+\tightlist
 \item
-  The function \texttt{new.function} has a first argument \texttt{x} and a second argument \texttt{y}.
+  Local environment.
 \item
-  R matched the first argument in \texttt{new.function(2,3)} to \texttt{x}, that is \texttt{x=2}, and the second argument to \texttt{y}, that is \texttt{y=3}.
+  Parent environment (functions defined within functions).
+\item
+  \ldots{}
+\item
+  Global environment.
 \end{itemize}
 
-We could have also been more explicit and state what \texttt{x} and \texttt{y} were.
+Thus, a variable that is defined within a function is not available outside the function.
+
+\hypertarget{replicating-code-with-functions}{%
+\subsubsection{Replicating code with functions}\label{replicating-code-with-functions}}
+
+As in any programming environment, the functions are very useful in order to replicate code by specifying certain parameters. Remember the countdown example? Below we have converted the same code into a function to decide the initial value of this process.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{new.function}\NormalTok{(}\AttributeTok{x=}\DecValTok{2}\NormalTok{, }\AttributeTok{y=}\DecValTok{3}\NormalTok{)}
+\NormalTok{countdown }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(}\AttributeTok{count =} \DecValTok{5}\NormalTok{)\{}
+  \ControlFlowTok{while}\NormalTok{ (count }\SpecialCharTok{\textgreater{}=} \DecValTok{0}\NormalTok{)\{}
+    \FunctionTok{print}\NormalTok{ (count)}
+\NormalTok{    count }\OtherTok{=}\NormalTok{ count }\SpecialCharTok{{-}} \DecValTok{1}
+\NormalTok{  \}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+By default, the countdown starts in 5,
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{countdown}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 7
+## [1] 5
+## [1] 4
+## [1] 3
+## [1] 2
+## [1] 1
+## [1] 0
 \end{verbatim}
 
-So now explicitly we state that the input \texttt{x} of \texttt{new.function} is 2 and that the input \texttt{y} is 3. Notice that the two ways of specifying inputs give the exact same results.
+But we can change the \texttt{count} parameter, so it will start in the number we specify
 
-\hypertarget{mathematical-and-statistical-functions}{%
-\subsection{Mathematical and statistical functions}\label{mathematical-and-statistical-functions}}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{countdown}\NormalTok{(}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
-The number of functions available in R is massive and it would be impossible to mention them all. Here I just give you a list of mathematical and statistical functions that we may use in the following.
+\begin{verbatim}
+## [1] 3
+## [1] 2
+## [1] 1
+## [1] 0
+\end{verbatim}
+
+\hypertarget{the-apply-family}{%
+\subsection{\texorpdfstring{The \texttt{apply} Family}{The apply Family}}\label{the-apply-family}}
+
+The \texttt{apply()} family pertains to the R base package and is populated with functions to manipulate slices of data from matrices, arrays, lists and dataframes in a repetitive way. These functions allow crossing the data in a number of ways and avoid explicit use of loop constructs. They act on an input list, matrix or array and apply a named function with one or several optional arguments.
+
+The called function could be:
 
 \begin{itemize}
+\tightlist
 \item
-  \texttt{exp} computes the exponential of the entries of an object
+  An aggregating function, like for example the mean, or the sum (that return a number or scalar);
 \item
-  \texttt{log} computes the logarithm of the entries of an object
+  Other transforming or subsetting functions; and
 \item
-  \texttt{sqrt} computes the square root of the entries of an
-\item
-  \texttt{sum} computes the sum of the entries of an object
-\item
-  \texttt{abs} computes the absolute value of the entries of an object
-\item
-  \texttt{mean} computes the mean of the entries of an object
-\item
-  \texttt{sd} computes the standard deviation of the entries of an object
-\item
-  \texttt{var} computes the variance of the entries of an object
+  Other vectorized functions, which yield more complex structures like lists, vectors, matrices, and arrays.
 \end{itemize}
 
-\hypertarget{the-apply-family-of-functions}{%
-\section{\texorpdfstring{The \texttt{apply} family of functions}{The apply family of functions}}\label{the-apply-family-of-functions}}
+The \texttt{apply()} functions form the basis of more complex combinations and helps to perform operations with very few lines of code. More specifically, the family is made up of the \texttt{apply()}, \texttt{lapply()}, \texttt{sapply()}, \texttt{vapply()}, \texttt{mapply()}, \texttt{rapply()}, and \texttt{tapply()} functions.
 
-One of the biggest limitation of R is that it is slow in performing cycles. For this reason, one should aim at avoiding as much as possible to use of loops.
+But how and when should we use these?
 
-There are various functions which are designed to help you in avoiding these loops and they are in the family of so called \texttt{apply} functions. There are many of these but we will only see two here.
+Well, this depends on the structure of the data that you want to operate on and the format of the output that you need.
 
-\hypertarget{the-function-apply}{%
-\subsection{\texorpdfstring{The function \texttt{apply}}{The function apply}}\label{the-function-apply}}
+\hypertarget{apply-function}{%
+\subsubsection{\texorpdfstring{\texttt{apply()} Function}{apply() Function}}\label{apply-function}}
 
-Consider the following code.
+Let's start with the godfather of the family, \texttt{apply()}, which operates on arrays. For simplicity, we will use 2D arrays, which are also known as matrices.
+
+The R base manual tells you that it's called as follows: \texttt{apply(X,\ MARGIN,\ FUN,\ ...)} where:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{X} is an array or a matrix if the dimension of the array is 2;
+\item
+  \texttt{MARGIN} is a variable defining how the function is applied: when \texttt{MARGIN=1}, it applies over rows, whereas with \texttt{MARGIN=2}, it works over columns. Note that when you use the construct \texttt{MARGIN=c(1,2)}, it applies to both rows and columns; and
+\item
+  \texttt{FUN}, which is the function that you want to apply to the data. It can be any R function, including a User Defined Function (UDF).
+\end{itemize}
+
+Let's construct a 5 x 6 matrix and imagine you want to sum the values of each column.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{9}\NormalTok{), }\AttributeTok{ncol=}\DecValTok{3}\NormalTok{ , }\AttributeTok{nrow =} \DecValTok{3}\NormalTok{)}
-\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{()}
-\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{)\{}
-\NormalTok{  y[i] }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(x[i,])}
-\NormalTok{\}}
-\NormalTok{y}
+\CommentTok{\# Construct a 5x6 matrix}
+\NormalTok{X }\OtherTok{=} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{rnorm}\NormalTok{(}\DecValTok{30}\NormalTok{), }\AttributeTok{nrow=}\DecValTok{5}\NormalTok{, }\AttributeTok{ncol=}\DecValTok{6}\NormalTok{)}
+
+\CommentTok{\# Sum the values of each column with \textasciigrave{}apply()\textasciigrave{}}
+\FunctionTok{apply}\NormalTok{(X, }\DecValTok{2}\NormalTok{, sum)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 12 15 18
+## [1]  3.3068149  0.7576652 -1.7653971  4.3518894  2.3963091  2.3626304
 \end{verbatim}
 
-The code first defines a matrix \texttt{x} and an empty vector \texttt{y} (recall that this is bad practice, but for this example it does not matter). Then there is a \texttt{for} cycle which assigns to the i-th entry of \texttt{y} the sum of the entries of the i-th row of \texttt{x}. So the vector \texttt{y} includes the row-totals.
+Remember that in R, a matrix can be seen as a collection of line vectors when you cross the matrix from top to bottom (along the vertical line 1, which specifies the dimension or margin 1), or as a list of columns vectors, spanning the matrix left to right along the dimension or margin 2.
 
-For this simple example the \texttt{for} cycle is extremely quick, but this is just to illustrate how we can replace it using the \texttt{apply} function.
+That means that the instruction you have just entered, depicted in figure 1, translates into: ``apply the function `sum' to the matrix X along margin 2 (by column), summing up the values of each column.
+
+Note that, to avoid cluttering the picture, just one of the columns is highlighted.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{apply}\NormalTok{(x, }\DecValTok{1}\NormalTok{, sum)}
+\CommentTok{\# Construct a 5x6 matrix}
+\NormalTok{X }\OtherTok{=} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{rnorm}\NormalTok{(}\DecValTok{30}\NormalTok{), }\AttributeTok{nrow=}\DecValTok{5}\NormalTok{, }\AttributeTok{ncol=}\DecValTok{6}\NormalTok{)}
+
+\CommentTok{\# Sum the values of each column with \textasciigrave{}apply()\textasciigrave{}}
+\FunctionTok{apply}\NormalTok{(X, }\DecValTok{2}\NormalTok{, sum)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 12 15 18
+## [1] -0.03206613 -1.80367548  1.05338074  0.33361302 -1.38118072  4.71834634
 \end{verbatim}
 
-Let's look at the above code. The first input of \texttt{apply} is the object we want to operate upon, in this case the matrix \texttt{x}. The second input specifies if the operation has to act over the rows of the matrix (input equal to 1) or over the columns (input equal to 2). The third input is the operation we want to use, in this case \texttt{sum}.
+You end up with a line vector containing the sums of the values of each column.
 
-Beside being faster, the above code is also a lot more compact than using a for loop.
+The output of the above code, a line vector, would have also been given if you summed along the lines of the matrix. This is how R displays the result.
 
-The following example computes the mean of each column of \texttt{x}.
+\hypertarget{the-lapply-function}{%
+\subsubsection{\texorpdfstring{The \texttt{lapply()} Function}{The lapply() Function}}\label{the-lapply-function}}
+
+You want to apply a given function to every element of a list and obtain a list as a result. When you execute \texttt{?lapply}, you see that the syntax looks like the \texttt{apply()} function.
+
+The difference is that:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  It can be used for other objects like dataframes, lists or vectors; and
+\item
+  The output returned is a list (which explains the ``l'' in the function name), which has the same number of elements as the object passed to it.
+\end{enumerate}
+
+To see how this works, create a few matrices and extract from each a given column.
+
+This is a quite common operation performed on real data when making comparisons or aggregations from different dataframes.
+
+Again, you start by specifying the object of interest, the list \texttt{Mylist.} You use the standard R selection operator \texttt{{[}} and then omit the first parameter (which therefore translates into ``any'', that's why you see the two commas).
+
+Next, you specify the second parameter, which is \texttt{2}: our margin is `column'. So you extract the second column from all the matrices within the list.
+
+In the right-hand side of figure 2, you can see an alternative extraction: this time you omit the first parameter, and you get the first row from each of the matrices. Our toy example, depicted in the last figure can be coded as:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{apply}\NormalTok{(x, }\DecValTok{2}\NormalTok{, mean)}
+\CommentTok{\# Create a list of matrices}
+\NormalTok{A }\OtherTok{=} \FunctionTok{matrix}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{9}\NormalTok{, }\AttributeTok{nrow =} \DecValTok{3}\NormalTok{)}
+\NormalTok{B }\OtherTok{=} \FunctionTok{matrix}\NormalTok{(}\DecValTok{4}\SpecialCharTok{:}\DecValTok{15}\NormalTok{, }\AttributeTok{nrow =} \DecValTok{4}\NormalTok{)}
+\NormalTok{C }\OtherTok{=} \FunctionTok{cbind}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{8}\NormalTok{,}\DecValTok{9}\NormalTok{,}\DecValTok{10}\NormalTok{), }\FunctionTok{c}\NormalTok{(}\DecValTok{8}\NormalTok{,}\DecValTok{9}\NormalTok{,}\DecValTok{10}\NormalTok{))}
+
+\NormalTok{MyList }\OtherTok{=} \FunctionTok{list}\NormalTok{(A,B,C)}
+
+\CommentTok{\# Extract the 2nd column from \textasciigrave{}MyList\textasciigrave{} with the selection operator \textasciigrave{}[\textasciigrave{} with \textasciigrave{}lapply()\textasciigrave{}}
+\FunctionTok{lapply}\NormalTok{(MyList,}\StringTok{"["}\NormalTok{, , }\DecValTok{2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 2 5 8
+## [[1]]
+## [1] 4 5 6
+## 
+## [[2]]
+## [1]  8  9 10 11
+## 
+## [[3]]
+## [1]  8  9 10
 \end{verbatim}
 
-\hypertarget{the-function-sapply}{%
-\subsection{\texorpdfstring{The function \texttt{sapply}}{The function sapply}}\label{the-function-sapply}}
-
-Consider again our function \texttt{new.function} which computes the sum of the squared of a number \texttt{x} with another number \texttt{y}.
-
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{new.function }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x,y)\{ x}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{+}\NormalTok{ y\}}
-\end{Highlighting}
-\end{Shaded}
-
-Suppose that we want to compute such a sum for all numbers \texttt{x} from 1 to 10. Suppose that \texttt{y} is chosen as 2. We can achieve this with a \texttt{for} cycle as follows.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{x }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\DecValTok{10}
-\NormalTok{z }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{()}
-\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{)\{}
-\NormalTok{  z[i] }\OtherTok{\textless{}{-}} \FunctionTok{new.function}\NormalTok{(x[i],}\DecValTok{2}\NormalTok{)}
-\NormalTok{\}}
-\NormalTok{z}
+\CommentTok{\# Extract the 1st row from \textasciigrave{}MyList\textasciigrave{}}
+\FunctionTok{lapply}\NormalTok{(MyList,}\StringTok{"["}\NormalTok{, }\DecValTok{1}\NormalTok{, )}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]   3   6  11  18  27  38  51  66  83 102
+## [[1]]
+## [1] 1 4 7
+## 
+## [[2]]
+## [1]  4  8 12
+## 
+## [[3]]
+## [1] 8 8
 \end{verbatim}
 
-The function \texttt{sapply} can be used for this specific purpose.
+A few notes to the code above:
+
+\begin{itemize}
+\tightlist
+\item
+  The \texttt{{[}} notation is the select operator. Remember, for example, that to extract all the elements of the third line of B requires: \texttt{B{[}3,{]}};
+\item
+  The \texttt{{[}{[}\ {]}{]}} notation expresses the fact that we are dealing with lists: {[}{[}2{]}{]} means the second element of the list. This is also shown in the output given by R;
+\item
+  The output is a list with as many elements as the element in the input; and
+\item
+  Note that you could also have extracted a single element for each matrice, like this: \texttt{lapply(MyList,"{[}",\ 1,\ 2)}
+\end{itemize}
+
+\hypertarget{the-sapply-function}{%
+\subsubsection{\texorpdfstring{The \texttt{sapply()} Function}{The sapply() Function}}\label{the-sapply-function}}
+
+The \texttt{sapply()} function works like \texttt{lapply()}, but it tries to simplify the output to the most elementary data structure that is possible. And indeed, \texttt{sapply()} is a `wrapper' function for \texttt{lapply()}.
+
+Essentially, \texttt{sapply()} calls \texttt{lapply()} on its input and then applies the following algorithm:
+
+\begin{itemize}
+\tightlist
+\item
+  If the result is a list where every element is length 1, then a vector is returned
+\item
+  If the result is a list where every element is a vector of the same length (\textgreater{} 1), a matrix is returned.
+\item
+  If neither of the above simplifications can be performed then a list is returned
+\end{itemize}
+
+An example may help to understand this: let's say that you want to repeat the extraction operation of a single element as in the last example, but now take the first element of the second row (indexes 2 and 1) for each matrix.
+
+Applying the \texttt{lapply()} function would give us a list unless you pass \texttt{simplify=FALSE} as a parameter to \texttt{sapply()}. Then, a list will be returned. See how it works in the code chunk below:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{x }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\DecValTok{10}
-\FunctionTok{sapply}\NormalTok{(x,new.function, }\AttributeTok{y=}\DecValTok{2}\NormalTok{)}
+\CommentTok{\# Return a list with \textasciigrave{}lapply()\textasciigrave{}}
+\FunctionTok{lapply}\NormalTok{(MyList,}\StringTok{"["}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{ )}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]   3   6  11  18  27  38  51  66  83 102
+## [[1]]
+## [1] 2
+## 
+## [[2]]
+## [1] 5
+## 
+## [[3]]
+## [1] 9
 \end{verbatim}
-
-The first argument of \texttt{sapply} is a vector of values we want to use as input of a function. The second argument is the function we want to apply multiple times. If the function has more than one input we can then specify what their value is, in this specific case \texttt{y=2}.
-
-Notice that a function can also be defined within \texttt{sapply}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{x }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\DecValTok{10}
-\FunctionTok{sapply}\NormalTok{(x, }\ControlFlowTok{function}\NormalTok{(i) i}\SpecialCharTok{\^{}}\DecValTok{2} \SpecialCharTok{+} \DecValTok{2}\NormalTok{)}
+\CommentTok{\# Return a vector with \textasciigrave{}sapply()\textasciigrave{}}
+\FunctionTok{sapply}\NormalTok{(MyList,}\StringTok{"["}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{ )}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##  [1]   3   6  11  18  27  38  51  66  83 102
+## [1] 2 5 9
 \end{verbatim}
 
-So we defined the vector \texttt{x} and we want to apply the function defined within \texttt{sapply} multiple times: once for each entry in the vector \texttt{x}.
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Return a list with \textasciigrave{}sapply()\textasciigrave{}}
+\FunctionTok{sapply}\NormalTok{(MyList,}\StringTok{"["}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\AttributeTok{simplify=}\NormalTok{F)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2 5 9
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Return a vector with \textasciigrave{}unlist()\textasciigrave{}}
+\FunctionTok{unlist}\NormalTok{(}\FunctionTok{lapply}\NormalTok{(MyList,}\StringTok{"["}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{ ))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2 5 9
+\end{verbatim}
+
+\hypertarget{apply-family-examples}{%
+\subsection{\texorpdfstring{\texttt{apply} Family Examples}{apply Family Examples}}\label{apply-family-examples}}
+
+Let's use the \texttt{mtcars} built-in dataset to see some examples:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(mtcars)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
+\end{verbatim}
+
+In this datset we can appreciate some characteristics of different cars. Imagine we want to obtain the average of each feature. We can use the \texttt{apply} function for that purpose:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{apply}\NormalTok{(mtcars, }\DecValTok{2}\NormalTok{, mean)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        mpg        cyl       disp         hp       drat         wt       qsec 
+##  20.090625   6.187500 230.721875 146.687500   3.596563   3.217250  17.848750 
+##         vs         am       gear       carb 
+##   0.437500   0.406250   3.687500   2.812500
+\end{verbatim}
+
+We could also obtain the mean of each call in all the features, but it doesn't make sense at all. Let's generate a list of four items to provide an example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data }\OtherTok{=} \FunctionTok{list}\NormalTok{(}\AttributeTok{item1 =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{4}\NormalTok{,}
+            \AttributeTok{item2 =} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{),}
+            \AttributeTok{item3 =} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{20}\NormalTok{,}\DecValTok{1}\NormalTok{),}
+            \AttributeTok{item4 =} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{100}\NormalTok{,}\DecValTok{5}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+We can get the mean of each of the items we have in the list using the \texttt{lapply} function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{lapply}\NormalTok{(data, mean)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $item1
+## [1] 2.5
+## 
+## $item2
+## [1] 0.08497086
+## 
+## $item3
+## [1] 1.052272
+## 
+## $item4
+## [1] 4.877802
+\end{verbatim}
+
+The last slide provides a simple example where each list item is simply a vector of numeric values. However, consider the case where you have a list that contains data frames and you would like to loop through each list item and perform a function to the data frame. In this case we can embed an \texttt{apply} function within an \texttt{lapply} function.
+
+For example, the following creates a list for R's built in beaver data sets. The lapply function loops through each of the two list items and uses apply to calculate the mean of the columns in both list items.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{beaver\_data }\OtherTok{=} \FunctionTok{list}\NormalTok{(}\AttributeTok{beaver1 =}\NormalTok{ beaver1, }
+                    \AttributeTok{beaver2 =}\NormalTok{ beaver2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{lapply}\NormalTok{(beaver\_data, }\ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{apply}\NormalTok{(x, }\DecValTok{2}\NormalTok{, mean))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $beaver1
+##          day         time         temp        activ 
+## 3.462018e+02 1.312018e+03 3.686219e+01 5.263158e-02 
+## 
+## $beaver2
+##       day      time      temp     activ 
+##  307.1300 1446.2000   37.5967    0.6200
+\end{verbatim}
+
+To illustrate the differences between \texttt{lapply} and \texttt{sapply} functions we can use the previous example using a list with the beaver data and compare the outputs:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{lapply}\NormalTok{(beaver\_data, }\ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{round}\NormalTok{(}\FunctionTok{apply}\NormalTok{(x, }\DecValTok{2}\NormalTok{, mean), }\DecValTok{2}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $beaver1
+##     day    time    temp   activ 
+##  346.20 1312.02   36.86    0.05 
+## 
+## $beaver2
+##     day    time    temp   activ 
+##  307.13 1446.20   37.60    0.62
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sapply}\NormalTok{(beaver\_data, }\ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{round}\NormalTok{(}\FunctionTok{apply}\NormalTok{(x, }\DecValTok{2}\NormalTok{, mean), }\DecValTok{2}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       beaver1 beaver2
+## day    346.20  307.13
+## time  1312.02 1446.20
+## temp    36.86   37.60
+## activ    0.05    0.62
+\end{verbatim}
+
+Finally, I would like to show a \texttt{tapply} example. We didn't dig into this function because we had already seen it in previous sessions, but it also deserves it's own applied example.
+
+\textbf{Remember}: \texttt{tapply()} is used to apply a function over subsets of a vector. It is primarily used when we have the following circumstances:
+
+\begin{itemize}
+\tightlist
+\item
+  A dataset that can be broken up into groups (via categorical variables - aka factors)
+\item
+  We desire to break the dataset up into groups
+\item
+  Within each group, we want to apply a function
+\end{itemize}
+
+The arguments to tapply() are as follows:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{x} is a vector
+\item
+  \texttt{INDEX} is a factor or a list of factors (or else they are coerced to factors)
+\item
+  \texttt{FUN} is a function to be applied
+\item
+  \texttt{...} contains other arguments to be passed FUN
+\item
+  \texttt{simplify}, should we simplify the result?
+\end{itemize}
+
+\begin{verbatim}
+# syntax of tapply function
+tapply(x, INDEX, FUN, ..., simplify = TRUE)
+\end{verbatim}
+
+To provide an example we'll use the built in mtcars dataset and calculate the mean of the \texttt{mpg} variable grouped by the \texttt{cyl} variable.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{tapply}\NormalTok{(mtcars}\SpecialCharTok{$}\NormalTok{mpg, mtcars}\SpecialCharTok{$}\NormalTok{cyl, mean)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        4        6        8 
+## 26.66364 19.74286 15.10000
+\end{verbatim}
+
+Now let's say you want to calculate the mean for each column in the mtcars dataset grouped by the cylinder categorical variable. To do this you can embed the \texttt{tapply} function within the \texttt{apply} function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{apply}\NormalTok{(mtcars, }\DecValTok{2}\NormalTok{, }\ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{tapply}\NormalTok{(x, mtcars}\SpecialCharTok{$}\NormalTok{cyl, mean))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        mpg cyl     disp        hp     drat       wt     qsec        vs
+## 4 26.66364   4 105.1364  82.63636 4.070909 2.285727 19.13727 0.9090909
+## 6 19.74286   6 183.3143 122.28571 3.585714 3.117143 17.97714 0.5714286
+## 8 15.10000   8 353.1000 209.21429 3.229286 3.999214 16.77214 0.0000000
+##          am     gear     carb
+## 4 0.7272727 4.090909 1.545455
+## 6 0.4285714 3.857143 3.428571
+## 8 0.1428571 3.285714 3.500000
+\end{verbatim}
 
 \hypertarget{the-pipe-operator}{%
 \section{The pipe operator}\label{the-pipe-operator}}
@@ -8639,7 +9255,7 @@ In both cases the p-values are larger than 0.10, thus we would not reject the nu
 
 For the sequence \texttt{x1} we observed that one bar was slightly outside the confidence bands: this sometimes happens even when data is actually (pseudo-) random - I created \texttt{x1} using \texttt{rnorm}. The autocorrelations below are an instance of a case where independence is not tenable since we see that multiple bars are outside the confidence bands.
 
-\begin{center}\includegraphics[width=0.5\linewidth]{bookdownproj_files/figure-latex/unnamed-chunk-410-1} \end{center}
+\begin{center}\includegraphics[width=0.5\linewidth]{bookdownproj_files/figure-latex/unnamed-chunk-429-1} \end{center}
 
 \hypertarget{monte-carlo-simulation}{%
 \chapter{Monte Carlo Simulation}\label{monte-carlo-simulation}}
@@ -8928,7 +9544,7 @@ A boxplot can give us a visualization of the results.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.5\linewidth]{bookdownproj_files/figure-latex/unnamed-chunk-420-1} \end{center}
+\begin{center}\includegraphics[width=0.5\linewidth]{bookdownproj_files/figure-latex/unnamed-chunk-439-1} \end{center}
 
 The boxplot importantly tells us two things:
 
@@ -9163,7 +9779,7 @@ A graphical representation of the table is also useful.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-430-1.pdf}
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-449-1.pdf}
 So we can see that Peter breaks even 102 out of 1000 times. Furthermore the plot shows us that most commonly Peter will win/lose little money and that big wins/losses are unlikely.
 
 To conclude our experiment we need to calculate our estimated probability of Peter breaking even. Clearly this is equal to 102/1000= 0.102. In R:
@@ -9314,7 +9930,7 @@ The estimated probability that Annie arrives before Sam is 0.223, and the \emph{
 
 In the next plot we can see that the shaded region shows the area in which \(A < S\)
 
-\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-437-1.pdf}
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-456-1.pdf}
 
 Now, what is the expected difference in the arrival times? Annie is more likely to arrive later, so we model \(E(A-S)\)
 
@@ -9403,7 +10019,7 @@ Next, we can see a plot that represents the results.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-442-1.pdf}
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-461-1.pdf}
 
 \hypertarget{the-taxi-problem-comparing-estimators}{%
 \section{The taxi problem (comparing estimators)}\label{the-taxi-problem-comparing-estimators}}
@@ -9512,7 +10128,7 @@ Seems that \texttt{estimate2} is ``less biased'', but we can also compare them w
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-448-1.pdf}
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-467-1.pdf}
 
 In this case, seems that \texttt{estimate1} has smaller estimation errors. We can also find the sample mean of the absolute errors and its standard error:
 
@@ -9538,8 +10154,8 @@ In this case, seems that \texttt{estimate1} has smaller estimation errors. We ca
 
 Again, the \texttt{estimate1} looks better than the \texttt{estimate2}.
 
-\hypertarget{discrete-events-simulation}{%
-\chapter{Discrete Events Simulation}\label{discrete-events-simulation}}
+\hypertarget{discrete-events-simulation-with-r}{%
+\chapter{Discrete Events Simulation with R}\label{discrete-events-simulation-with-r}}
 
 We are not going to explore this subject in depth, but at the end of this chapter we will understand what the discrete events simulation consists of, and we will carry out an example in R. Unlike Monte Carlo methods, which allow us to simulate events based on variables that change constantly over time, the discrete events simulation will help us to model the behavior of systems based on a sequence of discrete events over time. Remember that for both cases we use stochastic models.
 
@@ -9604,7 +10220,7 @@ In this course we have already used some DES-specific terminology, e.g., event, 
 The \texttt{R} API (Application Programming Interface) exposed by \texttt{simmer} comprises two main elements: the \textbf{simmer environment} (or simulation environment) and the \textbf{trajectory object}.
 
 \hypertarget{the-trajectory-object}{%
-\subsection{\texorpdfstring{\textbf{The Trajectory Object}}{The Trajectory Object}}\label{the-trajectory-object}}
+\section{The Trajectory Object}\label{the-trajectory-object}}
 
 A trajectory can be defined as a recipe and consists of an ordered set of activities. The \texttt{trajectory()} method instantiates the object, and activities can be appended using the \texttt{\%\textgreater{}\%} operator:
 
@@ -9619,12 +10235,6 @@ A trajectory can be defined as a recipe and consists of an ordered set of activi
   \FunctionTok{log\_}\NormalTok{(}\StringTok{"Leaving the trajectory"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
-
-\hypertarget{discrete-events-simulation-1}{%
-\chapter{Discrete Events Simulation}\label{discrete-events-simulation-1}}
-
-\hypertarget{the-simmer-api}{%
-\section{\texorpdfstring{The \texttt{simmer} API}{The simmer API}}\label{the-simmer-api}}
 
 The trajectory above illustrates the two most basic activities available: displaying a message (\texttt{log\_()}) and spending some time in the system (\texttt{timeout()}).
 
@@ -9641,12 +10251,6 @@ The example uses fixed parameters: a string and a numeric value respectively. Ho
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{discrete-events-simulation-2}{%
-\chapter{Discrete Events Simulation}\label{discrete-events-simulation-2}}
-
-\hypertarget{the-simmer-api-1}{%
-\section{\texorpdfstring{The \texttt{simmer} API}{The simmer API}}\label{the-simmer-api-1}}
-
 Let's check what happens if we print the trajectory:
 
 \begin{Shaded}
@@ -9662,15 +10266,7 @@ Let's check what happens if we print the trajectory:
 ## { Activity: Log          | message: function(), level: 0 }
 \end{verbatim}
 
-We see the three activities we have created in our trajectory: message + delay + message
-
-\hypertarget{discrete-events-simulation-3}{%
-\chapter{Discrete Events Simulation}\label{discrete-events-simulation-3}}
-
-\hypertarget{the-simmer-api-2}{%
-\section{\texorpdfstring{The \texttt{simmer} API}{The simmer API}}\label{the-simmer-api-2}}
-
-There are many activities available. We will briefly review them by categorizing them into different topics.
+We see the three activities we have created in our trajectory: message + delay + message. There are many activities available. We will briefly review them by categorizing them into different topics.
 
 \begin{itemize}
 \tightlist
@@ -9680,47 +10276,20 @@ There are many activities available. We will briefly review them by categorizing
   \textbf{Interaction with resources}: The two main activities for interacting with resources are \texttt{seize()} and \texttt{release()}. In their most basic usage, they seize/release a given amount of a resource specified by name.
 \item
   \textbf{Interaction with sources}: There are four activities specifically intended to modify arrival sources. An arrival may \texttt{activate()} or \texttt{deactivate()} a source, but also modify with \texttt{set\_trajectory()} the trajectory to which it attaches the arrivals created, or set a new inter-arrival distribution with \texttt{set\_source()}.
-\end{itemize}
-
-\hypertarget{discrete-events-simulation-4}{%
-\chapter{Discrete Events Simulation}\label{discrete-events-simulation-4}}
-
-\hypertarget{the-simmer-api-3}{%
-\section{\texorpdfstring{The \texttt{simmer} API}{The simmer API}}\label{the-simmer-api-3}}
-
-\begin{itemize}
-\tightlist
 \item
   \textbf{Branching}: A branch is a point in a trajectory in which one or more sub-trajectories may be followed. Two types of branching are supported in \texttt{simmer.} The \texttt{branch()} activity places the arrival in one of the sub-trajectories depending on some condition evaluated in a dynamical parameter called option. On the other hand, the \texttt{clone()} activity is a parallel branch. It does not take any option.
 \item
   \textbf{Loops}: There is a mechanism, \texttt{rollback()}, for going back in a trajectory and thus executing loops over a number of activities. This activity causes the arrival to step back a given amount of activities a number of times.
 \item
   \textbf{Batching}: Batching consists of collecting a number of arrivals before they can continue their path in the trajectory as a unit 2 . This means that if, for instance, 10 arrivals in a batch try to seize a unit of a certain resource, only one unit may be seized, not 10.
-\end{itemize}
-
-\hypertarget{discrete-events-simulation-5}{%
-\chapter{Discrete Events Simulation}\label{discrete-events-simulation-5}}
-
-\hypertarget{the-simmer-api-4}{%
-\section{\texorpdfstring{The \texttt{simmer} API}{The simmer API}}\label{the-simmer-api-4}}
-
-\begin{itemize}
-\tightlist
 \item
   \textbf{Asynchronous programming}: There are a number of methods enabling asynchronous events. The \texttt{send()} activity broadcasts one or more \textbf{signals} to all the arrivals subscribed to them. Signals can be triggered immediately or after some \textbf{delay}. Arrivals are able to block and \texttt{wait()} until a certain signal is received.
 \item
   \textbf{Reneging}: Besides being rejected while trying to seize a resource, arrivals are also able to leave the trajectory at any moment, synchronously or asynchronously. Namely, reneging means that an arrival abandons the trajectory at a given moment. The most simple activity enabling this is \texttt{leave}, which immediately triggers the action given some probability.
 \end{itemize}
 
-\hypertarget{discrete-events-simulation-6}{%
-\chapter{Discrete Events Simulation}\label{discrete-events-simulation-6}}
-
-\hypertarget{the-simmer-api-5}{%
-\section{\texorpdfstring{The \texttt{simmer} API}{The simmer API}}\label{the-simmer-api-5}}
-
-The \texttt{R} API (Application Programming Interface) exposed by \texttt{simmer} comprises two main elements: the \textbf{simmer environment} (or simulation environment) and the \textbf{trajectory object}.
-
-\textbf{The Simulation Enviroment}
+\hypertarget{the-simulation-enviroment}{%
+\section{The Simulation Enviroment}\label{the-simulation-enviroment}}
 
 The simulation environment manages resources and sources, and controls the simulation execution. The \texttt{simmer()} method instantiates the object, after which resources and sources can be appended using the \texttt{\%\textgreater{}\%} operator:
 
@@ -9739,12 +10308,6 @@ The simulation environment manages resources and sources, and controls the simul
 ## { Resource: res_name | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }
 ## { Source: arrival | monitored: 1 | n_generated: 0 }
 \end{verbatim}
-
-\hypertarget{discrete-events-simulation-7}{%
-\chapter{Discrete Events Simulation}\label{discrete-events-simulation-7}}
-
-\hypertarget{the-simmer-api-6}{%
-\section{\texorpdfstring{The \texttt{simmer} API}{The simmer API}}\label{the-simmer-api-6}}
 
 Then, the simulation can be executed, or \texttt{run()}, until a stop time:
 
@@ -9765,12 +10328,6 @@ Then, the simulation can be executed, or \texttt{run()}, until a stop time:
 ## { Source: arrival | monitored: 1 | n_generated: 2 }
 \end{verbatim}
 
-\hypertarget{discrete-events-simulation-8}{%
-\chapter{Discrete Events Simulation}\label{discrete-events-simulation-8}}
-
-\hypertarget{the-simmer-api-7}{%
-\section{\texorpdfstring{The \texttt{simmer} API}{The simmer API}}\label{the-simmer-api-7}}
-
 There are a number of methods for extracting information, such as the simulation time (\texttt{now()}), future scheduled events (\texttt{peek()}), and getters for obtaining resources' and sources' parameters (capacity, queue size, server count and queue count; number of arrivals generated so far). There are also several setters available for resources and sources (capacity, queue size; trajectory, distribution).
 
 \begin{itemize}
@@ -9780,13 +10337,8 @@ There are a number of methods for extracting information, such as the simulation
   \textbf{Sources}: Three main parameters define a source: a \texttt{name\_prefix} for each generated arrival, a \texttt{trajectory} to attach them to and a source of inter-arrival times. There are two kinds of source: \textbf{generators} and \textbf{data sources}. A generator (\texttt{add\_generator} method) is a dynamic source that draws inter-arrival times from a user-provided function. The \texttt{add\_dataframe} method allows the user to set up a data source which draws arrivals from a provided data frame.
 \end{itemize}
 
-\hypertarget{discrete-events-simulation-9}{%
-\chapter{Discrete Events Simulation}\label{discrete-events-simulation-9}}
-
-\hypertarget{the-simmer-api-8}{%
-\section{\texorpdfstring{The \texttt{simmer} API}{The simmer API}}\label{the-simmer-api-8}}
-
-\textbf{Monitoring and data retrieval}
+\hypertarget{monitoring-and-data-retrieval}{%
+\section{Monitoring and data retrieval}\label{monitoring-and-data-retrieval}}
 
 There are three methods for obtaining monitored data about arrivals, resources and attributes. They can be applied to a single simulation environment or to a list of environments, and the returning object is always a data frame.
 
@@ -9800,8 +10352,8 @@ There are three methods for obtaining monitored data about arrivals, resources a
   \texttt{get\_mon\_attributes()}: Returns state changes in attributes.
 \end{itemize}
 
-\hypertarget{discrete-events-simulation-10}{%
-\chapter{Discrete Events Simulation}\label{discrete-events-simulation-10}}
+\hypertarget{simmer-example}{%
+\section{\texorpdfstring{\texttt{simmer} Example}{simmer Example}}\label{simmer-example}}
 
 Let's see an example in R of discrete event simulation in which we simulate the behavior of patients in a hospital.
 
@@ -9813,9 +10365,6 @@ First we have to load the \texttt{simmer} and \texttt{magrittr} libraries to do 
 \FunctionTok{library}\NormalTok{(magrittr)}
 \end{Highlighting}
 \end{Shaded}
-
-\hypertarget{discrete-events-simulation-11}{%
-\chapter{Discrete Events Simulation}\label{discrete-events-simulation-11}}
 
 With the \texttt{simmer} library we create a simulation environment that we are going to call \texttt{outpatient\ clinic}
 
@@ -9830,9 +10379,6 @@ With the \texttt{simmer} library we create a simulation environment that we are 
 ## simmer environment: outpatient clinic | now: 0 | next: 
 ## { Monitor: in memory }
 \end{verbatim}
-
-\hypertarget{discrete-events-simulation-12}{%
-\chapter{Discrete Events Simulation}\label{discrete-events-simulation-12}}
 
 Second, we create the patient's trajectory. We do this using the \texttt{trajectory} function of the \texttt{simmer} library.
 
@@ -9856,9 +10402,6 @@ For example, in the case of the nurse, we seize the entity with the function \te
   \FunctionTok{release}\NormalTok{(}\StringTok{"administration"}\NormalTok{, }\DecValTok{1}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
-
-\hypertarget{discrete-events-simulation-13}{%
-\chapter{Discrete Events Simulation}\label{discrete-events-simulation-13}}
 
 Thirdly, we add the number of elements of the system using the \texttt{add\_resource} function.
 
@@ -9885,9 +10428,6 @@ We also generate the patient entity that will interact with the whole system usi
 ## { Source: patient | monitored: 1 | n_generated: 0 }
 \end{verbatim}
 
-\hypertarget{discrete-events-simulation-14}{%
-\chapter{Discrete Events Simulation}\label{discrete-events-simulation-14}}
-
 We finally launch the simulation for 540 minutes. When the simulation is finished we can see how our resources are working in the simulated system.
 
 \begin{Shaded}
@@ -9906,9 +10446,6 @@ We finally launch the simulation for 540 minutes. When the simulation is finishe
 ## { Source: patient | monitored: 1 | n_generated: 108 }
 \end{verbatim}
 
-\hypertarget{discrete-events-simulation-replication}{%
-\chapter{Discrete Events Simulation: Replication}\label{discrete-events-simulation-replication}}
-
 It is very easy to replicate a simulation multiple times using standard R functions.
 
 \begin{Shaded}
@@ -9924,12 +10461,7 @@ It is very easy to replicate a simulation multiple times using standard R functi
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{discrete-events-simulation-plots}{%
-\chapter{Discrete Events Simulation: Plots}\label{discrete-events-simulation-plots}}
-
-This package provides some basic visualization tools to help you take a glance at your simulations quickly.
-
-There are three types of plot implemented with different metrics available:
+This package provides some basic visualization tools to help you take a glance at your simulations quickly. There are three types of plot implemented with different metrics available:
 
 \begin{itemize}
 \tightlist
@@ -9959,9 +10491,6 @@ There are three types of plot implemented with different metrics available:
   Plot of trayectories
 \end{itemize}
 
-\hypertarget{discrete-events-simulation-plot-of-resources}{%
-\chapter{Discrete Events Simulation: Plot of resources}\label{discrete-events-simulation-plot-of-resources}}
-
 With this graphs we can have a look at the overall resource utilization. The top and bottom of the error bars show respectively the 25th and 75th percentile of the utilization across all the replications. The top of the bar shows the median utilization.
 
 \begin{Shaded}
@@ -9973,7 +10502,7 @@ With this graphs we can have a look at the overall resource utilization. The top
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-462-1.pdf}
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-481-1.pdf}
 
 It is also possible to have a look at resources' activity during the simulation.
 
@@ -9983,10 +10512,7 @@ It is also possible to have a look at resources' activity during the simulation.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-463-1.pdf}
-
-\hypertarget{discrete-events-simulation-plot-of-arrivals}{%
-\chapter{Discrete Events Simulation: Plot of arrivals}\label{discrete-events-simulation-plot-of-arrivals}}
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-482-1.pdf}
 
 Next we can have a look at the evolution of the arrivals' flow time during the simulation. In the plot below, each individual line represents a replication. A smooth line is drawn over them. All arrivals that didn't finish their entire trajectory are excluded from the plot.
 
@@ -10003,23 +10529,13 @@ Similarly one can have a look at the evolution of the activity times with \textt
 ## `geom_smooth()` using method = 'gam' and formula 'y ~ s(x, bs = "cs")'
 \end{verbatim}
 
-\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-464-1.pdf}
-
-\hypertarget{discrete-events-simulation-plot-of-trayectories}{%
-\chapter{Discrete Events Simulation: Plot of trayectories}\label{discrete-events-simulation-plot-of-trayectories}}
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-483-1.pdf}
 
 Simulation trajectories may grow considerably, and they are not always easy to inspect to ensure their compliance with the model that we are trying to build. In this example we are going to expose a simple one:
 
-\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-465-1.pdf}
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-484-1.pdf}
 
-\hypertarget{discrete-events-simulation-improving-the-system}{%
-\chapter{Discrete Events Simulation: Improving the system}\label{discrete-events-simulation-improving-the-system}}
-
-Now that we know a bit about the \texttt{simmer} tool we are going to make some changes in the system to try to improve its efficiency.
-
-From what we have seen in the examples, it seems that the nurses are overworked.
-
-We will first try to ``hire'' a new nurse to improve the system.
+Now that we know a bit about the \texttt{simmer} tool we are going to make some changes in the system to try to improve its efficiency. From what we have seen in the examples, it seems that the nurses are overworked. We will first try to ``hire'' a new nurse to improve the system.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -10034,27 +10550,19 @@ We will first try to ``hire'' a new nurse to improve the system.
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{discrete-events-simulation-improving-the-system-1}{%
-\chapter{Discrete Events Simulation: Improving the system}\label{discrete-events-simulation-improving-the-system-1}}
-
 Let's see how the system works with a new nurse through the plots:
 
-\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-467-1.pdf}
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-486-1.pdf}
 
-\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-468-1.pdf}
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-487-1.pdf}
 
 \begin{verbatim}
 ## `geom_smooth()` using method = 'gam' and formula 'y ~ s(x, bs = "cs")'
 \end{verbatim}
 
-\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-469-1.pdf}
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-488-1.pdf}
 
-\hypertarget{discrete-events-simulation-improving-the-system-2}{%
-\chapter{Discrete Events Simulation: Improving the system}\label{discrete-events-simulation-improving-the-system-2}}
-
-We can see that both doctors and nurses are now working at 100\% capacity.
-
-Now the problem seems to be coming from the administration. We are going to ``fire'' one of the workers in this area to try to improve the system.
+We can see that both doctors and nurses are now working at 100\% capacity. Now the problem seems to be coming from the administration. We are going to ``fire'' one of the workers in this area to try to improve the system.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -10069,25 +10577,19 @@ Now the problem seems to be coming from the administration. We are going to ``fi
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{discrete-events-simulation-improving-the-system-3}{%
-\chapter{Discrete Events Simulation: Improving the system}\label{discrete-events-simulation-improving-the-system-3}}
-
 Let's see how the system works without a administration worker through the plots:
 
-\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-471-1.pdf}
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-490-1.pdf}
 
-\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-472-1.pdf}
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-491-1.pdf}
 
 \begin{verbatim}
 ## `geom_smooth()` using method = 'gam' and formula 'y ~ s(x, bs = "cs")'
 \end{verbatim}
 
-\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-473-1.pdf}
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-492-1.pdf}
 
-\hypertarget{discrete-events-simulation-improving-the-system-4}{%
-\chapter{Discrete Events Simulation: Improving the system}\label{discrete-events-simulation-improving-the-system-4}}
-
-Great! We've found the perfect balance for our little hospital. In the next lab you will simulate the IE cafeteria with some specific pre COVID values for the simulation. Good luck!
+Great! We've found the perfect balance for our little hospital.
 
   \bibliography{book.bib,packages.bib}
 

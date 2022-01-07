@@ -126,7 +126,7 @@ plot(t, x + 60, type = "l", lwd = 2, xlab= "Time", ylab = "Speed in km/h")
 ```
 
 
-In later chapters we will focus on discrete simulations, which are usually called *discrete-event simulation*. Continuous simulations will not be discussed in these notes.
+In later chapters we will focus on discrete simulations, which are usually called *discrete-event simulation*.
 
 
 

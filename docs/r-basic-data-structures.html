@@ -13,7 +13,7 @@
   
   <meta property="og:image" content="/images/Rplot.png" />
   <meta property="og:description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
-  <meta name="github-repo" content="manueleleonelli/SimBook" />
+  <meta name="github-repo" content="amartinezm90/SMUCbook" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="2.7 R Basic Data Structures | Simulation and Modeling to Understand the Change" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Alejandro Martínez-Mingo &amp; Manuele Leonelli" />
 
 
-<meta name="date" content="2022-01-04" />
+<meta name="date" content="2022-01-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="r-basic-data-types.html"/>
-<link rel="next" href="accessing-and-manipulating-variables.html"/>
+<link rel="next" href="control-flow.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -230,38 +230,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.7.8" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#matrices-and-arrays"><i class="fa fa-check"></i><b>2.7.8</b> Matrices and Arrays</a></li>
 <li class="chapter" data-level="2.7.9" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#matrices"><i class="fa fa-check"></i><b>2.7.9</b> Matrices</a></li>
 <li class="chapter" data-level="2.7.10" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#lists"><i class="fa fa-check"></i><b>2.7.10</b> Lists</a></li>
-<li class="chapter" data-level="2.7.11" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#vectors-1"><i class="fa fa-check"></i><b>2.7.11</b> Vectors</a></li>
-<li class="chapter" data-level="2.7.12" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#matrices-1"><i class="fa fa-check"></i><b>2.7.12</b> Matrices</a></li>
-<li class="chapter" data-level="2.7.13" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#dataframes"><i class="fa fa-check"></i><b>2.7.13</b> Dataframes</a></li>
-<li class="chapter" data-level="2.7.14" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#null-and-na"><i class="fa fa-check"></i><b>2.7.14</b> <code>NULL</code> and <code>NA</code></a></li>
+<li class="chapter" data-level="2.7.11" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#data-frames"><i class="fa fa-check"></i><b>2.7.11</b> Data Frames</a></li>
 </ul></li>
-<li class="chapter" data-level="2.8" data-path="accessing-and-manipulating-variables.html"><a href="accessing-and-manipulating-variables.html"><i class="fa fa-check"></i><b>2.8</b> Accessing and manipulating variables</a>
+<li class="chapter" data-level="2.8" data-path="control-flow.html"><a href="control-flow.html"><i class="fa fa-check"></i><b>2.8</b> Control Flow</a>
 <ul>
-<li class="chapter" data-level="2.8.1" data-path="accessing-and-manipulating-variables.html"><a href="accessing-and-manipulating-variables.html#accessing-a-single-element"><i class="fa fa-check"></i><b>2.8.1</b> Accessing a single element</a></li>
-<li class="chapter" data-level="2.8.2" data-path="accessing-and-manipulating-variables.html"><a href="accessing-and-manipulating-variables.html#acessing-multiple-entries"><i class="fa fa-check"></i><b>2.8.2</b> Acessing multiple entries</a></li>
-<li class="chapter" data-level="2.8.3" data-path="accessing-and-manipulating-variables.html"><a href="accessing-and-manipulating-variables.html#accessing-entries-with-logical-operators"><i class="fa fa-check"></i><b>2.8.3</b> Accessing entries with logical operators</a></li>
-<li class="chapter" data-level="2.8.4" data-path="accessing-and-manipulating-variables.html"><a href="accessing-and-manipulating-variables.html#manipulating-dataframes"><i class="fa fa-check"></i><b>2.8.4</b> Manipulating dataframes</a></li>
-<li class="chapter" data-level="2.8.5" data-path="accessing-and-manipulating-variables.html"><a href="accessing-and-manipulating-variables.html#information-about-objects"><i class="fa fa-check"></i><b>2.8.5</b> Information about objects</a></li>
+<li class="chapter" data-level="2.8.1" data-path="control-flow.html"><a href="control-flow.html#conditional-statements"><i class="fa fa-check"></i><b>2.8.1</b> Conditional statements</a></li>
+<li class="chapter" data-level="2.8.2" data-path="control-flow.html"><a href="control-flow.html#loops"><i class="fa fa-check"></i><b>2.8.2</b> Loops</a></li>
+<li class="chapter" data-level="2.8.3" data-path="control-flow.html"><a href="control-flow.html#functions"><i class="fa fa-check"></i><b>2.8.3</b> Functions</a></li>
+<li class="chapter" data-level="2.8.4" data-path="control-flow.html"><a href="control-flow.html#the-apply-family"><i class="fa fa-check"></i><b>2.8.4</b> The <code>apply</code> Family</a></li>
+<li class="chapter" data-level="2.8.5" data-path="control-flow.html"><a href="control-flow.html#apply-family-examples"><i class="fa fa-check"></i><b>2.8.5</b> <code>apply</code> Family Examples</a></li>
 </ul></li>
-<li class="chapter" data-level="2.9" data-path="loops-and-conditions.html"><a href="loops-and-conditions.html"><i class="fa fa-check"></i><b>2.9</b> Loops and conditions</a>
-<ul>
-<li class="chapter" data-level="2.9.1" data-path="loops-and-conditions.html"><a href="loops-and-conditions.html#if-statements"><i class="fa fa-check"></i><b>2.9.1</b> <code>if</code> statements</a></li>
-<li class="chapter" data-level="2.9.2" data-path="loops-and-conditions.html"><a href="loops-and-conditions.html#ifelse"><i class="fa fa-check"></i><b>2.9.2</b> <code>ifelse</code></a></li>
-<li class="chapter" data-level="2.9.3" data-path="loops-and-conditions.html"><a href="loops-and-conditions.html#loops"><i class="fa fa-check"></i><b>2.9.3</b> Loops</a></li>
-</ul></li>
-<li class="chapter" data-level="2.10" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i><b>2.10</b> Functions</a>
-<ul>
-<li class="chapter" data-level="2.10.1" data-path="functions.html"><a href="functions.html#defining-your-own-function"><i class="fa fa-check"></i><b>2.10.1</b> Defining your own function</a></li>
-<li class="chapter" data-level="2.10.2" data-path="functions.html"><a href="functions.html#calling-functions"><i class="fa fa-check"></i><b>2.10.2</b> Calling functions</a></li>
-<li class="chapter" data-level="2.10.3" data-path="functions.html"><a href="functions.html#mathematical-and-statistical-functions"><i class="fa fa-check"></i><b>2.10.3</b> Mathematical and statistical functions</a></li>
-</ul></li>
-<li class="chapter" data-level="2.11" data-path="the-apply-family-of-functions.html"><a href="the-apply-family-of-functions.html"><i class="fa fa-check"></i><b>2.11</b> The <code>apply</code> family of functions</a>
-<ul>
-<li class="chapter" data-level="2.11.1" data-path="the-apply-family-of-functions.html"><a href="the-apply-family-of-functions.html#the-function-apply"><i class="fa fa-check"></i><b>2.11.1</b> The function <code>apply</code></a></li>
-<li class="chapter" data-level="2.11.2" data-path="the-apply-family-of-functions.html"><a href="the-apply-family-of-functions.html#the-function-sapply"><i class="fa fa-check"></i><b>2.11.2</b> The function <code>sapply</code></a></li>
-</ul></li>
-<li class="chapter" data-level="2.12" data-path="the-pipe-operator.html"><a href="the-pipe-operator.html"><i class="fa fa-check"></i><b>2.12</b> The pipe operator</a></li>
-<li class="chapter" data-level="2.13" data-path="plotting.html"><a href="plotting.html"><i class="fa fa-check"></i><b>2.13</b> Plotting</a></li>
+<li class="chapter" data-level="2.9" data-path="the-pipe-operator.html"><a href="the-pipe-operator.html"><i class="fa fa-check"></i><b>2.9</b> The pipe operator</a></li>
+<li class="chapter" data-level="2.10" data-path="plotting.html"><a href="plotting.html"><i class="fa fa-check"></i><b>2.10</b> Plotting</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="probability-basics.html"><a href="probability-basics.html"><i class="fa fa-check"></i><b>3</b> Probability Basics</a>
 <ul>
@@ -345,64 +325,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2" data-path="general-case-with-standard-normal-distributions.html"><a href="general-case-with-standard-normal-distributions.html"><i class="fa fa-check"></i><b>6.2</b> General Case with Standard Normal Distributions</a></li>
 <li class="chapter" data-level="6.3" data-path="the-taxi-problem-comparing-estimators.html"><a href="the-taxi-problem-comparing-estimators.html"><i class="fa fa-check"></i><b>6.3</b> The taxi problem (comparing estimators)</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="discrete-events-simulation.html"><a href="discrete-events-simulation.html"><i class="fa fa-check"></i><b>7</b> Discrete Events Simulation</a>
+<li class="chapter" data-level="7" data-path="discrete-events-simulation-with-r.html"><a href="discrete-events-simulation-with-r.html"><i class="fa fa-check"></i><b>7</b> Discrete Events Simulation with R</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="simmer-terminology.html"><a href="simmer-terminology.html"><i class="fa fa-check"></i><b>7.1</b> <code>simmer</code> terminology</a>
-<ul>
-<li class="chapter" data-level="7.1.1" data-path="simmer-terminology.html"><a href="simmer-terminology.html#the-trajectory-object"><i class="fa fa-check"></i><b>7.1.1</b> <strong>The Trajectory Object</strong></a></li>
+<li class="chapter" data-level="7.1" data-path="simmer-terminology.html"><a href="simmer-terminology.html"><i class="fa fa-check"></i><b>7.1</b> <code>simmer</code> terminology</a></li>
+<li class="chapter" data-level="7.2" data-path="the-trajectory-object.html"><a href="the-trajectory-object.html"><i class="fa fa-check"></i><b>7.2</b> The Trajectory Object</a></li>
+<li class="chapter" data-level="7.3" data-path="the-simulation-enviroment.html"><a href="the-simulation-enviroment.html"><i class="fa fa-check"></i><b>7.3</b> The Simulation Enviroment</a></li>
+<li class="chapter" data-level="7.4" data-path="monitoring-and-data-retrieval.html"><a href="monitoring-and-data-retrieval.html"><i class="fa fa-check"></i><b>7.4</b> Monitoring and data retrieval</a></li>
+<li class="chapter" data-level="7.5" data-path="simmer-example.html"><a href="simmer-example.html"><i class="fa fa-check"></i><b>7.5</b> <code>simmer</code> Example</a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="discrete-events-simulation-1.html"><a href="discrete-events-simulation-1.html"><i class="fa fa-check"></i><b>8</b> Discrete Events Simulation</a>
-<ul>
-<li class="chapter" data-level="8.1" data-path="the-simmer-api.html"><a href="the-simmer-api.html"><i class="fa fa-check"></i><b>8.1</b> The <code>simmer</code> API</a></li>
-</ul></li>
-<li class="chapter" data-level="9" data-path="discrete-events-simulation-2.html"><a href="discrete-events-simulation-2.html"><i class="fa fa-check"></i><b>9</b> Discrete Events Simulation</a>
-<ul>
-<li class="chapter" data-level="9.1" data-path="the-simmer-api-1.html"><a href="the-simmer-api-1.html"><i class="fa fa-check"></i><b>9.1</b> The <code>simmer</code> API</a></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="discrete-events-simulation-3.html"><a href="discrete-events-simulation-3.html"><i class="fa fa-check"></i><b>10</b> Discrete Events Simulation</a>
-<ul>
-<li class="chapter" data-level="10.1" data-path="the-simmer-api-2.html"><a href="the-simmer-api-2.html"><i class="fa fa-check"></i><b>10.1</b> The <code>simmer</code> API</a></li>
-</ul></li>
-<li class="chapter" data-level="11" data-path="discrete-events-simulation-4.html"><a href="discrete-events-simulation-4.html"><i class="fa fa-check"></i><b>11</b> Discrete Events Simulation</a>
-<ul>
-<li class="chapter" data-level="11.1" data-path="the-simmer-api-3.html"><a href="the-simmer-api-3.html"><i class="fa fa-check"></i><b>11.1</b> The <code>simmer</code> API</a></li>
-</ul></li>
-<li class="chapter" data-level="12" data-path="discrete-events-simulation-5.html"><a href="discrete-events-simulation-5.html"><i class="fa fa-check"></i><b>12</b> Discrete Events Simulation</a>
-<ul>
-<li class="chapter" data-level="12.1" data-path="the-simmer-api-4.html"><a href="the-simmer-api-4.html"><i class="fa fa-check"></i><b>12.1</b> The <code>simmer</code> API</a></li>
-</ul></li>
-<li class="chapter" data-level="13" data-path="discrete-events-simulation-6.html"><a href="discrete-events-simulation-6.html"><i class="fa fa-check"></i><b>13</b> Discrete Events Simulation</a>
-<ul>
-<li class="chapter" data-level="13.1" data-path="the-simmer-api-5.html"><a href="the-simmer-api-5.html"><i class="fa fa-check"></i><b>13.1</b> The <code>simmer</code> API</a></li>
-</ul></li>
-<li class="chapter" data-level="14" data-path="discrete-events-simulation-7.html"><a href="discrete-events-simulation-7.html"><i class="fa fa-check"></i><b>14</b> Discrete Events Simulation</a>
-<ul>
-<li class="chapter" data-level="14.1" data-path="the-simmer-api-6.html"><a href="the-simmer-api-6.html"><i class="fa fa-check"></i><b>14.1</b> The <code>simmer</code> API</a></li>
-</ul></li>
-<li class="chapter" data-level="15" data-path="discrete-events-simulation-8.html"><a href="discrete-events-simulation-8.html"><i class="fa fa-check"></i><b>15</b> Discrete Events Simulation</a>
-<ul>
-<li class="chapter" data-level="15.1" data-path="the-simmer-api-7.html"><a href="the-simmer-api-7.html"><i class="fa fa-check"></i><b>15.1</b> The <code>simmer</code> API</a></li>
-</ul></li>
-<li class="chapter" data-level="16" data-path="discrete-events-simulation-9.html"><a href="discrete-events-simulation-9.html"><i class="fa fa-check"></i><b>16</b> Discrete Events Simulation</a>
-<ul>
-<li class="chapter" data-level="16.1" data-path="the-simmer-api-8.html"><a href="the-simmer-api-8.html"><i class="fa fa-check"></i><b>16.1</b> The <code>simmer</code> API</a></li>
-</ul></li>
-<li class="chapter" data-level="17" data-path="discrete-events-simulation-10.html"><a href="discrete-events-simulation-10.html"><i class="fa fa-check"></i><b>17</b> Discrete Events Simulation</a></li>
-<li class="chapter" data-level="18" data-path="discrete-events-simulation-11.html"><a href="discrete-events-simulation-11.html"><i class="fa fa-check"></i><b>18</b> Discrete Events Simulation</a></li>
-<li class="chapter" data-level="19" data-path="discrete-events-simulation-12.html"><a href="discrete-events-simulation-12.html"><i class="fa fa-check"></i><b>19</b> Discrete Events Simulation</a></li>
-<li class="chapter" data-level="20" data-path="discrete-events-simulation-13.html"><a href="discrete-events-simulation-13.html"><i class="fa fa-check"></i><b>20</b> Discrete Events Simulation</a></li>
-<li class="chapter" data-level="21" data-path="discrete-events-simulation-14.html"><a href="discrete-events-simulation-14.html"><i class="fa fa-check"></i><b>21</b> Discrete Events Simulation</a></li>
-<li class="chapter" data-level="22" data-path="discrete-events-simulation-replication.html"><a href="discrete-events-simulation-replication.html"><i class="fa fa-check"></i><b>22</b> Discrete Events Simulation: Replication</a></li>
-<li class="chapter" data-level="23" data-path="discrete-events-simulation-plots.html"><a href="discrete-events-simulation-plots.html"><i class="fa fa-check"></i><b>23</b> Discrete Events Simulation: Plots</a></li>
-<li class="chapter" data-level="24" data-path="discrete-events-simulation-plot-of-resources.html"><a href="discrete-events-simulation-plot-of-resources.html"><i class="fa fa-check"></i><b>24</b> Discrete Events Simulation: Plot of resources</a></li>
-<li class="chapter" data-level="25" data-path="discrete-events-simulation-plot-of-arrivals.html"><a href="discrete-events-simulation-plot-of-arrivals.html"><i class="fa fa-check"></i><b>25</b> Discrete Events Simulation: Plot of arrivals</a></li>
-<li class="chapter" data-level="26" data-path="discrete-events-simulation-plot-of-trayectories.html"><a href="discrete-events-simulation-plot-of-trayectories.html"><i class="fa fa-check"></i><b>26</b> Discrete Events Simulation: Plot of trayectories</a></li>
-<li class="chapter" data-level="27" data-path="discrete-events-simulation-improving-the-system.html"><a href="discrete-events-simulation-improving-the-system.html"><i class="fa fa-check"></i><b>27</b> Discrete Events Simulation: Improving the system</a></li>
-<li class="chapter" data-level="28" data-path="discrete-events-simulation-improving-the-system-1.html"><a href="discrete-events-simulation-improving-the-system-1.html"><i class="fa fa-check"></i><b>28</b> Discrete Events Simulation: Improving the system</a></li>
-<li class="chapter" data-level="29" data-path="discrete-events-simulation-improving-the-system-2.html"><a href="discrete-events-simulation-improving-the-system-2.html"><i class="fa fa-check"></i><b>29</b> Discrete Events Simulation: Improving the system</a></li>
-<li class="chapter" data-level="30" data-path="discrete-events-simulation-improving-the-system-3.html"><a href="discrete-events-simulation-improving-the-system-3.html"><i class="fa fa-check"></i><b>30</b> Discrete Events Simulation: Improving the system</a></li>
-<li class="chapter" data-level="31" data-path="discrete-events-simulation-improving-the-system-4.html"><a href="discrete-events-simulation-improving-the-system-4.html"><i class="fa fa-check"></i><b>31</b> Discrete Events Simulation: Improving the system</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -1567,73 +1497,226 @@ cannot ask quantitative questions about factor levels, like &gt; or &lt;=, even 
 ##  $ fourth: cplx [1:2] 3.2-4.5i 12.8+2.2i</code></pre>
 </div>
 </div>
-<div id="vectors-1" class="section level3" number="2.7.11">
-<h3><span class="header-section-number">2.7.11</span> Vectors</h3>
-<p>In all previous examples the variables included one element only. More generally we can define sequences of elements or so-called <em>vectors</em>. They can be defined with the command <code>c</code>, which stands for combine.</p>
-<div class="sourceCode" id="cb641"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb641-1"><a href="r-basic-data-structures.html#cb641-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">7</span>)</span>
-<span id="cb641-2"><a href="r-basic-data-structures.html#cb641-2" aria-hidden="true" tabindex="-1"></a>vec</span></code></pre></div>
-<pre><code>## [1] 1 3 5 7</code></pre>
-<p>So <code>vec</code> includes the sequence of numbers 1, 3, 5, 7. Notice that a vector can only include one data type. Consider the following:</p>
-<div class="sourceCode" id="cb643"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb643-1"><a href="r-basic-data-structures.html#cb643-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="st">&quot;hello&quot;</span>, <span class="cn">TRUE</span>)</span>
-<span id="cb643-2"><a href="r-basic-data-structures.html#cb643-2" aria-hidden="true" tabindex="-1"></a>vec</span></code></pre></div>
-<pre><code>## [1] &quot;1&quot;     &quot;hello&quot; &quot;TRUE&quot;</code></pre>
-<p>We created a variable <code>vec</code> where the first entry is a number, then a character string, then a Boolean. When we print <code>vec</code>, we get that its elements are <code>"1"</code>, <code>"hello"</code> and <code>"TRUE"</code>: it has transformed the number <code>1</code> into the string <code>"1"</code> and the Boolean <code>TRUE</code> into <code>"TRUE"</code>.</p>
+<div id="data-frames" class="section level3" number="2.7.11">
+<h3><span class="header-section-number">2.7.11</span> Data Frames</h3>
+<p>Data frame is a two dimensional data structure in R. It is a special case of a list which has each component of equal length.</p>
+<div id="check-if-a-variable-is-a-data-frame-or-not" class="section level4" number="2.7.11.1">
+<h4><span class="header-section-number">2.7.11.1</span> Check if a variable is a data frame or not</h4>
+<p>We can check if a variable is a data frame or not using the <code>class()</code> function.</p>
+<div class="sourceCode" id="cb641"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb641-1"><a href="r-basic-data-structures.html#cb641-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(x)</span></code></pre></div>
+<pre><code>## [1] &quot;list&quot;</code></pre>
+<div class="sourceCode" id="cb643"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb643-1"><a href="r-basic-data-structures.html#cb643-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(x)</span></code></pre></div>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+<p>In this example, x can be considered as a list of 3 components with each component having a two element vector.</p>
 </div>
-<div id="matrices-1" class="section level3" number="2.7.12">
-<h3><span class="header-section-number">2.7.12</span> Matrices</h3>
-<p>Matrices are tables of elements that are organized in rows and columns. You can think of them as an arrangement of vectors into a table. Matrices must have the same data type in all its entries, as for vectors. Matrices can be constructed in multiple ways. One way is by stacking vectors into a matrix row-by-row with the command <code>rbind</code>. Consider the following example.</p>
-<div class="sourceCode" id="cb645"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb645-1"><a href="r-basic-data-structures.html#cb645-1" aria-hidden="true" tabindex="-1"></a>row1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span>
-<span id="cb645-2"><a href="r-basic-data-structures.html#cb645-2" aria-hidden="true" tabindex="-1"></a>row2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>)</span>
-<span id="cb645-3"><a href="r-basic-data-structures.html#cb645-3" aria-hidden="true" tabindex="-1"></a>row3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>)</span>
-<span id="cb645-4"><a href="r-basic-data-structures.html#cb645-4" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">rbind</span>(row1,row2,row3)</span>
-<span id="cb645-5"><a href="r-basic-data-structures.html#cb645-5" aria-hidden="true" tabindex="-1"></a>mat</span></code></pre></div>
-<pre><code>##      [,1] [,2] [,3]
-## row1    1    2    3
-## row2    4    5    6
-## row3    7    8    9</code></pre>
-<p>So first we created vectors <code>row1 = (1,2,3)</code>, <code>row2 = (4,5,6)</code> and <code>row3 = (7,8,9)</code> and then organizing them together into the matrix <code>mat</code>.</p>
-<p>The following code follows the same procedure but now organizes vectors by columns instead using the command <code>cbind</code>.</p>
-<div class="sourceCode" id="cb647"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb647-1"><a href="r-basic-data-structures.html#cb647-1" aria-hidden="true" tabindex="-1"></a>col1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span>
-<span id="cb647-2"><a href="r-basic-data-structures.html#cb647-2" aria-hidden="true" tabindex="-1"></a>col2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>)</span>
-<span id="cb647-3"><a href="r-basic-data-structures.html#cb647-3" aria-hidden="true" tabindex="-1"></a>col3 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>)</span>
-<span id="cb647-4"><a href="r-basic-data-structures.html#cb647-4" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">cbind</span>(col1,col2,col3)</span>
-<span id="cb647-5"><a href="r-basic-data-structures.html#cb647-5" aria-hidden="true" tabindex="-1"></a>mat</span></code></pre></div>
-<pre><code>##      col1 col2 col3
-## [1,]    1    4    7
-## [2,]    2    5    8
-## [3,]    3    6    9</code></pre>
-<p>Last, there is also a command called <code>matrix</code> to create a matrix. It takes a vector, defined using the command <code>c</code> and stores its entries into a matrix of <code>nrow</code> rows and <code>ncol</code> columns. Consider the following example.</p>
-<div class="sourceCode" id="cb649"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb649-1"><a href="r-basic-data-structures.html#cb649-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>)</span>
-<span id="cb649-2"><a href="r-basic-data-structures.html#cb649-2" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(vec, <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">3</span>)</span>
-<span id="cb649-3"><a href="r-basic-data-structures.html#cb649-3" aria-hidden="true" tabindex="-1"></a>mat</span></code></pre></div>
-<pre><code>##      [,1] [,2] [,3]
-## [1,]    1    4    7
-## [2,]    2    5    8
-## [3,]    3    6    9</code></pre>
-<p>So first we created a vector <code>vec</code> with numbers from 1 to 9 and then stored them in a matrix with 3 rows and 3 columns. Number are stored by column: the first element of <code>vec</code> is in entry (1,1), the second element of <code>vec</code> is in entry (2,1), and so on.</p>
+<div id="functions-of-data-frame" class="section level4" number="2.7.11.2">
+<h4><span class="header-section-number">2.7.11.2</span> Functions of data frame</h4>
+<p>Here you have some useful functions we can use to have a better understanding about the content we have inside our data frame:</p>
+<ul>
+<li>We can check the names of the variables using the <code>names()</code> function</li>
+</ul>
+<div class="sourceCode" id="cb645"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb645-1"><a href="r-basic-data-structures.html#cb645-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(x)</span></code></pre></div>
+<pre><code>## [1] &quot;SN&quot;     &quot;Age&quot;    &quot;Gender&quot;</code></pre>
+<ul>
+<li>We can know the number of columns and rows we have in our data frame (the <code>length()</code> function will return also the number of columns, it is taking the number of elements we are storing in the underlying list, which are the column vectors):</li>
+</ul>
+<div class="sourceCode" id="cb647"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb647-1"><a href="r-basic-data-structures.html#cb647-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(x)</span></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<div class="sourceCode" id="cb649"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb649-1"><a href="r-basic-data-structures.html#cb649-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(x)</span></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<div class="sourceCode" id="cb651"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb651-1"><a href="r-basic-data-structures.html#cb651-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(x)</span></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<ul>
+<li>The <code>str()</code> and the <code>summary()</code> are the most useful functions to understand our data frames:</li>
+</ul>
+<div class="sourceCode" id="cb653"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb653-1"><a href="r-basic-data-structures.html#cb653-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(x)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    2 obs. of  3 variables:
+##  $ SN    : int  1 2
+##  $ Age   : num  21 15
+##  $ Gender: chr  &quot;Male&quot; &quot;Female&quot;</code></pre>
+<div class="sourceCode" id="cb655"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb655-1"><a href="r-basic-data-structures.html#cb655-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(x)</span></code></pre></div>
+<pre><code>##        SN            Age          Gender         
+##  Min.   :1.00   Min.   :15.0   Length:2          
+##  1st Qu.:1.25   1st Qu.:16.5   Class :character  
+##  Median :1.50   Median :18.0   Mode  :character  
+##  Mean   :1.50   Mean   :18.0                     
+##  3rd Qu.:1.75   3rd Qu.:19.5                     
+##  Max.   :2.00   Max.   :21.0</code></pre>
 </div>
-<div id="dataframes" class="section level3" number="2.7.13">
-<h3><span class="header-section-number">2.7.13</span> Dataframes</h3>
-<p>Dataframes are very similar as matrices, they are tables organized in rows and columns. However, different to matrices they can have columns with different data types. They can be created with the command <code>data.frame</code>.</p>
-<div class="sourceCode" id="cb651"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb651-1"><a href="r-basic-data-structures.html#cb651-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">X1 =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="at">X2 =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>,<span class="cn">FALSE</span>,<span class="cn">FALSE</span>),</span>
-<span id="cb651-2"><a href="r-basic-data-structures.html#cb651-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">X3 =</span> <span class="fu">c</span>(<span class="st">&quot;male&quot;</span>,<span class="st">&quot;male&quot;</span>,<span class="st">&quot;female&quot;</span>))</span>
-<span id="cb651-3"><a href="r-basic-data-structures.html#cb651-3" aria-hidden="true" tabindex="-1"></a>data</span></code></pre></div>
-<pre><code>##   X1    X2     X3
-## 1  1  TRUE   male
-## 2  2 FALSE   male
-## 3  3 FALSE female</code></pre>
-<p>The dataframe <code>data</code> includes three columns: the first column <code>X1</code> of numbers, the second column <code>X2</code> of Boolean and the third column <code>X3</code> of characters. Dataframes are the objects that are most commonly used in real world data analysis.</p>
+<div id="how-to-create-a-data-frame" class="section level4" number="2.7.11.3">
+<h4><span class="header-section-number">2.7.11.3</span> How to create a data frame</h4>
+<p>We can create a data frame using the <code>data.frame()</code> function. Below you can see how to create the data frame we are using for all the previous examples:</p>
+<div class="sourceCode" id="cb657"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb657-1"><a href="r-basic-data-structures.html#cb657-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="st">&quot;SN&quot;</span> <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="st">&quot;Age&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">21</span>,<span class="dv">15</span>), <span class="st">&quot;Gender&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Male&quot;</span>,<span class="st">&quot;Female&quot;</span>))</span></code></pre></div>
+<p>Let’s take another look to the data frame structure:</p>
+<div class="sourceCode" id="cb658"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb658-1"><a href="r-basic-data-structures.html#cb658-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(x)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    2 obs. of  3 variables:
+##  $ SN    : int  1 2
+##  $ Age   : num  21 15
+##  $ Gender: chr  &quot;Male&quot; &quot;Female&quot;</code></pre>
+<p>Which is the type of the <code>Gender</code> variable? Do we need to change it? It is a character vector and, in order to use this variable in future models we will need to transform it into a factor. Remember that R3 automatically converts all the characters into factors, but we need to define those in R4.</p>
+<div class="sourceCode" id="cb660"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb660-1"><a href="r-basic-data-structures.html#cb660-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="st">&quot;SN&quot;</span> <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="st">&quot;Age&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">21</span>,<span class="dv">15</span>), <span class="st">&quot;Gender&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Male&quot;</span>,<span class="st">&quot;Female&quot;</span>), <span class="at">stringsAsFactors =</span> T)</span>
+<span id="cb660-2"><a href="r-basic-data-structures.html#cb660-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(x)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    2 obs. of  3 variables:
+##  $ SN    : int  1 2
+##  $ Age   : num  21 15
+##  $ Gender: chr  &quot;Male&quot; &quot;Female&quot;</code></pre>
+<p><strong>NOTE</strong>: Many data input functions of R like, <code>read.table()</code>, <code>read.csv()</code>, <code>read.delim()</code>, <code>read.fwf()</code> also read data into a data frame.</p>
 </div>
-<div id="null-and-na" class="section level3" number="2.7.14">
-<h3><span class="header-section-number">2.7.14</span> <code>NULL</code> and <code>NA</code></h3>
-<p>The expression <code>NA</code> is used in R to denote a missing value. Consider the following example.</p>
-<div class="sourceCode" id="cb653"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb653-1"><a href="r-basic-data-structures.html#cb653-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="cn">NA</span>, <span class="dv">5</span>)</span>
-<span id="cb653-2"><a href="r-basic-data-structures.html#cb653-2" aria-hidden="true" tabindex="-1"></a>vec</span></code></pre></div>
-<pre><code>## [1]  3 NA  5</code></pre>
-<p>Although the second element of <code>vec</code> is the expression <code>NA</code>, R recognizes that it is used for missing value and therefore the elements 3 and 5 are still considered numbers: indeed they are not printed as <code>"3"</code> and <code>"5"</code>.</p>
-<p><code>NULL</code> is an additional datatype. This can have various uses. For instance, it is associated to a vector with no entries.</p>
-<div class="sourceCode" id="cb655"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb655-1"><a href="r-basic-data-structures.html#cb655-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>()</span></code></pre></div>
-<pre><code>## NULL</code></pre>
+<div id="how-to-access-components-of-a-data-frame" class="section level4" number="2.7.11.4">
+<h4><span class="header-section-number">2.7.11.4</span> How to access components of a data frame</h4>
+<p>Components of data frame can be accessed like a list or like a matrix.</p>
+<div id="accessing-like-a-list" class="section level5" number="2.7.11.4.1">
+<h5><span class="header-section-number">2.7.11.4.1</span> Accessing like a list</h5>
+<p>We can use either <code>[</code>, <code>[[</code> or <code>$</code> operator to access columns of data frame.</p>
+<p>Accessing with <code>[[</code> or <code>$</code> is similar. However, it differs for <code>[</code> in that, indexing with <code>[</code> will return us a data frame but the other two will reduce it into a vector.</p>
+<div class="sourceCode" id="cb662"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb662-1"><a href="r-basic-data-structures.html#cb662-1" aria-hidden="true" tabindex="-1"></a>x[<span class="st">&quot;Gender&quot;</span>]</span></code></pre></div>
+<pre><code>##   Gender
+## 1   Male
+## 2 Female</code></pre>
+<div class="sourceCode" id="cb664"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb664-1"><a href="r-basic-data-structures.html#cb664-1" aria-hidden="true" tabindex="-1"></a>x<span class="sc">$</span>Age</span></code></pre></div>
+<pre><code>## [1] 21 15</code></pre>
+<div class="sourceCode" id="cb666"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb666-1"><a href="r-basic-data-structures.html#cb666-1" aria-hidden="true" tabindex="-1"></a>x[[<span class="st">&quot;Gender&quot;</span>]]</span></code></pre></div>
+<pre><code>## [1] &quot;Male&quot;   &quot;Female&quot;</code></pre>
+<div class="sourceCode" id="cb668"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb668-1"><a href="r-basic-data-structures.html#cb668-1" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">2</span>]</span></code></pre></div>
+<pre><code>##   Age
+## 1  21
+## 2  15</code></pre>
+<div class="sourceCode" id="cb670"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb670-1"><a href="r-basic-data-structures.html#cb670-1" aria-hidden="true" tabindex="-1"></a>x[[<span class="dv">3</span>]]</span></code></pre></div>
+<pre><code>## [1] &quot;Male&quot;   &quot;Female&quot;</code></pre>
+</div>
+<div id="accessing-like-a-matrix" class="section level5" number="2.7.11.4.2">
+<h5><span class="header-section-number">2.7.11.4.2</span> Accessing like a matrix</h5>
+<p>Data frames can be accessed like a matrix by providing index for row and column.</p>
+<p>To illustrate this, we use datasets already available in R. Datasets that are available can be listed with the command <code>library(help = "datasets")</code>.</p>
+<p>We will use the <code>trees</code> dataset which contains <code>Girth</code>, <code>Height</code> and <code>Volume</code> for Black Cherry Trees.</p>
+<p>A data frame can be examined using functions like <code>str()</code> and <code>head()</code>.</p>
+<div class="sourceCode" id="cb672"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb672-1"><a href="r-basic-data-structures.html#cb672-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(trees)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    31 obs. of  3 variables:
+##  $ Girth : num  8.3 8.6 8.8 10.5 10.7 10.8 11 11 11.1 11.2 ...
+##  $ Height: num  70 65 63 72 81 83 66 75 80 75 ...
+##  $ Volume: num  10.3 10.3 10.2 16.4 18.8 19.7 15.6 18.2 22.6 19.9 ...</code></pre>
+<div class="sourceCode" id="cb674"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb674-1"><a href="r-basic-data-structures.html#cb674-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(trees, <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##   Girth Height Volume
+## 1   8.3     70   10.3
+## 2   8.6     65   10.3
+## 3   8.8     63   10.2</code></pre>
+<p>We can see that trees is a data frame with 31 rows and 3 columns. We also display the first 3 rows of the data frame.</p>
+<p>Now we proceed to access the data frame like a matrix.</p>
+<div class="sourceCode" id="cb676"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb676-1"><a href="r-basic-data-structures.html#cb676-1" aria-hidden="true" tabindex="-1"></a>trees[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>,]    <span class="co"># select 2nd and 3rd row</span></span></code></pre></div>
+<pre><code>##   Girth Height Volume
+## 2   8.6     65   10.3
+## 3   8.8     63   10.2</code></pre>
+<div class="sourceCode" id="cb678"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb678-1"><a href="r-basic-data-structures.html#cb678-1" aria-hidden="true" tabindex="-1"></a>trees[trees<span class="sc">$</span>Height <span class="sc">&gt;</span> <span class="dv">82</span>,]    <span class="co"># selects rows with Height greater than 82</span></span></code></pre></div>
+<pre><code>##    Girth Height Volume
+## 6   10.8     83   19.7
+## 17  12.9     85   33.8
+## 18  13.3     86   27.4
+## 31  20.6     87   77.0</code></pre>
+</div>
+</div>
+<div id="how-to-modify-a-data-frame" class="section level4" number="2.7.11.5">
+<h4><span class="header-section-number">2.7.11.5</span> How to modify a Data Frame</h4>
+<p>Data frames can be modified like we modified matrices through reassignment.</p>
+<div class="sourceCode" id="cb680"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb680-1"><a href="r-basic-data-structures.html#cb680-1" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">1</span>,<span class="st">&quot;Age&quot;</span>] <span class="ot">=</span> <span class="dv">20</span>; x</span></code></pre></div>
+<pre><code>##   SN Age Gender
+## 1  1  20   Male
+## 2  2  15 Female</code></pre>
+<div id="adding-components" class="section level5" number="2.7.11.5.1">
+<h5><span class="header-section-number">2.7.11.5.1</span> Adding Components</h5>
+<p>Rows can be added to a data frame using the <code>rbind()</code> function.</p>
+<div class="sourceCode" id="cb682"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb682-1"><a href="r-basic-data-structures.html#cb682-1" aria-hidden="true" tabindex="-1"></a>(<span class="fu">rbind</span>(x,<span class="fu">list</span>(<span class="dv">1</span>,<span class="dv">16</span>,<span class="st">&quot;Female&quot;</span>)))</span></code></pre></div>
+<pre><code>##   SN Age Gender
+## 1  1  20   Male
+## 2  2  15 Female
+## 3  1  16 Female</code></pre>
+<p>Similarly, we can add columns using <code>cbind()</code>.</p>
+<div class="sourceCode" id="cb684"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb684-1"><a href="r-basic-data-structures.html#cb684-1" aria-hidden="true" tabindex="-1"></a>(<span class="fu">cbind</span>(x,<span class="at">State=</span><span class="fu">c</span>(<span class="st">&quot;NY&quot;</span>,<span class="st">&quot;FL&quot;</span>)))</span></code></pre></div>
+<pre><code>##   SN Age Gender State
+## 1  1  20   Male    NY
+## 2  2  15 Female    FL</code></pre>
+<p>Since data frames are implemented as list, we can also add new columns through simple list-like assignments.</p>
+<div class="sourceCode" id="cb686"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb686-1"><a href="r-basic-data-structures.html#cb686-1" aria-hidden="true" tabindex="-1"></a>x<span class="sc">$</span>State <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;NY&quot;</span>,<span class="st">&quot;FL&quot;</span>); x</span></code></pre></div>
+<pre><code>##   SN Age Gender State
+## 1  1  20   Male    NY
+## 2  2  15 Female    FL</code></pre>
+</div>
+<div id="deleting-components" class="section level5" number="2.7.11.5.2">
+<h5><span class="header-section-number">2.7.11.5.2</span> Deleting Components</h5>
+<p>Data frame columns can be deleted by assigning <code>NULL</code> to it.</p>
+<div class="sourceCode" id="cb688"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb688-1"><a href="r-basic-data-structures.html#cb688-1" aria-hidden="true" tabindex="-1"></a>x<span class="sc">$</span>State <span class="ot">=</span> <span class="cn">NULL</span>; x</span></code></pre></div>
+<pre><code>##   SN Age Gender
+## 1  1  20   Male
+## 2  2  15 Female</code></pre>
+<p>Similarly, rows can be deleted through reassignments.</p>
+<div class="sourceCode" id="cb690"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb690-1"><a href="r-basic-data-structures.html#cb690-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> x[<span class="sc">-</span><span class="dv">1</span>,]; x</span></code></pre></div>
+<pre><code>##   SN Age Gender
+## 2  2  15 Female</code></pre>
+</div>
+</div>
+<div id="exporting-a-data-frame" class="section level4" number="2.7.11.6">
+<h4><span class="header-section-number">2.7.11.6</span> Exporting a data frame</h4>
+<p>As we have mentioned before, any data table we import in R will take the form of a data frame by default. This facilitates us enormously the work of data cleaning since there are many libraries that work on data frames and will help us in this process. We will see many of these resources in the “Data Wrangling” module.</p>
+<p>For now, we only need some knowledge of importing and exporting data tables in R. Let’s start with a built-in dataframe like <code>trees</code>.</p>
+<div class="sourceCode" id="cb692"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb692-1"><a href="r-basic-data-structures.html#cb692-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(trees, <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##   Girth Height Volume
+## 1   8.3     70   10.3
+## 2   8.6     65   10.3
+## 3   8.8     63   10.2</code></pre>
+<p>This dataframe can be exported in different formats, but let’s see only the two main ones that we will use in R, .csv and .txt. The basic function in R for exporting data is called <code>write.table()</code>, and it has a lot of parameters. My recommendation is that you take a look at the documentation of this function to familiarize yourself with it.</p>
+<p>The main parameters of the <code>write.table()</code> function are</p>
+<ul>
+<li><code>x</code>: will be the object we want to export, in this case a data frame</li>
+<li><code>file</code>: is the name of the file to be exported. In this argument we can also enter a path to organize the file in our OS. The file will take the extension that we indicate in its name.</li>
+<li><code>append</code>: we will use it if the file already exists and we want to add new information. By default it is <code>FALSE</code>.</li>
+<li><code>quote</code>: by default it is also <code>FALSE.</code> If you set it to <code>TRUE</code> this parameter will return the factors and strings with quotes</li>
+<li><code>sep</code>: in this parameter we can decide how to separate the columns of our file. The default is a comma.</li>
+<li><code>dec</code>: this parameter will allow us to change the symbol of the decimals that by default is a dot.</li>
+<li>…</li>
+</ul>
+<p>Let’s see an example. Next we are going to export the data frame <code>trees</code> as a .txt file.</p>
+<div class="sourceCode" id="cb694"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb694-1"><a href="r-basic-data-structures.html#cb694-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(<span class="at">x =</span> trees, <span class="at">file =</span> <span class="st">&quot;./Data/trees.txt&quot;</span>, <span class="at">quote =</span> <span class="cn">TRUE</span>, <span class="at">sep =</span> <span class="st">&quot;;&quot;</span>, <span class="at">dec =</span> <span class="st">&quot;,&quot;</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p>Although the function <code>write.table()</code> already provides a simple method to export data tables, we can also use the function <code>write.csv()</code>, which will facilitate the export of .csv files with a predetermined format to facilitate their subsequent use.</p>
+<p>This function <code>write.csv()</code> or <code>write.csv2()</code> (a second version that has different default parameters) use as a base the <code>write.table()</code> function, so its behavior is practically the same.</p>
+<p>Let’s see the same example, but exporting the file in this case as a .csv:</p>
+<div class="sourceCode" id="cb695"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb695-1"><a href="r-basic-data-structures.html#cb695-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(<span class="at">x =</span> trees, <span class="at">file =</span> <span class="st">&quot;./Data/trees.csv&quot;</span>)</span>
+<span id="cb695-2"><a href="r-basic-data-structures.html#cb695-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv2</span>(<span class="at">x =</span> trees, <span class="at">file =</span> <span class="st">&quot;./Data/trees2.csv&quot;</span>)</span></code></pre></div>
+</div>
+<div id="importing-a-data-frame" class="section level4" number="2.7.11.7">
+<h4><span class="header-section-number">2.7.11.7</span> Importing a data frame</h4>
+<p>When importing data tables the operation will be exactly the same. In this case, the basic function of R is <code>read.table()</code>, and the functions <code>read.csv()</code> and <code>read.csv2()</code> use the previous one to define other behaviors focused on reading .csv files.</p>
+<p>The parameters of <code>read.table()</code> are the same as those of write.table() with some exceptions.</p>
+<ul>
+<li><code>header</code>: is a logical parameter (TRUE/FALSE) that indicates if the file contains a header.</li>
+<li><code>quote</code>: it is not a logical parameter anymore, but it allows us to decide how we want to code the quotes.</li>
+<li><code>row.names</code> and <code>col.names</code>: they also existed in the previous function but in this case they make more sense. These parameters will take a vector the size of the number of rows or columns respectively, and set it as such in the data frame</li>
+<li><code>na.strings</code>: logical vector that by default is FALSE, and assigns as NA’s to all character type elements.</li>
+<li><code>skip</code>: is a parameter that will skip the number of lines of the data table that we indicate with an integer.</li>
+<li><code>stringsAsFactors</code>: logical vector that by default is FALSE and helps us to code the character type vectors as factors. In some cases it will be useful, but in others we prefer to have the versatility that character vectors offer.</li>
+</ul>
+<p>Let’s see how to import the files that we have previously exported with the <code>read.table()</code> function:</p>
+<div class="sourceCode" id="cb696"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb696-1"><a href="r-basic-data-structures.html#cb696-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">read.table</span>(<span class="at">file =</span> <span class="st">&quot;./Data/trees.txt&quot;</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">sep =</span> <span class="st">&quot;;&quot;</span>, <span class="at">dec =</span> <span class="st">&quot;,&quot;</span>, </span>
+<span id="cb696-2"><a href="r-basic-data-structures.html#cb696-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">na.strings =</span> <span class="cn">FALSE</span>, <span class="at">stringsAsFactors =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb696-3"><a href="r-basic-data-structures.html#cb696-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    31 obs. of  3 variables:
+##  $ Girth : num  8.3 8.6 8.8 10.5 10.7 10.8 11 11 11.1 11.2 ...
+##  $ Height: int  70 65 63 72 81 83 66 75 80 75 ...
+##  $ Volume: num  10.3 10.3 10.2 16.4 18.8 19.7 15.6 18.2 22.6 19.9 ...</code></pre>
+<p>In the case of the functions <code>read.csv()</code> and r<code>ead.csv2()</code> we can ensure that the format in which we have exported the files will be the same as that in which we should read it:</p>
+<div class="sourceCode" id="cb698"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb698-1"><a href="r-basic-data-structures.html#cb698-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">&quot;./Data/trees.csv&quot;</span>)</span>
+<span id="cb698-2"><a href="r-basic-data-structures.html#cb698-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df1)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    31 obs. of  4 variables:
+##  $ X     : int  1 2 3 4 5 6 7 8 9 10 ...
+##  $ Girth : num  8.3 8.6 8.8 10.5 10.7 10.8 11 11 11.1 11.2 ...
+##  $ Height: int  70 65 63 72 81 83 66 75 80 75 ...
+##  $ Volume: num  10.3 10.3 10.2 16.4 18.8 19.7 15.6 18.2 22.6 19.9 ...</code></pre>
+<div class="sourceCode" id="cb700"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb700-1"><a href="r-basic-data-structures.html#cb700-1" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">=</span> <span class="fu">read.csv2</span>(<span class="at">file =</span> <span class="st">&quot;./Data/trees2.csv&quot;</span>)</span>
+<span id="cb700-2"><a href="r-basic-data-structures.html#cb700-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df2)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    31 obs. of  4 variables:
+##  $ X     : int  1 2 3 4 5 6 7 8 9 10 ...
+##  $ Girth : num  8.3 8.6 8.8 10.5 10.7 10.8 11 11 11.1 11.2 ...
+##  $ Height: int  70 65 63 72 81 83 66 75 80 75 ...
+##  $ Volume: num  10.3 10.3 10.2 16.4 18.8 19.7 15.6 18.2 22.6 19.9 ...</code></pre>
+</div>
 </div>
 </div>
             </section>
@@ -1642,7 +1725,7 @@ cannot ask quantitative questions about factor levels, like &gt; or &lt;=, even 
         </div>
       </div>
 <a href="r-basic-data-types.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="accessing-and-manipulating-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="control-flow.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

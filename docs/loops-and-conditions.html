@@ -4,19 +4,19 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2.9 Loops and conditions | Simulation and Modeling to Understand the Change</title>
+  <title>2.8 Loops and conditions | Simulation and Modeling to Understand the Change</title>
   <meta name="description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2.9 Loops and conditions | Simulation and Modeling to Understand the Change" />
+  <meta property="og:title" content="2.8 Loops and conditions | Simulation and Modeling to Understand the Change" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/Rplot.png" />
   <meta property="og:description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
-  <meta name="github-repo" content="manueleleonelli/SimBook" />
+  <meta name="github-repo" content="amartinezm90/SMUCbook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2.9 Loops and conditions | Simulation and Modeling to Understand the Change" />
+  <meta name="twitter:title" content="2.8 Loops and conditions | Simulation and Modeling to Understand the Change" />
   
   <meta name="twitter:description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
   <meta name="twitter:image" content="/images/Rplot.png" />
@@ -24,14 +24,14 @@
 <meta name="author" content="Alejandro Martínez-Mingo &amp; Manuele Leonelli" />
 
 
-<meta name="date" content="2022-01-04" />
+<meta name="date" content="2022-01-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="accessing-and-manipulating-variables.html"/>
+<link rel="prev" href="r-basic-data-structures.html"/>
 <link rel="next" href="functions.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -230,38 +230,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.7.8" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#matrices-and-arrays"><i class="fa fa-check"></i><b>2.7.8</b> Matrices and Arrays</a></li>
 <li class="chapter" data-level="2.7.9" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#matrices"><i class="fa fa-check"></i><b>2.7.9</b> Matrices</a></li>
 <li class="chapter" data-level="2.7.10" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#lists"><i class="fa fa-check"></i><b>2.7.10</b> Lists</a></li>
-<li class="chapter" data-level="2.7.11" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#vectors-1"><i class="fa fa-check"></i><b>2.7.11</b> Vectors</a></li>
-<li class="chapter" data-level="2.7.12" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#matrices-1"><i class="fa fa-check"></i><b>2.7.12</b> Matrices</a></li>
-<li class="chapter" data-level="2.7.13" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#dataframes"><i class="fa fa-check"></i><b>2.7.13</b> Dataframes</a></li>
-<li class="chapter" data-level="2.7.14" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#null-and-na"><i class="fa fa-check"></i><b>2.7.14</b> <code>NULL</code> and <code>NA</code></a></li>
+<li class="chapter" data-level="2.7.11" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#data-frames"><i class="fa fa-check"></i><b>2.7.11</b> Data Frames</a></li>
 </ul></li>
-<li class="chapter" data-level="2.8" data-path="accessing-and-manipulating-variables.html"><a href="accessing-and-manipulating-variables.html"><i class="fa fa-check"></i><b>2.8</b> Accessing and manipulating variables</a>
+<li class="chapter" data-level="2.8" data-path="loops-and-conditions.html"><a href="loops-and-conditions.html"><i class="fa fa-check"></i><b>2.8</b> Loops and conditions</a>
 <ul>
-<li class="chapter" data-level="2.8.1" data-path="accessing-and-manipulating-variables.html"><a href="accessing-and-manipulating-variables.html#accessing-a-single-element"><i class="fa fa-check"></i><b>2.8.1</b> Accessing a single element</a></li>
-<li class="chapter" data-level="2.8.2" data-path="accessing-and-manipulating-variables.html"><a href="accessing-and-manipulating-variables.html#acessing-multiple-entries"><i class="fa fa-check"></i><b>2.8.2</b> Acessing multiple entries</a></li>
-<li class="chapter" data-level="2.8.3" data-path="accessing-and-manipulating-variables.html"><a href="accessing-and-manipulating-variables.html#accessing-entries-with-logical-operators"><i class="fa fa-check"></i><b>2.8.3</b> Accessing entries with logical operators</a></li>
-<li class="chapter" data-level="2.8.4" data-path="accessing-and-manipulating-variables.html"><a href="accessing-and-manipulating-variables.html#manipulating-dataframes"><i class="fa fa-check"></i><b>2.8.4</b> Manipulating dataframes</a></li>
-<li class="chapter" data-level="2.8.5" data-path="accessing-and-manipulating-variables.html"><a href="accessing-and-manipulating-variables.html#information-about-objects"><i class="fa fa-check"></i><b>2.8.5</b> Information about objects</a></li>
+<li class="chapter" data-level="2.8.1" data-path="loops-and-conditions.html"><a href="loops-and-conditions.html#if-statements"><i class="fa fa-check"></i><b>2.8.1</b> <code>if</code> statements</a></li>
+<li class="chapter" data-level="2.8.2" data-path="loops-and-conditions.html"><a href="loops-and-conditions.html#ifelse"><i class="fa fa-check"></i><b>2.8.2</b> <code>ifelse</code></a></li>
+<li class="chapter" data-level="2.8.3" data-path="loops-and-conditions.html"><a href="loops-and-conditions.html#loops"><i class="fa fa-check"></i><b>2.8.3</b> Loops</a></li>
 </ul></li>
-<li class="chapter" data-level="2.9" data-path="loops-and-conditions.html"><a href="loops-and-conditions.html"><i class="fa fa-check"></i><b>2.9</b> Loops and conditions</a>
+<li class="chapter" data-level="2.9" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i><b>2.9</b> Functions</a>
 <ul>
-<li class="chapter" data-level="2.9.1" data-path="loops-and-conditions.html"><a href="loops-and-conditions.html#if-statements"><i class="fa fa-check"></i><b>2.9.1</b> <code>if</code> statements</a></li>
-<li class="chapter" data-level="2.9.2" data-path="loops-and-conditions.html"><a href="loops-and-conditions.html#ifelse"><i class="fa fa-check"></i><b>2.9.2</b> <code>ifelse</code></a></li>
-<li class="chapter" data-level="2.9.3" data-path="loops-and-conditions.html"><a href="loops-and-conditions.html#loops"><i class="fa fa-check"></i><b>2.9.3</b> Loops</a></li>
+<li class="chapter" data-level="2.9.1" data-path="functions.html"><a href="functions.html#defining-your-own-function"><i class="fa fa-check"></i><b>2.9.1</b> Defining your own function</a></li>
+<li class="chapter" data-level="2.9.2" data-path="functions.html"><a href="functions.html#calling-functions"><i class="fa fa-check"></i><b>2.9.2</b> Calling functions</a></li>
+<li class="chapter" data-level="2.9.3" data-path="functions.html"><a href="functions.html#mathematical-and-statistical-functions"><i class="fa fa-check"></i><b>2.9.3</b> Mathematical and statistical functions</a></li>
 </ul></li>
-<li class="chapter" data-level="2.10" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i><b>2.10</b> Functions</a>
+<li class="chapter" data-level="2.10" data-path="the-apply-family-of-functions.html"><a href="the-apply-family-of-functions.html"><i class="fa fa-check"></i><b>2.10</b> The <code>apply</code> family of functions</a>
 <ul>
-<li class="chapter" data-level="2.10.1" data-path="functions.html"><a href="functions.html#defining-your-own-function"><i class="fa fa-check"></i><b>2.10.1</b> Defining your own function</a></li>
-<li class="chapter" data-level="2.10.2" data-path="functions.html"><a href="functions.html#calling-functions"><i class="fa fa-check"></i><b>2.10.2</b> Calling functions</a></li>
-<li class="chapter" data-level="2.10.3" data-path="functions.html"><a href="functions.html#mathematical-and-statistical-functions"><i class="fa fa-check"></i><b>2.10.3</b> Mathematical and statistical functions</a></li>
+<li class="chapter" data-level="2.10.1" data-path="the-apply-family-of-functions.html"><a href="the-apply-family-of-functions.html#the-function-apply"><i class="fa fa-check"></i><b>2.10.1</b> The function <code>apply</code></a></li>
+<li class="chapter" data-level="2.10.2" data-path="the-apply-family-of-functions.html"><a href="the-apply-family-of-functions.html#the-function-sapply"><i class="fa fa-check"></i><b>2.10.2</b> The function <code>sapply</code></a></li>
 </ul></li>
-<li class="chapter" data-level="2.11" data-path="the-apply-family-of-functions.html"><a href="the-apply-family-of-functions.html"><i class="fa fa-check"></i><b>2.11</b> The <code>apply</code> family of functions</a>
-<ul>
-<li class="chapter" data-level="2.11.1" data-path="the-apply-family-of-functions.html"><a href="the-apply-family-of-functions.html#the-function-apply"><i class="fa fa-check"></i><b>2.11.1</b> The function <code>apply</code></a></li>
-<li class="chapter" data-level="2.11.2" data-path="the-apply-family-of-functions.html"><a href="the-apply-family-of-functions.html#the-function-sapply"><i class="fa fa-check"></i><b>2.11.2</b> The function <code>sapply</code></a></li>
-</ul></li>
-<li class="chapter" data-level="2.12" data-path="the-pipe-operator.html"><a href="the-pipe-operator.html"><i class="fa fa-check"></i><b>2.12</b> The pipe operator</a></li>
-<li class="chapter" data-level="2.13" data-path="plotting.html"><a href="plotting.html"><i class="fa fa-check"></i><b>2.13</b> Plotting</a></li>
+<li class="chapter" data-level="2.11" data-path="the-pipe-operator.html"><a href="the-pipe-operator.html"><i class="fa fa-check"></i><b>2.11</b> The pipe operator</a></li>
+<li class="chapter" data-level="2.12" data-path="plotting.html"><a href="plotting.html"><i class="fa fa-check"></i><b>2.12</b> Plotting</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="probability-basics.html"><a href="probability-basics.html"><i class="fa fa-check"></i><b>3</b> Probability Basics</a>
 <ul>
@@ -423,42 +412,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="loops-and-conditions" class="section level2" number="2.9">
-<h2><span class="header-section-number">2.9</span> Loops and conditions</h2>
+<div id="loops-and-conditions" class="section level2" number="2.8">
+<h2><span class="header-section-number">2.8</span> Loops and conditions</h2>
 <p>This section reviews two of the most basic elements of any programming language: <code>if</code> statements and <code>cycles</code> or <code>loops</code>.</p>
-<div id="if-statements" class="section level3" number="2.9.1">
-<h3><span class="header-section-number">2.9.1</span> <code>if</code> statements</h3>
+<div id="if-statements" class="section level3" number="2.8.1">
+<h3><span class="header-section-number">2.8.1</span> <code>if</code> statements</h3>
 <p>The basic form of an <code>if</code> statement in R is as follows:</p>
-<div class="sourceCode" id="cb695"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb695-1"><a href="loops-and-conditions.html#cb695-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(condition){true_action}</span></code></pre></div>
+<div class="sourceCode" id="cb731"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb731-1"><a href="loops-and-conditions.html#cb731-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(condition){true_action}</span></code></pre></div>
 <p>Condition must return a Boolean, either <code>TRUE</code> or <code>FALSE</code>. If <code>TRUE</code> then the code follows the code within the curly brackets and performs the <code>true_action</code>. If <code>condition</code> is <code>FALSE</code> the code does nothing.</p>
 <p>It is more customary to also give a chunk of code for the case <code>condition</code> is <code>FALSE</code>. This can be achieved with <code>else</code>.</p>
-<div class="sourceCode" id="cb696"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb696-1"><a href="loops-and-conditions.html#cb696-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(condition){true_action} <span class="cf">else</span> {false_action}</span></code></pre></div>
+<div class="sourceCode" id="cb732"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb732-1"><a href="loops-and-conditions.html#cb732-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(condition){true_action} <span class="cf">else</span> {false_action}</span></code></pre></div>
 <p>Let’s see an example.</p>
-<div class="sourceCode" id="cb697"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb697-1"><a href="loops-and-conditions.html#cb697-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb697-2"><a href="loops-and-conditions.html#cb697-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (a <span class="sc">&lt;</span> <span class="dv">2</span>){<span class="st">&quot;hello&quot;</span>} <span class="cf">else</span> {<span class="st">&quot;goodbye&quot;</span>}</span></code></pre></div>
+<div class="sourceCode" id="cb733"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb733-1"><a href="loops-and-conditions.html#cb733-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb733-2"><a href="loops-and-conditions.html#cb733-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (a <span class="sc">&lt;</span> <span class="dv">2</span>){<span class="st">&quot;hello&quot;</span>} <span class="cf">else</span> {<span class="st">&quot;goodbye&quot;</span>}</span></code></pre></div>
 <pre><code>## [1] &quot;goodbye&quot;</code></pre>
 <p>The variable <code>a</code> is assigned the number 5. Then we impose a condition: if <code>a</code> is less than 2, we print the text <code>"hello"</code>, otherwise <code>"goodbye"</code> is printed. Since <code>a &lt;- 5</code> the code prints correctly <code>"goodbye"</code>. On the other hand if <code>a</code> were assigned <code>1</code>.</p>
-<div class="sourceCode" id="cb699"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb699-1"><a href="loops-and-conditions.html#cb699-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb699-2"><a href="loops-and-conditions.html#cb699-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (a <span class="sc">&lt;</span> <span class="dv">2</span>){<span class="st">&quot;hello&quot;</span>} <span class="cf">else</span> {<span class="st">&quot;goodbye&quot;</span>}</span></code></pre></div>
+<div class="sourceCode" id="cb735"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb735-1"><a href="loops-and-conditions.html#cb735-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb735-2"><a href="loops-and-conditions.html#cb735-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (a <span class="sc">&lt;</span> <span class="dv">2</span>){<span class="st">&quot;hello&quot;</span>} <span class="cf">else</span> {<span class="st">&quot;goodbye&quot;</span>}</span></code></pre></div>
 <pre><code>## [1] &quot;hello&quot;</code></pre>
 </div>
-<div id="ifelse" class="section level3" number="2.9.2">
-<h3><span class="header-section-number">2.9.2</span> <code>ifelse</code></h3>
+<div id="ifelse" class="section level3" number="2.8.2">
+<h3><span class="header-section-number">2.8.2</span> <code>ifelse</code></h3>
 <p><code>if</code> works when checking a single element and the condition returns either <code>TRUE</code> or <code>FALSE</code>. The command <code>ifelse</code> can be used to quickly check a condition over all elements of a vector. Consider the following example.</p>
-<div class="sourceCode" id="cb701"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb701-1"><a href="loops-and-conditions.html#cb701-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>)</span>
-<span id="cb701-2"><a href="loops-and-conditions.html#cb701-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ifelse</span>(vec <span class="sc">&gt;</span> <span class="dv">5</span>, <span class="st">&quot;bigger&quot;</span>, <span class="st">&quot;smaller&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb737"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb737-1"><a href="loops-and-conditions.html#cb737-1" aria-hidden="true" tabindex="-1"></a>vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">9</span>)</span>
+<span id="cb737-2"><a href="loops-and-conditions.html#cb737-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ifelse</span>(vec <span class="sc">&gt;</span> <span class="dv">5</span>, <span class="st">&quot;bigger&quot;</span>, <span class="st">&quot;smaller&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;smaller&quot; &quot;smaller&quot; &quot;smaller&quot; &quot;bigger&quot;  &quot;bigger&quot;</code></pre>
 <p><code>vec</code> contains the values 1, 3, 5, 7, 9 and the <code>condition</code> is if an elemenent of <code>vec</code> is larger than 5. If <code>TRUE</code> the code returns the string <code>bigger</code> and otherwise returns <code>smaller</code>. The code above returns therefore a vector of the same length of <code>vec</code> including either the string <code>bigger</code> or the string <code>smaller</code>.</p>
 </div>
-<div id="loops" class="section level3" number="2.9.3">
-<h3><span class="header-section-number">2.9.3</span> Loops</h3>
+<div id="loops" class="section level3" number="2.8.3">
+<h3><span class="header-section-number">2.8.3</span> Loops</h3>
 <p><code>for</code> loops are used to iterate over items in a vector. They have the following skeleton:</p>
-<div class="sourceCode" id="cb703"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb703-1"><a href="loops-and-conditions.html#cb703-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(item <span class="cf">in</span> vector) {perform_action}</span></code></pre></div>
+<div class="sourceCode" id="cb739"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb739-1"><a href="loops-and-conditions.html#cb739-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(item <span class="cf">in</span> vector) {perform_action}</span></code></pre></div>
 <p>For each <code>item</code> in <code>vector</code>, <code>perform_action</code> is performed once and the value of <code>item</code> is updated each time.</p>
 <p>Here is an example.</p>
-<div class="sourceCode" id="cb704"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb704-1"><a href="loops-and-conditions.html#cb704-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)){</span>
-<span id="cb704-2"><a href="loops-and-conditions.html#cb704-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(i)</span>
-<span id="cb704-3"><a href="loops-and-conditions.html#cb704-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb740"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb740-1"><a href="loops-and-conditions.html#cb740-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)){</span>
+<span id="cb740-2"><a href="loops-and-conditions.html#cb740-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(i)</span>
+<span id="cb740-3"><a href="loops-and-conditions.html#cb740-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <pre><code>## [1] 1
 ## [1] 2
 ## [1] 3</code></pre>
@@ -470,7 +459,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="accessing-and-manipulating-variables.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="r-basic-data-structures.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="functions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

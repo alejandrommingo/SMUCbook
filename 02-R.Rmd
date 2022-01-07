@@ -213,11 +213,9 @@ setwd("C://User/Desktop/My_Working_Directory")
 
 ### Exercise: Set up your Working Directory
 
-You have 10 minutes to start getting familiar with Rstudio and to set your working directory in a folder that is suitable for the rest of the course. 
+Try to start getting familiar with Rstudio and to set your working directory in a folder that is suitable for the rest of the course.
 
 Remember, within this folder you can create sub-folders for each session in which you can include all the necessary material.
-
-To carry out this exercise you have a designated room with the rest of your work group. Try to solve the doubts together, and in case you don't find a solution you can call me to assist you during the exercise time.
 
 ## Expressions, Objects and Symbols
 
@@ -2468,529 +2466,744 @@ Finally, the most useful overview of the contents of a list is obtained with str
 str(items)
 ```
 
+### Data Frames
 
-
-
-
-
-
-
-
-
-
-
-
-
-### Vectors 
-
-In all previous examples the variables included one element only. More generally we can define sequences of elements or so-called *vectors*. They can be defined with the command `c`, which stands for combine. 
-```{r}
-vec <- c(1,3,5,7)
-vec
-```
-
-So `vec` includes the sequence of numbers 1, 3, 5, 7. Notice that a vector can only include one data type. Consider the following:
-
-```{r}
-vec <- c(1, "hello", TRUE)
-vec
-```
-
-We created a variable `vec` where the first entry is a number, then a character string, then a Boolean. When we print `vec`, we get that its elements are `"1"`, `"hello"` and `"TRUE"`: it has transformed the number `1` into the string `"1"` and the Boolean `TRUE` into `"TRUE"`.
-
-### Matrices
-
-Matrices are tables of elements that are organized in rows and columns. You can think of them as an arrangement of vectors into a table. Matrices must have the same data type in all its entries, as for vectors. Matrices can be constructed in multiple ways. One way is by stacking vectors into a matrix row-by-row with the command `rbind`. Consider the following example.
-```{r}
-row1 <- c(1,2,3)
-row2 <- c(4,5,6)
-row3 <- c(7,8,9)
-mat <- rbind(row1,row2,row3)
-mat
-```
-
-So first we created vectors `row1 = (1,2,3)`, `row2 = (4,5,6)` and `row3 = (7,8,9)` and then organizing them together into the matrix `mat`. 
-
-The following code follows the same procedure but now organizes vectors by columns instead using the command `cbind`.
-```{r}
-col1 <- c(1,2,3)
-col2 <- c(4,5,6)
-col3 <- c(7,8,9)
-mat <- cbind(col1,col2,col3)
-mat
-```
-
-Last, there is also a command called `matrix` to create a matrix. It takes a vector, defined using the command `c` and stores its entries into a matrix of `nrow` rows and `ncol` columns. Consider the following example.
-
-```{r}
-vec <- c(1,2,3,4,5,6,7,8,9)
-mat <- matrix(vec, nrow = 3, ncol = 3)
-mat
-```
-
-So first we created a vector `vec` with numbers from 1 to 9 and then stored them in a matrix with 3 rows and 3 columns. Number are stored by column: the first element of `vec` is in entry (1,1), the second element of `vec` is in entry (2,1), and so on.
-
-### Dataframes
-
-Dataframes are very similar as matrices, they are tables organized in rows and columns. However, different to matrices they can have columns with different data types. They can be created with the command `data.frame`.
-
-```{r}
-data <- data.frame(X1 = c(1,2,3), X2 = c(TRUE,FALSE,FALSE),
-                   X3 = c("male","male","female"))
-data
-```
-
-The dataframe `data` includes three columns: the first column `X1` of numbers, the second column `X2` of Boolean and the third column `X3` of characters. Dataframes are the objects that are most commonly used in real world data analysis.
-
-### `NULL` and `NA`
-
-The expression `NA` is used in R to denote a missing value. Consider the following example.
-
-```{r}
-vec <- c(3, NA, 5)
-vec
-```
-Although the second element of `vec` is the expression `NA`, R recognizes that it is used for missing value and therefore the elements 3 and 5 are still considered numbers: indeed they are not printed as `"3"` and `"5"`.
-
-`NULL` is an additional datatype. This can have various uses. For instance, it is associated to a vector with no entries.
-
-```{r}
-c()
-```
-
-## Accessing and manipulating variables 
-
-Now that we have described the main objects we will work with in R, we can discuss how to access specific information.
-
-### Accessing a single element
-
-Given a vector `vec` we can access its i-th entry with `vec[i]`.
-
-```{r}
-vec <- c(1,3,5)
-vec[2]
-```
-
-For a matrix or a dataframe we need to specify the associated row and column. If we have a matrix `mat` we can access the element in entry (i,j) with `mat[i,j]`.
-
-```{r}
-mat <- matrix(c(1,2,3,4,5,6,7,8,9), ncol=3, nrow =3)
-mat[1,3]
-```
-
-
-
-### Acessing multiple entries
-
-To access multiple entries we can on the other hand define a vector of indexes of the elements we want to access. Consider the following examples:
-
-```{r}
-vec <- c(1,3,5)
-vec[c(1,2)]
-```
-
-The above code accesses the first two entries of the vector `vec`. To do this we had to define a vector using `c(1,2)` stating the entries we wanted to look at. For matrices consider:
-
-```{r}
-mat <- matrix(c(1,2,3,4,5,6,7,8,9), ncol=3, nrow =3)
-mat[c(1,2),c(2,3)]
-```
-
-The syntax is very similar as before. We defined to index vectors, one for the rows and one for columns. The two statements `c(1,2)` and `c(2,3)` are separated by a comma to denote that the first selects the first and second row, whilst the second selects the second and third column.
-
-If one wants to access full rows or full columns, the argument associated to rows or columns is left blank. Consider the following examples.
-
-```{r}
-mat <- matrix(c(1,2,3,4,5,6,7,8,9), ncol=3, nrow =3)
-mat[1,]
-mat[,c(1,2)]
-```
-
-The code `mat[1,]` selects the first full row of `mat`. The code `mat[,c(1,2)]` selects the first and second column of `mat`. Notice that the comma has always to be included!
-
-To access multiple entries it is often useful to define sequences of number quickly. The following command defines the sequence of integer numbers from 1 to 9.
-
-```{r}
-1:9
-```
-
-More generally, one can define sequences of numbers using `seq` (see `?seq`).
-
-### Accessing entries with logical operators
-
-If we want to access elements of an object based on a condition it is often easier to use logical operators. This means comparing entries using the comparisons you would usually use in mathematical reasoning, for instance being equal to, or being larger to. The syntax is as follows:
-
- - `==` to check equality (notice the two equal signs)
- 
- - `!=` to check non-equality
-
- - `>` bigger to 
+Data frame is a two dimensional data structure in R. It is a special case of a list which has each component of equal length.
   
- - `>=` bigger or equal to
- 
- - `<` less to
- 
- - `<=` less or equal to
- 
-Let's see some examples.
+```{r, echo= FALSE}
+x = data.frame("SN" = 1:2, "Age" = c(21,15), "Gender" = c("Male","Female"))
+```
+
+#### Check if a variable is a data frame or not
+
+We can check if a variable is a data frame or not using the `class()` function.
 
 ```{r}
-vec <- c(2,3,4,5,6)
-vec > 4
+typeof(x)
+```
+```{r}
+class(x)
 ```
 
-We constructed a vector `vec` and check which entries were larger than 4. The output is a Boolean vector with the same number of entries as `vec` where only the last two entries are `TRUE`. Similarly,
+In this example, x can be considered as a list of 3 components with each component having a two element vector.
+
+#### Functions of data frame
+
+Here you have some useful functions we can use to have a better understanding about the content we have inside our data frame:
+
+  + We can check the names of the variables using the `names()` function
+  
+```{r}
+names(x)
+```
+  + We can know the number of columns and rows we have in our data frame (the `length()` function will return also the number of columns, it is taking the number of elements we are storing in the underlying list, which are the column vectors):
+  
+```{r}
+ncol(x)
+```
+```{r}
+nrow(x)
+```
+```{r}
+length(x)
+```
+  + The `str()` and the `summary()` are the most useful functions to understand our data frames:
+  
+```{r}
+str(x)
+```
+```{r}
+summary(x)
+```
+  
+#### How to create a data frame
+
+We can create a data frame using the `data.frame()` function. Below you can see how to create the data frame we are using for all the previous examples:
 
 ```{r}
-vec <- c(2,3,4,5,6)
-vec == 4
+x = data.frame("SN" = 1:2, "Age" = c(21,15), "Gender" = c("Male","Female"))
 ```
 
-has a `TRUE` in the third entry only.
-
-So if we were to be interested in returning the elements of `vec` that are larger than 4 we could use the code
+Let's take another look to the data frame structure:
 
 ```{r}
-vec <- c(2,3,4,5,6)
-vec[vec > 4]
+str(x)
 ```
 
-So we have a vector with only elements 5 and 6.
-
-### Manipulating dataframes
-
-We have seen in the previous section that dataframes are special types of matrices where columns can include a different data type. For this reason they have special way to manipulate and access their entries.
-
-First, specific columns of a dataframe can be accessed using its name and the `$` sign as follows.
+Which is the type of the `Gender` variable? Do we need to change it? It is a character vector and, in order to use this variable in future models we will need to transform it into a factor. Remember that R3 automatically converts all the characters into factors, but we need to define those in R4.
 
 ```{r}
-data <- data.frame(X1 = c(1,2,3), X2 = c(TRUE,FALSE,FALSE),
-                   X3 = c("male","male","female"))
-data$X1
-data$X3
+x = data.frame("SN" = 1:2, "Age" = c(21,15), "Gender" = c("Male","Female"), stringsAsFactors = T)
+str(x)
 ```
-So using the name of the dataframe `data` followed by `$` and then the name of the column, for instance `X1`, we access that specific column of the dataframe.
 
-Second, we can use the `$` sign to add new columns to a dataframe. Consider the following code.
+**NOTE**: Many data input functions of R like, `read.table()`, `read.csv()`, `read.delim()`, `read.fwf()` also read data into a data frame.
+
+#### How to access components of a data frame
+
+Components of data frame can be accessed like a list or like a matrix.
+
+##### Accessing like a list
+
+We can use either `[`, `[[` or `$` operator to access columns of data frame.
+
+Accessing with `[[` or `$` is similar. However, it differs for `[` in that, indexing with `[` will return us a data frame but the other two will reduce it into a vector.
 
 ```{r}
-data <- data.frame(X1 = c(1,2,3), X2 = c(TRUE,FALSE,FALSE),
-                   X3 = c("male","male","female"))
-data$X4 <- c("yes","no","no")
-data
+x["Gender"]
+```
+```{r}
+x$Age
+```
+```{r}
+x[["Gender"]]
+```
+```{r}
+x[2]
+```
+```{r}
+x[[3]]
 ```
 
-`data` now includes a fourth column called `X4` coinciding to the vector `c("yes","no","no")`.
+##### Accessing like a matrix
 
-Third, we can select specific rows of a dataframe using the command `subset`. Consider the following example.
+Data frames can be accessed like a matrix by providing index for row and column.
+
+To illustrate this, we use datasets already available in R. Datasets that are available can be listed with the command `library(help = "datasets")`.
+
+We will use the `trees` dataset which contains `Girth`, `Height` and `Volume` for Black Cherry Trees.
+
+A data frame can be examined using functions like `str()` and `head()`.
 
 ```{r}
-data <- data.frame(X1 = c(1,2,3), X2 = c(TRUE,FALSE,FALSE),
-                   X3 = c("male","male","female"))
-subset(data, X1 <= 2)
+str(trees)
+```
+```{r}
+head(trees, 3)
 ```
 
-The above code returns the rows of `data` such that `X1` is less or equal to 2. More complex rules to subset a dataframe can be combined using the and operator `&` and the or operator `|`. Let's see an example.
+We can see that trees is a data frame with 31 rows and 3 columns. We also display the first 3 rows of the data frame.
+
+Now we proceed to access the data frame like a matrix.
 
 ```{r}
-data <- data.frame(X1 = c(1,2,3), X2 = c(TRUE,FALSE,FALSE),
-                   X3 = c("male","male","female"))
-subset(data, X1 <= 2 & X2 == TRUE)
+trees[2:3,]    # select 2nd and 3rd row
+```
+```{r}
+trees[trees$Height > 82,]    # selects rows with Height greater than 82
 ```
 
-So the above code selects the rows such that `X1` is less or equal to 2 and `X2` is `TRUE`. This is the case only for the first row of `data`.
+#### How to modify a Data Frame
 
-### Information about objects
-
-Here is a list of functions which are often useful to get information about objects in R.
-
- - `length` returns the number of entries in a vector.
- 
- - `dim` returns the number of rows and columns of a matrix or a dataframe
- 
- - `unique` returns the unique elements of a vector or the unique rows of a matrix or a dataframe.
- 
- - `head` returns the first entries of a vector or the first rows of a matrix or a dataframe
- 
- - `order` returns a re-ordering of a vector or a data.frame in ascending order.
- 
-Let's see some examples.
+Data frames can be modified like we modified matrices through reassignment.
 
 ```{r}
-vec <- c(4,2,7,5,5)
-length(vec)
-unique(vec)
-order(vec)
+x[1,"Age"] = 20; x
 ```
 
-`length` gives the number of elements of `vec`, `unique` returns the different values in `vec` (so 5 is not repeated), `order` returns in entry i the ordering of the i-th entry of `vec`. So the first entry of `order(vec)`  is 2 since 4 is the second-smallest entry of `vec`.
+##### Adding Components
+
+Rows can be added to a data frame using the `rbind()` function.
 
 ```{r}
-data <- data.frame(X1 = c(1,2,3,4), X2 = c(TRUE,FALSE,FALSE,FALSE),
-                   X3 = c("male","male","female","female"))
-dim(data)
+(rbind(x,list(1,16,"Female")))
 ```
 
-So `dim` tells us that `data` has four rows and three columns.
-
-
-## Loops and conditions
-
-This section reviews two of the most basic elements of any programming language: `if` statements and `cycles` or `loops`. 
-
-### `if` statements
-
-The basic form of an `if` statement in R is as follows:
-
-```{r, eval = FALSE}
-if(condition){true_action}
-```
-
-Condition must return a Boolean, either `TRUE` or `FALSE`. If `TRUE` then the code follows the code within the curly brackets and performs the `true_action`. If `condition` is `FALSE` the code does nothing. 
-
-It is more customary to also give a chunk of code for the case `condition`  is `FALSE`. This can be achieved with `else`.
-
-```{r, eval = FALSE}
-if(condition){true_action} else {false_action}
-```
-
-Let's see an example.
+Similarly, we can add columns using `cbind()`.
 
 ```{r}
-a <- 5
-if (a < 2){"hello"} else {"goodbye"}
+(cbind(x,State=c("NY","FL")))
 ```
 
-The variable `a` is assigned the number 5. Then we impose a condition: if `a` is less than 2, we print the text `"hello"`, otherwise `"goodbye"` is printed. Since `a <- 5` the code prints correctly `"goodbye"`. On the other hand if `a` were assigned `1`.
-
+Since data frames are implemented as list, we can also add new columns through simple list-like assignments.
 
 ```{r}
-a <- 1
-if (a < 2){"hello"} else {"goodbye"}
+x$State = c("NY","FL"); x
 ```
 
-### `ifelse`
+##### Deleting Components
 
-`if` works when checking a single element and the condition returns either `TRUE` or `FALSE`. The command `ifelse` can be used to quickly check a condition over all elements of a vector. Consider the following example.
+Data frame columns can be deleted by assigning `NULL` to it.
 
 ```{r}
-vec <- c(1, 3, 5, 7, 9)
-ifelse(vec > 5, "bigger", "smaller")
+x$State = NULL; x
 ```
 
-`vec` contains the values 1, 3, 5, 7, 9 and the `condition` is if an elemenent of `vec` is larger than 5. If `TRUE` the code returns the string `bigger` and otherwise returns `smaller`. The code above returns therefore a vector of the same length of `vec` including either the string `bigger` or the string `smaller`.
+Similarly, rows can be deleted through reassignments.
+
+```{r}
+x = x[-1,]; x
+```
+
+#### Exporting a data frame
+
+As we have mentioned before, any data table we import in R will take the form of a data frame by default. This facilitates us enormously the work of data cleaning since there are many libraries that work on data frames and will help us in this process. We will see many of these resources in the "Data Wrangling" module.
+
+For now, we only need some knowledge of importing and exporting data tables in R. Let's start with a built-in dataframe like `trees`.
+
+```{r}
+head(trees, 3)
+```
+
+
+This dataframe can be exported in different formats, but let's see only the two main ones that we will use in R, .csv and .txt. The basic function in R for exporting data is called `write.table()`, and it has a lot of parameters. My recommendation is that you take a look at the documentation of this function to familiarize yourself with it.
+
+The main parameters of the `write.table()` function are
+
+  + `x`: will be the object we want to export, in this case a data frame
+  + `file`: is the name of the file to be exported. In this argument we can also enter a path to organize the file in our OS. The file will take the extension that we indicate in its name.
+  + `append`: we will use it if the file already exists and we want to add new information. By default it is `FALSE`.
+  + `quote`: by default it is also `FALSE.` If you set it to `TRUE` this parameter will return the factors and strings with quotes
+  + `sep`: in this parameter we can decide how to separate the columns of our file. The default is a comma.
+  + `dec`: this parameter will allow us to change the symbol of the decimals that by default is a dot.
+  + ...
+
+Let's see an example. Next we are going to export the data frame `trees` as a .txt file.
+
+```{r}
+write.table(x = trees, file = "./Data/trees.txt", quote = TRUE, sep = ";", dec = ",", row.names = FALSE)
+```
+
+Although the function `write.table()` already provides a simple method to export data tables, we can also use the function `write.csv()`, which will facilitate the export of .csv files with a predetermined format to facilitate their subsequent use.
+
+This function `write.csv()` or `write.csv2()` (a second version that has different default parameters) use as a base the `write.table()` function, so its behavior is practically the same.
+
+Let's see the same example, but exporting the file in this case as a .csv:
+
+```{r}
+write.csv(x = trees, file = "./Data/trees.csv")
+write.csv2(x = trees, file = "./Data/trees2.csv")
+```
+
+#### Importing a data frame
+
+When importing data tables the operation will be exactly the same. In this case, the basic function of R is `read.table()`, and the functions `read.csv()` and `read.csv2()` use the previous one to define other behaviors focused on reading .csv files.
+
+The parameters of `read.table()` are the same as those of write.table() with some exceptions.
+
++ `header`: is a logical parameter (TRUE/FALSE) that indicates if the file contains a header.
++ `quote`: it is not a logical parameter anymore, but it allows us to decide how we want to code the quotes.
++ `row.names` and `col.names`: they also existed in the previous function but in this case they make more sense. These parameters will take a vector the size of the number of rows or columns respectively, and set it as such in the data frame
++ `na.strings`: logical vector that by default is FALSE, and assigns as NA's to all character type elements.
++ `skip`: is a parameter that will skip the number of lines of the data table that we indicate with an integer.
++ `stringsAsFactors`: logical vector that by default is FALSE and helps us to code the character type vectors as factors. In some cases it will be useful, but in others we prefer to have the versatility that character vectors offer.
+
+Let's see how to import the files that we have previously exported with the `read.table()` function:
+
+```{r}
+df = read.table(file = "./Data/trees.txt", header = TRUE, sep = ";", dec = ",", 
+                na.strings = FALSE, stringsAsFactors = TRUE)
+str(df)
+```
+
+In the case of the functions `read.csv()` and r`ead.csv2()` we can ensure that the format in which we have exported the files will be the same as that in which we should read it:
+
+```{r}
+df1 = read.csv(file = "./Data/trees.csv")
+str(df1)
+```
+```{r}
+df2 = read.csv2(file = "./Data/trees2.csv")
+str(df2)
+```
+
+
+
+
+
+
+
+
+
+
+
+## Control Flow
+
+Flow control statements allow us to generate portions of code that perform certain actions given certain conditions. Let's differentiate between: Conditional sentences and loops
+
+
+### Conditional statements
+
+Conditional statements allow us to perform actions based on specific conditions that we attribute to objects created in our R session. In this way, we can generate huge chains of conditionals that result in multiple different actions. To work with conditional statements in R we will use the following keywords: `if`, `else if` and `else`. 
+
+<p align="center">
+  <img src="./images/R-programming/r-if-statement.jpg" style="border:0px;margin:50px;width:250px;">
+  <img src="./images/R-programming/r-if-else-statement.jpg" style="border:0px;margin:50px;width:300px;">
+</p> 
+
+The specific syntax to create conditional statements in R is the following
+
+<p align="center">
+  <img src="./images/R-programming/if.png" width="500">
+</p> 
+
+Let's see some code examples. In this first example R will perform an action (to print something) in case `x` is a negative number:
+
+```{r}
+x = -3
+if (x < 0) {
+  print("x is a negative number")
+}
+```
+
+In a second example we are using the `if` and `else` statements to print if `x` is negative or positive
+
+```{r}
+x = 5
+if (x < 0) {
+  print("x is a negative number")
+} else {
+  print("x is a positive number or zero")
+}
+```
+
+In this third example we are using more conditions to print if `x` is negative, zero or positive.
+
+```{r}
+x = -3
+if (x < 0) {
+  print("x is a negative number")
+} else if (x == 0) {
+  print("x is zero")
+} else {
+  print("x is a positive number")
+}
+```
 
 ### Loops
 
-`for` loops are used to iterate over items in a vector. They have the following skeleton:
-
-```{r, eval = FALSE}
-for(item in vector) {perform_action}
-```
-
-For each `item` in `vector`, `perform_action` is performed once and the value of `item` is updated each time.
-
-Here is an example.
+The classic, Fortran-like loop is available in R. The syntax is a little different, but the idea is identical; you request that an index (e.g. `i`), takes on a sequence of values, and that one or more lines of commands are executed as many times as there are different values of i. Here is a loop executed five times with the values of i from 1 to 5; we print the square of each value:
 
 ```{r}
-for (i in c(1,2,3)){
+# This is the abbreviated way to write a for loop
+for (i in 1:5) print(i^2)
+```
+
+For multiple lines of code, you use curly brackets `{}` to enclose material over which the loop is to work. Note that the ‘hard return’ (the Enter key) at the end of each command line is an essential part of the structure (you can replace the hard returns by semicolons if you like, but clarity is improved if you put each command on a separate line):
+
+```{r}
+j = k = 0
+for (i in 1:5) {
+  j = j+1
+  k = k+i*j
+  print(i+j+k)
+  }
+```
+
+There are two types of loops:
+
+* `while` loops: they perform a certain action iteratively until a stop condition is met
+
+* `for` loops: they execute a certain action in an iterative way for each element of a vector (set of elements).
+
+We must be very careful not to make an infinite loop. This will produce that our R session starts working without a stop condition and we will have to kill the process to finish it. To prevent this situation we can always use the `break` keyword in our loops. 
+
+<p align="center">
+  <img src="./images/R-programming/r-for-loop.jpg" style="border:0px;margin:50px;width:250px;">
+  <img src="./images/R-programming/r-while-loop.jpg" style="border:0px;margin:50px;width:250px;">
+</p> 
+
+Here you can see the specific syntax we use in R to create loops:
+
+<p align="center">
+  <img src="./images/R-programming/loops.png" width="1050">
+</p> 
+
+#### While loops examples
+
+In this first example we are creating a `ctr` variable that starts in `1`. Inside our while loop we are going to print our variable and later add `1` in each iteration
+
+```{r}
+ctr = 1
+while (ctr <= 7) {
+  print(paste("ctr is", ctr))
+  ctr = ctr + 1
+}
+```
+
+We can apply the same logic to create a countdown to zero:
+
+```{r}
+count = 10
+while (count >= 0){
+    print (count)
+    count = count - 1
+}
+```
+
+#### For loops example
+
+As we said, `for` loops are going to execute certain action for each element in any data structure (normally a vector). In this example we are just printing each element we have inside the cities vector.
+
+```{r}
+# Print each element in a vector
+cities = c("New York", "Paris", "London", "Tokyo", "Rio de Janeiro", "Cape Town")
+for (i in cities) {
   print(i)
 }
 ```
 
-Item is the variable `i` (it is costumary to use just a letter) and at each step `i` is set equal to a value in the vector `c(1,2,3)`. At each of these iterations, the command `print(i)`, which simply returns the value that `i` takes is called. Indeed we see that the output is the sequence of numbers 1, 2, 3. 
+#### Loops and conditional statements combination
 
-## Functions
+Once we know the different flow control methods we can combine them to perform much more complex actions. Let's look at some examples.
 
-Functions are chunks of code that are given a name so that they can be easily used multiple times. Perhaps without realising it, you have used functions already many times!
-
-### Defining your own function
-
-A function is composed of the following elements:
-
- - a name: in R functions are objects just like vectors or matrices and they are given a name.
- 
- - arguments: these are objects that will be used within the function.
- 
- - body: a chunk of code which is run within the function.
- 
- - output: an object that the function returns.
-
-
-Let's consider an example.
+We can use a conditional statement to break our loops. In this example we are printing our `ctr` variable as we did before, but we will break the loop if the module obtained dividing ctr by 5 is equal to 0.
 
 ```{r}
-my.function <- function(x,y){
-  z <- x + y
-  return(z)
+# Using the break keyword with a condition
+ctr = 1
+while (ctr <= 7) {
+  if (ctr %% 5 == 0)
+    break
+  print(paste("ctr is", ctr))
+  ctr = ctr + 1
 }
 ```
 
-The above function computes the sum of two numbers `x` and `y`. Let's call it.
+We can also introduce the `next` statement inside our loops. This will skip the current iteration, not performing all the actions we have below it inside the loop. In this case we are printing all the cities with a number of characters different to 6.
 
 ```{r}
-my.function(2,3)
-```
-
-The sum between 2 and 3 is indeed 5.
-
-Let's look at the code line by line. In the first line, we assigned a function using the command `function` to an object called `my.function`. `my.function` has two arguments called `x` and `y`.  Then there is an opening curly bracket `{`. The last line of code has a closing curly bracket `}`: whatever is in between the two brackets is a chunk of code which is run when the function is run. The second line computes a new variable called `z` which stores the sum of `x` and `y`. The third line of code tells us that the function should return `z` as output.
-
-Let's consider a slightly more complicated function.
-
-```{r}
-new.function <- function(x,y){
-  z1 <- x^2
-  z2 <- z1 + y
-  return(z2)
+# Print cities with 6 characters
+cities = c("New York", "Paris", "London", "Tokyo", "Rio de Janeiro", "Cape Town")
+for (city in cities) {
+  if (nchar(city) == 6)
+    next
+  print(city)
 }
 ```
 
-The `new.function` returns the sum between the square of the first input `x` and the second input `y`. Let's call the function.
+In this last example we are printing only the even numbers in the `numbers` list:
 
 ```{r}
-new.function(2,3)
-new.function(3,2)
-```
-
-Notice that `new.function(2,3)` is different from `new.function(3,2)`: indeed in the fist case the sum between 2^2 and 3 is computed, whilst in the second the sum between 3^2 and 2 is computed. Furthermore, that the variable `z1` exists only within the function: when you call the function the output does not create a variable `z1`. The output does not create either a variable `z2` it simply returns the value that is stored in `z2`, which can the be assigned as in the following example.
-
-```{r}
-value <- new.function(2,3)
-value
-```
-
-We stored in `value` the output of `new.function(2,3)`.
-
-An equivalent way to write `new.function` is as follows:
-
-```{r}
-new.function <- function(x,y){
-  x^2 + y
+# Print even numbers
+numbers = c(1:100)
+for (number in numbers){
+    if (number %% 2 == 0){
+        print(number)
+    }
 }
-new.function(2,3)
 ```
 
-The output is the same. We did not create any variable within the function and we did not explicitly use the `return` command. R understands that the last line of code is what the function should return.
+#### Nested for loops
 
-
-### Calling functions
-
-In R functions can be called in various ways. Before we have seen function calls as
-
-```{r, eval = FALSE}
-new.function(2,3)
-```
-
-How did it work?
-
- - The function `new.function` has a first argument `x` and a second argument `y`.
- 
- - R matched the first argument in `new.function(2,3)` to `x`, that is `x=2`, and the second argument to `y`, that is `y=3`.
- 
-We could have also been more explicit and state what `x` and `y` were.
+We can use a for loop within another for loop to iterate over two things at once (e.g., rows and columns of a matrix).
 
 ```{r}
-new.function(x=2, y=3)
-```
-
-So now explicitly we state that the input `x` of `new.function` is 2 and that the input `y` is 3. Notice that the two ways of specifying inputs give the exact same results.
-
-
-### Mathematical and statistical functions
-
-The number of functions available in R is massive and it would be impossible to mention them all. Here I just give you a list of mathematical and statistical functions that we may use in the following.
-
- - `exp` computes the exponential of the entries of an object
- 
- - `log` computes the logarithm of the entries of an object 
- 
- - `sqrt` computes the square root of the entries of an
- 
- - `sum` computes the sum of the entries of an object
- 
- - `abs` computes the absolute value of the entries of an object
- 
- - `mean` computes the mean of the entries of an object
- 
- - `sd` computes the standard deviation of the entries of an object
- 
- - `var` computes the variance of the entries of an object
-
-
-## The `apply` family of functions
-
-One of the biggest limitation of R is that it is slow in performing cycles. For this reason, one should aim at avoiding as much as possible to use of loops.
-
-There are various functions which are designed to help you in avoiding these loops and they are in the family of so called `apply` functions. There are many of these but we will only see two here.
-
-### The function `apply`
-
-Consider the following code.
-
-```{r}
-x <- matrix(c(1:9), ncol=3 , nrow = 3)
-y <- c()
-for (i in 1:3){
-  y[i] <- sum(x[i,])
+for(i in 1:5){
+  for(j in 1:5){
+    print(paste(i,j))
+  }
 }
-y
 ```
 
-The code first defines a matrix `x` and an empty vector `y` (recall that this is bad practice, but for this example it does not matter). Then there is a `for` cycle which assigns to the i-th entry of `y` the sum of the entries of the i-th row of `x`. So the vector `y` includes the row-totals.
+#### The `ifelse` function
 
-For this simple example the `for` cycle is extremely quick, but this is just to illustrate how we can replace it using the `apply` function.
+Sometimes you want to do one thing if a condition is true and a different thing if the condition is false (rather than do nothing, as in previous examples). The `ifelse` function allows you to do this for entire vectors without using for loops.
 
 ```{r}
-apply(x, 1, sum)
+v = 0:10
+ifelse(v>5, yes = T, no = F)
+ifelse(v > 5, v*2, v)
 ```
 
-Let's look at the above code. The first input of `apply` is the object we want to operate upon, in this case the matrix `x`. The second input specifies if the operation has to act over the rows of the matrix (input equal to 1) or over the columns (input equal to 2). The third input is the operation we want to use, in this case `sum`. 
+`ifelse` returns a value with the same shape as `v` which is filled with elements selected from either yes or no depending on whether the element of test is `TRUE` or `FALSE`.
 
-Beside being faster, the above code is also a lot more compact than using a for loop. 
+### Functions
 
-The following example computes the mean of each column of `x`.
+Functions are R objects that evaluate a set of input arguments and return an output. This is the syntax we use in R to create functions:
+
+<p align="center">
+  <img src="./images/R-programming/function.png" width="600">
+</p> 
+
+Arguments are a set of variable names that will be used within the function
+
+Arguments can be:
+
++ Required.
++ Optional (they are assigned a default value).
++ Adjustable length (each of these parameters is accessed with ..1, ..2, etc.).
+
+The function return is specified by calling the function `return(x)`. Sometimes it is not necessary, and the result of the last evaluated expression will be returned. It is recommended to use it for legibility.
+
+The function below has a required parameter (a) and an optional parameter (b).
+
+Parameter b, being optional, if it is not passed in the call, will take the value 1.
+
+The function has two returns:
+
++ When b equals zero (with return)
++ When b is not equal to zero (without return)
 
 ```{r}
-apply(x, 2, mean)
-```
-
-### The function `sapply`
-
-Consider again our function `new.function` which computes the sum of the squared of a number `x` with another number `y`.
-
-```{r}
-new.function <- function(x,y){ x^2 + y}
-```
-
-Suppose that we want to compute such a sum for all numbers `x` from 1 to 10. Suppose that `y` is chosen as 2. We can achieve this with a `for` cycle as follows.
-
-```{r}
-x <- 1:10
-z <- c()
-for (i in 1:10){
-  z[i] <- new.function(x[i],2)
+z = 1
+do_something = function(a, b = 1) {
+    if (b == 0)
+        return(0)
+    z = z + a*b + a/b
+    z
 }
-z
+
+do_something(5)
+do_something(4,4)
 ```
 
-The function `sapply` can be used for this specific purpose.
+#### Domain of variables in functions
+
+When a function is invoked, a new memory frame is created for it.
+
+Each memory frame is inside the call stack, the first frame corresponding to the global environment.
+
+Each function call will create a local frame.
+
+The names of the variables within a function are resolved in the following order:
+
++ Local environment.
++ Parent environment (functions defined within functions).
++ ...
++ Global environment.
+
+Thus, a variable that is defined within a function is not available outside the function.
+
+#### Replicating code with functions
+
+As in any programming environment, the functions are very useful in order to replicate code by specifying certain parameters. Remember the countdown example? Below we have converted the same code into a function to decide the initial value of this process.
 
 ```{r}
-x <- 1:10
-sapply(x,new.function, y=2)
+countdown = function(count = 5){
+  while (count >= 0){
+    print (count)
+    count = count - 1
+  }
+}
 ```
 
-The first argument of `sapply` is a vector of values we want to use as input of a function. The second argument is the function we want to apply multiple times. If the function has more than one input we can then specify what their value is, in this specific case `y=2`. 
-
-Notice that a function can also be defined within `sapply`.
+By default, the countdown starts in 5,
 
 ```{r}
-x <- 1:10
-sapply(x, function(i) i^2 + 2)
+countdown()
+```
+But we can change the `count` parameter, so it will start in the number we specify
+
+```{r}
+countdown(3)
 ```
 
-So we defined the vector `x` and we want to apply the function defined within `sapply` multiple times: once for each entry in the vector `x`.
+### The `apply` Family
+
+The `apply()` family pertains to the R base package and is populated with functions to manipulate slices of data from matrices, arrays, lists and dataframes in a repetitive way. These functions allow crossing the data in a number of ways and avoid explicit use of loop constructs. They act on an input list, matrix or array and apply a named function with one or several optional arguments.
+
+The called function could be:
+
++ An aggregating function, like for example the mean, or the sum (that return a number or scalar);
++ Other transforming or subsetting functions; and
++ Other vectorized functions, which yield more complex structures like lists, vectors, matrices, and arrays.
+
+The `apply()` functions form the basis of more complex combinations and helps to perform operations with very few lines of code. More specifically, the family is made up of the `apply()`, `lapply()`, `sapply()`, `vapply()`, `mapply()`, `rapply()`, and `tapply()` functions.
+
+But how and when should we use these?
+
+Well, this depends on the structure of the data that you want to operate on and the format of the output that you need.
+
+#### `apply()` Function
+
+Let’s start with the godfather of the family, `apply()`, which operates on arrays. For simplicity, we will use 2D arrays, which are also known as matrices.
+
+The R base manual tells you that it’s called as follows: `apply(X, MARGIN, FUN, ...)` where:
+
++ `X` is an array or a matrix if the dimension of the array is 2;
++ `MARGIN` is a variable defining how the function is applied: when `MARGIN=1`, it applies over rows, whereas with `MARGIN=2`, it works over columns. Note that when you use the construct `MARGIN=c(1,2)`, it applies to both rows and columns; and
++ `FUN`, which is the function that you want to apply to the data. It can be any R function, including a User Defined Function (UDF).
+
+Let’s construct a 5 x 6 matrix and imagine you want to sum the values of each column.
+
+```{r}
+# Construct a 5x6 matrix
+X = matrix(rnorm(30), nrow=5, ncol=6)
+
+# Sum the values of each column with `apply()`
+apply(X, 2, sum)
+```
+
+Remember that in R, a matrix can be seen as a collection of line vectors when you cross the matrix from top to bottom (along the vertical line 1, which specifies the dimension or margin 1), or as a list of columns vectors, spanning the matrix left to right along the dimension or margin 2.
+
+<p align="center">
+  <img src="./images/R-programming/apply.png" width="500">
+</p> 
+
+That means that the instruction you have just entered, depicted in figure 1, translates into: “apply the function ‘sum’ to the matrix X along margin 2 (by column), summing up the values of each column.
+
+Note that, to avoid cluttering the picture, just one of the columns is highlighted.
+
+```{r}
+# Construct a 5x6 matrix
+X = matrix(rnorm(30), nrow=5, ncol=6)
+
+# Sum the values of each column with `apply()`
+apply(X, 2, sum)
+```
+
+You end up with a line vector containing the sums of the values of each column.
+
+The output of the above code, a line vector, would have also been given if you summed along the lines of the matrix. This is how R displays the result.
+
+#### The `lapply()` Function
+
+You want to apply a given function to every element of a list and obtain a list as a result. When you execute `?lapply`, you see that the syntax looks like the `apply()` function.
+
+The difference is that:
+
+1. It can be used for other objects like dataframes, lists or vectors; and 
+2. The output returned is a list (which explains the “l” in the function name), which has the same number of elements as the object passed to it.
+
+To see how this works, create a few matrices and extract from each a given column.
+
+This is a quite common operation performed on real data when making comparisons or aggregations from different dataframes.
+
+<p align="center">
+  <img src="./images/R-programming/lapply.png" width="1000">
+</p> 
+
+Again, you start by specifying the object of interest, the list `Mylist.` You use the standard R selection operator `[` and then omit the first parameter (which therefore translates into “any”, that’s why you see the two commas).
+
+Next, you specify the second parameter, which is `2`: our margin is ‘column’. So you extract the second column from all the matrices within the list.
+
+In the right-hand side of figure 2, you can see an alternative extraction: this time you omit the first parameter, and you get the first row from each of the matrices. Our toy example, depicted in the last figure can be coded as:
+
+```{r}
+# Create a list of matrices
+A = matrix(1:9, nrow = 3)
+B = matrix(4:15, nrow = 4)
+C = cbind(c(8,9,10), c(8,9,10))
+
+MyList = list(A,B,C)
+
+# Extract the 2nd column from `MyList` with the selection operator `[` with `lapply()`
+lapply(MyList,"[", , 2)
+
+# Extract the 1st row from `MyList`
+lapply(MyList,"[", 1, )
+```
+
+A few notes to the code above:
+
++ The `[` notation is the select operator. Remember, for example, that to extract all the elements of the third line of B requires: `B[3,]`;
++ The `[[ ]]` notation expresses the fact that we are dealing with lists: [[2]] means the second element of the list. This is also shown in the output given by R;
++ The output is a list with as many elements as the element in the input; and
++ Note that you could also have extracted a single element for each matrice, like this: `lapply(MyList,"[", 1, 2)`
+
+#### The `sapply()` Function
+
+The `sapply()` function works like `lapply()`, but it tries to simplify the output to the most elementary data structure that is possible. And indeed, `sapply()` is a ‘wrapper’ function for `lapply()`.
+
+Essentially, `sapply()` calls `lapply()` on its input and then applies the following algorithm:
+
+  + If the result is a list where every element is length 1, then a vector is returned
+  + If the result is a list where every element is a vector of the same length (> 1), a matrix is returned.
+  + If neither of the above simplifications can be performed then a list is returned
+
+An example may help to understand this: let’s say that you want to repeat the extraction operation of a single element as in the last example, but now take the first element of the second row (indexes 2 and 1) for each matrix.
+
+Applying the `lapply()` function would give us a list unless you pass `simplify=FALSE` as a parameter to `sapply()`. Then, a list will be returned. See how it works in the code chunk below:
+
+```{r}
+# Return a list with `lapply()`
+lapply(MyList,"[", 2, 1 )
+
+# Return a vector with `sapply()`
+sapply(MyList,"[", 2, 1 )
+
+# Return a list with `sapply()`
+sapply(MyList,"[", 2, 1, simplify=F)
+
+# Return a vector with `unlist()`
+unlist(lapply(MyList,"[", 2, 1 ))
+```
+
+### `apply` Family Examples
+
+Let's use the `mtcars` built-in dataset to see some examples:
+
+```{r}
+head(mtcars)
+```
+
+In this datset we can appreciate some characteristics of different cars. Imagine we want to obtain the average of each feature. We can use the `apply` function for that purpose:
+
+```{r}
+apply(mtcars, 2, mean)
+```
+
+We could also obtain the mean of each call in all the features, but it doesn't make sense at all. Let's generate a list of four items to provide an example:
+
+```{r}
+data = list(item1 = 1:4,
+            item2 = rnorm(10),
+            item3 = rnorm(20,1),
+            item4 = rnorm(100,5))
+```
+
+We can get the mean of each of the items we have in the list using the `lapply` function.
+
+```{r}
+lapply(data, mean)
+```
+
+The last slide provides a simple example where each list item is simply a vector of numeric values. However, consider the case where you have a list that contains data frames and you would like to loop through each list item and perform a function to the data frame. In this case we can embed an `apply` function within an `lapply` function.
+
+For example, the following creates a list for R’s built in beaver data sets. The lapply function loops through each of the two list items and uses apply to calculate the mean of the columns in both list items. 
+
+```{r}
+beaver_data = list(beaver1 = beaver1, 
+                    beaver2 = beaver2)
+```
+
+```{r}
+lapply(beaver_data, function(x) apply(x, 2, mean))
+```
+
+To illustrate the differences between `lapply` and `sapply` functions we can use the previous example using a list with the beaver data and compare the outputs:
+
+```{r}
+lapply(beaver_data, function(x) round(apply(x, 2, mean), 2))
+```
+
+```{r}
+sapply(beaver_data, function(x) round(apply(x, 2, mean), 2))
+```
+
+Finally, I would like to show a `tapply` example. We didn't dig into this function because we had already seen it in previous sessions, but it also deserves it's own applied example.
+
+**Remember**: `tapply()` is used to apply a function over subsets of a vector. It is primarily used when we have the following circumstances:
+
+  + A dataset that can be broken up into groups (via categorical variables - aka factors)
+  + We desire to break the dataset up into groups
+  + Within each group, we want to apply a function
+
+The arguments to tapply() are as follows:
+
+  + `x` is a vector
+  + `INDEX` is a factor or a list of factors (or else they are coerced to factors)
+  + `FUN` is a function to be applied
+  + `...` contains other arguments to be passed FUN
+  + `simplify`, should we simplify the result?
+
+```
+# syntax of tapply function
+tapply(x, INDEX, FUN, ..., simplify = TRUE)
+```
+
+To provide an example we’ll use the built in mtcars dataset and calculate the mean of the `mpg` variable grouped by the `cyl` variable.
+
+```{r}
+tapply(mtcars$mpg, mtcars$cyl, mean)
+```
+
+Now let’s say you want to calculate the mean for each column in the mtcars dataset grouped by the cylinder categorical variable. To do this you can embed the `tapply` function within the `apply` function.
+
+```{r}
+apply(mtcars, 2, function(x) tapply(x, mtcars$cyl, mean))
+```
 
 
 ## The pipe operator
@@ -3015,7 +3228,6 @@ x %>% abs() %>% log() %>% mean()
 The above code can be seen as follows: consider the vector `x` and apply the function `abs` over its entries. Then apply the function `log` over the resulting vector and last apply the function `mean`.
 
 The code is equivalent to standard R but it is simpler to read. So sometimes it is preferrable to code using pipes instead of standard R syntax.
-
 
 ## Plotting
 

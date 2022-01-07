@@ -1,4 +1,4 @@
-# Discrete Events Simulation
+# Discrete Events Simulation with R
 
 We are not going to explore this subject in depth, but at the end of this chapter we will understand what the discrete events simulation consists of, and we will carry out an example in R. Unlike Monte Carlo methods, which allow us to simulate events based on variables that change constantly over time, the discrete events simulation will help us to model the behavior of systems based on a sequence of discrete events over time. Remember that for both cases we use stochastic models.
 
@@ -37,7 +37,7 @@ In this course we have already used some DES-specific terminology, e.g., event, 
 
 The `R` API (Application Programming Interface) exposed by `simmer` comprises two main elements: the **simmer environment** (or simulation environment) and the **trajectory object**.
 
-### **The Trajectory Object**
+## The Trajectory Object
 
 A trajectory can be defined as a recipe and consists of an ordered set of activities. The `trajectory()` method instantiates the object, and activities can be appended using the `%>%` operator:
 
@@ -50,10 +50,6 @@ traj0 <- trajectory() %>%
   timeout(10) %>%
   log_("Leaving the trajectory")
 ```
-
-
-# Discrete Events Simulation
-## The `simmer` API
 
 The trajectory above illustrates the two most basic activities available: displaying a message (`log_()`) and spending some time in the system (`timeout()`). 
 
@@ -68,46 +64,24 @@ traj1 <- trajectory() %>%
   log_(function() "Leaving the trajectory")
 ```
 
-# Discrete Events Simulation
-## The `simmer` API
-
 Let's check what happens if we print the trajectory:
 
 ```{r}
 traj1
 ```
 
-We see the three activities we have created in our trajectory: message + delay + message
-
-# Discrete Events Simulation
-## The `simmer` API
-
-There are many activities available. We will briefly review them by categorizing them into different topics.
+We see the three activities we have created in our trajectory: message + delay + message. There are many activities available. We will briefly review them by categorizing them into different topics.
 
 + **Arrival properties**: Arrivals are able to store attributes and modify these using `set_attribute()`. Arrivals also hold a set of three prioritization values for accessing resources, `priority`, `preemptible` and `restart`, and we can use them inside the `set_priorization()` function.
 + **Interaction with resources**: The two main activities for interacting with resources are `seize()` and `release()`. In their most basic usage, they seize/release a given amount of a resource specified by name.
 + **Interaction with sources**: There are four activities specifically intended to modify arrival sources. An arrival may `activate()` or `deactivate()` a source, but also modify with `set_trajectory()` the trajectory to which it attaches the arrivals created, or set a new inter-arrival distribution with `set_source()`.
-
-# Discrete Events Simulation
-## The `simmer` API
-
 + **Branching**: A branch is a point in a trajectory in which one or more sub-trajectories may be followed. Two types of branching are supported in `simmer.` The `branch()` activity places the arrival in one of the sub-trajectories depending on some condition evaluated in a dynamical parameter called option. On the other hand, the `clone()` activity is a parallel branch. It does not take any option.
 + **Loops**: There is a mechanism, `rollback()`, for going back in a trajectory and thus executing loops over a number of activities. This activity causes the arrival to step back a given amount of activities a number of times.
 + **Batching**: Batching consists of collecting a number of arrivals before they can continue their path in the trajectory as a unit 2 . This means that if, for instance, 10 arrivals in a batch try to seize a unit of a certain resource, only one unit may be seized, not 10.
-
-# Discrete Events Simulation
-## The `simmer` API
-
 + **Asynchronous programming**: There are a number of methods enabling asynchronous events. The `send()` activity broadcasts one or more **signals** to all the arrivals subscribed to them. Signals can be triggered immediately or after some **delay**. Arrivals are able to block and `wait()` until a certain signal is received.
 + **Reneging**: Besides being rejected while trying to seize a resource, arrivals are also able to leave the trajectory at any moment, synchronously or asynchronously. Namely, reneging means that an arrival abandons the trajectory at a given moment. The most simple activity enabling this is `leave`, which immediately triggers the action given some probability.
 
-
-# Discrete Events Simulation
-## The `simmer` API
-
-The `R` API (Application Programming Interface) exposed by `simmer` comprises two main elements: the **simmer environment** (or simulation environment) and the **trajectory object**.
-
-**The Simulation Enviroment**
+## The Simulation Enviroment
 
 The simulation environment manages resources and sources, and controls the simulation execution. The `simmer()` method instantiates the object, after which resources and sources can be appended using the `%>%` operator:
 
@@ -118,17 +92,11 @@ env <- simmer() %>%
   print()
 ```
 
-# Discrete Events Simulation
-## The `simmer` API
-
 Then, the simulation can be executed, or `run()`, until a stop time:
 
 ```{r}
 env %>% run(until = 30)
 ```
-
-# Discrete Events Simulation
-## The `simmer` API
 
 There are a number of methods for extracting information, such as the simulation time (`now()`), future scheduled events (`peek()`), and getters for obtaining resources’ and sources’ parameters (capacity, queue size, server count and queue count; number of arrivals generated so far). There are also several setters available for resources and sources (capacity, queue size; trajectory, distribution).
 
@@ -136,10 +104,7 @@ There are a number of methods for extracting information, such as the simulation
 
 + **Sources**: Three main parameters define a source: a `name_prefix` for each generated arrival, a `trajectory` to attach them to and a source of inter-arrival times. There are two kinds of source: **generators** and **data sources**. A generator (`add_generator` method) is a dynamic source that draws inter-arrival times from a user-provided function. The `add_dataframe` method allows the user to set up a data source which draws arrivals from a provided data frame.
 
-# Discrete Events Simulation
-## The `simmer` API
-
-**Monitoring and data retrieval**
+## Monitoring and data retrieval
 
 There are three methods for obtaining monitored data about arrivals, resources and attributes. They can be applied to a single simulation environment or to a list of environments, and the returning object is always a data frame.
 
@@ -147,8 +112,7 @@ There are three methods for obtaining monitored data about arrivals, resources a
 + `get_mon_resources()`: Returns state changes in resources.
 + `get_mon_attributes()`: Returns state changes in attributes.
 
-
-# Discrete Events Simulation
+## `simmer` Example
 
 Let's see an example in R of discrete event simulation in which we simulate the behavior of patients in a hospital.
 
@@ -159,16 +123,12 @@ library(simmer)
 library(magrittr)
 ```
 
-# Discrete Events Simulation
-
 With the `simmer` library we create a simulation environment that we are going to call `outpatient clinic`
 
 ```{r}
 env = simmer("outpatient clinic")
 env
 ```
-
-# Discrete Events Simulation
 
 Second, we create the patient's trajectory. We do this using the `trajectory` function of the `simmer` library. 
 
@@ -192,8 +152,6 @@ patient = trajectory("patients path") %>%
   release("administration", 1)
 ```
 
-# Discrete Events Simulation
-
 Thirdly, we add the number of elements of the system using the `add_resource` function. 
 
 In this case we introduce in the system two elements of the nurse type, three of the doctor type and two of the administration type. 
@@ -209,16 +167,12 @@ env %>%
   add_generator("patient", patient, function() rnorm(1,5,0.5))
 ```
 
-# Discrete Events Simulation
-
 We finally launch the simulation for 540 minutes. When the simulation is finished we can see how our resources are working in the simulated system.
 
 ```{r}
 env %>%
   run(until=540)
 ```
-
-# Discrete Events Simulation: Replication
 
 It is very easy to replicate a simulation multiple times using standard R functions.
 
@@ -233,11 +187,7 @@ envs <- lapply(1:100, function(i) {
 })
 ```
 
-# Discrete Events Simulation: Plots
-
-This package provides some basic visualization tools to help you take a glance at your simulations quickly.
-
-There are three types of plot implemented with different metrics available:
+This package provides some basic visualization tools to help you take a glance at your simulations quickly. There are three types of plot implemented with different metrics available:
 
   - Plot of resources. Two metrics available:
       * the usage of a resource over the simulation time frame.
@@ -247,8 +197,6 @@ There are three types of plot implemented with different metrics available:
       * waiting time.
       * flow time.
   - Plot of trayectories
-  
-# Discrete Events Simulation: Plot of resources
 
 With this graphs we can have a look at the overall resource utilization. The top and bottom of the error bars show respectively the 25th and 75th percentile of the utilization across all the replications. The top of the bar shows the median utilization.
 
@@ -259,14 +207,11 @@ resources <- get_mon_resources(envs)
 plot(resources, metric = "utilization")
 ```
 
-
 It is also possible to have a look at resources’ activity during the simulation.
 
 ```{r}
 plot(resources, metric = "usage", c("nurse", "doctor", "administration"), items = "server")
 ```
-
-# Discrete Events Simulation: Plot of arrivals
 
 Next we can have a look at the evolution of the arrivals’ flow time during the simulation. In the plot below, each individual line represents a replication. A smooth line is drawn over them. All arrivals that didn’t finish their entire trajectory are excluded from the plot.
 
@@ -277,21 +222,13 @@ arrivals <- get_mon_arrivals(envs)
 plot(arrivals, metric = "waiting_time")
 ```
 
-# Discrete Events Simulation: Plot of trayectories
-
 Simulation trajectories may grow considerably, and they are not always easy to inspect to ensure their compliance with the model that we are trying to build. In this example we are going to expose a simple one:
 
 ```{r, echo=FALSE}
 plot(patient)
 ```
 
-# Discrete Events Simulation: Improving the system
-
-Now that we know a bit about the `simmer` tool we are going to make some changes in the system to try to improve its efficiency.
-
-From what we have seen in the examples, it seems that the nurses are overworked. 
-
-We will first try to "hire" a new nurse to improve the system.
+Now that we know a bit about the `simmer` tool we are going to make some changes in the system to try to improve its efficiency. From what we have seen in the examples, it seems that the nurses are overworked. We will first try to "hire" a new nurse to improve the system.
 
 ```{r}
 envs2 <- lapply(1:100, function(i) {
@@ -303,8 +240,6 @@ envs2 <- lapply(1:100, function(i) {
     run(540)
 })
 ```
-
-# Discrete Events Simulation: Improving the system
 
 Let's see how the system works with a new nurse through the plots:
 
@@ -322,11 +257,7 @@ arrivals <- get_mon_arrivals(envs2)
 plot(arrivals, metric = "waiting_time")
 ```
 
-# Discrete Events Simulation: Improving the system
-
-We can see that both doctors and nurses are now working at 100% capacity. 
-
-Now the problem seems to be coming from the administration. We are going to "fire" one of the workers in this area to try to improve the system.
+We can see that both doctors and nurses are now working at 100% capacity. Now the problem seems to be coming from the administration. We are going to "fire" one of the workers in this area to try to improve the system.
 
 ```{r}
 envs3 <- lapply(1:100, function(i) {
@@ -338,8 +269,6 @@ envs3 <- lapply(1:100, function(i) {
     run(540)
 })
 ```
-
-# Discrete Events Simulation: Improving the system
 
 Let's see how the system works without a administration worker through the plots:
 
@@ -357,6 +286,4 @@ arrivals <- get_mon_arrivals(envs3)
 plot(arrivals, metric = "waiting_time")
 ```
 
-# Discrete Events Simulation: Improving the system
-
-Great! We've found the perfect balance for our little hospital. In the next lab you will simulate the IE cafeteria with some specific pre COVID values for the simulation. Good luck!
+Great! We've found the perfect balance for our little hospital.
