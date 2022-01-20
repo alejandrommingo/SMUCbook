@@ -13,7 +13,7 @@
   
   <meta property="og:image" content="/images/Rplot.png" />
   <meta property="og:description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
-  <meta name="github-repo" content="amartinezm90/SMUCbook" />
+  <meta name="github-repo" content="alejandrommingo/SMUCbook" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="2.6 R Basic Data types | Simulation and Modeling to Understand the Change" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Alejandro Martínez-Mingo &amp; Manuele Leonelli" />
 
 
-<meta name="date" content="2022-01-07" />
+<meta name="date" content="2022-01-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -605,12 +605,12 @@ case (LETTERS):</p>
 <p>All these things mean that working with dates and times is extremely complicated. Fortunately, R has a robust system for dealing with this complexity.</p>
 <p>To see how R handles dates and times, have a look at Sys.time():</p>
 <div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="r-basic-data-types.html#cb221-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>()</span></code></pre></div>
-<pre><code>## [1] &quot;2022-01-07 11:45:58 CET&quot;</code></pre>
+<pre><code>## [1] &quot;2022-01-20 13:06:12 CET&quot;</code></pre>
 <p>This description of date and time is strictly hierarchical from left to right: the longest time scale (years) comes first, then month, then day, separated by hyphens, then there is a blank space, followed by the time, with hours first (using the 24-hour clock), then minutes, then seconds, separated by colons. Finally, there is a character string explaining the time zone (CET stands for Central Europe Time)</p>
 <p>This representation of the date and time as a character string is user-friendly and familiar, but it is no good for calculations. For that, we need a single numeric representation of the combined date and time. The convention in R is to base this on seconds (the smallest time scale that is accommodated in Sys.time)</p>
 <p>The baseline for expressing today’s date and time in seconds is 1 January 1970:</p>
 <div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="r-basic-data-types.html#cb223-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">Sys.time</span>())</span></code></pre></div>
-<pre><code>## [1] 1641552359</code></pre>
+<pre><code>## [1] 1642680372</code></pre>
 <p>This is fine for plotting time series graphs, but it is not much good for computing monthly means (e.g. is the mean for June significantly different from the July mean?) or daily means (e.g. is the Monday mean significantly different from the Friday mean?).</p>
 <p>To answer questions like these we have to be able to access a broad set of categorical variables associated with the date: the year, the month, the day of the week, and so forth. To accommodate this, R uses the POSIX system for representing times and dates:</p>
 <div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="r-basic-data-types.html#cb225-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(<span class="fu">Sys.time</span>())</span></code></pre></div>
@@ -622,9 +622,9 @@ the effort. Naturally, you can easily convert to one representation to the other
 <div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="r-basic-data-types.html#cb227-1" aria-hidden="true" tabindex="-1"></a>time.list <span class="ot">=</span> <span class="fu">as.POSIXlt</span>(<span class="fu">Sys.time</span>())</span>
 <span id="cb227-2"><a href="r-basic-data-types.html#cb227-2" aria-hidden="true" tabindex="-1"></a><span class="fu">unlist</span>(time.list)</span></code></pre></div>
 <pre><code>##                sec                min               hour               mday 
-## &quot;58.5732440948486&quot;               &quot;45&quot;               &quot;11&quot;                &quot;7&quot; 
+## &quot;12.1856942176819&quot;                &quot;6&quot;               &quot;13&quot;               &quot;20&quot; 
 ##                mon               year               wday               yday 
-##                &quot;0&quot;              &quot;122&quot;                &quot;5&quot;                &quot;6&quot; 
+##                &quot;0&quot;              &quot;122&quot;                &quot;4&quot;               &quot;19&quot; 
 ##              isdst               zone             gmtoff 
 ##                &quot;0&quot;              &quot;CET&quot;             &quot;3600&quot;</code></pre>
 <p>Here you see the nine components of the list. The time is represented by the number of seconds (<code>sec</code>), minutes (<code>min</code>) and hours (on the 24-hour clock). Next comes the day of the month (<code>mday</code>, starting from 1), then the month of the year (mon, starting at January = 0), then the year (starting at 0 = 1900). The day of the week (<code>wday</code>) is coded from Sunday = 0 to Saturday = 6. The day within the year (<code>yday</code>) is coded from 0 = January 1. Finally, there is a logical variable <code>isdst</code> which asks whether daylight saving time is in operation (0 = FALSE in this case). The ones you are most likely to use include <code>year</code> (to get yearly mean values), <code>mon</code> (to get monthly means) and <code>wday</code> (to get means for the different days of the week).</p>
@@ -828,7 +828,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/amartinezm90/SMUCbook/blob/master/02-R.Rmd",
+"link": "https://github.com/alejandrommingo/SMUCbook/blob/master/02-R.Rmd",
 "text": null
 },
 "download": ["bookdownproj.pdf", "bookdownproj.epub"],
