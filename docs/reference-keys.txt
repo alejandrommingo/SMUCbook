@@ -5,10 +5,12 @@ fig:donut
 fig:unnamed-chunk-4
 fig:unnamed-chunk-5
 fig:unnamed-chunk-6
+exm:unlabeled-div-1
 fig:disc-pmf
 fig:disc-cdf
 fig:bernoulli
 fig:binom
+exm:unlabeled-div-2
 fig:geom
 fig:poisson
 fig:x-sq
@@ -20,6 +22,7 @@ fig:exppdf1
 fig:expcdf1
 fig:norm
 fig:pnorm
+eq:standard
 fig:seq
 fig:uplot
 fig:uhist
