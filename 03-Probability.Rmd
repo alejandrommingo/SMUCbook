@@ -379,11 +379,11 @@ F_{X}(x)=\begin{cases}
 
 Since we are working with a uniform distribution, we can assume that the area under the curve is equal to base per height. We already know that the area equals 1, and the base equals 5. This way we can calculate that: 
 
-\[
+\begin{align}
 AUC = base*height, \\
 1 = 5*height, \\
 height = 1/5 = 0.2
-\]
+\end{align}
 
 With this information it will be very easy for us to calculate more specific probabilities. For example, let's calculate $\mathbb{P}(1 \leq x \leq 2)$:
 
@@ -926,10 +926,10 @@ Notice that the limit of the distribution function is:
 
 We will not show here the calculation of the expectation and variance of a geometric random variable. They can be derived as:
 
-\[
+\begin{align}
 E(X)= \frac{1-p}{p}, \\
 Var(X) =  \frac{1-p}{p^2}
-\]
+\end{align}
 
 
 And its standard desviation is:
