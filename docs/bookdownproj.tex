@@ -760,7 +760,7 @@ The \texttt{history()} command displays the history of commands entered during t
 ##     writeLines(rawhist[inds], file2)
 ##     file.show(file2, title = "R History", delete.file = TRUE)
 ## }
-## <bytecode: 0x5583438d9a40>
+## <bytecode: 0x55b221f71380>
 ## <environment: namespace:utils>
 \end{verbatim}
 
@@ -2383,7 +2383,7 @@ To see how R handles dates and times, have a look at Sys.time():
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "2022-01-28 13:03:14 CET"
+## [1] "2022-01-28 13:20:25 CET"
 \end{verbatim}
 
 This description of date and time is strictly hierarchical from left to right: the longest time scale (years) comes first, then month, then day, separated by hyphens, then there is a blank space, followed by the time, with hours first (using the 24-hour clock), then minutes, then seconds, separated by colons. Finally, there is a character string explaining the time zone (CET stands for Central Europe Time)
@@ -2399,7 +2399,7 @@ The baseline for expressing today's date and time in seconds is 1 January 1970:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 1643371394
+## [1] 1643372426
 \end{verbatim}
 
 This is fine for plotting time series graphs, but it is not much good for computing monthly means (e.g.~is the mean for June significantly different from the July mean?) or daily means (e.g.~is the Monday mean significantly different from the Friday mean?).
@@ -2430,7 +2430,7 @@ the effort. Naturally, you can easily convert to one representation to the other
 
 \begin{verbatim}
 ##                sec                min               hour               mday 
-## "14.4810605049133"                "3"               "13"               "28" 
+## "25.6971204280853"               "20"               "13"               "28" 
 ##                mon               year               wday               yday 
 ##                "0"              "122"                "5"               "27" 
 ##              isdst               zone             gmtoff 
