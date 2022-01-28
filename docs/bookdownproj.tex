@@ -760,7 +760,7 @@ The \texttt{history()} command displays the history of commands entered during t
 ##     writeLines(rawhist[inds], file2)
 ##     file.show(file2, title = "R History", delete.file = TRUE)
 ## }
-## <bytecode: 0x5591da9e77b0>
+## <bytecode: 0x56549e471708>
 ## <environment: namespace:utils>
 \end{verbatim}
 
@@ -2383,7 +2383,7 @@ To see how R handles dates and times, have a look at Sys.time():
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "2022-01-28 10:57:42 CET"
+## [1] "2022-01-28 12:36:20 CET"
 \end{verbatim}
 
 This description of date and time is strictly hierarchical from left to right: the longest time scale (years) comes first, then month, then day, separated by hyphens, then there is a blank space, followed by the time, with hours first (using the 24-hour clock), then minutes, then seconds, separated by colons. Finally, there is a character string explaining the time zone (CET stands for Central Europe Time)
@@ -2399,7 +2399,7 @@ The baseline for expressing today's date and time in seconds is 1 January 1970:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 1643363863
+## [1] 1643369781
 \end{verbatim}
 
 This is fine for plotting time series graphs, but it is not much good for computing monthly means (e.g.~is the mean for June significantly different from the July mean?) or daily means (e.g.~is the Monday mean significantly different from the Friday mean?).
@@ -2430,7 +2430,7 @@ the effort. Naturally, you can easily convert to one representation to the other
 
 \begin{verbatim}
 ##                sec                min               hour               mday 
-## "42.5790059566498"               "57"               "10"               "28" 
+## "20.5138781070709"               "36"               "12"               "28" 
 ##                mon               year               wday               yday 
 ##                "0"              "122"                "5"               "27" 
 ##              isdst               zone             gmtoff 
@@ -7236,16 +7236,7 @@ For this reason we will in general assume a probabilistic model for the various 
 
 \textbf{Set Definition}
 
-A set is a \href{https://en.wikipedia.org/wiki/Primitive_notion}{primitive notion}. That is, it is a basic idea of human thought. A set is a collection of objects: numbers, images \ldots{} anything, football players, words, colors \ldots{}
-
-The basic set theory is simple and natural and is what we need for this course.
-
-Mathematical set theory is more complex and presents several paradoxes
-
-\hypertarget{basic-sets}{%
-\subsection{Basic sets}\label{basic-sets}}
-
-The sets usually have a mother set such as:
+A set is a \href{https://en.wikipedia.org/wiki/Primitive_notion}{primitive notion}. That is, it is a basic idea of human thought. A set is a collection of objects: numbers, images \ldots{} anything, football players, words, colors \ldots{} The basic set theory is simple and natural and is what we need for this course. Mathematical set theory is more complex and presents several paradoxes. The sets usually have a mother set such as:
 
 \begin{itemize}
 \tightlist
@@ -7263,43 +7254,24 @@ The sets usually have a mother set such as:
   Words = \(\{peace, war, love, probability,\ldots\}.\)
 \end{itemize}
 
-\hypertarget{basic-characteristics-and-properties-of-the-sets}{%
-\subsection{Basic characteristics and properties of the sets}\label{basic-characteristics-and-properties-of-the-sets}}
+Each \(\omega\) object of \(\Omega\) is called \textbf{the element of the set} \(\Omega\) and we say that \(\omega\) belongs to \(\Omega\). We will denote it with \(\omega\in \Omega\). A \textbf{set of one element}, for example, \(\{1\}\) is called a \textbf{singleton}.
 
-\begin{itemize}
-\tightlist
-\item
-  Each \(x\) object of \(\Omega\) is called \textbf{the element of the set} \(\Omega\) and we say that \(x\) belongs to \(\Omega\). We will denote it with \(x\in \Omega\).
-\item
-  A \textbf{set of one element}, for example, \(\{1\}\) is called a \textbf{singleton}.
-\item
-  Let \(A\) be another set we will say that \(A\) \textbf{is equal to} \(B\) if all the \(A\) elements are in \(B\) and all the \(B\) elements are in \(A\). For example \(A=\{1,2,3\}\) is equal to \(B=\{3,1,2\}\).
-\item
-  If \(A\) is another set such that if \(x\in A\) then \(x\in B\) we will say that \(A\) is a subset of or is contained in \(B\). We will denote it by \(A\subseteq B.\)
-\item
-  The set that has no elements is called an empty set and is denoted by the symbol \(\emptyset\).
-\item
-  Given \(A\) a set obviously \(\emptyset\subseteq A.\)
-\end{itemize}
+Let \(A\) be another set we will say that \(A\) \textbf{is equal to} \(B\) if all the \(A\) elements are in \(B\) and all the \(B\) elements are in \(A\). For example \(A=\{1,2,3\}\) is equal to \(B=\{3,1,2\}\). If \(A\) is another set such that if \(x\in A\) then \(x\in B\) we will say that \(A\) is a subset of or is contained in \(B\). We will denote it by \(A\subseteq B.\)
+
+The set that has no elements is called an empty set and is denoted by the symbol \(\emptyset\). Given \(A\) a set obviously \(\emptyset\subseteq A.\)
 
 Let's take as a base set \(\Omega=\{1,2,3\}\)
 
+\(\Omega\) is a set of cardinal 3, it is denoted by \(\#(\Omega)=3\) or by \(|\Omega|=3\). The \(\Omega\) set has \(2^3=8\) subsets:
+
 \begin{itemize}
 \tightlist
 \item
-  \(\Omega\) is a set of cardinal 3, it is denoted by \(\#(\Omega)=3\) or by \(|\Omega|=3\)
+  the empty \(\emptyset\) and the elementaries \(\{1\},\{3\},\{3\}\)
 \item
-  The \(\Omega\) set has \(2^3=8\) subsets.
-
-  \begin{itemize}
-  \tightlist
-  \item
-    the empty \(\emptyset\) and the elementaries \(\{1\},\{3\},\{3\}\)
-  \item
-    the subsets of two elements: \(\{1,2\},\{1,3\},\{2,3\}\)
-  \item
-    the total set of three elements \(\Omega=\{1,2,3\}.\)
-  \end{itemize}
+  the subsets of two elements: \(\{1,2\},\{1,3\},\{2,3\}\)
+\item
+  the total set of three elements \(\Omega=\{1,2,3\}.\)
 \end{itemize}
 
 \hypertarget{sample-spaces}{%
@@ -7322,6 +7294,7 @@ Probability is the mathematical language we use to quantify uncertainty.
 \textbf{Example:} Let \(\omega\) be the outcome of a measurement of some physical quantity, for example, temperature. Then \(\Omega=\mathbb{R}=(-\infty,\infty)\) (without considering that there is a lower bound, no harm in this). The event that the measurement is larger than 10 but less than or equal to 23 is \(A=(10,23]\).
 
 \textbf{Example:} If we toss a coin forever, then the sample space is the infinite set \(\Omega = \{w=(w_1,w_2,w_3,\dots): w_i\in\{H,T\}\}\). Let \(E\) be the event that the first head appears on the third toss. Then
+
 \[
 E=\{(w_1,w_2,w_3,\dots):w_1=T,w_2=T,w_3=H,w_i\in\{H,T\}\;\; for\;\; i>3\}.
 \]
@@ -7329,9 +7302,7 @@ E=\{(w_1,w_2,w_3,\dots):w_1=T,w_2=T,w_3=H,w_i\in\{H,T\}\;\; for\;\; i>3\}.
 \hypertarget{probability}{%
 \section{Probability}\label{probability}}
 
-We will assign a real number \(\mathbb{P}(A)\) to every event \(A\), called the \emph{probability} of \(A\). We also call \(\mathbb{P}\) a \emph{probability distribution} or a \emph{probability measure}.
-
-To qualify as a probability \(\mathbb{P}\) must satisfy three axioms.
+We will assign a real number \(\mathbb{P}(A)\) to every event \(A\), called the \emph{probability} of \(A\). We also call \(\mathbb{P}\) a \emph{probability distribution} or a \emph{probability measure}. To qualify as a probability \(\mathbb{P}\) must satisfy three axioms.
 
 \textbf{Definition:} A function \(\mathbb{P}\) that assigns a real number \(\mathbb{P}(A)\) to each event \(A\) is a \emph{probability distribution} if it satifies the following three axioms:
 
@@ -7364,24 +7335,27 @@ One can derive many properties from the axioms, such as:
 \end{itemize}
 
 Consider the experiment of throwing two dice. The sample space is
+
 \[
 \Omega = \{(\omega_1,\omega_2): \omega_1=1,\dots,6, \omega_2=1,\dots,6\}
 \]
-where \(\omega_1\) is the number of the first dice and \(\omega_2\) is the number of the second dice.
 
-There are 36 elements in the sample space and if the dice are fair each have probability 1/36.
+where \(\omega_1\) is the number of the first dice and \(\omega_2\) is the number of the second dice. There are 36 elements in the sample space and if the dice are fair each have probability 1/36. Consider the event that the sum of the dice is seven. The event of interest is
 
-Consider the event that the sum of the dice is seven. The event of interest is
 \[
 A=\{(\omega_1,\omega_2):\omega_1+\omega_2=7\}=\{(1,6),(2,5),(3,4),(4,3),(5,2),(6,1)\}
 \]
+
 and thus \(\mathbb{P}(A)=6/36=1/6\).
 
 Consider now the event of observing at least one six. The event of interest is now
+
 \[
 A=\{(\omega_1,\omega_2): \omega_1=6 \; and/or \; \omega_2=6\}
 \]
+
 We can write \(A=A_1\cup A_2\) where \(A_1\{(\omega_1,\omega_2): \omega_1=6 \}\) and \(A_2\{(\omega_1,\omega_2): \omega_2=6 \}\). Notice that \(A_1\cap A_2 =\{(6,6)\}\) and that \(\mathbb{P}(A_1)=\mathbb{P}(A_2)=6/36\) whilst \(\mathbb{P}(A_1\cap A_2)=1/36\). Thus
+
 \[
 \mathbb{P}(A)=\mathbb{P}(A_1\cup A_2)=\mathbb{P}(A_1)+\mathbb{P}(A_2)-\mathbb{P}(A_1\cap A_2)=6/36+ 6/36 -1/36 =11/36.
 \]
@@ -7392,14 +7366,14 @@ We can write \(A=A_1\cup A_2\) where \(A_1\{(\omega_1,\omega_2): \omega_1=6 \}\)
 If we flip a fair coin twice, then the probability of two heads is \(\frac{1}{2}\times \frac{1}{2}\). We multiply the probabilities because we regard the two tosses as independent.
 
 \textbf{Definition:} Two events \(A\) and \(B\) are \emph{independent} if
+
 \[
 \mathbb{P}(A,B)=\mathbb{P}(A)\mathbb{P}(B)
 \]
+
 Independence can arise in two distinct ways. Sometimes, we explicitly assume that two events are independent (for example in the toss of two coins). In other instances we derive independence by veryfing that \(\mathbb{P}(A,B)=\mathbb{P}(A)\mathbb{P}(B)\) holds.
 
-Suppose that \(A\) and \(B\) are disjoint events, each with positive probability. Can they be independent?
-
-No.~This follows since \(\mathbb{P}(A)\mathbb{P}(B)>0\) yet \(\mathbb{P}(A,B)=\mathbb{P}(\emptyset)=0.\)
+Suppose that \(A\) and \(B\) are disjoint events, each with positive probability. Can they be independent? No.~This follows since \(\mathbb{P}(A)\mathbb{P}(B)>0\) yet \(\mathbb{P}(A,B)=\mathbb{P}(\emptyset)=0.\)
 
 Consider the toss of a fair dice. Let \(A=\{2,4,6\}\) and \(B=\{1,2,3,4\}\). Then \(A\cap B = \{2,4\}\), \(\mathbb{P}(A,B)=2/6\), \(\mathbb{P}(A)\mathbb{P}(B)=(1/2)\times (2/3)\) and so \(A\) and \(B\) are independent.
 
@@ -7417,11 +7391,13 @@ Toss a fair coin 10 times. Let \(A\) be the event at least one head. Let \(T_j\)
 \subsection{Conditional Probabilities}\label{conditional-probabilities}}
 
 \textbf{Definition} The conditional probability of \(A\) given that \(B\) has occurred, assuming \(\mathbb{P}(B)>0\), is
+
 \[
 \mathbb{P}(A|B)=\frac{\mathbb{P}(A,B)}{\mathbb{P}(B)}
 \]
 
 \textbf{Example} A medical test for a disease \(D\) has outcomes + and -. The probabilities are
+
 \begin{align}
 \mathbb{P}(D,+)&=0.009\\
 \mathbb{P}(D,-)&=0.001 \\
@@ -7430,16 +7406,17 @@ Toss a fair coin 10 times. Let \(A\) be the event at least one head. Let \(T_j\)
 \end{align}
 
 From the definition of conditional probability
+
 \[
 \mathbb{P}(+|D)=\frac{\mathbb{P}(+,D)}{\mathbb{P}(D)}=\frac{0.009}{0.009+0.001}=0.9
 \]
+
 and
 \[
 \mathbb{P}(-|D^c)=\frac{\mathbb{P}(-,D^c)}{\mathbb{P}(D^c)}=\frac{0.891}{0.891+0.099}\approx 0.9
 \]
-The test is fairl accurate: sick people yield a positive 90 percent of the time and healthy people yield a negative about 90 percent of the times.
 
-Suppose you go for a test and get a positive. Wha is the probability you have the disease?
+The test is fairly accurate: sick people yield a positive 90 percent of the time and healthy people yield a negative about 90 percent of the times. Suppose you go for a test and get a positive. What is the probability you have the disease?
 
 \[
 \mathbb{P}(D|+)=\frac{\mathbb{P}(+,D)}{\mathbb{P}(+)}=\frac{0.009}{0.009+0.099}\approx 0.08
@@ -7464,15 +7441,15 @@ Statistics is concerned with data. The concept of a random variable provides the
 \[
 X: \Omega \rightarrow \mathbb{R}
 \]
-that assigns a real number \(X(\omega)\) to each outcome \(\omega\).
 
-We will basically only work directly with random variables and although the sample space will be barely mentioned, you should keep in mind that it is there!
+that assigns a real number \(X(\omega)\) to each outcome \(\omega\). We will basically only work directly with random variables and although the sample space will be barely mentioned, you should keep in mind that it is there!
 
 \textbf{Example:} Flip a coin ten times. Let \(X\) be the random variable counting the number of heads. For example, if \(\omega= HHTHHTHHTT\), then \(X(\omega)=6\).
 
 \textbf{Example:} Let \(\Omega=\{(x,y): x^2+y^2 \leq 1\}\). Consider drawing a point at random from \(\Omega\) (we will make this idea more precise later). A typical outcome is of the form \(\omega=(x,y)\). Some examples of random variables are \(X(\omega)=x\), \(Y(\omega)=y\), \(Z(\omega)=x+y\).
 
 Given a random variable \(X\) and a subset \(A\) of the real line, let
+
 \begin{align}
 \mathbb{P}(X\in A) &= \mathbb{P}(\{\omega\in\Omega: X(\omega)\in A\})\\
 \mathbb{P}(X = x) &= \mathbb{P}(\{\omega\in\Omega: X(\omega)=x\})
@@ -7508,7 +7485,7 @@ The following result shows that the CDF completely determines the distribution o
 
 \textbf{Theorem} Let \(X\) have CDF \(F_X\) and let \(Y\) have CDF \(F_Y\). If \(F_X(x)=F_Y(x)\) for all \(x\), then \(\mathbb{P}(X\in A)=\mathbb{P}(Y\in A)\) for all \(A\).
 
-Some properties:
+Some properties of the CDF are:
 
 \begin{itemize}
 \tightlist
@@ -7525,9 +7502,7 @@ Some properties:
 \hypertarget{random-variable-types}{%
 \subsection{Random variable types}\label{random-variable-types}}
 
-There are two fundamental types of random variables, discrete and continuous.
-
-The following is a rough definition.
+There are two fundamental types of random variables, discrete and continuous. The following is a rough definition.
 
 Discrete and Continuous Random Variables
 
@@ -7576,24 +7551,15 @@ These are \emph{continuous random} variables:
 \hypertarget{discrete-random-variables}{%
 \subsection{Discrete Random Variables}\label{discrete-random-variables}}
 
-\begin{itemize}
-\tightlist
-\item
-  We will now describe the behavior of r.v. To do this we will use different functions that will give us some probabilities of the random variable.
-\item
-  In the discrete case these functions are the probability function and the cumulative distribution function.
-\item
-  In the discrete case the probability function is the one that gives us the probabilities of the elementary events of r.v.
-\end{itemize}
+We will now describe the behavior of r.v. To do this we will use different functions that will give us some probabilities of the random variable. In the discrete case these functions are the probability function and the cumulative distribution function. In the discrete case the probability function is the one that gives us the probabilities of the elementary events of r.v.
 
 \textbf{Definition:} \(X\) is \emph{discrete} if it takes countably many values \(\{x_1,x_2,\dots\}\). We define the \emph{probability function} or \emph{probability mass function} for \(X\) by \(f_X(x)=\mathbb{P}(X=x)\).
-
-~
 
 Thus \(f_X(x)\geq 0\) for all \(x\) and \(\sum_i f_X(x_i)=1\). The CDF of \(X\) is related to \(f_X\) by
 \[
 F_X(x)=\mathbb{P}(X\leq x)=\sum_{x_i\leq x}f_X(x_i)
 \]
+
 \textbf{Example:} The probability mass function for the example of the toss of two coins is
 \[
 f_X(x)=\left\{
@@ -7606,11 +7572,7 @@ f_X(x)=\left\{
 \right.
 \]
 
-Consider the throw of two dice and define the random variable \(X\) as the absolute difference of the dice results.
-
-\(X\) can thus take values \({0,1,2,3,4,5}\)
-
-By counting appropriately the possible cases the PMF can be derived as
+Consider the throw of two dice and define the random variable \(X\) as the absolute difference of the dice results. \(X\) can thus take values \({0,1,2,3,4,5}\). By counting appropriately the possible cases the PMF can be derived as
 
 \[
 f_X(x)=\left\{
@@ -7647,6 +7609,7 @@ f_X(x)=\left\{
 \end{array}
 \right.
 \]
+
 Clearly, \(f_X(x)\geq 0\) and \(\int_{-\infty}^{\infty}f_X(x)dx=1\). The CDF is given by
 \[
 F_X(x)=\left\{
@@ -7658,7 +7621,7 @@ x, & 0\leq x \leq 1\\
 \right.
 \]
 
-Continuous random variables can lead to confusion. First, note that if \(X\) is continuous then \(\mathbb{P}(X=x)=0\) for every \(x\). Do not try to tink of \(f_X(x)\) as \(\mathbb{P}(X=x)\). This only holds for discrete random variables. We get probabilities from a PDF by integrating.
+Continuous random variables can lead to confusion. First, note that if \(X\) is continuous then \(\mathbb{P}(X=x)=0\) for every \(x\). Do not try to think of \(f_X(x)\) as \(\mathbb{P}(X=x)\). This only holds for discrete random variables. We get probabilities from a PDF by integrating.
 
 \begin{itemize}
 \tightlist
@@ -7685,6 +7648,7 @@ f_{X}(x)=\begin{cases}
 0,\ otherwise
 \end{cases}
 \]
+
 The plot of the PDF will be:
 
 \begin{Shaded}
@@ -7705,15 +7669,14 @@ F_{X}(x)=\begin{cases}
 \end{cases}
 \]
 
-Since we are working with a uniform distribution, we can assume that the area under the curve is equal to base per height.
-
-We already know that the area equals 1, and the base equals 5. This way we can calculate that:
+Since we are working with a uniform distribution, we can assume that the area under the curve is equal to base per height. We already know that the area equals 1, and the base equals 5. This way we can calculate that:
 
 \[
-AUC = base*height \\
-1 = 5*height \\
+AUC = base*height, \\
+1 = 5*height, \\
 height = 1/5 = 0.2
 \]
+
 With this information it will be very easy for us to calculate more specific probabilities. For example, let's calculate \(\mathbb{P}(1 \leq x \leq 2)\):
 
 \[
@@ -8040,26 +8003,26 @@ Consider an experiment or a real-world system where there can only be two outcom
   the status of a machine: broken or working;
 \end{itemize}
 
-By default one outcome happens with some probability, that we denote as \(\theta\in [0,1]\) and the other with probability \(1-\theta\).
+By default one outcome happens with some probability, that we denote as \(p\in [0,1]\) and the other with probability \(1-p\).
 
-Such a situation is in general modeled using the so-called \emph{Bernoulli distribution} with parameter \(\theta\). One outcome is associated to the number 1 (usually referred to as sucess) and the other is associated to the number 0 (usually referred to as failure). So \(P(X=1)=p(1)=\theta\) and \(P(X=0)=p(0)=1-\theta\).
+Such a situation is in general modeled using the so-called \emph{Bernoulli distribution} with parameter \(p\). One outcome is associated to the number 1 (usually referred to as sucess) and the other is associated to the number 0 (usually referred to as failure). So \(P(X=1)=p(1)=p\) and \(P(X=0)=p(0)=1-p\).
 
 The above pmf can be more coincisely written as
 \[
 p(x)=\left\{
 \begin{array}{ll}
-\theta^x(1-\theta)^{1-x}, & x=0,1\\
+p^x(1-p)^{1-x}, & x=0,1\\
 0, & \mbox{otherwise}
 \end{array}
 \right.
 \]
 The mean and variance of the Bernoulli distribution can be easily computed as
 \[
-E(X)=0\cdot(1-\theta)+ 1\cdot\theta=\theta,
+E(X)=0\cdot(1-p)+ 1\cdotp=p,
 \]
 and
 \[
-V(X)=(0-\theta)^2(1-\theta)+(1-\theta)^2\theta=\theta^2(1-\theta)+(1-\theta)^2\theta=\cdots = \theta(1-\theta)
+V(X)=(0-p)^2(1-p)+(1-p)^2p=p^2(1-p)+(1-p)^2p=\cdots = p(1-p)
 \]
 
 Figure \ref{fig:bernoulli} reports the pmf and the cdf of a Bernoulli random variable with parameter 0.3.
@@ -8070,6 +8033,38 @@ Figure \ref{fig:bernoulli} reports the pmf and the cdf of a Bernoulli random var
 \caption{\label{fig:bernoulli}PMF (left) and CDF (right) of a Bernoulli random variable with parameter 0.3}
 \end{figure}
 
+R doesn't provides a specific method for the Bernoulli distribution, but as we will see in the next section, this is a specific case of the binomial experiment, so we will use the binomial method for working with the Bernoulli distribution in R. We will explain this function below, for now let's see a couple examples of the Bernoulli \(Ber(p=0.25)\) distribution in R
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dbinom}\NormalTok{(}\DecValTok{0}\NormalTok{,}\AttributeTok{size=}\DecValTok{1}\NormalTok{,}\AttributeTok{prob=}\FloatTok{0.25}\NormalTok{) }\CommentTok{\# probability of failure}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.75
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dbinom}\NormalTok{(}\DecValTok{1}\NormalTok{,}\AttributeTok{size=}\DecValTok{1}\NormalTok{,}\AttributeTok{prob=}\FloatTok{0.25}\NormalTok{) }\CommentTok{\# probability of success}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.25
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{rbinom}\NormalTok{(}\AttributeTok{n=}\DecValTok{20}\NormalTok{,}\AttributeTok{size =} \DecValTok{1}\NormalTok{,}\AttributeTok{prob=}\FloatTok{0.25}\NormalTok{) }\CommentTok{\# generating 20 random numbers from a Bernoulli distribution with p = 0.25}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 0 0 0 0 0 1 0 0 0 0 1 0 0 1 0 0 0 1 1 0
+\end{verbatim}
+
 \hypertarget{binomial-distribution}{%
 \subsection{Binomial Distribution}\label{binomial-distribution}}
 
@@ -8079,20 +8074,20 @@ The Bernoulli random variable is actually a very special case of the so-called \
 \item
   each experiment is repeated \(n\) times;
 \item
-  each time there is a probability of success \(\theta\);
+  each time there is a probability of success \(p\);
 \item
   the outcome of each experiment is independent of the others.
 \end{itemize}
 
 Let's think of tossing a coin \(n\) times. Then we would expect that the probability of showing heads is the same for all tosses and that the result of previous tosses does not affect others. So this situation appears to meet the above assumptions and can be modeled by what we call a Binomial random variable.
 
-Formally, the random variable \(X\) is a Binomial random variable with parameters \(n\) and \(\theta\) if it denotes the number of successes of \(n\) independent Bernoulli random variables, all with parameter \(\theta\).
+Formally, the random variable \(X\) is a Binomial random variable with parameters \(n\) and \(p\) if it denotes the number of successes of \(n\) independent Bernoulli random variables, all with parameter \(p\).
 
-The pmf of a Binomial random variable with parameters \(n\) and \(\theta\) can be written as:
+The pmf of a Binomial random variable with parameters \(n\) and \(p\) can be written as:
 \[
 p(x)=\left\{
 \begin{array}{ll}
-\binom{n}{x}\theta^{x}(1-\theta)^{n-x}, & x = 0,1,\dots,n\\
+\binom{n}{x}p^{x}(1-p)^{n-x}, & x = 0,1,\dots,n\\
 0, & \mbox{otherwise}
 \end{array}
 \right.
@@ -8101,22 +8096,22 @@ Let's try and understand the formula by looking term by term.
 
 \begin{itemize}
 \item
-  if \(X=x\) there are \(x\) successes and each success has probability \(\theta\) - so \(\theta^x\) counts the overall probability of successes
+  if \(X=x\) there are \(x\) successes and each success has probability \(p\) - so \(p^x\) counts the overall probability of successes
 \item
-  if \(X=x\) there are \(n-x\) failures and each failure has probability \(1-\theta\) - so \((1-\theta)^{n-x}\) counts the overall probability of failures
+  if \(X=x\) there are \(n-x\) failures and each failure has probability \(1-p\) - so \((1-p)^{n-x}\) counts the overall probability of failures
 \item
   failures and successes can appear according to many orders. To see this, suppose that \(x=1\): there is only one success out of \(n\) trials. This could have been the first attempt, the second attempt or the \(n\)-th attempt. The term \(\binom{n}{x}\) counts all possible ways the outcome \(x\) could have happened.
 \end{itemize}
 
 The Bernoulli distribution can be seen as a special case of the Binomial where the parameter \(n\) is fixed to 1.
 
-We will not show why this is the case but the expectation and the variance of the Binomial random variable with parameters \(n\) and \(\theta\) can be derived as
+We will not show why this is the case but the expectation and the variance of the Binomial random variable with parameters \(n\) and \(p\) can be derived as
 \[
 E(X)=np, \hspace{2cm} V(X)=np(1-p)
 \]
 The formulae for the Bernoulli can be retrieved by setting \(n=1\).
 
-Figure \ref{fig:binom} shows the pmf of two Binomial distributions both with parameter \(n=10\) and with \(\theta=0.3\) (left) and \(\theta=0.8\). For the case \(\theta=0.3\) we can see that it is more likely that there are a small number of successes, whilst for \(\theta=0.8\) a large number of successes is more likely.
+Figure \ref{fig:binom} shows the pmf of two Binomial distributions both with parameter \(n=10\) and with \(p=0.3\) (left) and \(p=0.8\). For the case \(p=0.3\) we can see that it is more likely that there are a small number of successes, whilst for \(p=0.8\) a large number of successes is more likely.
 
 \begin{figure}
 \centering
@@ -8132,7 +8127,7 @@ R provides a straightforward implementation of the Binomial distribution through
 \item
   \texttt{size} is the parameter \(n\) of the Binomial;
 \item
-  \texttt{prob} is the parameter \(\theta\) of the Binomial.
+  \texttt{prob} is the parameter \(p\) of the Binomial.
 \end{itemize}
 
 So for instance
@@ -8147,7 +8142,7 @@ So for instance
 ## [1] 0.1171875
 \end{verbatim}
 
-returns \(P(X=3)=p(3)\) for a Binomial random variable with parameter \(n=10\) and \(\theta = 0.5\).
+returns \(P(X=3)=p(3)\) for a Binomial random variable with parameter \(n=10\) and \(p = 0.5\).
 
 Similarly,
 
@@ -8161,7 +8156,224 @@ Similarly,
 ## [1] 0.9900182
 \end{verbatim}
 
-returns \(P(X\leq 8) = F(8)\) for a Binomial random variable with parameter \(n=20\) and \(\theta = 0.2\).
+returns \(P(X\leq 8) = F(8)\) for a Binomial random variable with parameter \(n=20\) and \(p = 0.2\).
+
+R also provides a method for generating pseudo-random numbers using a binomial distribution through the function \texttt{rbinom}. This function will require three arguments:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{n} is the parameter for specifying the number of pseudo-random numbers we want to generate;
+\item
+  \texttt{size} is the parameter \(n\) of the Binomial;
+\item
+  \texttt{prob} is the parameter \(p\) of the Binomial.
+\end{itemize}
+
+\begin{example}
+\textbf{Example}
+The below example would be equivalent to repeating 100 times the experiment of tossing a coin 20 times and counting the number of heads.
+\end{example}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{rbinom}\NormalTok{(}\DecValTok{100}\NormalTok{,}\AttributeTok{size =} \DecValTok{20}\NormalTok{,}\AttributeTok{prob=}\FloatTok{0.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   [1]  8  8 11 11  8 10 12  9 10  5 12  9 10  7 12 10  9  8 11 12 11 10 13  5 10
+##  [26]  6  9 10 15 11 11 13  8  8  8 15  8 11  9 13 12  9 15 12 12 11  9 12 12  9
+##  [51]  9 15 12  7  9  9 13 10  8  9  9 10 11 10  7  9  6 12 11 10  9 10  9  9 11
+##  [76] 10  6 12 12  9  7 12  9 10 13 14 10 11 11  8  9 16 11 11 10 13 10 10 10 10
+\end{verbatim}
+
+\hypertarget{geometric-distribution}{%
+\subsection{Geometric distribution}\label{geometric-distribution}}
+
+We've all played a coin toss until we get the first head, or even throwing a ball into a basketball hoop until we get the first one in. From another point of view we can also try to model the number of times we flip a switch and the bulb lights up until it fails, or the number of times an ATM gives us money until it fails.
+
+The \textbf{modelling of this kind of problems is achieved with the so called Geometric Distribution}.
+
+Geometric distribution
+
+\begin{itemize}
+\tightlist
+\item
+  Let's repeat a Bernoulli experiment, of \(p\) parameter, independently until we get the first success.
+\item
+  Let \(X\) be the random variable that counts the number of failures before the first success. For example, if we have had \(x\) failures, it will be a sequence of \(x\) failures culminated with a success. More specifically
+\end{itemize}
+
+\[
+P(\overbrace{FFF\ldots F}^{x}S)=P(F)^{x}\cdot P(S)=(1-p)^{x}\cdot p=q^{x}\cdot p.
+\]
+
+Its probability function is
+
+\[
+P_X(x)=P(X=x)=\left\{\begin{array}{ll}
+(1-p)^{x}\cdot p & \mbox{ if } x=0,1,2,\ldots\\
+0 &\mbox{ otherwise}
+\end{array}\right..
+\]
+
+The random variable defined above is said to follow a geometric distribution of \(p\) parameter. We will denote it by \(Ge(p)\). Its domain is \(D_X=\{0,1,2,\ldots\}\).
+
+Now imagine that we want to calculate P(\(X\leq 3\)). By the property of the probability of the complementary event we have that
+
+\[
+P(X\leq 3 )=1-P(X> 3)=1-P(X\geq 4)
+\]
+
+In fact, the \(X\leq 3\) complementary tells us that we have failed more than three times until we get the first success, that is, \textbf{we have failed 4 or more times}. We can symbolize this event in the following way:
+
+\[
+\{X>3\}=\{X\geq 4\}= \{FFFF\}
+\]
+
+Now, since the attempts are independent, we have that:
+
+\begin{align}
+P(X>3) & = & P(\{FFFF\})= P(F)\cdot P(F)\cdot P(F)\cdot P(F)\\
+&=& (1-p)\cdot (1-p)\cdot (1-p)\cdot (1-p)= (1-p)^{3+1}\\
+&=&(1-p)^{4}
+\end{align}
+
+The value of the distribution function of \(X\) in \(x=3\) will be:
+
+\[
+F_X(3)=P(X\leq 3)=1-P(X>3)=1-(1-p)^{3+1}.
+\]
+
+Generalizing the result before any positive integer \(k=0,1,2,\ldots\), we have that:
+
+\[
+F_X(k)=P(X\leq k)=1-(1-p)^{k+1},\mbox{ if } k=0,1,2,\ldots
+\]
+
+In general, we'll have that:
+\[
+F_X(x)=P(X\leq x)=
+\left\{\begin{array}{ll} 
+0, & \mbox{ if } x<0,\\
+1- (1-p),  & \mbox{ if } k=0\leq x <1,\\
+1- (1-p)^2, & \mbox{ if } k=1\leq x <2,\\
+1- (1-p)^3, & \mbox{ if } k=2\leq x <3,\\
+1- (1-p)^{k+1}, & \mbox{ si } \left\{ \begin{array}{l}k\leq x< k+1,\\\mbox{for } k=0,1,2,\ldots\end{array}
+    \right.\end{array}\right.
+\]
+
+More compactly, we'll have that:
+\[
+F_X(x)=P(X\leq x)=
+\left\{\begin{array}{ll} 
+0, & \mbox{ if } x<0,\\
+1- (1-p)^{k+1}, & \mbox{ if } \left\{ \begin{array}{l}k\leq x< k+1,\\\mbox{for } k=0,1,2,\ldots\end{array}
+    \right.\end{array}
+    \right.
+\]
+
+Notice that the limit of the distribution function is:
+\[
+\displaystyle\lim_{k\to +\infty } F_X(k)=\lim_{k\to +\infty } 1-(1-p)^{k+1}=
+1,
+\]
+
+We will not show here the calculation of the expectation and variance of a geometric random variable. They can be derived as:
+
+\[
+E(X)= \frac{1-p}{p}, \\
+Var(X) =  \frac{1-p}{p^2}
+\]
+
+And its standard desviation is:
+
+\[
+\sqrt{Var(X)}=\sqrt{\frac{1-p}{p^2}}
+\]
+
+Another interpretation of the geometric random variable is using the number of attempts rather than the number of failures. Let's say we're only interested in the \textbf{number of attempts} to get the first success. If we define \(Y\)= number of attempts to get the first success Then \(Y=X+1\) where \(X\equiv Ge(p)\). Its domain is \(D_Y=\{1,2,\ldots\}\). The average increases in one attempt due to success \(E(Y)=E(X+1)=E(X)+1=\frac{1-p}{p}+1=\frac1{p}\). The variance is the same \(Var(Y)=Var(X+1)=Var(X)=\frac{1-p}{p^2}\).
+
+\(Ge(p)\) starting in 0 is the experiment to calculate the probability of having a specific number of attempts to obtain the first success
+
+R provides a method for performing calculations with a geometric random variable. The \texttt{dgeom} and \texttt{pgeom} functions will have the next arguments:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{x} will take the value of the geometric random variable we want to evaluate
+\item
+  \texttt{prob} is the probability of success in each of the attempts
+\end{itemize}
+
+Let's see some examples for the geometric distribution \(Ge(p=0.25)\).
+
+\(P(X=0)=(1-0.25)^0\cdot 0.25^1=0.25\)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dgeom}\NormalTok{(}\AttributeTok{x =} \DecValTok{0}\NormalTok{, }\AttributeTok{prob=}\FloatTok{0.25}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.25
+\end{verbatim}
+
+\(P(X\leq 0)=1- (1-0.25)^{0+1}=1-0.75=0.25\)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{pgeom}\NormalTok{(}\DecValTok{0}\NormalTok{,}\AttributeTok{prob=}\FloatTok{0.25}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.25
+\end{verbatim}
+
+\(P(X\leq 4)=1-(1-0.25)^{4+1}=1-0.75^5 = 0.76\)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{pgeom}\NormalTok{(}\DecValTok{4}\NormalTok{,}\AttributeTok{prob=}\FloatTok{0.25}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.7626953
+\end{verbatim}
+
+R also provides a method for generating pseudo-random numbers using a geometric distribution. The parameters of this function are:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{n} is the amount of pseudo-random numebers we want to generate
+\item
+  \texttt{prob} is the probability of success in each of the attempts
+\end{itemize}
+
+A random sample of size 25 of a \(Ge(0.25)\) can be generated as:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{rgeom}\NormalTok{(}\AttributeTok{n=}\DecValTok{25}\NormalTok{,}\AttributeTok{prob=}\FloatTok{0.25}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1]  0  1  2 11  0  6  7 13  5  2  5  5  0  1  2  2  0  0  0  0  9  1  2  3  0
+\end{verbatim}
+
+Figure \ref{fig:geom} shows the PMF and CDF of a Geometric distribution with parameter \(n=30\) and with \(p=0.25\).
+
+\begin{figure}
+\centering
+\includegraphics{bookdownproj_files/figure-latex/geom-1.pdf}
+\caption{\label{fig:geom}PMF and CDF of a Geometric random variable with parameters n = 30 and p = 0.25}
+\end{figure}
 
 \hypertarget{poisson-distribution}{%
 \subsection{Poisson Distribution}\label{poisson-distribution}}
@@ -8186,13 +8398,17 @@ One important characteristic of the Poisson distribution is that its mean and va
 E(X)= V(X) = \lambda.
 \]
 
-Figure @ref\{fig:poisson\} gives an illustration of the form of the pmf of the Poisson distribution for two parameter choices: \(\lambda=1\) (left) and \(\lambda = 4\) (right). The x-axis is shown until \(x=10\) but recall that the Poisson is defined over all non-negative integers. For the case \(\lambda=1\) we can see that the outcomes 0 and 1 have the largest probability - recall that \(E(X)=0\). For the case \(\lambda = 4\) the outcomes \(x = 2,3,4,5\) have the largest probability.
+Figure \ref{fig:poisson} gives an illustration of the form of the pmf of the Poisson distribution for two parameter choices: \(\lambda=1\) (left) and \(\lambda = 4\) (right). The x-axis is shown until \(x=10\) but recall that the Poisson is defined over all non-negative integers. For the case \(\lambda=1\) we can see that the outcomes 0 and 1 have the largest probability - recall that \(E(X)=0\). For the case \(\lambda = 4\) the outcomes \(x = 2,3,4,5\) have the largest probability.
 
 \begin{figure}
 \centering
 \includegraphics{bookdownproj_files/figure-latex/poisson-1.pdf}
 \caption{\label{fig:poisson}PMF of a Poisson random variable with parameter 1 (left) and 4 (right)}
 \end{figure}
+
+The interesting thing about Poisson variables is that we can modify (if the model allows it) the time interval \((0,t]\) in which we count the events. Of course, this doesn't necessarily have to be possible. But in general if the variable is poisson in \((0,t]\) it will be also in any sub-interval \((0,t']\) for all \(t'\) such that \(0<t'<t\). So we will be able to define a series of variables \(X_t\) of distribution \(Po(t)\).
+
+Poisson process definition Let's consider a \emph{Poisson} experiment with \(\lambda\) equal to the average number of events in a unit of time. If \(t\) is an amount of time in time units, the random variable \(X_{t}\) = number of events in the interval \((0,t]\) is a \(Po(\lambda\cdot t)\). The set of variables \(\{X_t\}_{t>0}\) is called a \textbf{Poisson process}.
 
 R provides a straightforward implementation of the Poisson distribution through the functions \texttt{dpois} for the pmf and \texttt{ppois} for the cdf. They require three arguments:
 
@@ -8231,6 +8447,32 @@ Similarly,
 
 returns \(P(X\leq 8) = F(8)\) for a Poisson random variable with parameter \(\lambda = 4\).
 
+We can also generate pseudo-random numbers from a poisson distribution using the \texttt{rpois} method. This method has two arguments in r:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{n} amount of pseudo-random numbers
+\item
+  \texttt{lambda} is the expectation for a specific time interval
+\end{itemize}
+
+This way,
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{rpois}\NormalTok{(}\AttributeTok{n=}\DecValTok{100}\NormalTok{,}\AttributeTok{lambda =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   [1] 1 2 2 3 2 5 3 2 3 7 2 4 7 1 1 3 3 6 1 1 2 3 2 3 1 2 0 4 2 2 1 1 5 4 2 4 1
+##  [38] 3 2 1 2 3 2 3 4 3 3 4 4 2 1 4 5 1 2 3 3 1 1 3 0 3 1 2 4 2 6 3 5 3 0 2 1 1
+##  [75] 6 2 7 4 0 2 2 4 1 3 4 3 5 2 2 1 4 2 4 5 4 4 2 3 1 6
+\end{verbatim}
+
+Returns a sequence of 100 observations for a Poisson distribution of \lambda = 3.
+
 \hypertarget{some-examples}{%
 \subsection{Some Examples}\label{some-examples}}
 
@@ -8250,9 +8492,9 @@ A recent survey indicated that 82\% of single women aged 25 years old will be ma
   the probability of two or three women in a sample of 20 will never be married.
 \end{itemize}
 
-The above situation can be modeled by a Binomial random variable where the parameter \(n\) depends on the question and \(\theta = 0.82\).
+The above situation can be modeled by a Binomial random variable where the parameter \(n\) depends on the question and \(p = 0.82\).
 
-The first question requires us to compute \(P(X\leq 3)= F(3)\) where \(X\) is Binomial with parameters \(n=20\) and \(\theta =0.82\). Using R
+The first question requires us to compute \(P(X\leq 3)= F(3)\) where \(X\) is Binomial with parameters \(n=20\) and \(p =0.82\). Using R
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -8264,7 +8506,7 @@ The first question requires us to compute \(P(X\leq 3)= F(3)\) where \(X\) is Bi
 ## [1] 0.0004400767
 \end{verbatim}
 
-The second question requires us to compute \(P(X\geq 90)\) where \(X\) is a Binomial random variable with parameters \(n=100\) and \(\theta = 0.82\). Notice that
+The second question requires us to compute \(P(X\geq 90)\) where \(X\) is a Binomial random variable with parameters \(n=100\) and \(p = 0.82\). Notice that
 \[
 P(X\geq 90) = 1 - P(X< 90) = 1 - P(X\leq 89) = 1 - F(89).
 \]
@@ -8280,7 +8522,7 @@ Using R
 ## [1] 0.02003866
 \end{verbatim}
 
-For the third question, notice that saying two women out of 20 will never be married is equal to 18 out of 20 will be married. Therefore we need to compute \(P(X=17) + P(X=18)= p(17) + p(18)\) where \(X\) is a Binomial random variable with parameters \(n=20\) and \(\theta = 0.82\). Using R
+For the third question, notice that saying two women out of 20 will never be married is equal to 18 out of 20 will be married. Therefore we need to compute \(P(X=17) + P(X=18)= p(17) + p(18)\) where \(X\) is a Binomial random variable with parameters \(n=20\) and \(p = 0.82\). Using R
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -8801,10 +9043,10 @@ Unfortunately it is not possible to solve such an integral (as for example for t
 However, notice that we would need to compute such an approximation for every possible value of \((\mu,\sigma^2)\), depending on the distribution we want to use. This is unfeasible to do in practice.
 
 There is a trick here, that you must have used multiple times already. We can transform a Normal \(X\) with parameters \(\mu\) and \(\sigma^2\) to the so-called \emph{standard Normal} random variable \(Z\), and viceversa, using the relationship:
-\begin{equation}
+\begin{align}
  \label{eq:standard}
 Z = \frac{X-\mu}{\sigma}, \hspace{1cm} X= \mu + \sigma Z.
-\end{equation}
+\end{align}
 It can be shown that \(Z\) is a Normal random variable with parameter \(\mu=0\) and \(\sigma^2=1\).
 
 The values of the cdf of the standard Normal random variable then need to be computed only once since \(\mu\) and \(\sigma^2\) are fixed. You have seen these numbers many many times in what are usually called the tables of the Normal distribution.
@@ -9900,7 +10142,7 @@ In both cases the p-values are larger than 0.10, thus we would not reject the nu
 
 For the sequence \texttt{x1} we observed that one bar was slightly outside the confidence bands: this sometimes happens even when data is actually (pseudo-) random - I created \texttt{x1} using \texttt{rnorm}. The autocorrelations below are an instance of a case where independence is not tenable since we see that multiple bars are outside the confidence bands.
 
-\begin{center}\includegraphics[width=0.5\linewidth]{bookdownproj_files/figure-latex/unnamed-chunk-431-1} \end{center}
+\begin{center}\includegraphics[width=0.5\linewidth]{bookdownproj_files/figure-latex/unnamed-chunk-438-1} \end{center}
 
 \hypertarget{monte-carlo-simulation}{%
 \chapter{Monte Carlo Simulation}\label{monte-carlo-simulation}}
@@ -10189,7 +10431,7 @@ A boxplot can give us a visualization of the results.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.5\linewidth]{bookdownproj_files/figure-latex/unnamed-chunk-441-1} \end{center}
+\begin{center}\includegraphics[width=0.5\linewidth]{bookdownproj_files/figure-latex/unnamed-chunk-448-1} \end{center}
 
 The boxplot importantly tells us two things:
 
@@ -10424,7 +10666,7 @@ A graphical representation of the table is also useful.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-451-1.pdf}
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-458-1.pdf}
 So we can see that Peter breaks even 102 out of 1000 times. Furthermore the plot shows us that most commonly Peter will win/lose little money and that big wins/losses are unlikely.
 
 To conclude our experiment we need to calculate our estimated probability of Peter breaking even. Clearly this is equal to 102/1000= 0.102. In R:
@@ -10575,7 +10817,7 @@ The estimated probability that Annie arrives before Sam is 0.223, and the \emph{
 
 In the next plot we can see that the shaded region shows the area in which \(A < S\)
 
-\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-458-1.pdf}
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-465-1.pdf}
 
 Now, what is the expected difference in the arrival times? Annie is more likely to arrive later, so we model \(E(A-S)\)
 
@@ -10664,7 +10906,7 @@ Next, we can see a plot that represents the results.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-463-1.pdf}
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-470-1.pdf}
 
 \hypertarget{the-taxi-problem-comparing-estimators}{%
 \section{The taxi problem (comparing estimators)}\label{the-taxi-problem-comparing-estimators}}
@@ -10773,7 +11015,7 @@ Seems that \texttt{estimate2} is ``less biased'', but we can also compare them w
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-469-1.pdf}
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-476-1.pdf}
 
 In this case, seems that \texttt{estimate1} has smaller estimation errors. We can also find the sample mean of the absolute errors and its standard error:
 
@@ -11147,7 +11389,7 @@ With this graphs we can have a look at the overall resource utilization. The top
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-483-1.pdf}
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-490-1.pdf}
 
 It is also possible to have a look at resources' activity during the simulation.
 
@@ -11157,7 +11399,7 @@ It is also possible to have a look at resources' activity during the simulation.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-484-1.pdf}
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-491-1.pdf}
 
 Next we can have a look at the evolution of the arrivals' flow time during the simulation. In the plot below, each individual line represents a replication. A smooth line is drawn over them. All arrivals that didn't finish their entire trajectory are excluded from the plot.
 
@@ -11174,11 +11416,11 @@ Similarly one can have a look at the evolution of the activity times with \textt
 ## `geom_smooth()` using method = 'gam' and formula 'y ~ s(x, bs = "cs")'
 \end{verbatim}
 
-\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-485-1.pdf}
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-492-1.pdf}
 
 Simulation trajectories may grow considerably, and they are not always easy to inspect to ensure their compliance with the model that we are trying to build. In this example we are going to expose a simple one:
 
-\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-486-1.pdf}
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-493-1.pdf}
 
 Now that we know a bit about the \texttt{simmer} tool we are going to make some changes in the system to try to improve its efficiency. From what we have seen in the examples, it seems that the nurses are overworked. We will first try to ``hire'' a new nurse to improve the system.
 
@@ -11197,15 +11439,15 @@ Now that we know a bit about the \texttt{simmer} tool we are going to make some 
 
 Let's see how the system works with a new nurse through the plots:
 
-\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-488-1.pdf}
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-495-1.pdf}
 
-\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-489-1.pdf}
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-496-1.pdf}
 
 \begin{verbatim}
 ## `geom_smooth()` using method = 'gam' and formula 'y ~ s(x, bs = "cs")'
 \end{verbatim}
 
-\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-490-1.pdf}
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-497-1.pdf}
 
 We can see that both doctors and nurses are now working at 100\% capacity. Now the problem seems to be coming from the administration. We are going to ``fire'' one of the workers in this area to try to improve the system.
 
@@ -11224,15 +11466,15 @@ We can see that both doctors and nurses are now working at 100\% capacity. Now t
 
 Let's see how the system works without a administration worker through the plots:
 
-\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-492-1.pdf}
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-499-1.pdf}
 
-\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-493-1.pdf}
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-500-1.pdf}
 
 \begin{verbatim}
 ## `geom_smooth()` using method = 'gam' and formula 'y ~ s(x, bs = "cs")'
 \end{verbatim}
 
-\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-494-1.pdf}
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-501-1.pdf}
 
 Great! We've found the perfect balance for our little hospital.
 

@@ -247,9 +247,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="3.1" data-path="set-theory.html"><a href="set-theory.html"><i class="fa fa-check"></i><b>3.1</b> Set theory</a>
 <ul>
-<li class="chapter" data-level="3.1.1" data-path="set-theory.html"><a href="set-theory.html#basic-sets"><i class="fa fa-check"></i><b>3.1.1</b> Basic sets</a></li>
-<li class="chapter" data-level="3.1.2" data-path="set-theory.html"><a href="set-theory.html#basic-characteristics-and-properties-of-the-sets"><i class="fa fa-check"></i><b>3.1.2</b> Basic characteristics and properties of the sets</a></li>
-<li class="chapter" data-level="3.1.3" data-path="set-theory.html"><a href="set-theory.html#sample-spaces"><i class="fa fa-check"></i><b>3.1.3</b> Sample Spaces</a></li>
+<li class="chapter" data-level="3.1.1" data-path="set-theory.html"><a href="set-theory.html#sample-spaces"><i class="fa fa-check"></i><b>3.1.1</b> Sample Spaces</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>3.2</b> Probability</a>
 <ul>
@@ -278,8 +276,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="3.5.1" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#bernoulli-distribution"><i class="fa fa-check"></i><b>3.5.1</b> Bernoulli Distribution</a></li>
 <li class="chapter" data-level="3.5.2" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#binomial-distribution"><i class="fa fa-check"></i><b>3.5.2</b> Binomial Distribution</a></li>
-<li class="chapter" data-level="3.5.3" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#poisson-distribution"><i class="fa fa-check"></i><b>3.5.3</b> Poisson Distribution</a></li>
-<li class="chapter" data-level="3.5.4" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#some-examples"><i class="fa fa-check"></i><b>3.5.4</b> Some Examples</a></li>
+<li class="chapter" data-level="3.5.3" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#geometric-distribution"><i class="fa fa-check"></i><b>3.5.3</b> Geometric distribution</a></li>
+<li class="chapter" data-level="3.5.4" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#poisson-distribution"><i class="fa fa-check"></i><b>3.5.4</b> Poisson Distribution</a></li>
+<li class="chapter" data-level="3.5.5" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#some-examples"><i class="fa fa-check"></i><b>3.5.5</b> Some Examples</a></li>
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="continuous-random-variables-1.html"><a href="continuous-random-variables-1.html"><i class="fa fa-check"></i><b>3.6</b> Continuous Random Variables</a>
 <ul>
@@ -382,13 +381,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>Definition:</strong> A <em>random variable</em> is a mapping
 <span class="math display">\[
 X: \Omega \rightarrow \mathbb{R}
-\]</span>
-that assigns a real number <span class="math inline">\(X(\omega)\)</span> to each outcome <span class="math inline">\(\omega\)</span>.</p>
-<p>We will basically only work directly with random variables and although the sample space will be barely mentioned, you should keep in mind that it is there!</p>
+\]</span></p>
+<p>that assigns a real number <span class="math inline">\(X(\omega)\)</span> to each outcome <span class="math inline">\(\omega\)</span>. We will basically only work directly with random variables and although the sample space will be barely mentioned, you should keep in mind that it is there!</p>
 <p><strong>Example:</strong> Flip a coin ten times. Let <span class="math inline">\(X\)</span> be the random variable counting the number of heads. For example, if <span class="math inline">\(\omega= HHTHHTHHTT\)</span>, then <span class="math inline">\(X(\omega)=6\)</span>.</p>
 <p><strong>Example:</strong> Let <span class="math inline">\(\Omega=\{(x,y): x^2+y^2 \leq 1\}\)</span>. Consider drawing a point at random from <span class="math inline">\(\Omega\)</span> (we will make this idea more precise later). A typical outcome is of the form <span class="math inline">\(\omega=(x,y)\)</span>. Some examples of random variables are <span class="math inline">\(X(\omega)=x\)</span>, <span class="math inline">\(Y(\omega)=y\)</span>, <span class="math inline">\(Z(\omega)=x+y\)</span>.</p>
-<p>Given a random variable <span class="math inline">\(X\)</span> and a subset <span class="math inline">\(A\)</span> of the real line, let
-<span class="math display">\[\begin{align}
+<p>Given a random variable <span class="math inline">\(X\)</span> and a subset <span class="math inline">\(A\)</span> of the real line, let</p>
+<p><span class="math display">\[\begin{align}
 \mathbb{P}(X\in A) &amp;= \mathbb{P}(\{\omega\in\Omega: X(\omega)\in A\})\\
 \mathbb{P}(X = x) &amp;= \mathbb{P}(\{\omega\in\Omega: X(\omega)=x\})
 \end{align}\]</span></p>
@@ -404,7 +402,7 @@ that assigns a real number <span class="math inline">\(X(\omega)\)</span> to eac
 F_X(x)=\mathbb{P}(X\leq x)
 \]</span></p>
 <p><strong>Example:</strong> Flip a fair coin twice and let <span class="math inline">\(X\)</span> be the number of heads. Then <span class="math inline">\(\mathbb{P}(X=0)=\mathbb{P}(X=2)=1/4\)</span> and <span class="math inline">\(\mathbb{P}(X=1)=1/2\)</span>. The distribution function is</p>
-<span class="math display">\[
+<p><span class="math display">\[
 F_X(x)=\left\{
 \begin{array}{ll}
 0, &amp; x&lt;0\\
@@ -413,13 +411,13 @@ F_X(x)=\left\{
 1, &amp; x\geq 2
 \end{array}
 \right.
-\]</span>
+\]</span></p>
 <p align="center">
 <img src="images/Probability/cdf.png" width="550">
 </p>
 <p>The following result shows that the CDF completely determines the distribution of a random variable</p>
 <p><strong>Theorem</strong> Let <span class="math inline">\(X\)</span> have CDF <span class="math inline">\(F_X\)</span> and let <span class="math inline">\(Y\)</span> have CDF <span class="math inline">\(F_Y\)</span>. If <span class="math inline">\(F_X(x)=F_Y(x)\)</span> for all <span class="math inline">\(x\)</span>, then <span class="math inline">\(\mathbb{P}(X\in A)=\mathbb{P}(Y\in A)\)</span> for all <span class="math inline">\(A\)</span>.</p>
-<p>Some properties:</p>
+<p>Some properties of the CDF are:</p>
 <ul>
 <li><span class="math inline">\(F_X\)</span> is non-decreasing: <span class="math inline">\(x_1&lt;x_2\)</span> implies that <span class="math inline">\(F_X(x_1)\leq F_X(x_2)\)</span></li>
 <li><span class="math inline">\(F_X\)</span> is normalized: <span class="math inline">\(\lim_{x\rightarrow -\infty}F_X(x)=0\)</span> and <span class="math inline">\(\lim_{x\rightarrow +\infty}F_X(x)=1\)</span></li>
@@ -429,8 +427,7 @@ F_X(x)=\left\{
 </div>
 <div id="random-variable-types" class="section level3" number="3.3.2">
 <h3><span class="header-section-number">3.3.2</span> Random variable types</h3>
-<p>There are two fundamental types of random variables, discrete and continuous.</p>
-<p>The following is a rough definition.</p>
+<p>There are two fundamental types of random variables, discrete and continuous. The following is a rough definition.</p>
 <p><l class="definition">Discrete and Continuous Random Variables </l></p>
 <ul>
 <li>A random variable is <strong>discreet</strong> if it can only take a number of values with positive probability.</li>
@@ -456,20 +453,13 @@ F_X(x)=\left\{
 </div>
 <div id="discrete-random-variables" class="section level3" number="3.3.3">
 <h3><span class="header-section-number">3.3.3</span> Discrete Random Variables</h3>
-<ul>
-<li>We will now describe the behavior of r.v. To do this we will use different functions that will give us some probabilities of the random variable.</li>
-<li>In the discrete case these functions are the probability function and the cumulative distribution function.</li>
-<li>In the discrete case the probability function is the one that gives us the probabilities of the elementary events of r.v.</li>
-</ul>
-<strong>Definition:</strong> <span class="math inline">\(X\)</span> is <em>discrete</em> if it takes countably many values <span class="math inline">\(\{x_1,x_2,\dots\}\)</span>. We define the <em>probability function</em> or <em>probability mass function</em> for <span class="math inline">\(X\)</span> by <span class="math inline">\(f_X(x)=\mathbb{P}(X=x)\)</span>.
-<p>
- 
-</p>
-Thus <span class="math inline">\(f_X(x)\geq 0\)</span> for all <span class="math inline">\(x\)</span> and <span class="math inline">\(\sum_i f_X(x_i)=1\)</span>. The CDF of <span class="math inline">\(X\)</span> is related to <span class="math inline">\(f_X\)</span> by
+<p>We will now describe the behavior of r.v. To do this we will use different functions that will give us some probabilities of the random variable. In the discrete case these functions are the probability function and the cumulative distribution function. In the discrete case the probability function is the one that gives us the probabilities of the elementary events of r.v.</p>
+<p><strong>Definition:</strong> <span class="math inline">\(X\)</span> is <em>discrete</em> if it takes countably many values <span class="math inline">\(\{x_1,x_2,\dots\}\)</span>. We define the <em>probability function</em> or <em>probability mass function</em> for <span class="math inline">\(X\)</span> by <span class="math inline">\(f_X(x)=\mathbb{P}(X=x)\)</span>.</p>
+<p>Thus <span class="math inline">\(f_X(x)\geq 0\)</span> for all <span class="math inline">\(x\)</span> and <span class="math inline">\(\sum_i f_X(x_i)=1\)</span>. The CDF of <span class="math inline">\(X\)</span> is related to <span class="math inline">\(f_X\)</span> by
 <span class="math display">\[
 F_X(x)=\mathbb{P}(X\leq x)=\sum_{x_i\leq x}f_X(x_i)
-\]</span>
-<strong>Example:</strong> The probability mass function for the example of the toss of two coins is
+\]</span></p>
+<p><strong>Example:</strong> The probability mass function for the example of the toss of two coins is
 <span class="math display">\[
 f_X(x)=\left\{
 \begin{array}{ll}
@@ -479,13 +469,11 @@ f_X(x)=\left\{
 0, &amp; otherwise
 \end{array}
 \right.
-\]</span>
+\]</span></p>
 <p align="center">
 <img src="images/Probability/pmf.png" width="550">
 </p>
-<p>Consider the throw of two dice and define the random variable <span class="math inline">\(X\)</span> as the absolute difference of the dice results.</p>
-<p><span class="math inline">\(X\)</span> can thus take values <span class="math inline">\({0,1,2,3,4,5}\)</span></p>
-<p>By counting appropriately the possible cases the PMF can be derived as</p>
+<p>Consider the throw of two dice and define the random variable <span class="math inline">\(X\)</span> as the absolute difference of the dice results. <span class="math inline">\(X\)</span> can thus take values <span class="math inline">\({0,1,2,3,4,5}\)</span>. By counting appropriately the possible cases the PMF can be derived as</p>
 <p><span class="math display">\[
 f_X(x)=\left\{
 \begin{array}{ll}
@@ -510,7 +498,7 @@ The function <span class="math inline">\(f_X\)</span> is called the <em>probabil
 F_X(x)=\int_{-\infty}^xf_x(t)dt
 \]</span>
 and <span class="math inline">\(f_X(x)=F_X^{&#39;}(x)\)</span> at all points <span class="math inline">\(x\)</span> at which <span class="math inline">\(F_X\)</span> is differentiable.</p>
-<strong>Example:</strong> Suppose that <span class="math inline">\(X\)</span> has PDF
+<p><strong>Example:</strong> Suppose that <span class="math inline">\(X\)</span> has PDF
 <span class="math display">\[
 f_X(x)=\left\{
 \begin{array}{ll}
@@ -518,8 +506,8 @@ f_X(x)=\left\{
 0, &amp; otherwise
 \end{array}
 \right.
-\]</span>
-Clearly, <span class="math inline">\(f_X(x)\geq 0\)</span> and <span class="math inline">\(\int_{-\infty}^{\infty}f_X(x)dx=1\)</span>. The CDF is given by
+\]</span></p>
+<p>Clearly, <span class="math inline">\(f_X(x)\geq 0\)</span> and <span class="math inline">\(\int_{-\infty}^{\infty}f_X(x)dx=1\)</span>. The CDF is given by
 <span class="math display">\[
 F_X(x)=\left\{
 \begin{array}{ll}
@@ -528,11 +516,11 @@ x, &amp; 0\leq x \leq 1\\
 1, &amp; x&gt;1
 \end{array}
 \right.
-\]</span>
+\]</span></p>
 <p align="center">
 <img src="images/Probability/cdf1.png" width="550">
 </p>
-<p>Continuous random variables can lead to confusion. First, note that if <span class="math inline">\(X\)</span> is continuous then <span class="math inline">\(\mathbb{P}(X=x)=0\)</span> for every <span class="math inline">\(x\)</span>. Do not try to tink of <span class="math inline">\(f_X(x)\)</span> as <span class="math inline">\(\mathbb{P}(X=x)\)</span>. This only holds for discrete random variables. We get probabilities from a PDF by integrating.</p>
+<p>Continuous random variables can lead to confusion. First, note that if <span class="math inline">\(X\)</span> is continuous then <span class="math inline">\(\mathbb{P}(X=x)=0\)</span> for every <span class="math inline">\(x\)</span>. Do not try to think of <span class="math inline">\(f_X(x)\)</span> as <span class="math inline">\(\mathbb{P}(X=x)\)</span>. This only holds for discrete random variables. We get probabilities from a PDF by integrating.</p>
 <ul>
 <li><span class="math inline">\(\mathbb{P}(X=x)=0\)</span></li>
 <li><span class="math inline">\(\mathbb{P}(x&lt; X \leq y)= F_X(y)-F_X(x)\)</span></li>
@@ -549,8 +537,8 @@ f_{X}(x)=\begin{cases}
 \frac{1}{5},\ for\ 0 \leq x \leq 5\\
 0,\ otherwise
 \end{cases}
-\]</span>
-The plot of the PDF will be:</p>
+\]</span></p>
+<p>The plot of the PDF will be:</p>
 <div class="sourceCode" id="cb778"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb778-1"><a href="random-variables.html#cb778-1" aria-hidden="true" tabindex="-1"></a>X <span class="ot">=</span> <span class="fu">density</span>(<span class="fu">runif</span>(<span class="dv">9999999</span>, <span class="dv">0</span>, <span class="dv">5</span>))</span>
 <span id="cb778-2"><a href="random-variables.html#cb778-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(X, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">main =</span> <span class="st">&quot;X PDF&quot;</span>,<span class="at">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="dv">7</span>))</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/unnamed-chunk-394-1.png" width="576" /></p>
@@ -562,14 +550,13 @@ F_{X}(x)=\begin{cases}
 1, x &gt; 5
 \end{cases}
 \]</span></p>
-<p>Since we are working with a uniform distribution, we can assume that the area under the curve is equal to base per height.</p>
-<p>We already know that the area equals 1, and the base equals 5. This way we can calculate that:</p>
+<p>Since we are working with a uniform distribution, we can assume that the area under the curve is equal to base per height. We already know that the area equals 1, and the base equals 5. This way we can calculate that:</p>
 <p><span class="math display">\[
-AUC = base*height \\
-1 = 5*height \\
+AUC = base*height, \\
+1 = 5*height, \\
 height = 1/5 = 0.2
-\]</span>
-With this information it will be very easy for us to calculate more specific probabilities. For example, let’s calculate <span class="math inline">\(\mathbb{P}(1 \leq x \leq 2)\)</span>:</p>
+\]</span></p>
+<p>With this information it will be very easy for us to calculate more specific probabilities. For example, let’s calculate <span class="math inline">\(\mathbb{P}(1 \leq x \leq 2)\)</span>:</p>
 <p><span class="math display">\[
 \mathbb{P}(1 \leq x \leq 2) = 1*1/5 = 0.2
 \]</span></p>

@@ -247,9 +247,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="3.1" data-path="set-theory.html"><a href="set-theory.html"><i class="fa fa-check"></i><b>3.1</b> Set theory</a>
 <ul>
-<li class="chapter" data-level="3.1.1" data-path="set-theory.html"><a href="set-theory.html#basic-sets"><i class="fa fa-check"></i><b>3.1.1</b> Basic sets</a></li>
-<li class="chapter" data-level="3.1.2" data-path="set-theory.html"><a href="set-theory.html#basic-characteristics-and-properties-of-the-sets"><i class="fa fa-check"></i><b>3.1.2</b> Basic characteristics and properties of the sets</a></li>
-<li class="chapter" data-level="3.1.3" data-path="set-theory.html"><a href="set-theory.html#sample-spaces"><i class="fa fa-check"></i><b>3.1.3</b> Sample Spaces</a></li>
+<li class="chapter" data-level="3.1.1" data-path="set-theory.html"><a href="set-theory.html#sample-spaces"><i class="fa fa-check"></i><b>3.1.1</b> Sample Spaces</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>3.2</b> Probability</a>
 <ul>
@@ -278,8 +276,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="3.5.1" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#bernoulli-distribution"><i class="fa fa-check"></i><b>3.5.1</b> Bernoulli Distribution</a></li>
 <li class="chapter" data-level="3.5.2" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#binomial-distribution"><i class="fa fa-check"></i><b>3.5.2</b> Binomial Distribution</a></li>
-<li class="chapter" data-level="3.5.3" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#poisson-distribution"><i class="fa fa-check"></i><b>3.5.3</b> Poisson Distribution</a></li>
-<li class="chapter" data-level="3.5.4" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#some-examples"><i class="fa fa-check"></i><b>3.5.4</b> Some Examples</a></li>
+<li class="chapter" data-level="3.5.3" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#geometric-distribution"><i class="fa fa-check"></i><b>3.5.3</b> Geometric distribution</a></li>
+<li class="chapter" data-level="3.5.4" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#poisson-distribution"><i class="fa fa-check"></i><b>3.5.4</b> Poisson Distribution</a></li>
+<li class="chapter" data-level="3.5.5" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#some-examples"><i class="fa fa-check"></i><b>3.5.5</b> Some Examples</a></li>
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="continuous-random-variables-1.html"><a href="continuous-random-variables-1.html"><i class="fa fa-check"></i><b>3.6</b> Continuous Random Variables</a>
 <ul>
@@ -379,16 +378,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="the-simulation-enviroment" class="section level2" number="7.3">
 <h2><span class="header-section-number">7.3</span> The Simulation Enviroment</h2>
 <p>The simulation environment manages resources and sources, and controls the simulation execution. The <code>simmer()</code> method instantiates the object, after which resources and sources can be appended using the <code>%&gt;%</code> operator:</p>
-<div class="sourceCode" id="cb958"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb958-1"><a href="the-simulation-enviroment.html#cb958-1" aria-hidden="true" tabindex="-1"></a>env <span class="ot">&lt;-</span> <span class="fu">simmer</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb958-2"><a href="the-simulation-enviroment.html#cb958-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_resource</span>(<span class="st">&quot;res_name&quot;</span>, <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb958-3"><a href="the-simulation-enviroment.html#cb958-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_generator</span>(<span class="st">&quot;arrival&quot;</span>, traj0, <span class="cf">function</span>() <span class="dv">25</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb958-4"><a href="the-simulation-enviroment.html#cb958-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb976"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb976-1"><a href="the-simulation-enviroment.html#cb976-1" aria-hidden="true" tabindex="-1"></a>env <span class="ot">&lt;-</span> <span class="fu">simmer</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb976-2"><a href="the-simulation-enviroment.html#cb976-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_resource</span>(<span class="st">&quot;res_name&quot;</span>, <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb976-3"><a href="the-simulation-enviroment.html#cb976-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_generator</span>(<span class="st">&quot;arrival&quot;</span>, traj0, <span class="cf">function</span>() <span class="dv">25</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb976-4"><a href="the-simulation-enviroment.html#cb976-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>()</span></code></pre></div>
 <pre><code>## simmer environment: anonymous | now: 0 | next: 0
 ## { Monitor: in memory }
 ## { Resource: res_name | monitored: TRUE | server status: 0(1) | queue status: 0(Inf) }
 ## { Source: arrival | monitored: 1 | n_generated: 0 }</code></pre>
 <p>Then, the simulation can be executed, or <code>run()</code>, until a stop time:</p>
-<div class="sourceCode" id="cb960"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb960-1"><a href="the-simulation-enviroment.html#cb960-1" aria-hidden="true" tabindex="-1"></a>env <span class="sc">%&gt;%</span> <span class="fu">run</span>(<span class="at">until =</span> <span class="dv">30</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb978"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb978-1"><a href="the-simulation-enviroment.html#cb978-1" aria-hidden="true" tabindex="-1"></a>env <span class="sc">%&gt;%</span> <span class="fu">run</span>(<span class="at">until =</span> <span class="dv">30</span>)</span></code></pre></div>
 <pre><code>## 25: arrival0: Entering the trajectory</code></pre>
 <pre><code>## simmer environment: anonymous | now: 30 | next: 35
 ## { Monitor: in memory }

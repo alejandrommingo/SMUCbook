@@ -247,9 +247,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="3.1" data-path="set-theory.html"><a href="set-theory.html"><i class="fa fa-check"></i><b>3.1</b> Set theory</a>
 <ul>
-<li class="chapter" data-level="3.1.1" data-path="set-theory.html"><a href="set-theory.html#basic-sets"><i class="fa fa-check"></i><b>3.1.1</b> Basic sets</a></li>
-<li class="chapter" data-level="3.1.2" data-path="set-theory.html"><a href="set-theory.html#basic-characteristics-and-properties-of-the-sets"><i class="fa fa-check"></i><b>3.1.2</b> Basic characteristics and properties of the sets</a></li>
-<li class="chapter" data-level="3.1.3" data-path="set-theory.html"><a href="set-theory.html#sample-spaces"><i class="fa fa-check"></i><b>3.1.3</b> Sample Spaces</a></li>
+<li class="chapter" data-level="3.1.1" data-path="set-theory.html"><a href="set-theory.html#sample-spaces"><i class="fa fa-check"></i><b>3.1.1</b> Sample Spaces</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>3.2</b> Probability</a>
 <ul>
@@ -278,8 +276,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="3.5.1" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#bernoulli-distribution"><i class="fa fa-check"></i><b>3.5.1</b> Bernoulli Distribution</a></li>
 <li class="chapter" data-level="3.5.2" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#binomial-distribution"><i class="fa fa-check"></i><b>3.5.2</b> Binomial Distribution</a></li>
-<li class="chapter" data-level="3.5.3" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#poisson-distribution"><i class="fa fa-check"></i><b>3.5.3</b> Poisson Distribution</a></li>
-<li class="chapter" data-level="3.5.4" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#some-examples"><i class="fa fa-check"></i><b>3.5.4</b> Some Examples</a></li>
+<li class="chapter" data-level="3.5.3" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#geometric-distribution"><i class="fa fa-check"></i><b>3.5.3</b> Geometric distribution</a></li>
+<li class="chapter" data-level="3.5.4" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#poisson-distribution"><i class="fa fa-check"></i><b>3.5.4</b> Poisson Distribution</a></li>
+<li class="chapter" data-level="3.5.5" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#some-examples"><i class="fa fa-check"></i><b>3.5.5</b> Some Examples</a></li>
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="continuous-random-variables-1.html"><a href="continuous-random-variables-1.html"><i class="fa fa-check"></i><b>3.6</b> Continuous Random Variables</a>
 <ul>
@@ -390,12 +389,12 @@ f(x)=\left\{
 \end{array}
 \right.
 \]</span>
-This is plotted in Figure <a href="notable-continuous-distribution.html#fig:unipdf">3.9</a> for choices of parameters <span class="math inline">\(a=2\)</span> and <span class="math inline">\(b=6\)</span></p>
-<div class="sourceCode" id="cb806"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb806-1"><a href="notable-continuous-distribution.html#cb806-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">2</span>,<span class="fl">0.01</span>),<span class="fu">seq</span>(<span class="dv">2</span>,<span class="dv">6</span>,<span class="fl">0.01</span>),<span class="fu">seq</span>(<span class="dv">6</span>,<span class="dv">9</span>,<span class="fl">0.01</span>))</span></code></pre></div>
+This is plotted in Figure <a href="notable-continuous-distribution.html#fig:unipdf">3.10</a> for choices of parameters <span class="math inline">\(a=2\)</span> and <span class="math inline">\(b=6\)</span></p>
+<div class="sourceCode" id="cb824"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb824-1"><a href="notable-continuous-distribution.html#cb824-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">2</span>,<span class="fl">0.01</span>),<span class="fu">seq</span>(<span class="dv">2</span>,<span class="dv">6</span>,<span class="fl">0.01</span>),<span class="fu">seq</span>(<span class="dv">6</span>,<span class="dv">9</span>,<span class="fl">0.01</span>))</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:unipdf"></span>
 <img src="bookdownproj_files/figure-html/unipdf-1.png" alt="Probability density function for a uniform random variable with parameters a = 2 and b = 6" width="50%" />
 <p class="caption">
-Figure 3.9: Probability density function for a uniform random variable with parameters a = 2 and b = 6
+Figure 3.10: Probability density function for a uniform random variable with parameters a = 2 and b = 6
 </p>
 </div>
 <p>By looking at the pdf we see that it is a flat, constant line between the values <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>. This implies that the probability that <span class="math inline">\(X\)</span> takes values between two values <span class="math inline">\(x_0\)</span> and <span class="math inline">\(x_1\)</span> only dependens on the length of the interval <span class="math inline">\((x_0,x_1)\)</span>.</p>
@@ -409,12 +408,12 @@ F(x)=\left\{
 \end{array}
 \right.
 \]</span>
-and this is plotted in Figure <a href="notable-continuous-distribution.html#fig:unicdf">3.10</a>.</p>
-<div class="sourceCode" id="cb807"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb807-1"><a href="notable-continuous-distribution.html#cb807-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">2</span>,<span class="fl">0.01</span>),<span class="fu">seq</span>(<span class="dv">2</span>,<span class="dv">6</span>,<span class="fl">0.01</span>),<span class="fu">seq</span>(<span class="dv">6</span>,<span class="dv">9</span>,<span class="fl">0.01</span>))</span></code></pre></div>
+and this is plotted in Figure <a href="notable-continuous-distribution.html#fig:unicdf">3.11</a>.</p>
+<div class="sourceCode" id="cb825"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb825-1"><a href="notable-continuous-distribution.html#cb825-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">2</span>,<span class="fl">0.01</span>),<span class="fu">seq</span>(<span class="dv">2</span>,<span class="dv">6</span>,<span class="fl">0.01</span>),<span class="fu">seq</span>(<span class="dv">6</span>,<span class="dv">9</span>,<span class="fl">0.01</span>))</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:unicdf"></span>
 <img src="bookdownproj_files/figure-html/unicdf-1.png" alt="Cumulative distribution function for a uniform random variable with parameters a = 2 and b = 6" width="50%" />
 <p class="caption">
-Figure 3.10: Cumulative distribution function for a uniform random variable with parameters a = 2 and b = 6
+Figure 3.11: Cumulative distribution function for a uniform random variable with parameters a = 2 and b = 6
 </p>
 </div>
 <p>The mean and variance of a uniform can be derived as
@@ -430,11 +429,11 @@ So the mean is equal to the middle point of the interval <span class="math inlin
 <li><p>the third argument, <code>max</code>, is the parameter <span class="math inline">\(b\)</span>, by default equal to one.</p></li>
 </ul>
 <p>So for instance</p>
-<div class="sourceCode" id="cb808"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb808-1"><a href="notable-continuous-distribution.html#cb808-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dunif</span>(<span class="dv">5</span>, <span class="at">min =</span> <span class="dv">2</span>, <span class="at">max =</span> <span class="dv">6</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb826"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb826-1"><a href="notable-continuous-distribution.html#cb826-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dunif</span>(<span class="dv">5</span>, <span class="at">min =</span> <span class="dv">2</span>, <span class="at">max =</span> <span class="dv">6</span>)</span></code></pre></div>
 <pre><code>## [1] 0.25</code></pre>
 <p>computes the pdf at the point 5 of a uniform random variable with parameters <span class="math inline">\(a=2\)</span> and <span class="math inline">\(b=6\)</span>.</p>
 <p>Conversely,</p>
-<div class="sourceCode" id="cb810"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb810-1"><a href="notable-continuous-distribution.html#cb810-1" aria-hidden="true" tabindex="-1"></a><span class="fu">punif</span>(<span class="fl">0.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb828"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb828-1"><a href="notable-continuous-distribution.html#cb828-1" aria-hidden="true" tabindex="-1"></a><span class="fu">punif</span>(<span class="fl">0.5</span>)</span></code></pre></div>
 <pre><code>## [1] 0.5</code></pre>
 <p>computes the cdf at the point 0.5 of a uniform random variable with parameters <span class="math inline">\(a=0\)</span> and <span class="math inline">\(b=1\)</span>.</p>
 </div>
@@ -449,12 +448,12 @@ f(x) = \left\{
 \end{array}
 \right.
 \]</span></p>
-<p>Figure <a href="notable-continuous-distribution.html#fig:exppdf1">3.11</a> reports the pdf of exponential random variables for various choices of the parameter <span class="math inline">\(\lambda\)</span>.</p>
-<div class="sourceCode" id="cb812"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb812-1"><a href="notable-continuous-distribution.html#cb812-1" aria-hidden="true" tabindex="-1"></a>values <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.25</span>,<span class="dv">1</span>,<span class="fl">2.5</span>)</span></code></pre></div>
+<p>Figure <a href="notable-continuous-distribution.html#fig:exppdf1">3.12</a> reports the pdf of exponential random variables for various choices of the parameter <span class="math inline">\(\lambda\)</span>.</p>
+<div class="sourceCode" id="cb830"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb830-1"><a href="notable-continuous-distribution.html#cb830-1" aria-hidden="true" tabindex="-1"></a>values <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.25</span>,<span class="dv">1</span>,<span class="fl">2.5</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:exppdf1"></span>
 <img src="bookdownproj_files/figure-html/exppdf1-1.png" alt="Probability density function for exponential random variables" width="50%" />
 <p class="caption">
-Figure 3.11: Probability density function for exponential random variables
+Figure 3.12: Probability density function for exponential random variables
 </p>
 </div>
 <p>Exponential random variables are very often used in dynamic simulations since they are very often used to model interarrival times in process: for instance the time between arrivals of customers at the donut shop.</p>
@@ -467,12 +466,12 @@ F(x)=\left\{
 \end{array}
 \right.
 \]</span>
-and is reported in Figure <a href="notable-continuous-distribution.html#fig:expcdf1">3.12</a> for the same choices of parameters.</p>
-<div class="sourceCode" id="cb813"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb813-1"><a href="notable-continuous-distribution.html#cb813-1" aria-hidden="true" tabindex="-1"></a>values <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.25</span>,<span class="dv">1</span>,<span class="fl">2.5</span>)</span></code></pre></div>
+and is reported in Figure <a href="notable-continuous-distribution.html#fig:expcdf1">3.13</a> for the same choices of parameters.</p>
+<div class="sourceCode" id="cb831"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb831-1"><a href="notable-continuous-distribution.html#cb831-1" aria-hidden="true" tabindex="-1"></a>values <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.25</span>,<span class="dv">1</span>,<span class="fl">2.5</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:expcdf1"></span>
 <img src="bookdownproj_files/figure-html/expcdf1-1.png" alt="Cumulative distribution function for exponential random variables" width="50%" />
 <p class="caption">
-Figure 3.12: Cumulative distribution function for exponential random variables
+Figure 3.13: Cumulative distribution function for exponential random variables
 </p>
 </div>
 <p>The mean and the variance of exponential random variables can be computed as</p>
@@ -485,11 +484,11 @@ E(X)=\frac{1}{\lambda}, \hspace{1cm} V(X)=\frac{1}{\lambda^2}
 <li><p>the second argument, <code>rate</code>, is the parameter <span class="math inline">\(\lambda\)</span>, by default equal to one;</p></li>
 </ul>
 <p>So for instance</p>
-<div class="sourceCode" id="cb814"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb814-1"><a href="notable-continuous-distribution.html#cb814-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dexp</span>(<span class="dv">2</span>, <span class="at">rate =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb832"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb832-1"><a href="notable-continuous-distribution.html#cb832-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dexp</span>(<span class="dv">2</span>, <span class="at">rate =</span> <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## [1] 0.007436257</code></pre>
 <p>computes the pdf at the point 2 of an exponential random variable with parameter <span class="math inline">\(\lambda =3\)</span>.</p>
 <p>Conversely</p>
-<div class="sourceCode" id="cb816"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb816-1"><a href="notable-continuous-distribution.html#cb816-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pexp</span>(<span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb834"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb834-1"><a href="notable-continuous-distribution.html#cb834-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pexp</span>(<span class="dv">4</span>)</span></code></pre></div>
 <pre><code>## [1] 0.9816844</code></pre>
 <p>computes the cdf at the point 4 of an exponential random variable with parameter <span class="math inline">\(\lambda =1\)</span>.</p>
 </div>
@@ -505,12 +504,12 @@ Recall that
 E(X)=\mu, \hspace{1cm} V(X)=\sigma^2,
 \]</span>
 and so the parameters have a straightforward interpretation in terms of mean and variance.</p>
-<p>Figure <a href="notable-continuous-distribution.html#fig:norm">3.13</a> shows the form of the pdf of the Normal distribution for various choices of the parameters. On the left we have Normal pdfs for <span class="math inline">\(\sigma^2=1\)</span> and various choices of <span class="math inline">\(\mu\)</span>: we can see that <span class="math inline">\(\mu\)</span> shifts the plot on the x-axis. On the right we have Normal pdfs for <span class="math inline">\(\mu=1\)</span> and various choices of <span class="math inline">\(\sigma^2\)</span>: we can see that all distributions are centered around the same value while they have a different spread/variability.</p>
-<div class="sourceCode" id="cb818"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb818-1"><a href="notable-continuous-distribution.html#cb818-1" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>)</span></code></pre></div>
+<p>Figure <a href="notable-continuous-distribution.html#fig:norm">3.14</a> shows the form of the pdf of the Normal distribution for various choices of the parameters. On the left we have Normal pdfs for <span class="math inline">\(\sigma^2=1\)</span> and various choices of <span class="math inline">\(\mu\)</span>: we can see that <span class="math inline">\(\mu\)</span> shifts the plot on the x-axis. On the right we have Normal pdfs for <span class="math inline">\(\mu=1\)</span> and various choices of <span class="math inline">\(\sigma^2\)</span>: we can see that all distributions are centered around the same value while they have a different spread/variability.</p>
+<div class="sourceCode" id="cb836"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb836-1"><a href="notable-continuous-distribution.html#cb836-1" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:norm"></span>
 <img src="bookdownproj_files/figure-html/norm-1.png" alt="Probability density function for normal random variables" width="50%" />
 <p class="caption">
-Figure 3.13: Probability density function for normal random variables
+Figure 3.14: Probability density function for normal random variables
 </p>
 </div>
 <p>The form of the Normal pdf is the well-known so-called bell-shaped function. We can notice some properties:</p>
@@ -522,21 +521,21 @@ Figure 3.13: Probability density function for normal random variables
 <span class="math display">\[
 F(x) = P(X\leq x)=\int_{-\infty}^{+\infty}\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{1}{2}\frac{(x-\mu)^2}{\sigma^2}\right)dx
 \]</span></p>
-<p>The cdf of the Normal for various choices of parameters is reported in Figure <a href="notable-continuous-distribution.html#fig:pnorm">3.14</a>.</p>
-<div class="sourceCode" id="cb819"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb819-1"><a href="notable-continuous-distribution.html#cb819-1" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>)</span></code></pre></div>
+<p>The cdf of the Normal for various choices of parameters is reported in Figure <a href="notable-continuous-distribution.html#fig:pnorm">3.15</a>.</p>
+<div class="sourceCode" id="cb837"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb837-1"><a href="notable-continuous-distribution.html#cb837-1" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:pnorm"></span>
 <img src="bookdownproj_files/figure-html/pnorm-1.png" alt="Cumulative distribution function for normal random variables" width="50%" />
 <p class="caption">
-Figure 3.14: Cumulative distribution function for normal random variables
+Figure 3.15: Cumulative distribution function for normal random variables
 </p>
 </div>
 <p>Unfortunately it is not possible to solve such an integral (as for example for the Uniform and the Exponential), and in general it is approximated using some numerical techniques. This is surprising considering that the Normal distribution is so widely used!!!</p>
 <p>However, notice that we would need to compute such an approximation for every possible value of <span class="math inline">\((\mu,\sigma^2)\)</span>, depending on the distribution we want to use. This is unfeasible to do in practice.</p>
 <p>There is a trick here, that you must have used multiple times already. We can transform a Normal <span class="math inline">\(X\)</span> with parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span> to the so-called <em>standard Normal</em> random variable <span class="math inline">\(Z\)</span>, and viceversa, using the relationship:
-<span class="math display" id="eq:standard">\[\begin{equation}
+<span class="math display" id="eq:standard">\[\begin{align}
  \tag{3.1}
 Z = \frac{X-\mu}{\sigma}, \hspace{1cm} X= \mu + \sigma Z.
-\end{equation}\]</span>
+\end{align}\]</span>
 It can be shown that <span class="math inline">\(Z\)</span> is a Normal random variable with parameter <span class="math inline">\(\mu=0\)</span> and <span class="math inline">\(\sigma^2=1\)</span>.</p>
 <p>The values of the cdf of the standard Normal random variable then need to be computed only once since <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma^2\)</span> are fixed. You have seen these numbers many many times in what are usually called the tables of the Normal distribution.</p>
 <p>As a matter of fact you have also computed many times the cdf of a generic Normal random variable. First you computed <span class="math inline">\(Z\)</span> using equation <a href="notable-continuous-distribution.html#eq:standard">(3.1)</a> and then looked at the Normal tables to derive that number.</p>
@@ -557,11 +556,11 @@ Again this cannot be computed exactly, there is no closed-form expression. This 
 <li><p>the third argument, <code>sd</code>, is the standard deviation, that is <span class="math inline">\(\sqrt{\sigma^2}\)</span>, by default equal to one.</p></li>
 </ul>
 <p>So for instance</p>
-<div class="sourceCode" id="cb820"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb820-1"><a href="notable-continuous-distribution.html#cb820-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dnorm</span>(<span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb838"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb838-1"><a href="notable-continuous-distribution.html#cb838-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dnorm</span>(<span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## [1] 0.004431848</code></pre>
 <p>computes the value of the standard Normal pdf at the value three.</p>
 <p>Similarly,</p>
-<div class="sourceCode" id="cb822"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb822-1"><a href="notable-continuous-distribution.html#cb822-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="fl">0.4</span>,<span class="dv">1</span>,<span class="fl">0.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb840"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb840-1"><a href="notable-continuous-distribution.html#cb840-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="fl">0.4</span>,<span class="dv">1</span>,<span class="fl">0.5</span>)</span></code></pre></div>
 <pre><code>## [1] 0.1150697</code></pre>
 <p>compute the value of the Normal cdf with parameters <span class="math inline">\(\mu=1\)</span> and <span class="math inline">\(\sqrt{\sigma^2}=0.5\)</span> at the value 0.4.</p>
 </div>

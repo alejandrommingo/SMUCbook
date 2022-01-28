@@ -247,9 +247,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="3.1" data-path="set-theory.html"><a href="set-theory.html"><i class="fa fa-check"></i><b>3.1</b> Set theory</a>
 <ul>
-<li class="chapter" data-level="3.1.1" data-path="set-theory.html"><a href="set-theory.html#basic-sets"><i class="fa fa-check"></i><b>3.1.1</b> Basic sets</a></li>
-<li class="chapter" data-level="3.1.2" data-path="set-theory.html"><a href="set-theory.html#basic-characteristics-and-properties-of-the-sets"><i class="fa fa-check"></i><b>3.1.2</b> Basic characteristics and properties of the sets</a></li>
-<li class="chapter" data-level="3.1.3" data-path="set-theory.html"><a href="set-theory.html#sample-spaces"><i class="fa fa-check"></i><b>3.1.3</b> Sample Spaces</a></li>
+<li class="chapter" data-level="3.1.1" data-path="set-theory.html"><a href="set-theory.html#sample-spaces"><i class="fa fa-check"></i><b>3.1.1</b> Sample Spaces</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>3.2</b> Probability</a>
 <ul>
@@ -278,8 +276,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="3.5.1" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#bernoulli-distribution"><i class="fa fa-check"></i><b>3.5.1</b> Bernoulli Distribution</a></li>
 <li class="chapter" data-level="3.5.2" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#binomial-distribution"><i class="fa fa-check"></i><b>3.5.2</b> Binomial Distribution</a></li>
-<li class="chapter" data-level="3.5.3" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#poisson-distribution"><i class="fa fa-check"></i><b>3.5.3</b> Poisson Distribution</a></li>
-<li class="chapter" data-level="3.5.4" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#some-examples"><i class="fa fa-check"></i><b>3.5.4</b> Some Examples</a></li>
+<li class="chapter" data-level="3.5.3" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#geometric-distribution"><i class="fa fa-check"></i><b>3.5.3</b> Geometric distribution</a></li>
+<li class="chapter" data-level="3.5.4" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#poisson-distribution"><i class="fa fa-check"></i><b>3.5.4</b> Poisson Distribution</a></li>
+<li class="chapter" data-level="3.5.5" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#some-examples"><i class="fa fa-check"></i><b>3.5.5</b> Some Examples</a></li>
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="continuous-random-variables-1.html"><a href="continuous-random-variables-1.html"><i class="fa fa-check"></i><b>3.6</b> Continuous Random Variables</a>
 <ul>
@@ -380,36 +379,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">7.5</span> <code>simmer</code> Example</h2>
 <p>Let’s see an example in R of discrete event simulation in which we simulate the behavior of patients in a hospital.</p>
 <p>First we have to load the <code>simmer</code> and <code>magrittr</code> libraries to do the simulation</p>
-<div class="sourceCode" id="cb963"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb963-1"><a href="simmer-example.html#cb963-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(simmer)</span>
-<span id="cb963-2"><a href="simmer-example.html#cb963-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span></code></pre></div>
+<div class="sourceCode" id="cb981"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb981-1"><a href="simmer-example.html#cb981-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(simmer)</span>
+<span id="cb981-2"><a href="simmer-example.html#cb981-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span></code></pre></div>
 <p>With the <code>simmer</code> library we create a simulation environment that we are going to call <code>outpatient clinic</code></p>
-<div class="sourceCode" id="cb964"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb964-1"><a href="simmer-example.html#cb964-1" aria-hidden="true" tabindex="-1"></a>env <span class="ot">=</span> <span class="fu">simmer</span>(<span class="st">&quot;outpatient clinic&quot;</span>)</span>
-<span id="cb964-2"><a href="simmer-example.html#cb964-2" aria-hidden="true" tabindex="-1"></a>env</span></code></pre></div>
+<div class="sourceCode" id="cb982"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb982-1"><a href="simmer-example.html#cb982-1" aria-hidden="true" tabindex="-1"></a>env <span class="ot">=</span> <span class="fu">simmer</span>(<span class="st">&quot;outpatient clinic&quot;</span>)</span>
+<span id="cb982-2"><a href="simmer-example.html#cb982-2" aria-hidden="true" tabindex="-1"></a>env</span></code></pre></div>
 <pre><code>## simmer environment: outpatient clinic | now: 0 | next: 
 ## { Monitor: in memory }</code></pre>
 <p>Second, we create the patient’s trajectory. We do this using the <code>trajectory</code> function of the <code>simmer</code> library.</p>
 <p>Within this path we create the activities of the entities in the trajectory using the <code>seize</code> and <code>release</code> functions. Among these functions we introduce the time that each patient takes to carry out each event, that would correspond with the activity of the entities.</p>
 <p>For example, in the case of the nurse, we seize the entity with the function <code>seize</code>, we give it a time limit of 15 minutes (we do this simulating a random number with a normal distribution of mean 15 and standard deviation 1), and we release the entity with the function <code>release</code>.</p>
-<div class="sourceCode" id="cb966"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb966-1"><a href="simmer-example.html#cb966-1" aria-hidden="true" tabindex="-1"></a>patient <span class="ot">=</span> <span class="fu">trajectory</span>(<span class="st">&quot;patients path&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb966-2"><a href="simmer-example.html#cb966-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">seize</span>(<span class="st">&quot;nurse&quot;</span>, <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb966-3"><a href="simmer-example.html#cb966-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">timeout</span>(<span class="cf">function</span>() <span class="fu">rnorm</span>(<span class="dv">1</span>,<span class="dv">15</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb966-4"><a href="simmer-example.html#cb966-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">release</span>(<span class="st">&quot;nurse&quot;</span>, <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb966-5"><a href="simmer-example.html#cb966-5" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb966-6"><a href="simmer-example.html#cb966-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">seize</span>(<span class="st">&quot;doctor&quot;</span>, <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb966-7"><a href="simmer-example.html#cb966-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">timeout</span>(<span class="cf">function</span>() <span class="fu">rnorm</span>(<span class="dv">1</span>,<span class="dv">20</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb966-8"><a href="simmer-example.html#cb966-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">release</span>(<span class="st">&quot;doctor&quot;</span>, <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb966-9"><a href="simmer-example.html#cb966-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb966-10"><a href="simmer-example.html#cb966-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">seize</span>(<span class="st">&quot;administration&quot;</span>, <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb966-11"><a href="simmer-example.html#cb966-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">timeout</span>(<span class="cf">function</span>() <span class="fu">rnorm</span>(<span class="dv">1</span>,<span class="dv">5</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb966-12"><a href="simmer-example.html#cb966-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">release</span>(<span class="st">&quot;administration&quot;</span>, <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb984"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb984-1"><a href="simmer-example.html#cb984-1" aria-hidden="true" tabindex="-1"></a>patient <span class="ot">=</span> <span class="fu">trajectory</span>(<span class="st">&quot;patients path&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb984-2"><a href="simmer-example.html#cb984-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">seize</span>(<span class="st">&quot;nurse&quot;</span>, <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb984-3"><a href="simmer-example.html#cb984-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">timeout</span>(<span class="cf">function</span>() <span class="fu">rnorm</span>(<span class="dv">1</span>,<span class="dv">15</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb984-4"><a href="simmer-example.html#cb984-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">release</span>(<span class="st">&quot;nurse&quot;</span>, <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb984-5"><a href="simmer-example.html#cb984-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb984-6"><a href="simmer-example.html#cb984-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">seize</span>(<span class="st">&quot;doctor&quot;</span>, <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb984-7"><a href="simmer-example.html#cb984-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">timeout</span>(<span class="cf">function</span>() <span class="fu">rnorm</span>(<span class="dv">1</span>,<span class="dv">20</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb984-8"><a href="simmer-example.html#cb984-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">release</span>(<span class="st">&quot;doctor&quot;</span>, <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb984-9"><a href="simmer-example.html#cb984-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb984-10"><a href="simmer-example.html#cb984-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">seize</span>(<span class="st">&quot;administration&quot;</span>, <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb984-11"><a href="simmer-example.html#cb984-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">timeout</span>(<span class="cf">function</span>() <span class="fu">rnorm</span>(<span class="dv">1</span>,<span class="dv">5</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb984-12"><a href="simmer-example.html#cb984-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">release</span>(<span class="st">&quot;administration&quot;</span>, <span class="dv">1</span>)</span></code></pre></div>
 <p>Thirdly, we add the number of elements of the system using the <code>add_resource</code> function.</p>
 <p>In this case we introduce in the system two elements of the nurse type, three of the doctor type and two of the administration type.</p>
 <p>We also generate the patient entity that will interact with the whole system using the <code>add_generator</code> function. We will generate a patient every five minutes with a standard deviation of 0.5 minutes.</p>
-<div class="sourceCode" id="cb967"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb967-1"><a href="simmer-example.html#cb967-1" aria-hidden="true" tabindex="-1"></a>env <span class="sc">%&gt;%</span></span>
-<span id="cb967-2"><a href="simmer-example.html#cb967-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_resource</span>(<span class="st">&quot;nurse&quot;</span>, <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb967-3"><a href="simmer-example.html#cb967-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_resource</span>(<span class="st">&quot;doctor&quot;</span>, <span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb967-4"><a href="simmer-example.html#cb967-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_resource</span>(<span class="st">&quot;administration&quot;</span>, <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb967-5"><a href="simmer-example.html#cb967-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_generator</span>(<span class="st">&quot;patient&quot;</span>, patient, <span class="cf">function</span>() <span class="fu">rnorm</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="fl">0.5</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb985"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb985-1"><a href="simmer-example.html#cb985-1" aria-hidden="true" tabindex="-1"></a>env <span class="sc">%&gt;%</span></span>
+<span id="cb985-2"><a href="simmer-example.html#cb985-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_resource</span>(<span class="st">&quot;nurse&quot;</span>, <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb985-3"><a href="simmer-example.html#cb985-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_resource</span>(<span class="st">&quot;doctor&quot;</span>, <span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb985-4"><a href="simmer-example.html#cb985-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_resource</span>(<span class="st">&quot;administration&quot;</span>, <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb985-5"><a href="simmer-example.html#cb985-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_generator</span>(<span class="st">&quot;patient&quot;</span>, patient, <span class="cf">function</span>() <span class="fu">rnorm</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="fl">0.5</span>))</span></code></pre></div>
 <pre><code>## simmer environment: outpatient clinic | now: 0 | next: 0
 ## { Monitor: in memory }
 ## { Resource: nurse | monitored: TRUE | server status: 0(2) | queue status: 0(Inf) }
@@ -417,8 +416,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## { Resource: administration | monitored: TRUE | server status: 0(2) | queue status: 0(Inf) }
 ## { Source: patient | monitored: 1 | n_generated: 0 }</code></pre>
 <p>We finally launch the simulation for 540 minutes. When the simulation is finished we can see how our resources are working in the simulated system.</p>
-<div class="sourceCode" id="cb969"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb969-1"><a href="simmer-example.html#cb969-1" aria-hidden="true" tabindex="-1"></a>env <span class="sc">%&gt;%</span></span>
-<span id="cb969-2"><a href="simmer-example.html#cb969-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">run</span>(<span class="at">until=</span><span class="dv">540</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb987"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb987-1"><a href="simmer-example.html#cb987-1" aria-hidden="true" tabindex="-1"></a>env <span class="sc">%&gt;%</span></span>
+<span id="cb987-2"><a href="simmer-example.html#cb987-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">run</span>(<span class="at">until=</span><span class="dv">540</span>)</span></code></pre></div>
 <pre><code>## simmer environment: outpatient clinic | now: 540 | next: 540.960538344821
 ## { Monitor: in memory }
 ## { Resource: nurse | monitored: TRUE | server status: 2(2) | queue status: 34(Inf) }
@@ -426,14 +425,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## { Resource: administration | monitored: TRUE | server status: 1(2) | queue status: 0(Inf) }
 ## { Source: patient | monitored: 1 | n_generated: 108 }</code></pre>
 <p>It is very easy to replicate a simulation multiple times using standard R functions.</p>
-<div class="sourceCode" id="cb971"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb971-1"><a href="simmer-example.html#cb971-1" aria-hidden="true" tabindex="-1"></a>envs <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="cf">function</span>(i) {</span>
-<span id="cb971-2"><a href="simmer-example.html#cb971-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">simmer</span>(<span class="st">&quot;outpatient clinic&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb971-3"><a href="simmer-example.html#cb971-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_resource</span>(<span class="st">&quot;nurse&quot;</span>, <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb971-4"><a href="simmer-example.html#cb971-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_resource</span>(<span class="st">&quot;doctor&quot;</span>, <span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb971-5"><a href="simmer-example.html#cb971-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_resource</span>(<span class="st">&quot;administration&quot;</span>, <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb971-6"><a href="simmer-example.html#cb971-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_generator</span>(<span class="st">&quot;patient&quot;</span>, patient, <span class="cf">function</span>() <span class="fu">rnorm</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="fl">0.5</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb971-7"><a href="simmer-example.html#cb971-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">run</span>(<span class="dv">540</span>)</span>
-<span id="cb971-8"><a href="simmer-example.html#cb971-8" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb989"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb989-1"><a href="simmer-example.html#cb989-1" aria-hidden="true" tabindex="-1"></a>envs <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="cf">function</span>(i) {</span>
+<span id="cb989-2"><a href="simmer-example.html#cb989-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">simmer</span>(<span class="st">&quot;outpatient clinic&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb989-3"><a href="simmer-example.html#cb989-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_resource</span>(<span class="st">&quot;nurse&quot;</span>, <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb989-4"><a href="simmer-example.html#cb989-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_resource</span>(<span class="st">&quot;doctor&quot;</span>, <span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb989-5"><a href="simmer-example.html#cb989-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_resource</span>(<span class="st">&quot;administration&quot;</span>, <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb989-6"><a href="simmer-example.html#cb989-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_generator</span>(<span class="st">&quot;patient&quot;</span>, patient, <span class="cf">function</span>() <span class="fu">rnorm</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="fl">0.5</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb989-7"><a href="simmer-example.html#cb989-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">run</span>(<span class="dv">540</span>)</span>
+<span id="cb989-8"><a href="simmer-example.html#cb989-8" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
 <p>This package provides some basic visualization tools to help you take a glance at your simulations quickly. There are three types of plot implemented with different metrics available:</p>
 <ul>
 <li>Plot of resources. Two metrics available:
@@ -450,51 +449,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Plot of trayectories</li>
 </ul>
 <p>With this graphs we can have a look at the overall resource utilization. The top and bottom of the error bars show respectively the 25th and 75th percentile of the utilization across all the replications. The top of the bar shows the median utilization.</p>
-<div class="sourceCode" id="cb972"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb972-1"><a href="simmer-example.html#cb972-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(simmer.plot)</span>
-<span id="cb972-2"><a href="simmer-example.html#cb972-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb972-3"><a href="simmer-example.html#cb972-3" aria-hidden="true" tabindex="-1"></a>resources <span class="ot">&lt;-</span> <span class="fu">get_mon_resources</span>(envs)</span>
-<span id="cb972-4"><a href="simmer-example.html#cb972-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(resources, <span class="at">metric =</span> <span class="st">&quot;utilization&quot;</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-483-1.png" width="672" /></p>
+<div class="sourceCode" id="cb990"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb990-1"><a href="simmer-example.html#cb990-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(simmer.plot)</span>
+<span id="cb990-2"><a href="simmer-example.html#cb990-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb990-3"><a href="simmer-example.html#cb990-3" aria-hidden="true" tabindex="-1"></a>resources <span class="ot">&lt;-</span> <span class="fu">get_mon_resources</span>(envs)</span>
+<span id="cb990-4"><a href="simmer-example.html#cb990-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(resources, <span class="at">metric =</span> <span class="st">&quot;utilization&quot;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-490-1.png" width="672" /></p>
 <p>It is also possible to have a look at resources’ activity during the simulation.</p>
-<div class="sourceCode" id="cb973"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb973-1"><a href="simmer-example.html#cb973-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(resources, <span class="at">metric =</span> <span class="st">&quot;usage&quot;</span>, <span class="fu">c</span>(<span class="st">&quot;nurse&quot;</span>, <span class="st">&quot;doctor&quot;</span>, <span class="st">&quot;administration&quot;</span>), <span class="at">items =</span> <span class="st">&quot;server&quot;</span>)</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-484-1.png" width="672" /></p>
+<div class="sourceCode" id="cb991"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb991-1"><a href="simmer-example.html#cb991-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(resources, <span class="at">metric =</span> <span class="st">&quot;usage&quot;</span>, <span class="fu">c</span>(<span class="st">&quot;nurse&quot;</span>, <span class="st">&quot;doctor&quot;</span>, <span class="st">&quot;administration&quot;</span>), <span class="at">items =</span> <span class="st">&quot;server&quot;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-491-1.png" width="672" /></p>
 <p>Next we can have a look at the evolution of the arrivals’ flow time during the simulation. In the plot below, each individual line represents a replication. A smooth line is drawn over them. All arrivals that didn’t finish their entire trajectory are excluded from the plot.</p>
 <p>Similarly one can have a look at the evolution of the activity times with <code>metric = "activity_time"</code> and waiting times with <code>metric = "waiting_time"</code>.</p>
-<div class="sourceCode" id="cb974"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb974-1"><a href="simmer-example.html#cb974-1" aria-hidden="true" tabindex="-1"></a>arrivals <span class="ot">&lt;-</span> <span class="fu">get_mon_arrivals</span>(envs)</span>
-<span id="cb974-2"><a href="simmer-example.html#cb974-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(arrivals, <span class="at">metric =</span> <span class="st">&quot;waiting_time&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb992"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb992-1"><a href="simmer-example.html#cb992-1" aria-hidden="true" tabindex="-1"></a>arrivals <span class="ot">&lt;-</span> <span class="fu">get_mon_arrivals</span>(envs)</span>
+<span id="cb992-2"><a href="simmer-example.html#cb992-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(arrivals, <span class="at">metric =</span> <span class="st">&quot;waiting_time&quot;</span>)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using method = &#39;gam&#39; and formula &#39;y ~ s(x, bs = &quot;cs&quot;)&#39;</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-485-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-492-1.png" width="672" /></p>
 <p>Simulation trajectories may grow considerably, and they are not always easy to inspect to ensure their compliance with the model that we are trying to build. In this example we are going to expose a simple one:</p>
 <div id="htmlwidget-631133840bfea22d3e37" style="width:672px;height:480px;" class="grViz html-widget"></div>
 <script type="application/json" data-for="htmlwidget-631133840bfea22d3e37">{"x":{"diagram":"digraph {\n\ngraph [layout = \"dot\",\n       outputorder = \"edgesfirst\",\n       bgcolor = \"white\"]\n\nnode [fontname = \"sans-serif\",\n      fontsize = \"10\",\n      shape = \"circle\",\n      fixedsize = \"true\",\n      width = \"1.5\",\n      style = \"filled\",\n      fillcolor = \"aliceblue\",\n      color = \"gray70\",\n      fontcolor = \"gray50\"]\n\nedge [fontname = \"Helvetica\",\n     fontsize = \"8\",\n     len = \"1.5\",\n     color = \"gray80\",\n     arrowsize = \"0.5\"]\n\n  \"1\" [label = \"Seize\", shape = \"box\", style = \"filled\", color = \"#7FC97F\", tooltip = \"resource: nurse, amount: 1\", fontcolor = \"black\", fillcolor = \"#7FC97F\"] \n  \"2\" [label = \"Timeout\", shape = \"box\", style = \"solid\", color = \"black\", tooltip = \"delay: function()\", fontcolor = \"black\", fillcolor = \"#000000\"] \n  \"3\" [label = \"Release\", shape = \"box\", style = \"filled\", color = \"#7FC97F\", tooltip = \"resource: nurse, amount: 1\", fontcolor = \"black\", fillcolor = \"#7FC97F\"] \n  \"4\" [label = \"Seize\", shape = \"box\", style = \"filled\", color = \"#BEAED4\", tooltip = \"resource: doctor, amount: 1\", fontcolor = \"black\", fillcolor = \"#BEAED4\"] \n  \"5\" [label = \"Timeout\", shape = \"box\", style = \"solid\", color = \"black\", tooltip = \"delay: function()\", fontcolor = \"black\", fillcolor = \"#000000\"] \n  \"6\" [label = \"Release\", shape = \"box\", style = \"filled\", color = \"#BEAED4\", tooltip = \"resource: doctor, amount: 1\", fontcolor = \"black\", fillcolor = \"#BEAED4\"] \n  \"7\" [label = \"Seize\", shape = \"box\", style = \"filled\", color = \"#FDC086\", tooltip = \"resource: administration, amount: 1\", fontcolor = \"black\", fillcolor = \"#FDC086\"] \n  \"8\" [label = \"Timeout\", shape = \"box\", style = \"solid\", color = \"black\", tooltip = \"delay: function()\", fontcolor = \"black\", fillcolor = \"#000000\"] \n  \"9\" [label = \"Release\", shape = \"box\", style = \"filled\", color = \"#FDC086\", tooltip = \"resource: administration, amount: 1\", fontcolor = \"black\", fillcolor = \"#FDC086\"] \n\"1\"->\"2\" [color = \"black\", style = \"solid\"] \n\"2\"->\"3\" [color = \"black\", style = \"solid\"] \n\"3\"->\"4\" [color = \"black\", style = \"solid\"] \n\"4\"->\"5\" [color = \"black\", style = \"solid\"] \n\"5\"->\"6\" [color = \"black\", style = \"solid\"] \n\"6\"->\"7\" [color = \"black\", style = \"solid\"] \n\"7\"->\"8\" [color = \"black\", style = \"solid\"] \n\"8\"->\"9\" [color = \"black\", style = \"solid\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 <p>Now that we know a bit about the <code>simmer</code> tool we are going to make some changes in the system to try to improve its efficiency. From what we have seen in the examples, it seems that the nurses are overworked. We will first try to “hire” a new nurse to improve the system.</p>
-<div class="sourceCode" id="cb976"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb976-1"><a href="simmer-example.html#cb976-1" aria-hidden="true" tabindex="-1"></a>envs2 <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="cf">function</span>(i) {</span>
-<span id="cb976-2"><a href="simmer-example.html#cb976-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">simmer</span>(<span class="st">&quot;outpatient clinic&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb976-3"><a href="simmer-example.html#cb976-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_resource</span>(<span class="st">&quot;nurse&quot;</span>, <span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb976-4"><a href="simmer-example.html#cb976-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_resource</span>(<span class="st">&quot;doctor&quot;</span>, <span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb976-5"><a href="simmer-example.html#cb976-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_resource</span>(<span class="st">&quot;administration&quot;</span>, <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb976-6"><a href="simmer-example.html#cb976-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_generator</span>(<span class="st">&quot;patient&quot;</span>, patient, <span class="cf">function</span>() <span class="fu">rnorm</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="fl">0.5</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb976-7"><a href="simmer-example.html#cb976-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">run</span>(<span class="dv">540</span>)</span>
-<span id="cb976-8"><a href="simmer-example.html#cb976-8" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb994"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb994-1"><a href="simmer-example.html#cb994-1" aria-hidden="true" tabindex="-1"></a>envs2 <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="cf">function</span>(i) {</span>
+<span id="cb994-2"><a href="simmer-example.html#cb994-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">simmer</span>(<span class="st">&quot;outpatient clinic&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb994-3"><a href="simmer-example.html#cb994-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_resource</span>(<span class="st">&quot;nurse&quot;</span>, <span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb994-4"><a href="simmer-example.html#cb994-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_resource</span>(<span class="st">&quot;doctor&quot;</span>, <span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb994-5"><a href="simmer-example.html#cb994-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_resource</span>(<span class="st">&quot;administration&quot;</span>, <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb994-6"><a href="simmer-example.html#cb994-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_generator</span>(<span class="st">&quot;patient&quot;</span>, patient, <span class="cf">function</span>() <span class="fu">rnorm</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="fl">0.5</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb994-7"><a href="simmer-example.html#cb994-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">run</span>(<span class="dv">540</span>)</span>
+<span id="cb994-8"><a href="simmer-example.html#cb994-8" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
 <p>Let’s see how the system works with a new nurse through the plots:</p>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-488-1.png" width="672" /></p>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-489-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-495-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-496-1.png" width="672" /></p>
 <pre><code>## `geom_smooth()` using method = &#39;gam&#39; and formula &#39;y ~ s(x, bs = &quot;cs&quot;)&#39;</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-490-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-497-1.png" width="672" /></p>
 <p>We can see that both doctors and nurses are now working at 100% capacity. Now the problem seems to be coming from the administration. We are going to “fire” one of the workers in this area to try to improve the system.</p>
-<div class="sourceCode" id="cb978"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb978-1"><a href="simmer-example.html#cb978-1" aria-hidden="true" tabindex="-1"></a>envs3 <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="cf">function</span>(i) {</span>
-<span id="cb978-2"><a href="simmer-example.html#cb978-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">simmer</span>(<span class="st">&quot;outpatient clinic&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb978-3"><a href="simmer-example.html#cb978-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_resource</span>(<span class="st">&quot;nurse&quot;</span>, <span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb978-4"><a href="simmer-example.html#cb978-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_resource</span>(<span class="st">&quot;doctor&quot;</span>, <span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb978-5"><a href="simmer-example.html#cb978-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_resource</span>(<span class="st">&quot;administration&quot;</span>, <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb978-6"><a href="simmer-example.html#cb978-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_generator</span>(<span class="st">&quot;patient&quot;</span>, patient, <span class="cf">function</span>() <span class="fu">rnorm</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="fl">0.5</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb978-7"><a href="simmer-example.html#cb978-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">run</span>(<span class="dv">540</span>)</span>
-<span id="cb978-8"><a href="simmer-example.html#cb978-8" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb996"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb996-1"><a href="simmer-example.html#cb996-1" aria-hidden="true" tabindex="-1"></a>envs3 <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="cf">function</span>(i) {</span>
+<span id="cb996-2"><a href="simmer-example.html#cb996-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">simmer</span>(<span class="st">&quot;outpatient clinic&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb996-3"><a href="simmer-example.html#cb996-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_resource</span>(<span class="st">&quot;nurse&quot;</span>, <span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb996-4"><a href="simmer-example.html#cb996-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_resource</span>(<span class="st">&quot;doctor&quot;</span>, <span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb996-5"><a href="simmer-example.html#cb996-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_resource</span>(<span class="st">&quot;administration&quot;</span>, <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb996-6"><a href="simmer-example.html#cb996-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">add_generator</span>(<span class="st">&quot;patient&quot;</span>, patient, <span class="cf">function</span>() <span class="fu">rnorm</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="fl">0.5</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb996-7"><a href="simmer-example.html#cb996-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">run</span>(<span class="dv">540</span>)</span>
+<span id="cb996-8"><a href="simmer-example.html#cb996-8" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div>
 <p>Let’s see how the system works without a administration worker through the plots:</p>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-492-1.png" width="672" /></p>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-493-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-499-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-500-1.png" width="672" /></p>
 <pre><code>## `geom_smooth()` using method = &#39;gam&#39; and formula &#39;y ~ s(x, bs = &quot;cs&quot;)&#39;</code></pre>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-494-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-501-1.png" width="672" /></p>
 <p>Great! We’ve found the perfect balance for our little hospital.</p>
 
 </div>

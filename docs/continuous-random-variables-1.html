@@ -247,9 +247,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="3.1" data-path="set-theory.html"><a href="set-theory.html"><i class="fa fa-check"></i><b>3.1</b> Set theory</a>
 <ul>
-<li class="chapter" data-level="3.1.1" data-path="set-theory.html"><a href="set-theory.html#basic-sets"><i class="fa fa-check"></i><b>3.1.1</b> Basic sets</a></li>
-<li class="chapter" data-level="3.1.2" data-path="set-theory.html"><a href="set-theory.html#basic-characteristics-and-properties-of-the-sets"><i class="fa fa-check"></i><b>3.1.2</b> Basic characteristics and properties of the sets</a></li>
-<li class="chapter" data-level="3.1.3" data-path="set-theory.html"><a href="set-theory.html#sample-spaces"><i class="fa fa-check"></i><b>3.1.3</b> Sample Spaces</a></li>
+<li class="chapter" data-level="3.1.1" data-path="set-theory.html"><a href="set-theory.html#sample-spaces"><i class="fa fa-check"></i><b>3.1.1</b> Sample Spaces</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>3.2</b> Probability</a>
 <ul>
@@ -278,8 +276,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="3.5.1" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#bernoulli-distribution"><i class="fa fa-check"></i><b>3.5.1</b> Bernoulli Distribution</a></li>
 <li class="chapter" data-level="3.5.2" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#binomial-distribution"><i class="fa fa-check"></i><b>3.5.2</b> Binomial Distribution</a></li>
-<li class="chapter" data-level="3.5.3" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#poisson-distribution"><i class="fa fa-check"></i><b>3.5.3</b> Poisson Distribution</a></li>
-<li class="chapter" data-level="3.5.4" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#some-examples"><i class="fa fa-check"></i><b>3.5.4</b> Some Examples</a></li>
+<li class="chapter" data-level="3.5.3" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#geometric-distribution"><i class="fa fa-check"></i><b>3.5.3</b> Geometric distribution</a></li>
+<li class="chapter" data-level="3.5.4" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#poisson-distribution"><i class="fa fa-check"></i><b>3.5.4</b> Poisson Distribution</a></li>
+<li class="chapter" data-level="3.5.5" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#some-examples"><i class="fa fa-check"></i><b>3.5.5</b> Some Examples</a></li>
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="continuous-random-variables-1.html"><a href="continuous-random-variables-1.html"><i class="fa fa-check"></i><b>3.6</b> Continuous Random Variables</a>
 <ul>
@@ -386,12 +385,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>the height of the students of Simulation and Modeling to understand change: it can be any real number.</p></li>
 </ul>
 <p>Whilst for discrete random variables we considered summations over the elements of <span class="math inline">\(\mathbb{X}\)</span>, i.e. <span class="math inline">\(\sum_{x\in\mathbb{X}}\)</span>, for continuous random variables we need to consider integrals over appropriate intervals.</p>
-<p>You should be more or less familiar with these from previous studies of calculus. But let’s give an example. Consider the function <span class="math inline">\(f(x)=x^2\)</span> computing the squared of a number <span class="math inline">\(x\)</span>. Suppose we are interested in this function between the values -1 and 1, which is plotted by the red line in Figure <a href="continuous-random-variables-1.html#fig:x-sq">3.6</a>. Consider the so-called integral <span class="math inline">\(\int_{-1}^{1}x^2dx\)</span>: this coincides with the area delimited by the function and the x-axis. In Figure <a href="continuous-random-variables-1.html#fig:x-sq">3.6</a> the blue area is therefore equal to <span class="math inline">\(\int_{-1}^{1}x^2dx\)</span>.</p>
-<div class="sourceCode" id="cb802"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb802-1"><a href="continuous-random-variables-1.html#cb802-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>,<span class="fl">0.01</span>), <span class="at">y =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>,<span class="fl">0.01</span>)<span class="sc">^</span><span class="dv">2</span>), <span class="fu">aes</span>(x,y)) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="at">lwd =</span> <span class="fl">1.3</span>, <span class="at">col=</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span> <span class="fu">geom_area</span>(<span class="at">alpha=</span><span class="fl">0.6</span>, <span class="at">fill =</span> <span class="st">&quot;lightskyblue2&quot;</span>) <span class="sc">+</span>  <span class="fu">theme_bw</span>() </span></code></pre></div>
+<p>You should be more or less familiar with these from previous studies of calculus. But let’s give an example. Consider the function <span class="math inline">\(f(x)=x^2\)</span> computing the squared of a number <span class="math inline">\(x\)</span>. Suppose we are interested in this function between the values -1 and 1, which is plotted by the red line in Figure <a href="continuous-random-variables-1.html#fig:x-sq">3.7</a>. Consider the so-called integral <span class="math inline">\(\int_{-1}^{1}x^2dx\)</span>: this coincides with the area delimited by the function and the x-axis. In Figure <a href="continuous-random-variables-1.html#fig:x-sq">3.7</a> the blue area is therefore equal to <span class="math inline">\(\int_{-1}^{1}x^2dx\)</span>.</p>
+<div class="sourceCode" id="cb820"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb820-1"><a href="continuous-random-variables-1.html#cb820-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>,<span class="fl">0.01</span>), <span class="at">y =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>,<span class="fl">0.01</span>)<span class="sc">^</span><span class="dv">2</span>), <span class="fu">aes</span>(x,y)) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="at">lwd =</span> <span class="fl">1.3</span>, <span class="at">col=</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span> <span class="fu">geom_area</span>(<span class="at">alpha=</span><span class="fl">0.6</span>, <span class="at">fill =</span> <span class="st">&quot;lightskyblue2&quot;</span>) <span class="sc">+</span>  <span class="fu">theme_bw</span>() </span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:x-sq"></span>
 <img src="bookdownproj_files/figure-html/x-sq-1.png" alt="Plot of the squared function and the area under its curve" width="50%" />
 <p class="caption">
-Figure 3.6: Plot of the squared function and the area under its curve
+Figure 3.7: Plot of the squared function and the area under its curve
 </p>
 </div>
 <p>We will not be interested in computing integrals ourselves, so if you do not know/remember how to do it, there is no problem!</p>
@@ -422,21 +421,21 @@ f(x) = \left\{
 \end{array}
 \right.
 \]</span></p>
-<p>The pdf is drawn in Figure <a href="continuous-random-variables-1.html#fig:exp">3.7</a> by the red line. One can see that <span class="math inline">\(f(x)\geq 0\)</span> for all <span class="math inline">\(x\geq 0\)</span> and one could also compute that it integrates to one.</p>
+<p>The pdf is drawn in Figure <a href="continuous-random-variables-1.html#fig:exp">3.8</a> by the red line. One can see that <span class="math inline">\(f(x)\geq 0\)</span> for all <span class="math inline">\(x\geq 0\)</span> and one could also compute that it integrates to one.</p>
 <p>Therefore the probability that the waiting time is between any two values <span class="math inline">\((a,b)\)</span> can be computed as
 <span class="math display">\[
 \int_a^b\frac{1}{4}e^{-x/4}dx.
 \]</span>
-In particular if we were interested in the probability that the waiting time is between two and five minutes, corresponding to the shaded area in Figure <a href="continuous-random-variables-1.html#fig:exp">3.7</a>, we could compute it as
+In particular if we were interested in the probability that the waiting time is between two and five minutes, corresponding to the shaded area in Figure <a href="continuous-random-variables-1.html#fig:exp">3.8</a>, we could compute it as
 <span class="math display">\[
 P(2&lt;X&lt;5)=\int_2^5f(x)dx=\int_{2}^5\frac{1}{4}e^{-x/4}dx= 0.32
 \]</span></p>
-<div class="sourceCode" id="cb803"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb803-1"><a href="continuous-random-variables-1.html#cb803-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x=</span><span class="fu">seq</span>(<span class="fl">0.01</span>,<span class="dv">15</span>,<span class="fl">0.05</span>),<span class="at">y=</span><span class="fu">dexp</span>(<span class="fu">seq</span>(<span class="fl">0.01</span>,<span class="dv">15</span>,<span class="fl">0.05</span>),<span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb821"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb821-1"><a href="continuous-random-variables-1.html#cb821-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x=</span><span class="fu">seq</span>(<span class="fl">0.01</span>,<span class="dv">15</span>,<span class="fl">0.05</span>),<span class="at">y=</span><span class="fu">dexp</span>(<span class="fu">seq</span>(<span class="fl">0.01</span>,<span class="dv">15</span>,<span class="fl">0.05</span>),<span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>))</span></code></pre></div>
 <pre><code>## Warning: Removed 240 rows containing missing values (position_stack).</code></pre>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:exp"></span>
 <img src="bookdownproj_files/figure-html/exp-1.png" alt="Probability density function for the waiting time in the donut shop example" width="50%" />
 <p class="caption">
-Figure 3.7: Probability density function for the waiting time in the donut shop example
+Figure 3.8: Probability density function for the waiting time in the donut shop example
 </p>
 </div>
 <p>Notice that since <span class="math inline">\(P(X=x_0)=0\)</span> for any <span class="math inline">\(x_0\in\mathbb{X}\)</span>, we also have that
@@ -463,12 +462,12 @@ This integral can be solved and <span class="math inline">\(F(x)\)</span> can be
 <span class="math display">\[
 F(x)= 1- e^{-x/4},
 \]</span>
-which is plotted in Figure <a href="continuous-random-variables-1.html#fig:expcdf">3.8</a>.</p>
-<div class="sourceCode" id="cb805"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb805-1"><a href="continuous-random-variables-1.html#cb805-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="dv">20</span>,<span class="fl">0.5</span>)</span></code></pre></div>
+which is plotted in Figure <a href="continuous-random-variables-1.html#fig:expcdf">3.9</a>.</p>
+<div class="sourceCode" id="cb823"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb823-1"><a href="continuous-random-variables-1.html#cb823-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="dv">20</span>,<span class="fl">0.5</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:expcdf"></span>
 <img src="bookdownproj_files/figure-html/expcdf-1.png" alt="Cumulative distribution function for the waiting time at the donut shop" width="50%" />
 <p class="caption">
-Figure 3.8: Cumulative distribution function for the waiting time at the donut shop
+Figure 3.9: Cumulative distribution function for the waiting time at the donut shop
 </p>
 </div>
 <p>We can notice that the cdf has similar properties as in the discrete case: it is non-decreasing, on the left-hand side is zero and on the right-hand side tends to zero.</p>

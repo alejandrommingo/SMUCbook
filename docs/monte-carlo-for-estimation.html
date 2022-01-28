@@ -247,9 +247,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="3.1" data-path="set-theory.html"><a href="set-theory.html"><i class="fa fa-check"></i><b>3.1</b> Set theory</a>
 <ul>
-<li class="chapter" data-level="3.1.1" data-path="set-theory.html"><a href="set-theory.html#basic-sets"><i class="fa fa-check"></i><b>3.1.1</b> Basic sets</a></li>
-<li class="chapter" data-level="3.1.2" data-path="set-theory.html"><a href="set-theory.html#basic-characteristics-and-properties-of-the-sets"><i class="fa fa-check"></i><b>3.1.2</b> Basic characteristics and properties of the sets</a></li>
-<li class="chapter" data-level="3.1.3" data-path="set-theory.html"><a href="set-theory.html#sample-spaces"><i class="fa fa-check"></i><b>3.1.3</b> Sample Spaces</a></li>
+<li class="chapter" data-level="3.1.1" data-path="set-theory.html"><a href="set-theory.html#sample-spaces"><i class="fa fa-check"></i><b>3.1.1</b> Sample Spaces</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>3.2</b> Probability</a>
 <ul>
@@ -278,8 +276,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="3.5.1" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#bernoulli-distribution"><i class="fa fa-check"></i><b>3.5.1</b> Bernoulli Distribution</a></li>
 <li class="chapter" data-level="3.5.2" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#binomial-distribution"><i class="fa fa-check"></i><b>3.5.2</b> Binomial Distribution</a></li>
-<li class="chapter" data-level="3.5.3" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#poisson-distribution"><i class="fa fa-check"></i><b>3.5.3</b> Poisson Distribution</a></li>
-<li class="chapter" data-level="3.5.4" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#some-examples"><i class="fa fa-check"></i><b>3.5.4</b> Some Examples</a></li>
+<li class="chapter" data-level="3.5.3" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#geometric-distribution"><i class="fa fa-check"></i><b>3.5.3</b> Geometric distribution</a></li>
+<li class="chapter" data-level="3.5.4" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#poisson-distribution"><i class="fa fa-check"></i><b>3.5.4</b> Poisson Distribution</a></li>
+<li class="chapter" data-level="3.5.5" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#some-examples"><i class="fa fa-check"></i><b>3.5.5</b> Some Examples</a></li>
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="continuous-random-variables-1.html"><a href="continuous-random-variables-1.html"><i class="fa fa-check"></i><b>3.6</b> Continuous Random Variables</a>
 <ul>
@@ -394,27 +393,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>What is expected difference in arrival times?</li>
 </ol>
 <p>We start simulating a large number of values from distribution of <span class="math inline">\((A,S)\)</span> say, <code>1000</code>, where <span class="math inline">\(A\)</span> and <span class="math inline">\(S\)</span> are independent:</p>
-<div class="sourceCode" id="cb928"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb928-1"><a href="monte-carlo-for-estimation.html#cb928-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2021</span>)</span>
-<span id="cb928-2"><a href="monte-carlo-for-estimation.html#cb928-2" aria-hidden="true" tabindex="-1"></a>sam <span class="ot">=</span> <span class="fu">runif</span>(<span class="dv">1000</span>, <span class="dv">10</span>, <span class="fl">11.5</span>)</span>
-<span id="cb928-3"><a href="monte-carlo-for-estimation.html#cb928-3" aria-hidden="true" tabindex="-1"></a>annie <span class="ot">=</span> <span class="fu">runif</span>(<span class="dv">1000</span>, <span class="fl">10.5</span>, <span class="dv">12</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb946"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb946-1"><a href="monte-carlo-for-estimation.html#cb946-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2021</span>)</span>
+<span id="cb946-2"><a href="monte-carlo-for-estimation.html#cb946-2" aria-hidden="true" tabindex="-1"></a>sam <span class="ot">=</span> <span class="fu">runif</span>(<span class="dv">1000</span>, <span class="dv">10</span>, <span class="fl">11.5</span>)</span>
+<span id="cb946-3"><a href="monte-carlo-for-estimation.html#cb946-3" aria-hidden="true" tabindex="-1"></a>annie <span class="ot">=</span> <span class="fu">runif</span>(<span class="dv">1000</span>, <span class="fl">10.5</span>, <span class="dv">12</span>)</span></code></pre></div>
 <p>We want the probability <span class="math inline">\(P(A &lt; S)\)</span> which is estimated by the proportion of simulated pairs <span class="math inline">\((a,s)\)</span> where <span class="math inline">\(a\)</span> is smaller than <span class="math inline">\(s\)</span></p>
-<div class="sourceCode" id="cb929"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb929-1"><a href="monte-carlo-for-estimation.html#cb929-1" aria-hidden="true" tabindex="-1"></a>prob <span class="ot">=</span> <span class="fu">sum</span>(annie <span class="sc">&lt;</span> sam) <span class="sc">/</span> <span class="dv">1000</span></span>
-<span id="cb929-2"><a href="monte-carlo-for-estimation.html#cb929-2" aria-hidden="true" tabindex="-1"></a>prob</span></code></pre></div>
+<div class="sourceCode" id="cb947"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb947-1"><a href="monte-carlo-for-estimation.html#cb947-1" aria-hidden="true" tabindex="-1"></a>prob <span class="ot">=</span> <span class="fu">sum</span>(annie <span class="sc">&lt;</span> sam) <span class="sc">/</span> <span class="dv">1000</span></span>
+<span id="cb947-2"><a href="monte-carlo-for-estimation.html#cb947-2" aria-hidden="true" tabindex="-1"></a>prob</span></code></pre></div>
 <pre><code>## [1] 0.223</code></pre>
 <p>The estimated probability that Annie arrives before Sam is 0.223, and the <em>standard error</em> of this estimation is:</p>
-<div class="sourceCode" id="cb931"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb931-1"><a href="monte-carlo-for-estimation.html#cb931-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(prob <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> prob) <span class="sc">/</span> <span class="dv">1000</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb949"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb949-1"><a href="monte-carlo-for-estimation.html#cb949-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(prob <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> prob) <span class="sc">/</span> <span class="dv">1000</span>)</span></code></pre></div>
 <pre><code>## [1] 0.01316324</code></pre>
 <p>In the next plot we can see that the shaded region shows the area in which <span class="math inline">\(A &lt; S\)</span></p>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-458-1.png" width="672" /></p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-465-1.png" width="672" /></p>
 <p>Now, what is the expected difference in the arrival times? Annie is more likely to arrive later, so we model <span class="math inline">\(E(A-S)\)</span></p>
-<div class="sourceCode" id="cb933"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb933-1"><a href="monte-carlo-for-estimation.html#cb933-1" aria-hidden="true" tabindex="-1"></a>difference <span class="ot">=</span> annie <span class="sc">-</span> sam</span></code></pre></div>
+<div class="sourceCode" id="cb951"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb951-1"><a href="monte-carlo-for-estimation.html#cb951-1" aria-hidden="true" tabindex="-1"></a>difference <span class="ot">=</span> annie <span class="sc">-</span> sam</span></code></pre></div>
 <p>Now we can estimate the mean of the differences using Monte Carlo methods</p>
-<div class="sourceCode" id="cb934"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb934-1"><a href="monte-carlo-for-estimation.html#cb934-1" aria-hidden="true" tabindex="-1"></a>estimatedMean <span class="ot">=</span> <span class="fu">mean</span>(difference)</span>
-<span id="cb934-2"><a href="monte-carlo-for-estimation.html#cb934-2" aria-hidden="true" tabindex="-1"></a>estimatedMean</span></code></pre></div>
+<div class="sourceCode" id="cb952"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb952-1"><a href="monte-carlo-for-estimation.html#cb952-1" aria-hidden="true" tabindex="-1"></a>estimatedMean <span class="ot">=</span> <span class="fu">mean</span>(difference)</span>
+<span id="cb952-2"><a href="monte-carlo-for-estimation.html#cb952-2" aria-hidden="true" tabindex="-1"></a>estimatedMean</span></code></pre></div>
 <pre><code>## [1] 0.5079882</code></pre>
 <p>The estimated standard error is the standard desviation of the difference divided by the square root of the simulation sample size:</p>
-<div class="sourceCode" id="cb936"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb936-1"><a href="monte-carlo-for-estimation.html#cb936-1" aria-hidden="true" tabindex="-1"></a>SE <span class="ot">=</span> <span class="fu">sd</span>(difference) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">1000</span>)</span>
-<span id="cb936-2"><a href="monte-carlo-for-estimation.html#cb936-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="st">&quot;Mean&quot;</span> <span class="ot">=</span> estimatedMean, <span class="st">&quot;Standard Error&quot;</span> <span class="ot">=</span> SE)</span></code></pre></div>
+<div class="sourceCode" id="cb954"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb954-1"><a href="monte-carlo-for-estimation.html#cb954-1" aria-hidden="true" tabindex="-1"></a>SE <span class="ot">=</span> <span class="fu">sd</span>(difference) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">1000</span>)</span>
+<span id="cb954-2"><a href="monte-carlo-for-estimation.html#cb954-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="st">&quot;Mean&quot;</span> <span class="ot">=</span> estimatedMean, <span class="st">&quot;Standard Error&quot;</span> <span class="ot">=</span> SE)</span></code></pre></div>
 <pre><code>##           Mean Standard Error 
 ##     0.50798819     0.01972754</code></pre>
 <p>So we estimate that Annie will arrive 0.508 hours after Sam arrives. Since standard error is only 0.02 hours, we can be 95% confident that the true difference is between 0.528 and 0.488 hours</p>

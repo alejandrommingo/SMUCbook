@@ -247,9 +247,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="3.1" data-path="set-theory.html"><a href="set-theory.html"><i class="fa fa-check"></i><b>3.1</b> Set theory</a>
 <ul>
-<li class="chapter" data-level="3.1.1" data-path="set-theory.html"><a href="set-theory.html#basic-sets"><i class="fa fa-check"></i><b>3.1.1</b> Basic sets</a></li>
-<li class="chapter" data-level="3.1.2" data-path="set-theory.html"><a href="set-theory.html#basic-characteristics-and-properties-of-the-sets"><i class="fa fa-check"></i><b>3.1.2</b> Basic characteristics and properties of the sets</a></li>
-<li class="chapter" data-level="3.1.3" data-path="set-theory.html"><a href="set-theory.html#sample-spaces"><i class="fa fa-check"></i><b>3.1.3</b> Sample Spaces</a></li>
+<li class="chapter" data-level="3.1.1" data-path="set-theory.html"><a href="set-theory.html#sample-spaces"><i class="fa fa-check"></i><b>3.1.1</b> Sample Spaces</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>3.2</b> Probability</a>
 <ul>
@@ -278,8 +276,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="3.5.1" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#bernoulli-distribution"><i class="fa fa-check"></i><b>3.5.1</b> Bernoulli Distribution</a></li>
 <li class="chapter" data-level="3.5.2" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#binomial-distribution"><i class="fa fa-check"></i><b>3.5.2</b> Binomial Distribution</a></li>
-<li class="chapter" data-level="3.5.3" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#poisson-distribution"><i class="fa fa-check"></i><b>3.5.3</b> Poisson Distribution</a></li>
-<li class="chapter" data-level="3.5.4" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#some-examples"><i class="fa fa-check"></i><b>3.5.4</b> Some Examples</a></li>
+<li class="chapter" data-level="3.5.3" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#geometric-distribution"><i class="fa fa-check"></i><b>3.5.3</b> Geometric distribution</a></li>
+<li class="chapter" data-level="3.5.4" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#poisson-distribution"><i class="fa fa-check"></i><b>3.5.4</b> Poisson Distribution</a></li>
+<li class="chapter" data-level="3.5.5" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#some-examples"><i class="fa fa-check"></i><b>3.5.5</b> Some Examples</a></li>
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="continuous-random-variables-1.html"><a href="continuous-random-variables-1.html"><i class="fa fa-check"></i><b>3.6</b> Continuous Random Variables</a>
 <ul>
@@ -379,12 +378,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="set-theory" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> Set theory</h2>
 <p><l class="definition"><strong>Set Definition</strong> </l></p>
-<p>A set is a <a href="https://en.wikipedia.org/wiki/Primitive_notion">primitive notion</a>. That is, it is a basic idea of human thought. A set is a collection of objects: numbers, images … anything, football players, words, colors …</p>
-<p>The basic set theory is simple and natural and is what we need for this course.</p>
-<p>Mathematical set theory is more complex and presents several paradoxes</p>
-<div id="basic-sets" class="section level3" number="3.1.1">
-<h3><span class="header-section-number">3.1.1</span> Basic sets</h3>
-<p>The sets usually have a mother set such as:</p>
+<p>A set is a <a href="https://en.wikipedia.org/wiki/Primitive_notion">primitive notion</a>. That is, it is a basic idea of human thought. A set is a collection of objects: numbers, images … anything, football players, words, colors … The basic set theory is simple and natural and is what we need for this course. Mathematical set theory is more complex and presents several paradoxes. The sets usually have a mother set such as:</p>
 <ul>
 <li><span class="math inline">\(\mathbb{N}=\{0,1,2,\ldots\}\)</span></li>
 <li><span class="math inline">\(\mathbb{Z}=\{\ldots,-2,-1,0,1,2,\ldots\}\)</span></li>
@@ -393,30 +387,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Alphabet = <span class="math inline">\(\{a,b,c,\ldots, A,B,C,\ldots\}.\)</span></li>
 <li>Words = <span class="math inline">\(\{peace, war, love, probability,\ldots\}.\)</span></li>
 </ul>
-</div>
-<div id="basic-characteristics-and-properties-of-the-sets" class="section level3" number="3.1.2">
-<h3><span class="header-section-number">3.1.2</span> Basic characteristics and properties of the sets</h3>
-<ul>
-<li>Each <span class="math inline">\(x\)</span> object of <span class="math inline">\(\Omega\)</span> is called <strong>the element of the set</strong> <span class="math inline">\(\Omega\)</span> and we say that <span class="math inline">\(x\)</span> belongs to <span class="math inline">\(\Omega\)</span>. We will denote it with <span class="math inline">\(x\in \Omega\)</span>.</li>
-<li>A <strong>set of one element</strong>, for example, <span class="math inline">\(\{1\}\)</span> is called a <strong>singleton</strong>.</li>
-<li>Let <span class="math inline">\(A\)</span> be another set we will say that <span class="math inline">\(A\)</span> <strong>is equal to</strong> <span class="math inline">\(B\)</span> if all the <span class="math inline">\(A\)</span> elements are in <span class="math inline">\(B\)</span> and all the <span class="math inline">\(B\)</span> elements are in <span class="math inline">\(A\)</span>. For example <span class="math inline">\(A=\{1,2,3\}\)</span> is equal to <span class="math inline">\(B=\{3,1,2\}\)</span>.</li>
-<li>If <span class="math inline">\(A\)</span> is another set such that if <span class="math inline">\(x\in A\)</span> then <span class="math inline">\(x\in B\)</span> we will say that <span class="math inline">\(A\)</span> is a subset of or is contained in <span class="math inline">\(B\)</span>. We will denote it by <span class="math inline">\(A\subseteq B.\)</span></li>
-<li>The set that has no elements is called an empty set and is denoted by the symbol <span class="math inline">\(\emptyset\)</span>.</li>
-<li>Given <span class="math inline">\(A\)</span> a set obviously <span class="math inline">\(\emptyset\subseteq A.\)</span></li>
-</ul>
+<p>Each <span class="math inline">\(\omega\)</span> object of <span class="math inline">\(\Omega\)</span> is called <strong>the element of the set</strong> <span class="math inline">\(\Omega\)</span> and we say that <span class="math inline">\(\omega\)</span> belongs to <span class="math inline">\(\Omega\)</span>. We will denote it with <span class="math inline">\(\omega\in \Omega\)</span>. A <strong>set of one element</strong>, for example, <span class="math inline">\(\{1\}\)</span> is called a <strong>singleton</strong>.</p>
+<p>Let <span class="math inline">\(A\)</span> be another set we will say that <span class="math inline">\(A\)</span> <strong>is equal to</strong> <span class="math inline">\(B\)</span> if all the <span class="math inline">\(A\)</span> elements are in <span class="math inline">\(B\)</span> and all the <span class="math inline">\(B\)</span> elements are in <span class="math inline">\(A\)</span>. For example <span class="math inline">\(A=\{1,2,3\}\)</span> is equal to <span class="math inline">\(B=\{3,1,2\}\)</span>. If <span class="math inline">\(A\)</span> is another set such that if <span class="math inline">\(x\in A\)</span> then <span class="math inline">\(x\in B\)</span> we will say that <span class="math inline">\(A\)</span> is a subset of or is contained in <span class="math inline">\(B\)</span>. We will denote it by <span class="math inline">\(A\subseteq B.\)</span></p>
+<p>The set that has no elements is called an empty set and is denoted by the symbol <span class="math inline">\(\emptyset\)</span>. Given <span class="math inline">\(A\)</span> a set obviously <span class="math inline">\(\emptyset\subseteq A.\)</span></p>
 <p>Let’s take as a base set <span class="math inline">\(\Omega=\{1,2,3\}\)</span></p>
-<ul>
-<li><span class="math inline">\(\Omega\)</span> is a set of cardinal 3, it is denoted by <span class="math inline">\(\#(\Omega)=3\)</span> or by <span class="math inline">\(|\Omega|=3\)</span></li>
-<li>The <span class="math inline">\(\Omega\)</span> set has <span class="math inline">\(2^3=8\)</span> subsets.
+<p><span class="math inline">\(\Omega\)</span> is a set of cardinal 3, it is denoted by <span class="math inline">\(\#(\Omega)=3\)</span> or by <span class="math inline">\(|\Omega|=3\)</span>. The <span class="math inline">\(\Omega\)</span> set has <span class="math inline">\(2^3=8\)</span> subsets:</p>
 <ul>
 <li>the empty <span class="math inline">\(\emptyset\)</span> and the elementaries <span class="math inline">\(\{1\},\{3\},\{3\}\)</span></li>
 <li>the subsets of two elements: <span class="math inline">\(\{1,2\},\{1,3\},\{2,3\}\)</span></li>
 <li>the total set of three elements <span class="math inline">\(\Omega=\{1,2,3\}.\)</span></li>
-</ul></li>
 </ul>
-</div>
-<div id="sample-spaces" class="section level3" number="3.1.3">
-<h3><span class="header-section-number">3.1.3</span> Sample Spaces</h3>
+<div id="sample-spaces" class="section level3" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> Sample Spaces</h3>
 <p>Probability is the mathematical language we use to quantify uncertainty.</p>
 <ul>
 <li>The <em>sample space</em> <span class="math inline">\(\Omega\)</span> is the set of possible outcomes of an experiment.</li>
@@ -425,8 +407,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p><strong>Example:</strong> If we toss a coin twice then <span class="math inline">\(\Omega =\{ HH, HT, TH, TT\}\)</span>. The event that the first toss is heads is <span class="math inline">\(A=\{HH,HT\}\)</span>.</p>
 <p><strong>Example:</strong> Let <span class="math inline">\(\omega\)</span> be the outcome of a measurement of some physical quantity, for example, temperature. Then <span class="math inline">\(\Omega=\mathbb{R}=(-\infty,\infty)\)</span> (without considering that there is a lower bound, no harm in this). The event that the measurement is larger than 10 but less than or equal to 23 is <span class="math inline">\(A=(10,23]\)</span>.</p>
-<p><strong>Example:</strong> If we toss a coin forever, then the sample space is the infinite set <span class="math inline">\(\Omega = \{w=(w_1,w_2,w_3,\dots): w_i\in\{H,T\}\}\)</span>. Let <span class="math inline">\(E\)</span> be the event that the first head appears on the third toss. Then
-<span class="math display">\[
+<p><strong>Example:</strong> If we toss a coin forever, then the sample space is the infinite set <span class="math inline">\(\Omega = \{w=(w_1,w_2,w_3,\dots): w_i\in\{H,T\}\}\)</span>. Let <span class="math inline">\(E\)</span> be the event that the first head appears on the third toss. Then</p>
+<p><span class="math display">\[
 E=\{(w_1,w_2,w_3,\dots):w_1=T,w_2=T,w_3=H,w_i\in\{H,T\}\;\; for\;\; i&gt;3\}.
 \]</span></p>
 </div>

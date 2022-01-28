@@ -9,6 +9,7 @@ fig:disc-pmf
 fig:disc-cdf
 fig:bernoulli
 fig:binom
+fig:geom
 fig:poisson
 fig:x-sq
 fig:exp
@@ -158,8 +159,6 @@ the-pipe-operator
 plotting
 probability-basics
 set-theory
-basic-sets
-basic-characteristics-and-properties-of-the-sets
 sample-spaces
 probability
 independence
@@ -181,6 +180,7 @@ summaries
 notable-discrete-variables
 bernoulli-distribution
 binomial-distribution
+geometric-distribution
 poisson-distribution
 some-examples
 probability-of-marriage

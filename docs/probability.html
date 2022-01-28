@@ -247,9 +247,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="3.1" data-path="set-theory.html"><a href="set-theory.html"><i class="fa fa-check"></i><b>3.1</b> Set theory</a>
 <ul>
-<li class="chapter" data-level="3.1.1" data-path="set-theory.html"><a href="set-theory.html#basic-sets"><i class="fa fa-check"></i><b>3.1.1</b> Basic sets</a></li>
-<li class="chapter" data-level="3.1.2" data-path="set-theory.html"><a href="set-theory.html#basic-characteristics-and-properties-of-the-sets"><i class="fa fa-check"></i><b>3.1.2</b> Basic characteristics and properties of the sets</a></li>
-<li class="chapter" data-level="3.1.3" data-path="set-theory.html"><a href="set-theory.html#sample-spaces"><i class="fa fa-check"></i><b>3.1.3</b> Sample Spaces</a></li>
+<li class="chapter" data-level="3.1.1" data-path="set-theory.html"><a href="set-theory.html#sample-spaces"><i class="fa fa-check"></i><b>3.1.1</b> Sample Spaces</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>3.2</b> Probability</a>
 <ul>
@@ -278,8 +276,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="3.5.1" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#bernoulli-distribution"><i class="fa fa-check"></i><b>3.5.1</b> Bernoulli Distribution</a></li>
 <li class="chapter" data-level="3.5.2" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#binomial-distribution"><i class="fa fa-check"></i><b>3.5.2</b> Binomial Distribution</a></li>
-<li class="chapter" data-level="3.5.3" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#poisson-distribution"><i class="fa fa-check"></i><b>3.5.3</b> Poisson Distribution</a></li>
-<li class="chapter" data-level="3.5.4" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#some-examples"><i class="fa fa-check"></i><b>3.5.4</b> Some Examples</a></li>
+<li class="chapter" data-level="3.5.3" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#geometric-distribution"><i class="fa fa-check"></i><b>3.5.3</b> Geometric distribution</a></li>
+<li class="chapter" data-level="3.5.4" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#poisson-distribution"><i class="fa fa-check"></i><b>3.5.4</b> Poisson Distribution</a></li>
+<li class="chapter" data-level="3.5.5" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#some-examples"><i class="fa fa-check"></i><b>3.5.5</b> Some Examples</a></li>
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="continuous-random-variables-1.html"><a href="continuous-random-variables-1.html"><i class="fa fa-check"></i><b>3.6</b> Continuous Random Variables</a>
 <ul>
@@ -378,8 +377,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="probability" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> Probability</h2>
-<p>We will assign a real number <span class="math inline">\(\mathbb{P}(A)\)</span> to every event <span class="math inline">\(A\)</span>, called the <em>probability</em> of <span class="math inline">\(A\)</span>. We also call <span class="math inline">\(\mathbb{P}\)</span> a <em>probability distribution</em> or a <em>probability measure</em>.</p>
-<p>To qualify as a probability <span class="math inline">\(\mathbb{P}\)</span> must satisfy three axioms.</p>
+<p>We will assign a real number <span class="math inline">\(\mathbb{P}(A)\)</span> to every event <span class="math inline">\(A\)</span>, called the <em>probability</em> of <span class="math inline">\(A\)</span>. We also call <span class="math inline">\(\mathbb{P}\)</span> a <em>probability distribution</em> or a <em>probability measure</em>. To qualify as a probability <span class="math inline">\(\mathbb{P}\)</span> must satisfy three axioms.</p>
 <p><strong>Definition:</strong> A function <span class="math inline">\(\mathbb{P}\)</span> that assigns a real number <span class="math inline">\(\mathbb{P}(A)\)</span> to each event <span class="math inline">\(A\)</span> is a <em>probability distribution</em> if it satifies the following three axioms:</p>
 <ul>
 <li><span class="math inline">\(\mathbb{P}(A)\geq 0\)</span> for every event <span class="math inline">\(A\)</span></li>
@@ -395,35 +393,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><span class="math inline">\(A\cap B = \emptyset \Rightarrow \mathbb{P}(A\cup B) = \mathbb{P}(A)+\mathbb{P}(B)\)</span></li>
 <li>In general <span class="math inline">\(\mathbb{P}(A\cup B) = \mathbb{P}(A)+\mathbb{P}(B)- \mathbb{P}(A\cap B)\)</span></li>
 </ul>
-<p>Consider the experiment of throwing two dice. The sample space is
-<span class="math display">\[
+<p>Consider the experiment of throwing two dice. The sample space is</p>
+<p><span class="math display">\[
 \Omega = \{(\omega_1,\omega_2): \omega_1=1,\dots,6, \omega_2=1,\dots,6\}
-\]</span>
-where <span class="math inline">\(\omega_1\)</span> is the number of the first dice and <span class="math inline">\(\omega_2\)</span> is the number of the second dice.</p>
-<p>There are 36 elements in the sample space and if the dice are fair each have probability 1/36.</p>
-<p>Consider the event that the sum of the dice is seven. The event of interest is
-<span class="math display">\[
+\]</span></p>
+<p>where <span class="math inline">\(\omega_1\)</span> is the number of the first dice and <span class="math inline">\(\omega_2\)</span> is the number of the second dice. There are 36 elements in the sample space and if the dice are fair each have probability 1/36. Consider the event that the sum of the dice is seven. The event of interest is</p>
+<p><span class="math display">\[
 A=\{(\omega_1,\omega_2):\omega_1+\omega_2=7\}=\{(1,6),(2,5),(3,4),(4,3),(5,2),(6,1)\}
-\]</span>
-and thus <span class="math inline">\(\mathbb{P}(A)=6/36=1/6\)</span>.</p>
-<p>Consider now the event of observing at least one six. The event of interest is now
-<span class="math display">\[
+\]</span></p>
+<p>and thus <span class="math inline">\(\mathbb{P}(A)=6/36=1/6\)</span>.</p>
+<p>Consider now the event of observing at least one six. The event of interest is now</p>
+<p><span class="math display">\[
 A=\{(\omega_1,\omega_2): \omega_1=6 \; and/or \; \omega_2=6\}
-\]</span>
-We can write <span class="math inline">\(A=A_1\cup A_2\)</span> where <span class="math inline">\(A_1\{(\omega_1,\omega_2): \omega_1=6 \}\)</span> and <span class="math inline">\(A_2\{(\omega_1,\omega_2): \omega_2=6 \}\)</span>. Notice that <span class="math inline">\(A_1\cap A_2 =\{(6,6)\}\)</span> and that <span class="math inline">\(\mathbb{P}(A_1)=\mathbb{P}(A_2)=6/36\)</span> whilst <span class="math inline">\(\mathbb{P}(A_1\cap A_2)=1/36\)</span>. Thus
-<span class="math display">\[
+\]</span></p>
+<p>We can write <span class="math inline">\(A=A_1\cup A_2\)</span> where <span class="math inline">\(A_1\{(\omega_1,\omega_2): \omega_1=6 \}\)</span> and <span class="math inline">\(A_2\{(\omega_1,\omega_2): \omega_2=6 \}\)</span>. Notice that <span class="math inline">\(A_1\cap A_2 =\{(6,6)\}\)</span> and that <span class="math inline">\(\mathbb{P}(A_1)=\mathbb{P}(A_2)=6/36\)</span> whilst <span class="math inline">\(\mathbb{P}(A_1\cap A_2)=1/36\)</span>. Thus</p>
+<p><span class="math display">\[
 \mathbb{P}(A)=\mathbb{P}(A_1\cup A_2)=\mathbb{P}(A_1)+\mathbb{P}(A_2)-\mathbb{P}(A_1\cap A_2)=6/36+ 6/36 -1/36 =11/36.
 \]</span></p>
 <div id="independence" class="section level3" number="3.2.1">
 <h3><span class="header-section-number">3.2.1</span> Independence</h3>
 <p>If we flip a fair coin twice, then the probability of two heads is <span class="math inline">\(\frac{1}{2}\times \frac{1}{2}\)</span>. We multiply the probabilities because we regard the two tosses as independent.</p>
-<p><strong>Definition:</strong> Two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are <em>independent</em> if
-<span class="math display">\[
+<p><strong>Definition:</strong> Two events <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are <em>independent</em> if</p>
+<p><span class="math display">\[
 \mathbb{P}(A,B)=\mathbb{P}(A)\mathbb{P}(B)
-\]</span>
-Independence can arise in two distinct ways. Sometimes, we explicitly assume that two events are independent (for example in the toss of two coins). In other instances we derive independence by veryfing that <span class="math inline">\(\mathbb{P}(A,B)=\mathbb{P}(A)\mathbb{P}(B)\)</span> holds.</p>
-<p>Suppose that <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are disjoint events, each with positive probability. Can they be independent?</p>
-<p>No. This follows since <span class="math inline">\(\mathbb{P}(A)\mathbb{P}(B)&gt;0\)</span> yet <span class="math inline">\(\mathbb{P}(A,B)=\mathbb{P}(\emptyset)=0.\)</span></p>
+\]</span></p>
+<p>Independence can arise in two distinct ways. Sometimes, we explicitly assume that two events are independent (for example in the toss of two coins). In other instances we derive independence by veryfing that <span class="math inline">\(\mathbb{P}(A,B)=\mathbb{P}(A)\mathbb{P}(B)\)</span> holds.</p>
+<p>Suppose that <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are disjoint events, each with positive probability. Can they be independent? No. This follows since <span class="math inline">\(\mathbb{P}(A)\mathbb{P}(B)&gt;0\)</span> yet <span class="math inline">\(\mathbb{P}(A,B)=\mathbb{P}(\emptyset)=0.\)</span></p>
 <p>Consider the toss of a fair dice. Let <span class="math inline">\(A=\{2,4,6\}\)</span> and <span class="math inline">\(B=\{1,2,3,4\}\)</span>. Then <span class="math inline">\(A\cap B = \{2,4\}\)</span>, <span class="math inline">\(\mathbb{P}(A,B)=2/6\)</span>, <span class="math inline">\(\mathbb{P}(A)\mathbb{P}(B)=(1/2)\times (2/3)\)</span> and so <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are independent.</p>
 <p>Toss a fair coin 10 times. Let <span class="math inline">\(A\)</span> be the event at least one head. Let <span class="math inline">\(T_j\)</span> be the event that tails occurs on the jth toss. Then</p>
 <p><span class="math display">\[\begin{align}
@@ -436,27 +431,26 @@ Independence can arise in two distinct ways. Sometimes, we explicitly assume tha
 </div>
 <div id="conditional-probabilities" class="section level3" number="3.2.2">
 <h3><span class="header-section-number">3.2.2</span> Conditional Probabilities</h3>
-<p><strong>Definition</strong> The conditional probability of <span class="math inline">\(A\)</span> given that <span class="math inline">\(B\)</span> has occurred, assuming <span class="math inline">\(\mathbb{P}(B)&gt;0\)</span>, is
-<span class="math display">\[
+<p><strong>Definition</strong> The conditional probability of <span class="math inline">\(A\)</span> given that <span class="math inline">\(B\)</span> has occurred, assuming <span class="math inline">\(\mathbb{P}(B)&gt;0\)</span>, is</p>
+<p><span class="math display">\[
 \mathbb{P}(A|B)=\frac{\mathbb{P}(A,B)}{\mathbb{P}(B)}
 \]</span></p>
-<p><strong>Example</strong> A medical test for a disease <span class="math inline">\(D\)</span> has outcomes + and -. The probabilities are
-<span class="math display">\[\begin{align}
+<p><strong>Example</strong> A medical test for a disease <span class="math inline">\(D\)</span> has outcomes + and -. The probabilities are</p>
+<p><span class="math display">\[\begin{align}
 \mathbb{P}(D,+)&amp;=0.009\\
 \mathbb{P}(D,-)&amp;=0.001 \\
 \mathbb{P}(D^c,+)&amp;=0.099\\
 \mathbb{P}(D^c,-)&amp;=0.891
 \end{align}\]</span></p>
-<p>From the definition of conditional probability
-<span class="math display">\[
+<p>From the definition of conditional probability</p>
+<p><span class="math display">\[
 \mathbb{P}(+|D)=\frac{\mathbb{P}(+,D)}{\mathbb{P}(D)}=\frac{0.009}{0.009+0.001}=0.9
-\]</span>
-and
+\]</span></p>
+<p>and
 <span class="math display">\[
 \mathbb{P}(-|D^c)=\frac{\mathbb{P}(-,D^c)}{\mathbb{P}(D^c)}=\frac{0.891}{0.891+0.099}\approx 0.9
-\]</span>
-The test is fairl accurate: sick people yield a positive 90 percent of the time and healthy people yield a negative about 90 percent of the times.</p>
-<p>Suppose you go for a test and get a positive. Wha is the probability you have the disease?</p>
+\]</span></p>
+<p>The test is fairly accurate: sick people yield a positive 90 percent of the time and healthy people yield a negative about 90 percent of the times. Suppose you go for a test and get a positive. What is the probability you have the disease?</p>
 <p><span class="math display">\[
 \mathbb{P}(D|+)=\frac{\mathbb{P}(+,D)}{\mathbb{P}(+)}=\frac{0.009}{0.009+0.099}\approx 0.08
 \]</span></p>
