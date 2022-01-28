@@ -4,10 +4,14 @@
 %
 \documentclass[
 ]{book}
+\title{Simulation and Modeling to Understand the Change}
+\author{Alejandro Martínez-Mingo \& Manuele Leonelli}
+\date{2022-01-28}
+
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
-\usepackage{ifxetex,ifluatex}
-\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+\usepackage{iftex}
+\ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
@@ -109,16 +113,29 @@
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{5}
 \usepackage{booktabs}
-\ifluatex
+\ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
 \usepackage[]{natbib}
 \bibliographystyle{apalike}
 
-\title{Simulation and Modeling to Understand the Change}
-\author{Alejandro Martínez-Mingo \& Manuele Leonelli}
-\date{2022-01-20}
-
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}{Lemma}[chapter]
+\newtheorem{corollary}{Corollary}[chapter]
+\newtheorem{proposition}{Proposition}[chapter]
+\newtheorem{conjecture}{Conjecture}[chapter]
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[chapter]
+\theoremstyle{definition}
+\newtheorem{example}{Example}[chapter]
+\theoremstyle{definition}
+\newtheorem{exercise}{Exercise}[chapter]
+\theoremstyle{definition}
+\newtheorem{hypothesis}{Hypothesis}[chapter]
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{solution}{Solution}
 \begin{document}
 \maketitle
 
@@ -324,7 +341,7 @@ Whether an element should be treated as an entity or as a resource is something 
 \item
   \emph{State}: collection of variables necessary to describe the system at any time point. In our donut shop, in the simplest case the necessary variables are number of customers queuing and number of busy employees. This fully characterizes the system.
 \item
-  \emph{List}: collection of entites or resources ordered in some logical fashion. For instance, the customers waiting in our shop may be ordered in the so-called ``fist-come, first-served" scheme, that is customers will be served in the order they arrived in the shop.
+  \emph{List}: collection of entites or resources ordered in some logical fashion. For instance, the customers waiting in our shop may be ordered in the so-called ``fist-come, first-served'' scheme, that is customers will be served in the order they arrived in the shop.
 \end{itemize}
 
 \hypertarget{operations-of-the-objects}{%
@@ -743,7 +760,7 @@ The \texttt{history()} command displays the history of commands entered during t
 ##     writeLines(rawhist[inds], file2)
 ##     file.show(file2, title = "R History", delete.file = TRUE)
 ## }
-## <bytecode: 0x55d282ecf170>
+## <bytecode: 0x5591da9e77b0>
 ## <environment: namespace:utils>
 \end{verbatim}
 
@@ -2366,7 +2383,7 @@ To see how R handles dates and times, have a look at Sys.time():
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "2022-01-20 13:06:47 CET"
+## [1] "2022-01-28 10:57:42 CET"
 \end{verbatim}
 
 This description of date and time is strictly hierarchical from left to right: the longest time scale (years) comes first, then month, then day, separated by hyphens, then there is a blank space, followed by the time, with hours first (using the 24-hour clock), then minutes, then seconds, separated by colons. Finally, there is a character string explaining the time zone (CET stands for Central Europe Time)
@@ -2382,7 +2399,7 @@ The baseline for expressing today's date and time in seconds is 1 January 1970:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 1642680407
+## [1] 1643363863
 \end{verbatim}
 
 This is fine for plotting time series graphs, but it is not much good for computing monthly means (e.g.~is the mean for June significantly different from the July mean?) or daily means (e.g.~is the Monday mean significantly different from the Friday mean?).
@@ -2413,9 +2430,9 @@ the effort. Naturally, you can easily convert to one representation to the other
 
 \begin{verbatim}
 ##                sec                min               hour               mday 
-## "47.0734965801239"                "6"               "13"               "20" 
+## "42.5790059566498"               "57"               "10"               "28" 
 ##                mon               year               wday               yday 
-##                "0"              "122"                "4"               "19" 
+##                "0"              "122"                "5"               "27" 
 ##              isdst               zone             gmtoff 
 ##                "0"              "CET"             "3600"
 \end{verbatim}
@@ -7214,8 +7231,636 @@ Our final aim is to be able to mimic real-world systems as close as possible. In
 
 For this reason we will in general assume a probabilistic model for the various components of a simulation. This chapter gives a review of possible models as well as their characteristics.
 
+\hypertarget{set-theory}{%
+\section{Set theory}\label{set-theory}}
+
+\textbf{Set Definition}
+
+A set is a \href{https://en.wikipedia.org/wiki/Primitive_notion}{primitive notion}. That is, it is a basic idea of human thought. A set is a collection of objects: numbers, images \ldots{} anything, football players, words, colors \ldots{}
+
+The basic set theory is simple and natural and is what we need for this course.
+
+Mathematical set theory is more complex and presents several paradoxes
+
+\hypertarget{basic-sets}{%
+\subsection{Basic sets}\label{basic-sets}}
+
+The sets usually have a mother set such as:
+
+\begin{itemize}
+\tightlist
+\item
+  \(\mathbb{N}=\{0,1,2,\ldots\}\)
+\item
+  \(\mathbb{Z}=\{\ldots,-2,-1,0,1,2,\ldots\}\)
+\item
+  \(\mathbb{Q}=\left\{\frac{p}{q}\quad\Big|\quad p,q\in \mathbb{Z} \mbox{ and } q \not= 0.\right\}\)
+\item
+  \(\mathbb{R}=\{\mbox{All points in a line.}\}\)
+\item
+  Alphabet = \(\{a,b,c,\ldots, A,B,C,\ldots\}.\)
+\item
+  Words = \(\{peace, war, love, probability,\ldots\}.\)
+\end{itemize}
+
+\hypertarget{basic-characteristics-and-properties-of-the-sets}{%
+\subsection{Basic characteristics and properties of the sets}\label{basic-characteristics-and-properties-of-the-sets}}
+
+\begin{itemize}
+\tightlist
+\item
+  Each \(x\) object of \(\Omega\) is called \textbf{the element of the set} \(\Omega\) and we say that \(x\) belongs to \(\Omega\). We will denote it with \(x\in \Omega\).
+\item
+  A \textbf{set of one element}, for example, \(\{1\}\) is called a \textbf{singleton}.
+\item
+  Let \(A\) be another set we will say that \(A\) \textbf{is equal to} \(B\) if all the \(A\) elements are in \(B\) and all the \(B\) elements are in \(A\). For example \(A=\{1,2,3\}\) is equal to \(B=\{3,1,2\}\).
+\item
+  If \(A\) is another set such that if \(x\in A\) then \(x\in B\) we will say that \(A\) is a subset of or is contained in \(B\). We will denote it by \(A\subseteq B.\)
+\item
+  The set that has no elements is called an empty set and is denoted by the symbol \(\emptyset\).
+\item
+  Given \(A\) a set obviously \(\emptyset\subseteq A.\)
+\end{itemize}
+
+Let's take as a base set \(\Omega=\{1,2,3\}\)
+
+\begin{itemize}
+\tightlist
+\item
+  \(\Omega\) is a set of cardinal 3, it is denoted by \(\#(\Omega)=3\) or by \(|\Omega|=3\)
+\item
+  The \(\Omega\) set has \(2^3=8\) subsets.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    the empty \(\emptyset\) and the elementaries \(\{1\},\{3\},\{3\}\)
+  \item
+    the subsets of two elements: \(\{1,2\},\{1,3\},\{2,3\}\)
+  \item
+    the total set of three elements \(\Omega=\{1,2,3\}.\)
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{sample-spaces}{%
+\subsection{Sample Spaces}\label{sample-spaces}}
+
+Probability is the mathematical language we use to quantify uncertainty.
+
+\begin{itemize}
+\tightlist
+\item
+  The \emph{sample space} \(\Omega\) is the set of possible outcomes of an experiment.
+\item
+  Points \(\omega\in\Omega\) are called \emph{outcomes}, \emph{realizations}, or \emph{elements}.
+\item
+  Subsets of \(\Omega\) are called \emph{events}
+\end{itemize}
+
+\textbf{Example:} If we toss a coin twice then \(\Omega =\{ HH, HT, TH, TT\}\). The event that the first toss is heads is \(A=\{HH,HT\}\).
+
+\textbf{Example:} Let \(\omega\) be the outcome of a measurement of some physical quantity, for example, temperature. Then \(\Omega=\mathbb{R}=(-\infty,\infty)\) (without considering that there is a lower bound, no harm in this). The event that the measurement is larger than 10 but less than or equal to 23 is \(A=(10,23]\).
+
+\textbf{Example:} If we toss a coin forever, then the sample space is the infinite set \(\Omega = \{w=(w_1,w_2,w_3,\dots): w_i\in\{H,T\}\}\). Let \(E\) be the event that the first head appears on the third toss. Then
+\[
+E=\{(w_1,w_2,w_3,\dots):w_1=T,w_2=T,w_3=H,w_i\in\{H,T\}\;\; for\;\; i>3\}.
+\]
+
+\hypertarget{probability}{%
+\section{Probability}\label{probability}}
+
+We will assign a real number \(\mathbb{P}(A)\) to every event \(A\), called the \emph{probability} of \(A\). We also call \(\mathbb{P}\) a \emph{probability distribution} or a \emph{probability measure}.
+
+To qualify as a probability \(\mathbb{P}\) must satisfy three axioms.
+
+\textbf{Definition:} A function \(\mathbb{P}\) that assigns a real number \(\mathbb{P}(A)\) to each event \(A\) is a \emph{probability distribution} if it satifies the following three axioms:
+
+\begin{itemize}
+\tightlist
+\item
+  \(\mathbb{P}(A)\geq 0\) for every event \(A\)
+\item
+  \(\mathbb{P}(\Omega)=1\)
+\item
+  If \(A_1,A_2,\dots\) are disjoint then \(\mathbb{P}(\cup_{i=1}^\infty A_i)=\sum_{i=1}^\infty\mathbb{P}(A_i)\)
+\end{itemize}
+
+One can derive many properties from the axioms, such as:
+
+\begin{itemize}
+\tightlist
+\item
+  \(\mathbb{P}(\emptyset)=0\)
+\item
+  \(A\subset B \Rightarrow \mathbb{P}(A) \leq \mathbb{P}(B)\)
+\item
+  \(0\leq \mathbb{P}(A) \leq 1\)
+\item
+  \(\mathbb{P}(A^c)= 1-\mathbb{P}(A)\)
+\item
+  \(A\cap B = \emptyset \Rightarrow \mathbb{P}(A\cup B) = \mathbb{P}(A)+\mathbb{P}(B)\)
+\item
+  In general \(\mathbb{P}(A\cup B) = \mathbb{P}(A)+\mathbb{P}(B)- \mathbb{P}(A\cap B)\)
+\end{itemize}
+
+Consider the experiment of throwing two dice. The sample space is
+\[
+\Omega = \{(\omega_1,\omega_2): \omega_1=1,\dots,6, \omega_2=1,\dots,6\}
+\]
+where \(\omega_1\) is the number of the first dice and \(\omega_2\) is the number of the second dice.
+
+There are 36 elements in the sample space and if the dice are fair each have probability 1/36.
+
+Consider the event that the sum of the dice is seven. The event of interest is
+\[
+A=\{(\omega_1,\omega_2):\omega_1+\omega_2=7\}=\{(1,6),(2,5),(3,4),(4,3),(5,2),(6,1)\}
+\]
+and thus \(\mathbb{P}(A)=6/36=1/6\).
+
+Consider now the event of observing at least one six. The event of interest is now
+\[
+A=\{(\omega_1,\omega_2): \omega_1=6 \; and/or \; \omega_2=6\}
+\]
+We can write \(A=A_1\cup A_2\) where \(A_1\{(\omega_1,\omega_2): \omega_1=6 \}\) and \(A_2\{(\omega_1,\omega_2): \omega_2=6 \}\). Notice that \(A_1\cap A_2 =\{(6,6)\}\) and that \(\mathbb{P}(A_1)=\mathbb{P}(A_2)=6/36\) whilst \(\mathbb{P}(A_1\cap A_2)=1/36\). Thus
+\[
+\mathbb{P}(A)=\mathbb{P}(A_1\cup A_2)=\mathbb{P}(A_1)+\mathbb{P}(A_2)-\mathbb{P}(A_1\cap A_2)=6/36+ 6/36 -1/36 =11/36.
+\]
+
+\hypertarget{independence}{%
+\subsection{Independence}\label{independence}}
+
+If we flip a fair coin twice, then the probability of two heads is \(\frac{1}{2}\times \frac{1}{2}\). We multiply the probabilities because we regard the two tosses as independent.
+
+\textbf{Definition:} Two events \(A\) and \(B\) are \emph{independent} if
+\[
+\mathbb{P}(A,B)=\mathbb{P}(A)\mathbb{P}(B)
+\]
+Independence can arise in two distinct ways. Sometimes, we explicitly assume that two events are independent (for example in the toss of two coins). In other instances we derive independence by veryfing that \(\mathbb{P}(A,B)=\mathbb{P}(A)\mathbb{P}(B)\) holds.
+
+Suppose that \(A\) and \(B\) are disjoint events, each with positive probability. Can they be independent?
+
+No.~This follows since \(\mathbb{P}(A)\mathbb{P}(B)>0\) yet \(\mathbb{P}(A,B)=\mathbb{P}(\emptyset)=0.\)
+
+Consider the toss of a fair dice. Let \(A=\{2,4,6\}\) and \(B=\{1,2,3,4\}\). Then \(A\cap B = \{2,4\}\), \(\mathbb{P}(A,B)=2/6\), \(\mathbb{P}(A)\mathbb{P}(B)=(1/2)\times (2/3)\) and so \(A\) and \(B\) are independent.
+
+Toss a fair coin 10 times. Let \(A\) be the event at least one head. Let \(T_j\) be the event that tails occurs on the jth toss. Then
+
+\begin{align}
+\mathbb{P}(A) & = 1 - \mathbb{P}(A^c)\\
+& = 1- \mathbb{P}(all\; tails)\\
+& = 1- \mathbb{P}(T_1,T_2,\dots,T_{10})\\
+& = 1- \mathbb{P}(T_1)\times\cdots\times\mathbb{P}(T_{10})\\
+& = 1- (1/2)^{10}\approx 0.999
+\end{align}
+
+\hypertarget{conditional-probabilities}{%
+\subsection{Conditional Probabilities}\label{conditional-probabilities}}
+
+\textbf{Definition} The conditional probability of \(A\) given that \(B\) has occurred, assuming \(\mathbb{P}(B)>0\), is
+\[
+\mathbb{P}(A|B)=\frac{\mathbb{P}(A,B)}{\mathbb{P}(B)}
+\]
+
+\textbf{Example} A medical test for a disease \(D\) has outcomes + and -. The probabilities are
+\begin{align}
+\mathbb{P}(D,+)&=0.009\\
+\mathbb{P}(D,-)&=0.001 \\
+\mathbb{P}(D^c,+)&=0.099\\
+\mathbb{P}(D^c,-)&=0.891
+\end{align}
+
+From the definition of conditional probability
+\[
+\mathbb{P}(+|D)=\frac{\mathbb{P}(+,D)}{\mathbb{P}(D)}=\frac{0.009}{0.009+0.001}=0.9
+\]
+and
+\[
+\mathbb{P}(-|D^c)=\frac{\mathbb{P}(-,D^c)}{\mathbb{P}(D^c)}=\frac{0.891}{0.891+0.099}\approx 0.9
+\]
+The test is fairl accurate: sick people yield a positive 90 percent of the time and healthy people yield a negative about 90 percent of the times.
+
+Suppose you go for a test and get a positive. Wha is the probability you have the disease?
+
+\[
+\mathbb{P}(D|+)=\frac{\mathbb{P}(+,D)}{\mathbb{P}(+)}=\frac{0.009}{0.009+0.099}\approx 0.08
+\]
+
+\hypertarget{conditional-probabilities-and-independence}{%
+\subsection{Conditional Probabilities and Independence}\label{conditional-probabilities-and-independence}}
+
+\textbf{Theorem} If \(A\) and \(B\) are independent events then \(\mathbb{P}(A|B)=\mathbb{P}(A)\). Also for any pair of events \(A\) and \(B\)
+\[
+\mathbb{P}(A,B)=\mathbb{P}(A|B)\mathbb{P}(B)=\mathbb{P}(B|A)\mathbb{P}(A)
+\]
+
+\textbf{Example} Draw two cards from a deck without replacement. Let \(A\) be the event that the first draw is the ace of clubs and let \(B\) be the event that the second draw is the queen of diamonds. Then \(\mathbb{P}(A,B)=\mathbb{P}(B|A)\mathbb{P}(A)=(1/51)\times (1/52)\).
+
+\hypertarget{random-variables}{%
+\section{Random Variables}\label{random-variables}}
+
+Statistics is concerned with data. The concept of a random variable provides the link between sample spaces and events to data.
+
+\textbf{Definition:} A \emph{random variable} is a mapping
+\[
+X: \Omega \rightarrow \mathbb{R}
+\]
+that assigns a real number \(X(\omega)\) to each outcome \(\omega\).
+
+We will basically only work directly with random variables and although the sample space will be barely mentioned, you should keep in mind that it is there!
+
+\textbf{Example:} Flip a coin ten times. Let \(X\) be the random variable counting the number of heads. For example, if \(\omega= HHTHHTHHTT\), then \(X(\omega)=6\).
+
+\textbf{Example:} Let \(\Omega=\{(x,y): x^2+y^2 \leq 1\}\). Consider drawing a point at random from \(\Omega\) (we will make this idea more precise later). A typical outcome is of the form \(\omega=(x,y)\). Some examples of random variables are \(X(\omega)=x\), \(Y(\omega)=y\), \(Z(\omega)=x+y\).
+
+Given a random variable \(X\) and a subset \(A\) of the real line, let
+\begin{align}
+\mathbb{P}(X\in A) &= \mathbb{P}(\{\omega\in\Omega: X(\omega)\in A\})\\
+\mathbb{P}(X = x) &= \mathbb{P}(\{\omega\in\Omega: X(\omega)=x\})
+\end{align}
+
+Notice that \(X\) denotes the random variable and \(x\) denotes a particular value of \(X\)
+
+\textbf{Example:} Flip a coin twice and let \(X\) be the number of heads. Then, \(\mathbb{P}(X=0)=\mathbb{P}(\{TT\})=1/4\), \(\mathbb{P}(X=1)=\mathbb{P}(\{TH,HT\})=1/2\) and \(\mathbb{P}(X=2)=\mathbb{P}(\{HH\})=1/4\). The random variable and its distribution can be summarized as follows:
+
+\hypertarget{distribution-functions}{%
+\subsection{Distribution Functions}\label{distribution-functions}}
+
+\textbf{Definition} Given a random variable \(X\), the \emph{cumulative distribution function} or CDF is the function \(F_X:\mathbb{R}\rightarrow [0,1]\) defined by
+
+\[
+F_X(x)=\mathbb{P}(X\leq x)
+\]
+
+\textbf{Example:} Flip a fair coin twice and let \(X\) be the number of heads. Then \(\mathbb{P}(X=0)=\mathbb{P}(X=2)=1/4\) and \(\mathbb{P}(X=1)=1/2\). The distribution function is
+
+\[
+F_X(x)=\left\{
+\begin{array}{ll}
+0, & x<0\\
+1/4, & 0\leq x <1\\
+3/4, & 1\leq x <2 \\
+1, & x\geq 2
+\end{array}
+\right.
+\]
+
+The following result shows that the CDF completely determines the distribution of a random variable
+
+\textbf{Theorem} Let \(X\) have CDF \(F_X\) and let \(Y\) have CDF \(F_Y\). If \(F_X(x)=F_Y(x)\) for all \(x\), then \(\mathbb{P}(X\in A)=\mathbb{P}(Y\in A)\) for all \(A\).
+
+Some properties:
+
+\begin{itemize}
+\tightlist
+\item
+  \(F_X\) is non-decreasing: \(x_1<x_2\) implies that \(F_X(x_1)\leq F_X(x_2)\)
+\item
+  \(F_X\) is normalized: \(\lim_{x\rightarrow -\infty}F_X(x)=0\) and \(\lim_{x\rightarrow +\infty}F_X(x)=1\)
+\item
+  \(F_X\) is right-continuous
+\item
+  It is defined for all \(x\in\mathbb{R}\).
+\end{itemize}
+
+\hypertarget{random-variable-types}{%
+\subsection{Random variable types}\label{random-variable-types}}
+
+There are two fundamental types of random variables, discrete and continuous.
+
+The following is a rough definition.
+
+Discrete and Continuous Random Variables
+
+\begin{itemize}
+\tightlist
+\item
+  A random variable is \textbf{discreet} if it can only take a number of values with positive probability.
+\item
+  Random \textbf{continuous} variables take values in intervals.
+\end{itemize}
+
+\begin{example}
+
+\textbf{Example}
+
+These are \emph{discreet random} variables:
+
+\begin{itemize}
+\tightlist
+\item
+  number of damaged items in a shipment
+\item
+  Number of customers arriving at a bank in an hour.
+\item
+  Number of errors detected in a company's accounts.
+\item
+  Number of health insurance policy claims.
+\end{itemize}
+
+These are \emph{continuous random} variables:
+
+\begin{itemize}
+\tightlist
+\item
+  Annual income of a family.
+\item
+  Amount of oil imported by a country.
+\item
+  Variation in the price of a telecommunication company's shares.
+\item
+  Percentage of impurities in a batch of chemicals.
+\end{itemize}
+
+\end{example}
+
 \hypertarget{discrete-random-variables}{%
-\section{Discrete Random Variables}\label{discrete-random-variables}}
+\subsection{Discrete Random Variables}\label{discrete-random-variables}}
+
+\begin{itemize}
+\tightlist
+\item
+  We will now describe the behavior of r.v. To do this we will use different functions that will give us some probabilities of the random variable.
+\item
+  In the discrete case these functions are the probability function and the cumulative distribution function.
+\item
+  In the discrete case the probability function is the one that gives us the probabilities of the elementary events of r.v.
+\end{itemize}
+
+\textbf{Definition:} \(X\) is \emph{discrete} if it takes countably many values \(\{x_1,x_2,\dots\}\). We define the \emph{probability function} or \emph{probability mass function} for \(X\) by \(f_X(x)=\mathbb{P}(X=x)\).
+
+~
+
+Thus \(f_X(x)\geq 0\) for all \(x\) and \(\sum_i f_X(x_i)=1\). The CDF of \(X\) is related to \(f_X\) by
+\[
+F_X(x)=\mathbb{P}(X\leq x)=\sum_{x_i\leq x}f_X(x_i)
+\]
+\textbf{Example:} The probability mass function for the example of the toss of two coins is
+\[
+f_X(x)=\left\{
+\begin{array}{ll}
+1/4, & x=0\\
+1/2, & x=1\\
+1/4, & x=2 \\
+0, & otherwise
+\end{array}
+\right.
+\]
+
+Consider the throw of two dice and define the random variable \(X\) as the absolute difference of the dice results.
+
+\(X\) can thus take values \({0,1,2,3,4,5}\)
+
+By counting appropriately the possible cases the PMF can be derived as
+
+\[
+f_X(x)=\left\{
+\begin{array}{ll}
+6/36 & x=0 \\
+10/36 & x=1 \\
+8/36 & x=2\\
+6/36 & x=3 \\
+4/36 & x=4\\
+2/36 & x=5
+\end{array}
+\right.
+\]
+
+\hypertarget{continuous-random-variables}{%
+\subsection{Continuous Random Variables}\label{continuous-random-variables}}
+
+\textbf{Definition} A random variable \(X\) is \emph{continuous} if there exists a function \(f_X\) such that \(f_X(x)\geq 0\) for all \(x\), \(\int_{-\infty}^{\infty}f_X(x)dx=1\) and for every \(a\leq b\)
+\[
+\mathbb{P}(a<X<b)=\int_a^bf_x(x)dx
+\]
+The function \(f_X\) is called the \emph{probability density function} (PDF). We have that
+\[
+F_X(x)=\int_{-\infty}^xf_x(t)dt
+\]
+and \(f_X(x)=F_X^{'}(x)\) at all points \(x\) at which \(F_X\) is differentiable.
+
+\textbf{Example:} Suppose that \(X\) has PDF
+\[
+f_X(x)=\left\{
+\begin{array}{ll}
+1, & for  \; 0\leq x\leq 1\\
+0, & otherwise
+\end{array}
+\right.
+\]
+Clearly, \(f_X(x)\geq 0\) and \(\int_{-\infty}^{\infty}f_X(x)dx=1\). The CDF is given by
+\[
+F_X(x)=\left\{
+\begin{array}{ll}
+0, & x<0\\
+x, & 0\leq x \leq 1\\
+1, & x>1
+\end{array}
+\right.
+\]
+
+Continuous random variables can lead to confusion. First, note that if \(X\) is continuous then \(\mathbb{P}(X=x)=0\) for every \(x\). Do not try to tink of \(f_X(x)\) as \(\mathbb{P}(X=x)\). This only holds for discrete random variables. We get probabilities from a PDF by integrating.
+
+\begin{itemize}
+\tightlist
+\item
+  \(\mathbb{P}(X=x)=0\)
+\item
+  \(\mathbb{P}(x< X \leq y)= F_X(y)-F_X(x)\)
+\item
+  \(\mathbb{P}(X>x)=1-F_X(x)\)
+\item
+  If \(X\) is continuous then
+  \[
+  F_X(b)-F_X(a)= \mathbb{P}(a<X<b)=\mathbb{P}(a\leq X<b)=\mathbb{P}(a<X\leq b)=\mathbb{P}(a\leq X \leq b)
+  \]
+\end{itemize}
+
+Let's make a simple example to understand that \(\mathbb{P}(X=x)=0\)
+
+Suppose we have a uniform continuous random variable \(X\) with a PDF:
+
+\[
+f_{X}(x)=\begin{cases}
+\frac{1}{5},\ for\ 0 \leq x \leq 5\\
+0,\ otherwise
+\end{cases}
+\]
+The plot of the PDF will be:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{X }\OtherTok{=} \FunctionTok{density}\NormalTok{(}\FunctionTok{runif}\NormalTok{(}\DecValTok{9999999}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{5}\NormalTok{))}
+\FunctionTok{plot}\NormalTok{(X, }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{, }\AttributeTok{main =} \StringTok{"X PDF"}\NormalTok{,}\AttributeTok{xlab =} \StringTok{""}\NormalTok{, }\AttributeTok{xlim =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{2}\NormalTok{,}\DecValTok{7}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-394-1.pdf}
+
+And the CDF is given by:
+\[
+F_{X}(x)=\begin{cases}
+0,\ x < 0 \\
+\frac{x}{5},\ 0 \leq x \leq 5  \\
+1, x > 5
+\end{cases}
+\]
+
+Since we are working with a uniform distribution, we can assume that the area under the curve is equal to base per height.
+
+We already know that the area equals 1, and the base equals 5. This way we can calculate that:
+
+\[
+AUC = base*height \\
+1 = 5*height \\
+height = 1/5 = 0.2
+\]
+With this information it will be very easy for us to calculate more specific probabilities. For example, let's calculate \(\mathbb{P}(1 \leq x \leq 2)\):
+
+\[
+\mathbb{P}(1 \leq x \leq 2) = 1*1/5 = 0.2
+\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(X, }\AttributeTok{col =} \StringTok{"blue"}\NormalTok{, }\AttributeTok{main =} \StringTok{"X PDF"}\NormalTok{,}\AttributeTok{xlab =} \StringTok{""}\NormalTok{,}\AttributeTok{xlim=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-395-1} \end{center}
+
+Well, now let's look at more extreme scenarios. Let's calculate the following probabilities:
+
+\begin{itemize}
+\tightlist
+\item
+  \(\mathbb{P}(4 \leq x \leq 4.333) = 1/3 * 1/5 = 0.0666\)
+\item
+  \(\mathbb{P}(2.9 \leq x \leq 3.1) = 1/5 * 1/5 = 0.04\)
+\item
+  \(\mathbb{P}(2.99 \leq x \leq 3.01) = 1/50 * 1/5 = 0.004\)
+\item
+  \(\mathbb{P}(2.999 \leq x \leq 3.001) = 1/500 * 1/5 = 0.0004\)
+\item
+  \(\mathbb{P}(x=3) = 1/\infty * 1/5 = 0\)
+\end{itemize}
+
+\hypertarget{expectation-of-a-random-variable}{%
+\subsection{Expectation of a Random Variable}\label{expectation-of-a-random-variable}}
+
+The \emph{expected value} or \emph{expectation} or \emph{mean} of \(X\) is defined to be
+\[
+\mathbb{E}(X)=\sum_x xf_X(x)
+\]
+if \(X\) is discrete and
+\[
+\int xf_X(x)dx
+\]
+if \(X\) is continuous.
+
+The expectation is a one-number summary of the distribution characterizing the average behavior of the random variable.
+
+\textbf{Example:} Flip a fair coin two times. Let \(X\) be the number of heads. Then \(\mathbb{E}(X)=\sum_{x}xf_X(x)= 0\times f_X(0)+1\times f_X(1) + 2\times f_X(2)=0\times 1/4 + 1 \times 1/2 +2 \times 1/4 = 1\).
+
+\begin{itemize}
+\tightlist
+\item
+  For any two random variables \(X\) and \(Y\), \(\mathbb{E}(X+Y)=\mathbb{E}(X)+\mathbb{E}(Y)\).
+\item
+  For any random variable \(X\) and constant \(a\), \(\mathbb{E}(aX)=a\mathbb{E}(X)\).
+\item
+  For any constant \(b\), \(\mathbb{E}(b)=b\).
+\item
+  So more generally \(\mathbb{E}(aX+bY+c)=a\mathbb{E}(X)+b\mathbb{E}(Y)+c\).
+\item
+  If \(X\) and \(Y\) are independent \(\mathbb{E}(XY)=\mathbb{E}(X)\mathbb{E}(Y)\).
+\end{itemize}
+
+\hypertarget{variance-of-random-variables}{%
+\subsection{Variance of Random Variables}\label{variance-of-random-variables}}
+
+The \emph{variance} of a random variable \(X\), denoted by \(\mathbb{V}(X)\), measures the spread of a distribution and is defined by
+\[
+\mathbb{V}(X)=\mathbb{E}((X-\mathbb{E}(X))^2).
+\]
+If \(X\) is discrete
+\[
+\mathbb{V}(X)=\sum_x(x-\mathbb{E}(X))²f_X(x)
+\]
+and if \(X\) is continuous
+\[
+\mathbb{V}(X)=\int(x-\mathbb{E}(X))f_X(x)dx
+\]
+The \emph{standard deviation} is \(sd(X)=\sqrt{\mathbb{V}(X)}\).
+
+\begin{itemize}
+\tightlist
+\item
+  \(\mathbb{V}(X)=\mathbb{E}(X^2)-\mathbb{E}(X)^2\)
+\item
+  If \(a\) and \(b\) are constants then \(\mathbb{V}(aX+b)=a^2\mathbb{V}(X)\)
+\item
+  If \(X\) and \(Y\) are independent \(\mathbb{V}(X+Y)=\mathbb{V}(X)+\mathbb{V}(Y)\).
+\end{itemize}
+
+\hypertarget{sample-mean-and-sample-variance}{%
+\subsection{Sample Mean and Sample Variance}\label{sample-mean-and-sample-variance}}
+
+If \(X_1,\dots,X_n\) are random variables then we define the \emph{sample mean} to be
+\[
+\bar{X}_n=\frac{1}{n}\sum_{i=1}^n X_i
+\]
+and the \emph{sample variance} to be
+\[
+S_n^2=\frac{1}{n-1}\sum_{i=1}^n(X_i-\bar{X}_n)^2
+\]
+
+\textbf{Theorem} Let \(X_1,\dots, X_n\) be independent and let \(\mu=\mathbb{E}(X_i)\) and \(\sigma^2=\mathbb{V}(X_i)\). Then
+\[
+\mathbb{E}(\bar{X}_n)=\mu, \qquad \mathbb{V}(\bar{X}_n)=\frac{\sigma^2}{n} \qquad \mathbb{E}(S_n^2)=\sigma^2
+\]
+
+\hypertarget{covariance-between-random-variables}{%
+\subsection{Covariance between Random Variables}\label{covariance-between-random-variables}}
+
+If \(X\) and \(Y\) are random variables then the covariance and the correlation between \(X\) and \(Y\) measure the strength of their linear relationship.
+
+The covaraince between \(X\) and \(Y\) is defined by
+\[
+Cov(X,Y)=\mathbb{E}\left((X-\mathbb{E}(X))(Y-\mathbb{E}(Y))\right)
+\]
+and the correlation by
+\[
+\rho(X,Y)=\frac{Cov(X,Y)}{sd(X)sd(Y)}
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  The covariance satisfies
+  \[
+  Cov(X,Y)=\mathbb{E}(XY)-\mathbb{E}(X)\mathbb{E}(Y)
+  \]
+\item
+  The correlation satisfies
+  \[
+  -1\leq \rho(X,Y)\leq 1
+  \]
+\item
+  If \(X\) and \(Y\) are independent then \(Cov(X,Y)=\rho(X,Y)=0\), but the converse is in general not true.
+\item
+  If \(Y=aX+b\), then \(\rho(X,Y)=1\) if \(a>0\) and \(\rho(X,Y)=-1\) if \(a<0\).
+\item
+  It holds that
+  \[
+  \mathbb{V}(X+Y)=\mathbb{V}(X)+\mathbb{V}(Y)+2Cov(X,Y)
+  \]
+  \[
+  \mathbb{V}(X-Y)=\mathbb{V}(X)+\mathbb{V}(Y)-2Cov(X,Y)
+  \]
+\end{itemize}
+
+\hypertarget{discrete-random-variables-1}{%
+\section{Discrete Random Variables}\label{discrete-random-variables-1}}
 
 We start introducing discrete random variables. Here we will not enter in all the mathematical details and some concepts will be introduced only intuitively. However, some mathematical details will be given for some concepts.
 
@@ -7699,8 +8344,8 @@ The third question requires us to compute \(P(X>3) = 1 - P(X\leq 2) = 1 - F(2)\)
 ## [1] 0.5768099
 \end{verbatim}
 
-\hypertarget{continuous-random-variables}{%
-\section{Continuous Random Variables}\label{continuous-random-variables}}
+\hypertarget{continuous-random-variables-1}{%
+\section{Continuous Random Variables}\label{continuous-random-variables-1}}
 
 Our attention now turns to continuous random variables. These are in general more technical and less intuitive than discrete ones. You should not worry about all the technical details, since these are in general not important, and focus on the interpretation.
 
@@ -9255,7 +9900,7 @@ In both cases the p-values are larger than 0.10, thus we would not reject the nu
 
 For the sequence \texttt{x1} we observed that one bar was slightly outside the confidence bands: this sometimes happens even when data is actually (pseudo-) random - I created \texttt{x1} using \texttt{rnorm}. The autocorrelations below are an instance of a case where independence is not tenable since we see that multiple bars are outside the confidence bands.
 
-\begin{center}\includegraphics[width=0.5\linewidth]{bookdownproj_files/figure-latex/unnamed-chunk-429-1} \end{center}
+\begin{center}\includegraphics[width=0.5\linewidth]{bookdownproj_files/figure-latex/unnamed-chunk-431-1} \end{center}
 
 \hypertarget{monte-carlo-simulation}{%
 \chapter{Monte Carlo Simulation}\label{monte-carlo-simulation}}
@@ -9544,7 +10189,7 @@ A boxplot can give us a visualization of the results.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics[width=0.5\linewidth]{bookdownproj_files/figure-latex/unnamed-chunk-439-1} \end{center}
+\begin{center}\includegraphics[width=0.5\linewidth]{bookdownproj_files/figure-latex/unnamed-chunk-441-1} \end{center}
 
 The boxplot importantly tells us two things:
 
@@ -9779,7 +10424,7 @@ A graphical representation of the table is also useful.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-449-1.pdf}
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-451-1.pdf}
 So we can see that Peter breaks even 102 out of 1000 times. Furthermore the plot shows us that most commonly Peter will win/lose little money and that big wins/losses are unlikely.
 
 To conclude our experiment we need to calculate our estimated probability of Peter breaking even. Clearly this is equal to 102/1000= 0.102. In R:
@@ -9930,7 +10575,7 @@ The estimated probability that Annie arrives before Sam is 0.223, and the \emph{
 
 In the next plot we can see that the shaded region shows the area in which \(A < S\)
 
-\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-456-1.pdf}
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-458-1.pdf}
 
 Now, what is the expected difference in the arrival times? Annie is more likely to arrive later, so we model \(E(A-S)\)
 
@@ -10019,7 +10664,7 @@ Next, we can see a plot that represents the results.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-461-1.pdf}
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-463-1.pdf}
 
 \hypertarget{the-taxi-problem-comparing-estimators}{%
 \section{The taxi problem (comparing estimators)}\label{the-taxi-problem-comparing-estimators}}
@@ -10128,7 +10773,7 @@ Seems that \texttt{estimate2} is ``less biased'', but we can also compare them w
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-467-1.pdf}
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-469-1.pdf}
 
 In this case, seems that \texttt{estimate1} has smaller estimation errors. We can also find the sample mean of the absolute errors and its standard error:
 
@@ -10502,7 +11147,7 @@ With this graphs we can have a look at the overall resource utilization. The top
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-481-1.pdf}
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-483-1.pdf}
 
 It is also possible to have a look at resources' activity during the simulation.
 
@@ -10512,7 +11157,7 @@ It is also possible to have a look at resources' activity during the simulation.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-482-1.pdf}
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-484-1.pdf}
 
 Next we can have a look at the evolution of the arrivals' flow time during the simulation. In the plot below, each individual line represents a replication. A smooth line is drawn over them. All arrivals that didn't finish their entire trajectory are excluded from the plot.
 
@@ -10529,11 +11174,11 @@ Similarly one can have a look at the evolution of the activity times with \textt
 ## `geom_smooth()` using method = 'gam' and formula 'y ~ s(x, bs = "cs")'
 \end{verbatim}
 
-\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-483-1.pdf}
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-485-1.pdf}
 
 Simulation trajectories may grow considerably, and they are not always easy to inspect to ensure their compliance with the model that we are trying to build. In this example we are going to expose a simple one:
 
-\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-484-1.pdf}
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-486-1.pdf}
 
 Now that we know a bit about the \texttt{simmer} tool we are going to make some changes in the system to try to improve its efficiency. From what we have seen in the examples, it seems that the nurses are overworked. We will first try to ``hire'' a new nurse to improve the system.
 
@@ -10552,15 +11197,15 @@ Now that we know a bit about the \texttt{simmer} tool we are going to make some 
 
 Let's see how the system works with a new nurse through the plots:
 
-\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-486-1.pdf}
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-488-1.pdf}
 
-\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-487-1.pdf}
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-489-1.pdf}
 
 \begin{verbatim}
 ## `geom_smooth()` using method = 'gam' and formula 'y ~ s(x, bs = "cs")'
 \end{verbatim}
 
-\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-488-1.pdf}
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-490-1.pdf}
 
 We can see that both doctors and nurses are now working at 100\% capacity. Now the problem seems to be coming from the administration. We are going to ``fire'' one of the workers in this area to try to improve the system.
 
@@ -10579,15 +11224,15 @@ We can see that both doctors and nurses are now working at 100\% capacity. Now t
 
 Let's see how the system works without a administration worker through the plots:
 
-\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-490-1.pdf}
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-492-1.pdf}
 
-\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-491-1.pdf}
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-493-1.pdf}
 
 \begin{verbatim}
 ## `geom_smooth()` using method = 'gam' and formula 'y ~ s(x, bs = "cs")'
 \end{verbatim}
 
-\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-492-1.pdf}
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-494-1.pdf}
 
 Great! We've found the perfect balance for our little hospital.
 

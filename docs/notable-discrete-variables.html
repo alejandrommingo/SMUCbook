@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3.2 Notable Discrete Variables | Simulation and Modeling to Understand the Change</title>
+  <title>3.5 Notable Discrete Variables | Simulation and Modeling to Understand the Change</title>
   <meta name="description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3.2 Notable Discrete Variables | Simulation and Modeling to Understand the Change" />
+  <meta property="og:title" content="3.5 Notable Discrete Variables | Simulation and Modeling to Understand the Change" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/Rplot.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="alejandrommingo/SMUCbook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3.2 Notable Discrete Variables | Simulation and Modeling to Understand the Change" />
+  <meta name="twitter:title" content="3.5 Notable Discrete Variables | Simulation and Modeling to Understand the Change" />
   
   <meta name="twitter:description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
   <meta name="twitter:image" content="/images/Rplot.png" />
@@ -24,15 +24,15 @@
 <meta name="author" content="Alejandro Martínez-Mingo &amp; Manuele Leonelli" />
 
 
-<meta name="date" content="2022-01-20" />
+<meta name="date" content="2022-01-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="discrete-random-variables.html"/>
-<link rel="next" href="continuous-random-variables.html"/>
+<link rel="prev" href="discrete-random-variables-1.html"/>
+<link rel="next" href="continuous-random-variables-1.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -245,32 +245,55 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3" data-path="probability-basics.html"><a href="probability-basics.html"><i class="fa fa-check"></i><b>3</b> Probability Basics</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="discrete-random-variables.html"><a href="discrete-random-variables.html"><i class="fa fa-check"></i><b>3.1</b> Discrete Random Variables</a>
+<li class="chapter" data-level="3.1" data-path="set-theory.html"><a href="set-theory.html"><i class="fa fa-check"></i><b>3.1</b> Set theory</a>
 <ul>
-<li class="chapter" data-level="3.1.1" data-path="discrete-random-variables.html"><a href="discrete-random-variables.html#probability-mass-function"><i class="fa fa-check"></i><b>3.1.1</b> Probability Mass Function</a></li>
-<li class="chapter" data-level="3.1.2" data-path="discrete-random-variables.html"><a href="discrete-random-variables.html#cumulative-distribution-function"><i class="fa fa-check"></i><b>3.1.2</b> Cumulative Distribution Function</a></li>
-<li class="chapter" data-level="3.1.3" data-path="discrete-random-variables.html"><a href="discrete-random-variables.html#summaries"><i class="fa fa-check"></i><b>3.1.3</b> Summaries</a></li>
+<li class="chapter" data-level="3.1.1" data-path="set-theory.html"><a href="set-theory.html#basic-sets"><i class="fa fa-check"></i><b>3.1.1</b> Basic sets</a></li>
+<li class="chapter" data-level="3.1.2" data-path="set-theory.html"><a href="set-theory.html#basic-characteristics-and-properties-of-the-sets"><i class="fa fa-check"></i><b>3.1.2</b> Basic characteristics and properties of the sets</a></li>
+<li class="chapter" data-level="3.1.3" data-path="set-theory.html"><a href="set-theory.html#sample-spaces"><i class="fa fa-check"></i><b>3.1.3</b> Sample Spaces</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html"><i class="fa fa-check"></i><b>3.2</b> Notable Discrete Variables</a>
+<li class="chapter" data-level="3.2" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>3.2</b> Probability</a>
 <ul>
-<li class="chapter" data-level="3.2.1" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#bernoulli-distribution"><i class="fa fa-check"></i><b>3.2.1</b> Bernoulli Distribution</a></li>
-<li class="chapter" data-level="3.2.2" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#binomial-distribution"><i class="fa fa-check"></i><b>3.2.2</b> Binomial Distribution</a></li>
-<li class="chapter" data-level="3.2.3" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#poisson-distribution"><i class="fa fa-check"></i><b>3.2.3</b> Poisson Distribution</a></li>
-<li class="chapter" data-level="3.2.4" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#some-examples"><i class="fa fa-check"></i><b>3.2.4</b> Some Examples</a></li>
+<li class="chapter" data-level="3.2.1" data-path="probability.html"><a href="probability.html#independence"><i class="fa fa-check"></i><b>3.2.1</b> Independence</a></li>
+<li class="chapter" data-level="3.2.2" data-path="probability.html"><a href="probability.html#conditional-probabilities"><i class="fa fa-check"></i><b>3.2.2</b> Conditional Probabilities</a></li>
+<li class="chapter" data-level="3.2.3" data-path="probability.html"><a href="probability.html#conditional-probabilities-and-independence"><i class="fa fa-check"></i><b>3.2.3</b> Conditional Probabilities and Independence</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="continuous-random-variables.html"><a href="continuous-random-variables.html"><i class="fa fa-check"></i><b>3.3</b> Continuous Random Variables</a>
+<li class="chapter" data-level="3.3" data-path="random-variables.html"><a href="random-variables.html"><i class="fa fa-check"></i><b>3.3</b> Random Variables</a>
 <ul>
-<li class="chapter" data-level="3.3.1" data-path="continuous-random-variables.html"><a href="continuous-random-variables.html#probability-density-function"><i class="fa fa-check"></i><b>3.3.1</b> Probability Density Function</a></li>
-<li class="chapter" data-level="3.3.2" data-path="continuous-random-variables.html"><a href="continuous-random-variables.html#cumulative-distribution-function-1"><i class="fa fa-check"></i><b>3.3.2</b> Cumulative Distribution Function</a></li>
-<li class="chapter" data-level="3.3.3" data-path="continuous-random-variables.html"><a href="continuous-random-variables.html#summaries-1"><i class="fa fa-check"></i><b>3.3.3</b> Summaries</a></li>
+<li class="chapter" data-level="3.3.1" data-path="random-variables.html"><a href="random-variables.html#distribution-functions"><i class="fa fa-check"></i><b>3.3.1</b> Distribution Functions</a></li>
+<li class="chapter" data-level="3.3.2" data-path="random-variables.html"><a href="random-variables.html#random-variable-types"><i class="fa fa-check"></i><b>3.3.2</b> Random variable types</a></li>
+<li class="chapter" data-level="3.3.3" data-path="random-variables.html"><a href="random-variables.html#discrete-random-variables"><i class="fa fa-check"></i><b>3.3.3</b> Discrete Random Variables</a></li>
+<li class="chapter" data-level="3.3.4" data-path="random-variables.html"><a href="random-variables.html#continuous-random-variables"><i class="fa fa-check"></i><b>3.3.4</b> Continuous Random Variables</a></li>
+<li class="chapter" data-level="3.3.5" data-path="random-variables.html"><a href="random-variables.html#expectation-of-a-random-variable"><i class="fa fa-check"></i><b>3.3.5</b> Expectation of a Random Variable</a></li>
+<li class="chapter" data-level="3.3.6" data-path="random-variables.html"><a href="random-variables.html#variance-of-random-variables"><i class="fa fa-check"></i><b>3.3.6</b> Variance of Random Variables</a></li>
+<li class="chapter" data-level="3.3.7" data-path="random-variables.html"><a href="random-variables.html#sample-mean-and-sample-variance"><i class="fa fa-check"></i><b>3.3.7</b> Sample Mean and Sample Variance</a></li>
+<li class="chapter" data-level="3.3.8" data-path="random-variables.html"><a href="random-variables.html#covariance-between-random-variables"><i class="fa fa-check"></i><b>3.3.8</b> Covariance between Random Variables</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="notable-continuous-distribution.html"><a href="notable-continuous-distribution.html"><i class="fa fa-check"></i><b>3.4</b> Notable Continuous Distribution</a>
+<li class="chapter" data-level="3.4" data-path="discrete-random-variables-1.html"><a href="discrete-random-variables-1.html"><i class="fa fa-check"></i><b>3.4</b> Discrete Random Variables</a>
 <ul>
-<li class="chapter" data-level="3.4.1" data-path="notable-continuous-distribution.html"><a href="notable-continuous-distribution.html#uniform-distribution"><i class="fa fa-check"></i><b>3.4.1</b> Uniform Distribution</a></li>
-<li class="chapter" data-level="3.4.2" data-path="notable-continuous-distribution.html"><a href="notable-continuous-distribution.html#exponential-distribution"><i class="fa fa-check"></i><b>3.4.2</b> Exponential Distribution</a></li>
-<li class="chapter" data-level="3.4.3" data-path="notable-continuous-distribution.html"><a href="notable-continuous-distribution.html#normal-distribution"><i class="fa fa-check"></i><b>3.4.3</b> Normal Distribution</a></li>
+<li class="chapter" data-level="3.4.1" data-path="discrete-random-variables-1.html"><a href="discrete-random-variables-1.html#probability-mass-function"><i class="fa fa-check"></i><b>3.4.1</b> Probability Mass Function</a></li>
+<li class="chapter" data-level="3.4.2" data-path="discrete-random-variables-1.html"><a href="discrete-random-variables-1.html#cumulative-distribution-function"><i class="fa fa-check"></i><b>3.4.2</b> Cumulative Distribution Function</a></li>
+<li class="chapter" data-level="3.4.3" data-path="discrete-random-variables-1.html"><a href="discrete-random-variables-1.html#summaries"><i class="fa fa-check"></i><b>3.4.3</b> Summaries</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="the-central-limit-theorem.html"><a href="the-central-limit-theorem.html"><i class="fa fa-check"></i><b>3.5</b> The Central Limit Theorem</a></li>
+<li class="chapter" data-level="3.5" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html"><i class="fa fa-check"></i><b>3.5</b> Notable Discrete Variables</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#bernoulli-distribution"><i class="fa fa-check"></i><b>3.5.1</b> Bernoulli Distribution</a></li>
+<li class="chapter" data-level="3.5.2" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#binomial-distribution"><i class="fa fa-check"></i><b>3.5.2</b> Binomial Distribution</a></li>
+<li class="chapter" data-level="3.5.3" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#poisson-distribution"><i class="fa fa-check"></i><b>3.5.3</b> Poisson Distribution</a></li>
+<li class="chapter" data-level="3.5.4" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#some-examples"><i class="fa fa-check"></i><b>3.5.4</b> Some Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="continuous-random-variables-1.html"><a href="continuous-random-variables-1.html"><i class="fa fa-check"></i><b>3.6</b> Continuous Random Variables</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="continuous-random-variables-1.html"><a href="continuous-random-variables-1.html#probability-density-function"><i class="fa fa-check"></i><b>3.6.1</b> Probability Density Function</a></li>
+<li class="chapter" data-level="3.6.2" data-path="continuous-random-variables-1.html"><a href="continuous-random-variables-1.html#cumulative-distribution-function-1"><i class="fa fa-check"></i><b>3.6.2</b> Cumulative Distribution Function</a></li>
+<li class="chapter" data-level="3.6.3" data-path="continuous-random-variables-1.html"><a href="continuous-random-variables-1.html#summaries-1"><i class="fa fa-check"></i><b>3.6.3</b> Summaries</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="notable-continuous-distribution.html"><a href="notable-continuous-distribution.html"><i class="fa fa-check"></i><b>3.7</b> Notable Continuous Distribution</a>
+<ul>
+<li class="chapter" data-level="3.7.1" data-path="notable-continuous-distribution.html"><a href="notable-continuous-distribution.html#uniform-distribution"><i class="fa fa-check"></i><b>3.7.1</b> Uniform Distribution</a></li>
+<li class="chapter" data-level="3.7.2" data-path="notable-continuous-distribution.html"><a href="notable-continuous-distribution.html#exponential-distribution"><i class="fa fa-check"></i><b>3.7.2</b> Exponential Distribution</a></li>
+<li class="chapter" data-level="3.7.3" data-path="notable-continuous-distribution.html"><a href="notable-continuous-distribution.html#normal-distribution"><i class="fa fa-check"></i><b>3.7.3</b> Normal Distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="3.8" data-path="the-central-limit-theorem.html"><a href="the-central-limit-theorem.html"><i class="fa fa-check"></i><b>3.8</b> The Central Limit Theorem</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="random-number-generation.html"><a href="random-number-generation.html"><i class="fa fa-check"></i><b>4</b> Random Number Generation</a>
 <ul>
@@ -353,13 +376,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="notable-discrete-variables" class="section level2" number="3.2">
-<h2><span class="header-section-number">3.2</span> Notable Discrete Variables</h2>
+<div id="notable-discrete-variables" class="section level2" number="3.5">
+<h2><span class="header-section-number">3.5</span> Notable Discrete Variables</h2>
 <p>In the previous section we gave a generic definition of discrete random variables and discussed the conditions that a pmf must obey. We considered the example of a biased dice and constructed a pmf for that specific example.</p>
 <p>There are situations that often happen in practice: for instance the case of experiments with binary outcomes. For such cases random variables with specific pmfs are given a name and their properties are well known and studied.</p>
 <p>In this section we will consider three such distributions: Bernoulli, Binomial and Poisson.</p>
-<div id="bernoulli-distribution" class="section level3" number="3.2.1">
-<h3><span class="header-section-number">3.2.1</span> Bernoulli Distribution</h3>
+<div id="bernoulli-distribution" class="section level3" number="3.5.1">
+<h3><span class="header-section-number">3.5.1</span> Bernoulli Distribution</h3>
 <p>Consider an experiment or a real-world system where there can only be two outcomes:</p>
 <ul>
 <li><p>a toss of a coin: heads or tails;</p></li>
@@ -393,8 +416,8 @@ Figure 3.3: PMF (left) and CDF (right) of a Bernoulli random variable with param
 </p>
 </div>
 </div>
-<div id="binomial-distribution" class="section level3" number="3.2.2">
-<h3><span class="header-section-number">3.2.2</span> Binomial Distribution</h3>
+<div id="binomial-distribution" class="section level3" number="3.5.2">
+<h3><span class="header-section-number">3.5.2</span> Binomial Distribution</h3>
 <p>The Bernoulli random variable is actually a very special case of the so-called <em>Binomial</em> random variable. Consider experiments of the type discussed for Bernoullis: coin tosses, COVID tests etc. Now suppose that instead of having just one trial, each of these experiments are repeated multiple times. Consider the following assumptions:</p>
 <ul>
 <li><p>each experiment is repeated <span class="math inline">\(n\)</span> times;</p></li>
@@ -438,16 +461,16 @@ Figure 3.4: PMF of a Binomial random variable with parameters n = 10 and theta =
 <li><p><code>prob</code> is the parameter <span class="math inline">\(\theta\)</span> of the Binomial.</p></li>
 </ul>
 <p>So for instance</p>
-<div class="sourceCode" id="cb780"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb780-1"><a href="notable-discrete-variables.html#cb780-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="dv">3</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb782"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb782-1"><a href="notable-discrete-variables.html#cb782-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="dv">3</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span></code></pre></div>
 <pre><code>## [1] 0.1171875</code></pre>
 <p>returns <span class="math inline">\(P(X=3)=p(3)\)</span> for a Binomial random variable with parameter <span class="math inline">\(n=10\)</span> and <span class="math inline">\(\theta = 0.5\)</span>.</p>
 <p>Similarly,</p>
-<div class="sourceCode" id="cb782"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb782-1"><a href="notable-discrete-variables.html#cb782-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(<span class="dv">8</span>, <span class="at">size =</span> <span class="dv">20</span>, <span class="at">prob =</span> <span class="fl">0.2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb784"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb784-1"><a href="notable-discrete-variables.html#cb784-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(<span class="dv">8</span>, <span class="at">size =</span> <span class="dv">20</span>, <span class="at">prob =</span> <span class="fl">0.2</span>)</span></code></pre></div>
 <pre><code>## [1] 0.9900182</code></pre>
 <p>returns <span class="math inline">\(P(X\leq 8) = F(8)\)</span> for a Binomial random variable with parameter <span class="math inline">\(n=20\)</span> and <span class="math inline">\(\theta = 0.2\)</span>.</p>
 </div>
-<div id="poisson-distribution" class="section level3" number="3.2.3">
-<h3><span class="header-section-number">3.2.3</span> Poisson Distribution</h3>
+<div id="poisson-distribution" class="section level3" number="3.5.3">
+<h3><span class="header-section-number">3.5.3</span> Poisson Distribution</h3>
 <p>The last class of discrete random variables we discuss is the so-called <em>Poisson</em> distribution. Whilst for Bernoulli and Binomial we had an interpretation of why the pmf took its specific form by associating it to independent binary experiments each with an equal probability of success, for the Poisson there is no such an interpretation.</p>
 <p>A discrete random variable <span class="math inline">\(X\)</span> has a Poisson distribution with parameter <span class="math inline">\(\lambda\)</span> if its pmf is
 <span class="math display">\[
@@ -477,19 +500,19 @@ Figure 3.5: PMF of a Poisson random variable with parameter 1 (left) and 4 (righ
 <li><p><code>lambda</code> is the parameter <span class="math inline">\(\lambda\)</span> of the Poisson;</p></li>
 </ul>
 <p>So for instance</p>
-<div class="sourceCode" id="cb784"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb784-1"><a href="notable-discrete-variables.html#cb784-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dpois</span>(<span class="dv">3</span>, <span class="at">lambda =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb786"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb786-1"><a href="notable-discrete-variables.html#cb786-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dpois</span>(<span class="dv">3</span>, <span class="at">lambda =</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## [1] 0.06131324</code></pre>
 <p>returns <span class="math inline">\(P(X=3)=p(3)\)</span> for a Poisson random variable with parameter <span class="math inline">\(\lambda = 1\)</span>.</p>
 <p>Similarly,</p>
-<div class="sourceCode" id="cb786"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb786-1"><a href="notable-discrete-variables.html#cb786-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ppois</span>(<span class="dv">8</span>, <span class="at">lambda =</span> <span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb788"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb788-1"><a href="notable-discrete-variables.html#cb788-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ppois</span>(<span class="dv">8</span>, <span class="at">lambda =</span> <span class="dv">4</span>)</span></code></pre></div>
 <pre><code>## [1] 0.9786366</code></pre>
 <p>returns <span class="math inline">\(P(X\leq 8) = F(8)\)</span> for a Poisson random variable with parameter <span class="math inline">\(\lambda = 4\)</span>.</p>
 </div>
-<div id="some-examples" class="section level3" number="3.2.4">
-<h3><span class="header-section-number">3.2.4</span> Some Examples</h3>
+<div id="some-examples" class="section level3" number="3.5.4">
+<h3><span class="header-section-number">3.5.4</span> Some Examples</h3>
 <p>We next consider two examples to see in practice the use of the Binomial and Poisson distributions.</p>
-<div id="probability-of-marriage" class="section level4" number="3.2.4.1">
-<h4><span class="header-section-number">3.2.4.1</span> Probability of Marriage</h4>
+<div id="probability-of-marriage" class="section level4" number="3.5.4.1">
+<h4><span class="header-section-number">3.5.4.1</span> Probability of Marriage</h4>
 <p>A recent survey indicated that 82% of single women aged 25 years old will be married in their lifetime. Compute</p>
 <ul>
 <li><p>the probability of at most 3 women will be married in a sample of 20;</p></li>
@@ -498,21 +521,21 @@ Figure 3.5: PMF of a Poisson random variable with parameter 1 (left) and 4 (righ
 </ul>
 <p>The above situation can be modeled by a Binomial random variable where the parameter <span class="math inline">\(n\)</span> depends on the question and <span class="math inline">\(\theta = 0.82\)</span>.</p>
 <p>The first question requires us to compute <span class="math inline">\(P(X\leq 3)= F(3)\)</span> where <span class="math inline">\(X\)</span> is Binomial with parameters <span class="math inline">\(n=20\)</span> and <span class="math inline">\(\theta =0.82\)</span>. Using R</p>
-<div class="sourceCode" id="cb788"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb788-1"><a href="notable-discrete-variables.html#cb788-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(<span class="dv">3</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.82</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb790"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb790-1"><a href="notable-discrete-variables.html#cb790-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(<span class="dv">3</span>, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">prob =</span> <span class="fl">0.82</span>)</span></code></pre></div>
 <pre><code>## [1] 0.0004400767</code></pre>
 <p>The second question requires us to compute <span class="math inline">\(P(X\geq 90)\)</span> where <span class="math inline">\(X\)</span> is a Binomial random variable with parameters <span class="math inline">\(n=100\)</span> and <span class="math inline">\(\theta = 0.82\)</span>. Notice that
 <span class="math display">\[
 P(X\geq 90) = 1 - P(X&lt; 90) = 1 - P(X\leq 89) = 1 - F(89).
 \]</span>
 Using R</p>
-<div class="sourceCode" id="cb790"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb790-1"><a href="notable-discrete-variables.html#cb790-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pbinom</span>(<span class="dv">89</span>, <span class="at">size =</span> <span class="dv">100</span>,  <span class="at">prob =</span> <span class="fl">0.82</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb792"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb792-1"><a href="notable-discrete-variables.html#cb792-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pbinom</span>(<span class="dv">89</span>, <span class="at">size =</span> <span class="dv">100</span>,  <span class="at">prob =</span> <span class="fl">0.82</span>)</span></code></pre></div>
 <pre><code>## [1] 0.02003866</code></pre>
 <p>For the third question, notice that saying two women out of 20 will never be married is equal to 18 out of 20 will be married. Therefore we need to compute <span class="math inline">\(P(X=17) + P(X=18)= p(17) + p(18)\)</span> where <span class="math inline">\(X\)</span> is a Binomial random variable with parameters <span class="math inline">\(n=20\)</span> and <span class="math inline">\(\theta = 0.82\)</span>. Using R</p>
-<div class="sourceCode" id="cb792"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb792-1"><a href="notable-discrete-variables.html#cb792-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">dbinom</span>(<span class="dv">17</span><span class="sc">:</span><span class="dv">18</span>, <span class="at">size =</span> <span class="dv">20</span>, <span class="at">prob =</span> <span class="fl">0.82</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb794"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb794-1"><a href="notable-discrete-variables.html#cb794-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">dbinom</span>(<span class="dv">17</span><span class="sc">:</span><span class="dv">18</span>, <span class="at">size =</span> <span class="dv">20</span>, <span class="at">prob =</span> <span class="fl">0.82</span>))</span></code></pre></div>
 <pre><code>## [1] 0.4007631</code></pre>
 </div>
-<div id="the-bad-stuntman" class="section level4" number="3.2.4.2">
-<h4><span class="header-section-number">3.2.4.2</span> The Bad Stuntman</h4>
+<div id="the-bad-stuntman" class="section level4" number="3.5.4.2">
+<h4><span class="header-section-number">3.5.4.2</span> The Bad Stuntman</h4>
 <p>A stuntman injures himself an average of three times a year. Use the Poisson probability formula to calculate the probability that he will be injured:</p>
 <ul>
 <li><p>4 times a year</p></li>
@@ -521,13 +544,13 @@ Using R</p>
 </ul>
 <p>The above situation can be modeled as a Poisson distribution <span class="math inline">\(X\)</span> with parameter <span class="math inline">\(\lambda = 3\)</span>.</p>
 <p>The first question requires us to compute <span class="math inline">\(P(X=4)\)</span> which using R can be computed as</p>
-<div class="sourceCode" id="cb794"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb794-1"><a href="notable-discrete-variables.html#cb794-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dpois</span>(<span class="dv">4</span>, <span class="at">lambda =</span><span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb796"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb796-1"><a href="notable-discrete-variables.html#cb796-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dpois</span>(<span class="dv">4</span>, <span class="at">lambda =</span><span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## [1] 0.1680314</code></pre>
 <p>The second question requires us to compute <span class="math inline">\(P(X&lt;2) = P(X=0)+P(X=1)= F(1)\)</span> which using R can be computed as</p>
-<div class="sourceCode" id="cb796"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb796-1"><a href="notable-discrete-variables.html#cb796-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ppois</span>(<span class="dv">1</span>,<span class="at">lambda=</span><span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb798"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb798-1"><a href="notable-discrete-variables.html#cb798-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ppois</span>(<span class="dv">1</span>,<span class="at">lambda=</span><span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## [1] 0.1991483</code></pre>
 <p>The third question requires us to compute <span class="math inline">\(P(X&gt;3) = 1 - P(X\leq 2) = 1 - F(2)\)</span> which using R can be computed as</p>
-<div class="sourceCode" id="cb798"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb798-1"><a href="notable-discrete-variables.html#cb798-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">ppois</span>(<span class="dv">2</span>, <span class="at">lambda =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb800"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb800-1"><a href="notable-discrete-variables.html#cb800-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">ppois</span>(<span class="dv">2</span>, <span class="at">lambda =</span> <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## [1] 0.5768099</code></pre>
 </div>
 </div>
@@ -537,8 +560,8 @@ Using R</p>
           </div>
         </div>
       </div>
-<a href="discrete-random-variables.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="continuous-random-variables.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="discrete-random-variables-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="continuous-random-variables-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

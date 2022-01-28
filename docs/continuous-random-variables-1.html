@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3.6 Continuous Random Variables | Simulation and Modeling to Understand the Change</title>
+  <meta name="description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3.6 Continuous Random Variables | Simulation and Modeling to Understand the Change" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="/images/Rplot.png" />
+  <meta property="og:description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
+  <meta name="github-repo" content="alejandrommingo/SMUCbook" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3.6 Continuous Random Variables | Simulation and Modeling to Understand the Change" />
+  
+  <meta name="twitter:description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
+  <meta name="twitter:image" content="/images/Rplot.png" />
+
+<meta name="author" content="Alejandro Martínez-Mingo &amp; Manuele Leonelli" />
+
+
+<meta name="date" content="2022-01-28" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="notable-discrete-variables.html"/>
+<link rel="next" href="notable-continuous-distribution.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/viz-1.8.2/viz.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/grViz-binding-1.0.6.1/grViz.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">SMUC</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="what-is-simulation.html"><a href="what-is-simulation.html"><i class="fa fa-check"></i><b>1.1</b> What is simulation</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="what-is-simulation.html"><a href="what-is-simulation.html#a-simple-simulation-model"><i class="fa fa-check"></i><b>1.1.1</b> A simple simulation model</a></li>
+<li class="chapter" data-level="1.1.2" data-path="what-is-simulation.html"><a href="what-is-simulation.html#why-simulate"><i class="fa fa-check"></i><b>1.1.2</b> Why simulate?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="types-of-simulations.html"><a href="types-of-simulations.html"><i class="fa fa-check"></i><b>1.2</b> Types of simulations</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="types-of-simulations.html"><a href="types-of-simulations.html#stochastic-vs-deterministic-simulations"><i class="fa fa-check"></i><b>1.2.1</b> Stochastic vs deterministic simulations</a></li>
+<li class="chapter" data-level="1.2.2" data-path="types-of-simulations.html"><a href="types-of-simulations.html#static-vs-dynamic-simulations"><i class="fa fa-check"></i><b>1.2.2</b> Static vs dynamic simulations</a></li>
+<li class="chapter" data-level="1.2.3" data-path="types-of-simulations.html"><a href="types-of-simulations.html#discrete-vs-continuous-simulations"><i class="fa fa-check"></i><b>1.2.3</b> Discrete vs continuous simulations</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="elements-of-a-simulation-model.html"><a href="elements-of-a-simulation-model.html"><i class="fa fa-check"></i><b>1.3</b> Elements of a simulation model</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="elements-of-a-simulation-model.html"><a href="elements-of-a-simulation-model.html#objects-of-the-model"><i class="fa fa-check"></i><b>1.3.1</b> Objects of the model</a></li>
+<li class="chapter" data-level="1.3.2" data-path="elements-of-a-simulation-model.html"><a href="elements-of-a-simulation-model.html#organization-of-entities-and-resources"><i class="fa fa-check"></i><b>1.3.2</b> Organization of entities and resources</a></li>
+<li class="chapter" data-level="1.3.3" data-path="elements-of-a-simulation-model.html"><a href="elements-of-a-simulation-model.html#operations-of-the-objects"><i class="fa fa-check"></i><b>1.3.3</b> Operations of the objects</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="the-donut-shop-example.html"><a href="the-donut-shop-example.html"><i class="fa fa-check"></i><b>1.4</b> The donut shop example</a></li>
+<li class="chapter" data-level="1.5" data-path="simulating-a-little-health-center.html"><a href="simulating-a-little-health-center.html"><i class="fa fa-check"></i><b>1.5</b> Simulating a little health center</a></li>
+<li class="chapter" data-level="1.6" data-path="whats-next.html"><a href="whats-next.html"><i class="fa fa-check"></i><b>1.6</b> What’s next</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="r-programming.html"><a href="r-programming.html"><i class="fa fa-check"></i><b>2</b> R programming</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="why-r.html"><a href="why-r.html"><i class="fa fa-check"></i><b>2.1</b> Why R?</a></li>
+<li class="chapter" data-level="2.2" data-path="section-bibliography.html"><a href="section-bibliography.html"><i class="fa fa-check"></i><b>2.2</b> Section Bibliography</a></li>
+<li class="chapter" data-level="2.3" data-path="r-basics.html"><a href="r-basics.html"><i class="fa fa-check"></i><b>2.3</b> R basics</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="r-basics.html"><a href="r-basics.html#introduction-to-r"><i class="fa fa-check"></i><b>2.3.1</b> Introduction to R</a></li>
+<li class="chapter" data-level="2.3.2" data-path="r-basics.html"><a href="r-basics.html#r-history"><i class="fa fa-check"></i><b>2.3.2</b> R History</a></li>
+<li class="chapter" data-level="2.3.3" data-path="r-basics.html"><a href="r-basics.html#r-advantages"><i class="fa fa-check"></i><b>2.3.3</b> R Advantages</a></li>
+<li class="chapter" data-level="2.3.4" data-path="r-basics.html"><a href="r-basics.html#what-do-we-mean-by-r"><i class="fa fa-check"></i><b>2.3.4</b> What do we mean by R?</a></li>
+<li class="chapter" data-level="2.3.5" data-path="r-basics.html"><a href="r-basics.html#console-mode"><i class="fa fa-check"></i><b>2.3.5</b> Console Mode</a></li>
+<li class="chapter" data-level="2.3.6" data-path="r-basics.html"><a href="r-basics.html#getting-help-in-r"><i class="fa fa-check"></i><b>2.3.6</b> Getting help in R</a></li>
+<li class="chapter" data-level="2.3.7" data-path="r-basics.html"><a href="r-basics.html#packages-in-r"><i class="fa fa-check"></i><b>2.3.7</b> Packages in R</a></li>
+<li class="chapter" data-level="2.3.8" data-path="r-basics.html"><a href="r-basics.html#built-in-r-libraries"><i class="fa fa-check"></i><b>2.3.8</b> Built-in R libraries</a></li>
+<li class="chapter" data-level="2.3.9" data-path="r-basics.html"><a href="r-basics.html#contents-of-packages"><i class="fa fa-check"></i><b>2.3.9</b> Contents of Packages</a></li>
+<li class="chapter" data-level="2.3.10" data-path="r-basics.html"><a href="r-basics.html#installing-packages"><i class="fa fa-check"></i><b>2.3.10</b> Installing Packages</a></li>
+<li class="chapter" data-level="2.3.11" data-path="r-basics.html"><a href="r-basics.html#command-line-versus-scripts"><i class="fa fa-check"></i><b>2.3.11</b> Command line versus scripts</a></li>
+<li class="chapter" data-level="2.3.12" data-path="r-basics.html"><a href="r-basics.html#rstudio"><i class="fa fa-check"></i><b>2.3.12</b> RStudio</a></li>
+<li class="chapter" data-level="2.3.13" data-path="r-basics.html"><a href="r-basics.html#working-directory"><i class="fa fa-check"></i><b>2.3.13</b> Working Directory</a></li>
+<li class="chapter" data-level="2.3.14" data-path="r-basics.html"><a href="r-basics.html#exercise-set-up-your-working-directory"><i class="fa fa-check"></i><b>2.3.14</b> Exercise: Set up your Working Directory</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="expressions-objects-and-symbols.html"><a href="expressions-objects-and-symbols.html"><i class="fa fa-check"></i><b>2.4</b> Expressions, Objects and Symbols</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="expressions-objects-and-symbols.html"><a href="expressions-objects-and-symbols.html#some-examples-to-start-with"><i class="fa fa-check"></i><b>2.4.1</b> Some examples to start with</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="r-as-a-calculator.html"><a href="r-as-a-calculator.html"><i class="fa fa-check"></i><b>2.5</b> R as a Calculator</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="r-as-a-calculator.html"><a href="r-as-a-calculator.html#complex-numbers-in-r"><i class="fa fa-check"></i><b>2.5.1</b> Complex numbers in R</a></li>
+<li class="chapter" data-level="2.5.2" data-path="r-as-a-calculator.html"><a href="r-as-a-calculator.html#rounding"><i class="fa fa-check"></i><b>2.5.2</b> Rounding</a></li>
+<li class="chapter" data-level="2.5.3" data-path="r-as-a-calculator.html"><a href="r-as-a-calculator.html#arithmetics"><i class="fa fa-check"></i><b>2.5.3</b> Arithmetics</a></li>
+<li class="chapter" data-level="2.5.4" data-path="r-as-a-calculator.html"><a href="r-as-a-calculator.html#modulo-and-integer-quotients"><i class="fa fa-check"></i><b>2.5.4</b> Modulo and integer quotients</a></li>
+<li class="chapter" data-level="2.5.5" data-path="r-as-a-calculator.html"><a href="r-as-a-calculator.html#operators"><i class="fa fa-check"></i><b>2.5.5</b> Operators</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html"><i class="fa fa-check"></i><b>2.6</b> R Basic Data types</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#integers"><i class="fa fa-check"></i><b>2.6.1</b> Integers</a></li>
+<li class="chapter" data-level="2.6.2" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#integer-vs.-double"><i class="fa fa-check"></i><b>2.6.2</b> Integer vs. Double</a></li>
+<li class="chapter" data-level="2.6.3" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#logical-operators"><i class="fa fa-check"></i><b>2.6.3</b> Logical operators</a></li>
+<li class="chapter" data-level="2.6.4" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#real-numbers-equality"><i class="fa fa-check"></i><b>2.6.4</b> Real numbers equality</a></li>
+<li class="chapter" data-level="2.6.5" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#logical-arithmetic"><i class="fa fa-check"></i><b>2.6.5</b> Logical arithmetic</a></li>
+<li class="chapter" data-level="2.6.6" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#characters"><i class="fa fa-check"></i><b>2.6.6</b> Characters</a></li>
+<li class="chapter" data-level="2.6.7" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#characters-letters-vectors"><i class="fa fa-check"></i><b>2.6.7</b> Characters: letters vectors</a></li>
+<li class="chapter" data-level="2.6.8" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#characters-pasting-strings-together"><i class="fa fa-check"></i><b>2.6.8</b> Characters: Pasting strings together</a></li>
+<li class="chapter" data-level="2.6.9" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#characters-extracting-parts-of-strings"><i class="fa fa-check"></i><b>2.6.9</b> Characters: Extracting parts of strings</a></li>
+<li class="chapter" data-level="2.6.10" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#characters-counting-things-within-strings"><i class="fa fa-check"></i><b>2.6.10</b> Characters: Counting things within strings</a></li>
+<li class="chapter" data-level="2.6.11" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#characters-upper--and-lower-case-text"><i class="fa fa-check"></i><b>2.6.11</b> Characters: Upper- and lower-case text</a></li>
+<li class="chapter" data-level="2.6.12" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#dates-and-times"><i class="fa fa-check"></i><b>2.6.12</b> Dates and times</a></li>
+<li class="chapter" data-level="2.6.13" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#dates-and-times-reading-time-data-from-files"><i class="fa fa-check"></i><b>2.6.13</b> Dates and times: Reading time data from files</a></li>
+<li class="chapter" data-level="2.6.14" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#dates-and-times-the-strptime-function"><i class="fa fa-check"></i><b>2.6.14</b> Dates and times: The <code>strptime</code> function</a></li>
+<li class="chapter" data-level="2.6.15" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#dates-and-times-summary"><i class="fa fa-check"></i><b>2.6.15</b> Dates and times: Summary</a></li>
+<li class="chapter" data-level="2.6.16" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#testing-and-coercing"><i class="fa fa-check"></i><b>2.6.16</b> Testing and coercing</a></li>
+<li class="chapter" data-level="2.6.17" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#missing-values-infinity-and-things-that-are-not-numbers"><i class="fa fa-check"></i><b>2.6.17</b> Missing values, infinity and things that are not numbers</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html"><i class="fa fa-check"></i><b>2.7</b> R Basic Data Structures</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#vectors"><i class="fa fa-check"></i><b>2.7.1</b> Vectors</a></li>
+<li class="chapter" data-level="2.7.2" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#sequences"><i class="fa fa-check"></i><b>2.7.2</b> Sequences</a></li>
+<li class="chapter" data-level="2.7.3" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#vector-and-subscripts"><i class="fa fa-check"></i><b>2.7.3</b> Vector and Subscripts</a></li>
+<li class="chapter" data-level="2.7.4" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#vector-operations"><i class="fa fa-check"></i><b>2.7.4</b> Vector Operations</a></li>
+<li class="chapter" data-level="2.7.5" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#vector-functions"><i class="fa fa-check"></i><b>2.7.5</b> Vector Functions</a></li>
+<li class="chapter" data-level="2.7.6" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#sets"><i class="fa fa-check"></i><b>2.7.6</b> Sets</a></li>
+<li class="chapter" data-level="2.7.7" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#factors"><i class="fa fa-check"></i><b>2.7.7</b> Factors</a></li>
+<li class="chapter" data-level="2.7.8" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#matrices-and-arrays"><i class="fa fa-check"></i><b>2.7.8</b> Matrices and Arrays</a></li>
+<li class="chapter" data-level="2.7.9" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#matrices"><i class="fa fa-check"></i><b>2.7.9</b> Matrices</a></li>
+<li class="chapter" data-level="2.7.10" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#lists"><i class="fa fa-check"></i><b>2.7.10</b> Lists</a></li>
+<li class="chapter" data-level="2.7.11" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#data-frames"><i class="fa fa-check"></i><b>2.7.11</b> Data Frames</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="control-flow.html"><a href="control-flow.html"><i class="fa fa-check"></i><b>2.8</b> Control Flow</a>
+<ul>
+<li class="chapter" data-level="2.8.1" data-path="control-flow.html"><a href="control-flow.html#conditional-statements"><i class="fa fa-check"></i><b>2.8.1</b> Conditional statements</a></li>
+<li class="chapter" data-level="2.8.2" data-path="control-flow.html"><a href="control-flow.html#loops"><i class="fa fa-check"></i><b>2.8.2</b> Loops</a></li>
+<li class="chapter" data-level="2.8.3" data-path="control-flow.html"><a href="control-flow.html#functions"><i class="fa fa-check"></i><b>2.8.3</b> Functions</a></li>
+<li class="chapter" data-level="2.8.4" data-path="control-flow.html"><a href="control-flow.html#the-apply-family"><i class="fa fa-check"></i><b>2.8.4</b> The <code>apply</code> Family</a></li>
+<li class="chapter" data-level="2.8.5" data-path="control-flow.html"><a href="control-flow.html#apply-family-examples"><i class="fa fa-check"></i><b>2.8.5</b> <code>apply</code> Family Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="2.9" data-path="the-pipe-operator.html"><a href="the-pipe-operator.html"><i class="fa fa-check"></i><b>2.9</b> The pipe operator</a></li>
+<li class="chapter" data-level="2.10" data-path="plotting.html"><a href="plotting.html"><i class="fa fa-check"></i><b>2.10</b> Plotting</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="probability-basics.html"><a href="probability-basics.html"><i class="fa fa-check"></i><b>3</b> Probability Basics</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="set-theory.html"><a href="set-theory.html"><i class="fa fa-check"></i><b>3.1</b> Set theory</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="set-theory.html"><a href="set-theory.html#basic-sets"><i class="fa fa-check"></i><b>3.1.1</b> Basic sets</a></li>
+<li class="chapter" data-level="3.1.2" data-path="set-theory.html"><a href="set-theory.html#basic-characteristics-and-properties-of-the-sets"><i class="fa fa-check"></i><b>3.1.2</b> Basic characteristics and properties of the sets</a></li>
+<li class="chapter" data-level="3.1.3" data-path="set-theory.html"><a href="set-theory.html#sample-spaces"><i class="fa fa-check"></i><b>3.1.3</b> Sample Spaces</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>3.2</b> Probability</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="probability.html"><a href="probability.html#independence"><i class="fa fa-check"></i><b>3.2.1</b> Independence</a></li>
+<li class="chapter" data-level="3.2.2" data-path="probability.html"><a href="probability.html#conditional-probabilities"><i class="fa fa-check"></i><b>3.2.2</b> Conditional Probabilities</a></li>
+<li class="chapter" data-level="3.2.3" data-path="probability.html"><a href="probability.html#conditional-probabilities-and-independence"><i class="fa fa-check"></i><b>3.2.3</b> Conditional Probabilities and Independence</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="random-variables.html"><a href="random-variables.html"><i class="fa fa-check"></i><b>3.3</b> Random Variables</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="random-variables.html"><a href="random-variables.html#distribution-functions"><i class="fa fa-check"></i><b>3.3.1</b> Distribution Functions</a></li>
+<li class="chapter" data-level="3.3.2" data-path="random-variables.html"><a href="random-variables.html#random-variable-types"><i class="fa fa-check"></i><b>3.3.2</b> Random variable types</a></li>
+<li class="chapter" data-level="3.3.3" data-path="random-variables.html"><a href="random-variables.html#discrete-random-variables"><i class="fa fa-check"></i><b>3.3.3</b> Discrete Random Variables</a></li>
+<li class="chapter" data-level="3.3.4" data-path="random-variables.html"><a href="random-variables.html#continuous-random-variables"><i class="fa fa-check"></i><b>3.3.4</b> Continuous Random Variables</a></li>
+<li class="chapter" data-level="3.3.5" data-path="random-variables.html"><a href="random-variables.html#expectation-of-a-random-variable"><i class="fa fa-check"></i><b>3.3.5</b> Expectation of a Random Variable</a></li>
+<li class="chapter" data-level="3.3.6" data-path="random-variables.html"><a href="random-variables.html#variance-of-random-variables"><i class="fa fa-check"></i><b>3.3.6</b> Variance of Random Variables</a></li>
+<li class="chapter" data-level="3.3.7" data-path="random-variables.html"><a href="random-variables.html#sample-mean-and-sample-variance"><i class="fa fa-check"></i><b>3.3.7</b> Sample Mean and Sample Variance</a></li>
+<li class="chapter" data-level="3.3.8" data-path="random-variables.html"><a href="random-variables.html#covariance-between-random-variables"><i class="fa fa-check"></i><b>3.3.8</b> Covariance between Random Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="discrete-random-variables-1.html"><a href="discrete-random-variables-1.html"><i class="fa fa-check"></i><b>3.4</b> Discrete Random Variables</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="discrete-random-variables-1.html"><a href="discrete-random-variables-1.html#probability-mass-function"><i class="fa fa-check"></i><b>3.4.1</b> Probability Mass Function</a></li>
+<li class="chapter" data-level="3.4.2" data-path="discrete-random-variables-1.html"><a href="discrete-random-variables-1.html#cumulative-distribution-function"><i class="fa fa-check"></i><b>3.4.2</b> Cumulative Distribution Function</a></li>
+<li class="chapter" data-level="3.4.3" data-path="discrete-random-variables-1.html"><a href="discrete-random-variables-1.html#summaries"><i class="fa fa-check"></i><b>3.4.3</b> Summaries</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html"><i class="fa fa-check"></i><b>3.5</b> Notable Discrete Variables</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#bernoulli-distribution"><i class="fa fa-check"></i><b>3.5.1</b> Bernoulli Distribution</a></li>
+<li class="chapter" data-level="3.5.2" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#binomial-distribution"><i class="fa fa-check"></i><b>3.5.2</b> Binomial Distribution</a></li>
+<li class="chapter" data-level="3.5.3" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#poisson-distribution"><i class="fa fa-check"></i><b>3.5.3</b> Poisson Distribution</a></li>
+<li class="chapter" data-level="3.5.4" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#some-examples"><i class="fa fa-check"></i><b>3.5.4</b> Some Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="continuous-random-variables-1.html"><a href="continuous-random-variables-1.html"><i class="fa fa-check"></i><b>3.6</b> Continuous Random Variables</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="continuous-random-variables-1.html"><a href="continuous-random-variables-1.html#probability-density-function"><i class="fa fa-check"></i><b>3.6.1</b> Probability Density Function</a></li>
+<li class="chapter" data-level="3.6.2" data-path="continuous-random-variables-1.html"><a href="continuous-random-variables-1.html#cumulative-distribution-function-1"><i class="fa fa-check"></i><b>3.6.2</b> Cumulative Distribution Function</a></li>
+<li class="chapter" data-level="3.6.3" data-path="continuous-random-variables-1.html"><a href="continuous-random-variables-1.html#summaries-1"><i class="fa fa-check"></i><b>3.6.3</b> Summaries</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="notable-continuous-distribution.html"><a href="notable-continuous-distribution.html"><i class="fa fa-check"></i><b>3.7</b> Notable Continuous Distribution</a>
+<ul>
+<li class="chapter" data-level="3.7.1" data-path="notable-continuous-distribution.html"><a href="notable-continuous-distribution.html#uniform-distribution"><i class="fa fa-check"></i><b>3.7.1</b> Uniform Distribution</a></li>
+<li class="chapter" data-level="3.7.2" data-path="notable-continuous-distribution.html"><a href="notable-continuous-distribution.html#exponential-distribution"><i class="fa fa-check"></i><b>3.7.2</b> Exponential Distribution</a></li>
+<li class="chapter" data-level="3.7.3" data-path="notable-continuous-distribution.html"><a href="notable-continuous-distribution.html#normal-distribution"><i class="fa fa-check"></i><b>3.7.3</b> Normal Distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="3.8" data-path="the-central-limit-theorem.html"><a href="the-central-limit-theorem.html"><i class="fa fa-check"></i><b>3.8</b> The Central Limit Theorem</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="random-number-generation.html"><a href="random-number-generation.html"><i class="fa fa-check"></i><b>4</b> Random Number Generation</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="properties-of-random-numbers.html"><a href="properties-of-random-numbers.html"><i class="fa fa-check"></i><b>4.1</b> Properties of Random Numbers</a></li>
+<li class="chapter" data-level="4.2" data-path="pseudo-random-numbers.html"><a href="pseudo-random-numbers.html"><i class="fa fa-check"></i><b>4.2</b> Pseudo Random Numbers</a></li>
+<li class="chapter" data-level="4.3" data-path="generating-pseudo-random-numbers.html"><a href="generating-pseudo-random-numbers.html"><i class="fa fa-check"></i><b>4.3</b> Generating Pseudo-Random Numbers</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="generating-pseudo-random-numbers.html"><a href="generating-pseudo-random-numbers.html#generating-pseudo-random-numbers-in-r"><i class="fa fa-check"></i><b>4.3.1</b> Generating Pseudo-Random Numbers in R</a></li>
+<li class="chapter" data-level="4.3.2" data-path="generating-pseudo-random-numbers.html"><a href="generating-pseudo-random-numbers.html#linear-congruential-method"><i class="fa fa-check"></i><b>4.3.2</b> Linear Congruential Method</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="testing-randomness.html"><a href="testing-randomness.html"><i class="fa fa-check"></i><b>4.4</b> Testing Randomness</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="testing-randomness.html"><a href="testing-randomness.html#testing-uniformity"><i class="fa fa-check"></i><b>4.4.1</b> Testing Uniformity</a></li>
+<li class="chapter" data-level="4.4.2" data-path="testing-randomness.html"><a href="testing-randomness.html#testing-independence"><i class="fa fa-check"></i><b>4.4.2</b> Testing Independence</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="random-variate-generation.html"><a href="random-variate-generation.html"><i class="fa fa-check"></i><b>4.5</b> Random Variate Generation</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="random-variate-generation.html"><a href="random-variate-generation.html#random-generation-in-r"><i class="fa fa-check"></i><b>4.5.1</b> Random Generation in R</a></li>
+<li class="chapter" data-level="4.5.2" data-path="random-variate-generation.html"><a href="random-variate-generation.html#the-inverse-transform-method"><i class="fa fa-check"></i><b>4.5.2</b> The Inverse Transform Method</a></li>
+<li class="chapter" data-level="4.5.3" data-path="random-variate-generation.html"><a href="random-variate-generation.html#simulating-bernoulli-and-binomial"><i class="fa fa-check"></i><b>4.5.3</b> Simulating Bernoulli and Binomial</a></li>
+<li class="chapter" data-level="4.5.4" data-path="random-variate-generation.html"><a href="random-variate-generation.html#simulating-other-distributions"><i class="fa fa-check"></i><b>4.5.4</b> Simulating Other Distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="testing-generic-simulation-sequences.html"><a href="testing-generic-simulation-sequences.html"><i class="fa fa-check"></i><b>4.6</b> Testing Generic Simulation Sequences</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="testing-generic-simulation-sequences.html"><a href="testing-generic-simulation-sequences.html#testing-distribution-fit"><i class="fa fa-check"></i><b>4.6.1</b> Testing Distribution Fit</a></li>
+<li class="chapter" data-level="4.6.2" data-path="testing-generic-simulation-sequences.html"><a href="testing-generic-simulation-sequences.html#testing-independence-1"><i class="fa fa-check"></i><b>4.6.2</b> Testing Independence</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="monte-carlo-simulation.html"><a href="monte-carlo-simulation.html"><i class="fa fa-check"></i><b>5</b> Monte Carlo Simulation</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="what-does-monte-carlo-simulation-mean.html"><a href="what-does-monte-carlo-simulation-mean.html"><i class="fa fa-check"></i><b>5.1</b> What does Monte Carlo simulation mean?</a></li>
+<li class="chapter" data-level="5.2" data-path="a-bit-of-history.html"><a href="a-bit-of-history.html"><i class="fa fa-check"></i><b>5.2</b> A bit of history</a></li>
+<li class="chapter" data-level="5.3" data-path="steps-of-monte-carlo-simulation.html"><a href="steps-of-monte-carlo-simulation.html"><i class="fa fa-check"></i><b>5.3</b> Steps of Monte Carlo simulation</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="steps-of-monte-carlo-simulation.html"><a href="steps-of-monte-carlo-simulation.html#estimating-pi-step-1"><i class="fa fa-check"></i><b>5.3.1</b> Estimating <span class="math inline">\(\pi\)</span>: step 1</a></li>
+<li class="chapter" data-level="5.3.2" data-path="steps-of-monte-carlo-simulation.html"><a href="steps-of-monte-carlo-simulation.html#estimating-pi-step-2"><i class="fa fa-check"></i><b>5.3.2</b> Estimating <span class="math inline">\(\pi\)</span>: step 2</a></li>
+<li class="chapter" data-level="5.3.3" data-path="steps-of-monte-carlo-simulation.html"><a href="steps-of-monte-carlo-simulation.html#estimating-pi-step-3"><i class="fa fa-check"></i><b>5.3.3</b> Estimating <span class="math inline">\(\pi\)</span>: step 3</a></li>
+<li class="chapter" data-level="5.3.4" data-path="steps-of-monte-carlo-simulation.html"><a href="steps-of-monte-carlo-simulation.html#estimating-pi-step-4"><i class="fa fa-check"></i><b>5.3.4</b> Estimating <span class="math inline">\(\pi\)</span>: step 4</a></li>
+<li class="chapter" data-level="5.3.5" data-path="steps-of-monte-carlo-simulation.html"><a href="steps-of-monte-carlo-simulation.html#estimating-pi-step-5"><i class="fa fa-check"></i><b>5.3.5</b> Estimating <span class="math inline">\(\pi\)</span>: step 5</a></li>
+<li class="chapter" data-level="5.3.6" data-path="steps-of-monte-carlo-simulation.html"><a href="steps-of-monte-carlo-simulation.html#estimating-pi-conclusions"><i class="fa fa-check"></i><b>5.3.6</b> Estimating <span class="math inline">\(\pi\)</span>: conclusions</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="the-sample-function.html"><a href="the-sample-function.html"><i class="fa fa-check"></i><b>5.4</b> The <code>sample</code> function</a></li>
+<li class="chapter" data-level="5.5" data-path="a-game-of-chance.html"><a href="a-game-of-chance.html"><i class="fa fa-check"></i><b>5.5</b> A game of chance</a></li>
+<li class="chapter" data-level="5.6" data-path="takeaways.html"><a href="takeaways.html"><i class="fa fa-check"></i><b>5.6</b> Takeaways</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="monte-carlo-methods-for-inference.html"><a href="monte-carlo-methods-for-inference.html"><i class="fa fa-check"></i><b>6</b> Monte Carlo methods for inference</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="monte-carlo-for-estimation.html"><a href="monte-carlo-for-estimation.html"><i class="fa fa-check"></i><b>6.1</b> Monte Carlo for estimation</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="monte-carlo-for-estimation.html"><a href="monte-carlo-for-estimation.html#sam-and-annie-from-sleepless-in-seattle"><i class="fa fa-check"></i><b>6.1.1</b> Sam and Annie from ‘Sleepless in Seattle’</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="general-case-with-standard-normal-distributions.html"><a href="general-case-with-standard-normal-distributions.html"><i class="fa fa-check"></i><b>6.2</b> General Case with Standard Normal Distributions</a></li>
+<li class="chapter" data-level="6.3" data-path="the-taxi-problem-comparing-estimators.html"><a href="the-taxi-problem-comparing-estimators.html"><i class="fa fa-check"></i><b>6.3</b> The taxi problem (comparing estimators)</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="discrete-events-simulation-with-r.html"><a href="discrete-events-simulation-with-r.html"><i class="fa fa-check"></i><b>7</b> Discrete Events Simulation with R</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="simmer-terminology.html"><a href="simmer-terminology.html"><i class="fa fa-check"></i><b>7.1</b> <code>simmer</code> terminology</a></li>
+<li class="chapter" data-level="7.2" data-path="the-trajectory-object.html"><a href="the-trajectory-object.html"><i class="fa fa-check"></i><b>7.2</b> The Trajectory Object</a></li>
+<li class="chapter" data-level="7.3" data-path="the-simulation-enviroment.html"><a href="the-simulation-enviroment.html"><i class="fa fa-check"></i><b>7.3</b> The Simulation Enviroment</a></li>
+<li class="chapter" data-level="7.4" data-path="monitoring-and-data-retrieval.html"><a href="monitoring-and-data-retrieval.html"><i class="fa fa-check"></i><b>7.4</b> Monitoring and data retrieval</a></li>
+<li class="chapter" data-level="7.5" data-path="simmer-example.html"><a href="simmer-example.html"><i class="fa fa-check"></i><b>7.5</b> <code>simmer</code> Example</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Simulation and Modeling to Understand the Change</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="continuous-random-variables-1" class="section level2" number="3.6">
+<h2><span class="header-section-number">3.6</span> Continuous Random Variables</h2>
+<p>Our attention now turns to continuous random variables. These are in general more technical and less intuitive than discrete ones. You should not worry about all the technical details, since these are in general not important, and focus on the interpretation.</p>
+<p>A continuous random variable <span class="math inline">\(X\)</span> is a random variable whose sample space <span class="math inline">\(\mathbb{X}\)</span> is an interval or a collection of intervals. In general <span class="math inline">\(\mathbb{X}\)</span> may coincide with the set of real numbers <span class="math inline">\(\mathbb{R}\)</span> or some subset of it. Examples of continuous random variables:</p>
+<ul>
+<li><p>the pressure of a tire of a car: it can be any positive real number;</p></li>
+<li><p>the current temperature in the city of Madrid: it can be any real number;</p></li>
+<li><p>the height of the students of Simulation and Modeling to understand change: it can be any real number.</p></li>
+</ul>
+<p>Whilst for discrete random variables we considered summations over the elements of <span class="math inline">\(\mathbb{X}\)</span>, i.e. <span class="math inline">\(\sum_{x\in\mathbb{X}}\)</span>, for continuous random variables we need to consider integrals over appropriate intervals.</p>
+<p>You should be more or less familiar with these from previous studies of calculus. But let’s give an example. Consider the function <span class="math inline">\(f(x)=x^2\)</span> computing the squared of a number <span class="math inline">\(x\)</span>. Suppose we are interested in this function between the values -1 and 1, which is plotted by the red line in Figure <a href="continuous-random-variables-1.html#fig:x-sq">3.6</a>. Consider the so-called integral <span class="math inline">\(\int_{-1}^{1}x^2dx\)</span>: this coincides with the area delimited by the function and the x-axis. In Figure <a href="continuous-random-variables-1.html#fig:x-sq">3.6</a> the blue area is therefore equal to <span class="math inline">\(\int_{-1}^{1}x^2dx\)</span>.</p>
+<div class="sourceCode" id="cb802"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb802-1"><a href="continuous-random-variables-1.html#cb802-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>,<span class="fl">0.01</span>), <span class="at">y =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>,<span class="fl">0.01</span>)<span class="sc">^</span><span class="dv">2</span>), <span class="fu">aes</span>(x,y)) <span class="sc">+</span> <span class="fu">geom_line</span>(<span class="at">lwd =</span> <span class="fl">1.3</span>, <span class="at">col=</span> <span class="st">&quot;red&quot;</span>) <span class="sc">+</span> <span class="fu">geom_area</span>(<span class="at">alpha=</span><span class="fl">0.6</span>, <span class="at">fill =</span> <span class="st">&quot;lightskyblue2&quot;</span>) <span class="sc">+</span>  <span class="fu">theme_bw</span>() </span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:x-sq"></span>
+<img src="bookdownproj_files/figure-html/x-sq-1.png" alt="Plot of the squared function and the area under its curve" width="50%" />
+<p class="caption">
+Figure 3.6: Plot of the squared function and the area under its curve
+</p>
+</div>
+<p>We will not be interested in computing integrals ourselves, so if you do not know/remember how to do it, there is no problem!</p>
+<div id="probability-density-function" class="section level3" number="3.6.1">
+<h3><span class="header-section-number">3.6.1</span> Probability Density Function</h3>
+<p>Discrete random variable are easy to work with in the sense that there exists a function, that we called probability mass function, such that <span class="math inline">\(p(x)=P(X=x)\)</span>, that is the value of that function in the point <span class="math inline">\(x\)</span> is exactly the probability that <span class="math inline">\(X=x\)</span>.</p>
+<p>Therefore we may wonder if this is true for a continuous random variable too. Sadly, the answer is no and probabilities for continuous random variables are defined in a slightly more involved way.</p>
+<p>Let <span class="math inline">\(X\)</span> be a continuous random variable with sample space <span class="math inline">\(\mathbb{X}\)</span>. The probability that <span class="math inline">\(X\)</span> takes values in the interval <span class="math inline">\([a,b]\)</span> is given by
+<span class="math display">\[
+P(a\leq X \leq b) = \int_{a}^bf(x)dx
+\]</span>
+where <span class="math inline">\(f(x)\)</span> is called the <em>probability density function</em> (pdf in short). Pdfs, just like pmfs must obey two conditions:</p>
+<ul>
+<li><p><span class="math inline">\(f(x)\geq 0\)</span> for all <span class="math inline">\(x\in\mathbb{X}\)</span>;</p></li>
+<li><p><span class="math inline">\(\int_{x\in\mathbb{X}}f(x)dx=1\)</span>.</p></li>
+</ul>
+<p>So in the discrete case the pmf is defined exactly as the probability. In the continuous case the pdf is the function such that its integral is the probability that random variable takes values in a specific interval.</p>
+<p>As a consequence of this definition notice that for any specific value <span class="math inline">\(x_0\in\mathbb{X}\)</span>, <span class="math inline">\(P(X=x_0)=0\)</span> since
+<span class="math display">\[
+\int_{x_0}^{x_0}f(x)dx = 0.
+\]</span></p>
+<p>Let’s consider an example. The waiting time of customers of a donuts shop is believed to be random and to follow a random variable whose pdf is
+<span class="math display">\[
+f(x) = \left\{
+\begin{array}{ll}
+\frac{1}{4}e^{-x/4}, &amp; x\geq 0\\
+0, &amp; \mbox{otherwise}
+\end{array}
+\right.
+\]</span></p>
+<p>The pdf is drawn in Figure <a href="continuous-random-variables-1.html#fig:exp">3.7</a> by the red line. One can see that <span class="math inline">\(f(x)\geq 0\)</span> for all <span class="math inline">\(x\geq 0\)</span> and one could also compute that it integrates to one.</p>
+<p>Therefore the probability that the waiting time is between any two values <span class="math inline">\((a,b)\)</span> can be computed as
+<span class="math display">\[
+\int_a^b\frac{1}{4}e^{-x/4}dx.
+\]</span>
+In particular if we were interested in the probability that the waiting time is between two and five minutes, corresponding to the shaded area in Figure <a href="continuous-random-variables-1.html#fig:exp">3.7</a>, we could compute it as
+<span class="math display">\[
+P(2&lt;X&lt;5)=\int_2^5f(x)dx=\int_{2}^5\frac{1}{4}e^{-x/4}dx= 0.32
+\]</span></p>
+<div class="sourceCode" id="cb803"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb803-1"><a href="continuous-random-variables-1.html#cb803-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x=</span><span class="fu">seq</span>(<span class="fl">0.01</span>,<span class="dv">15</span>,<span class="fl">0.05</span>),<span class="at">y=</span><span class="fu">dexp</span>(<span class="fu">seq</span>(<span class="fl">0.01</span>,<span class="dv">15</span>,<span class="fl">0.05</span>),<span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>))</span></code></pre></div>
+<pre><code>## Warning: Removed 240 rows containing missing values (position_stack).</code></pre>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:exp"></span>
+<img src="bookdownproj_files/figure-html/exp-1.png" alt="Probability density function for the waiting time in the donut shop example" width="50%" />
+<p class="caption">
+Figure 3.7: Probability density function for the waiting time in the donut shop example
+</p>
+</div>
+<p>Notice that since <span class="math inline">\(P(X=x_0)=0\)</span> for any <span class="math inline">\(x_0\in\mathbb{X}\)</span>, we also have that
+<span class="math display">\[
+P(a\leq X \leq b)=P(a &lt; X \leq b) = P(a\leq X &lt; b) = P(a&lt;X&lt;b).
+\]</span></p>
+</div>
+<div id="cumulative-distribution-function-1" class="section level3" number="3.6.2">
+<h3><span class="header-section-number">3.6.2</span> Cumulative Distribution Function</h3>
+<p>For a continuous random variable <span class="math inline">\(X\)</span> the cumulative distribution function (cdf) is equally defined as
+<span class="math display">\[
+F(x) = P(X \leq x),
+\]</span>
+where now
+<span class="math display">\[
+P(X \leq x) = P(X &lt; x) = \int_{-\infty}^xf(t)dt.
+\]</span>
+so the summation is substituted by an integral.</p>
+<p>Let’s consider again the donut shop example as an illustration. The cdf is defined as
+<span class="math display">\[
+F(x)=\int_{-\infty}^xf(t)dt = \int_{-\infty}^x\frac{1}{4}e^{-x/4}.
+\]</span>
+This integral can be solved and <span class="math inline">\(F(x)\)</span> can be calculated as
+<span class="math display">\[
+F(x)= 1- e^{-x/4},
+\]</span>
+which is plotted in Figure <a href="continuous-random-variables-1.html#fig:expcdf">3.8</a>.</p>
+<div class="sourceCode" id="cb805"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb805-1"><a href="continuous-random-variables-1.html#cb805-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="dv">20</span>,<span class="fl">0.5</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:expcdf"></span>
+<img src="bookdownproj_files/figure-html/expcdf-1.png" alt="Cumulative distribution function for the waiting time at the donut shop" width="50%" />
+<p class="caption">
+Figure 3.8: Cumulative distribution function for the waiting time at the donut shop
+</p>
+</div>
+<p>We can notice that the cdf has similar properties as in the discrete case: it is non-decreasing, on the left-hand side is zero and on the right-hand side tends to zero.</p>
+<p>In the continuous case, one can prove that cdfs and pdfs are related as
+<span class="math display">\[
+f(x)=\frac{d}{dx}F(x).
+\]</span></p>
+</div>
+<div id="summaries-1" class="section level3" number="3.6.3">
+<h3><span class="header-section-number">3.6.3</span> Summaries</h3>
+<p>Just as for discrete random variables, we may want to summarize some features of a continuous random variable into a unique number. The same set of summaries exists for continuous random variables, which are almost exactly defined as in the discrete case (integrals are used instead of summations).</p>
+<ul>
+<li><p><em>mean</em>: the mean of a continuous random variable <span class="math inline">\(X\)</span> is defined as
+<span class="math display">\[
+ E(X) = \int_{-\infty}^{+\infty}xf(x)dx
+ \]</span></p></li>
+<li><p><em>median</em>: the median of a continuous random variable <span class="math inline">\(X\)</span> is defined as the value <span class="math inline">\(x\)</span> such that <span class="math inline">\(P(X\leq x) = 0.5\)</span> or equally <span class="math inline">\(F(x)=0.5\)</span>.</p></li>
+<li><p><em>mode</em>: the mode of a continuous random variable <span class="math inline">\(X\)</span> is defined the value <span class="math inline">\(x\)</span> such that <span class="math inline">\(f(x)\)</span> is largest.</p></li>
+<li><p><em>variance</em>: the variance of a continuous random variable <span class="math inline">\(X\)</span> is defined as
+<span class="math display">\[
+ V(X)=\int_{-\infty}^{+\infty}(x-E(X))^2f(x)dx
+ \]</span></p></li>
+<li><p><em>standard deviation</em>: the standard deviation of a continuous random variable <span class="math inline">\(X\)</span> is defined as <span class="math inline">\(\sqrt{V(X)}\)</span>.</p></li>
+</ul>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="notable-discrete-variables.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="notable-continuous-distribution.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/03-Probability.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/alejandrommingo/SMUCbook/blob/master/03-Probability.Rmd",
+"text": null
+},
+"download": ["bookdownproj.pdf", "bookdownproj.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

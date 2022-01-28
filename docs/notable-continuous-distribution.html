@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3.4 Notable Continuous Distribution | Simulation and Modeling to Understand the Change</title>
+  <title>3.7 Notable Continuous Distribution | Simulation and Modeling to Understand the Change</title>
   <meta name="description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3.4 Notable Continuous Distribution | Simulation and Modeling to Understand the Change" />
+  <meta property="og:title" content="3.7 Notable Continuous Distribution | Simulation and Modeling to Understand the Change" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/Rplot.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="alejandrommingo/SMUCbook" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3.4 Notable Continuous Distribution | Simulation and Modeling to Understand the Change" />
+  <meta name="twitter:title" content="3.7 Notable Continuous Distribution | Simulation and Modeling to Understand the Change" />
   
   <meta name="twitter:description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
   <meta name="twitter:image" content="/images/Rplot.png" />
@@ -24,14 +24,14 @@
 <meta name="author" content="Alejandro Martínez-Mingo &amp; Manuele Leonelli" />
 
 
-<meta name="date" content="2022-01-20" />
+<meta name="date" content="2022-01-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="continuous-random-variables.html"/>
+<link rel="prev" href="continuous-random-variables-1.html"/>
 <link rel="next" href="the-central-limit-theorem.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -245,32 +245,55 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3" data-path="probability-basics.html"><a href="probability-basics.html"><i class="fa fa-check"></i><b>3</b> Probability Basics</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="discrete-random-variables.html"><a href="discrete-random-variables.html"><i class="fa fa-check"></i><b>3.1</b> Discrete Random Variables</a>
+<li class="chapter" data-level="3.1" data-path="set-theory.html"><a href="set-theory.html"><i class="fa fa-check"></i><b>3.1</b> Set theory</a>
 <ul>
-<li class="chapter" data-level="3.1.1" data-path="discrete-random-variables.html"><a href="discrete-random-variables.html#probability-mass-function"><i class="fa fa-check"></i><b>3.1.1</b> Probability Mass Function</a></li>
-<li class="chapter" data-level="3.1.2" data-path="discrete-random-variables.html"><a href="discrete-random-variables.html#cumulative-distribution-function"><i class="fa fa-check"></i><b>3.1.2</b> Cumulative Distribution Function</a></li>
-<li class="chapter" data-level="3.1.3" data-path="discrete-random-variables.html"><a href="discrete-random-variables.html#summaries"><i class="fa fa-check"></i><b>3.1.3</b> Summaries</a></li>
+<li class="chapter" data-level="3.1.1" data-path="set-theory.html"><a href="set-theory.html#basic-sets"><i class="fa fa-check"></i><b>3.1.1</b> Basic sets</a></li>
+<li class="chapter" data-level="3.1.2" data-path="set-theory.html"><a href="set-theory.html#basic-characteristics-and-properties-of-the-sets"><i class="fa fa-check"></i><b>3.1.2</b> Basic characteristics and properties of the sets</a></li>
+<li class="chapter" data-level="3.1.3" data-path="set-theory.html"><a href="set-theory.html#sample-spaces"><i class="fa fa-check"></i><b>3.1.3</b> Sample Spaces</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html"><i class="fa fa-check"></i><b>3.2</b> Notable Discrete Variables</a>
+<li class="chapter" data-level="3.2" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>3.2</b> Probability</a>
 <ul>
-<li class="chapter" data-level="3.2.1" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#bernoulli-distribution"><i class="fa fa-check"></i><b>3.2.1</b> Bernoulli Distribution</a></li>
-<li class="chapter" data-level="3.2.2" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#binomial-distribution"><i class="fa fa-check"></i><b>3.2.2</b> Binomial Distribution</a></li>
-<li class="chapter" data-level="3.2.3" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#poisson-distribution"><i class="fa fa-check"></i><b>3.2.3</b> Poisson Distribution</a></li>
-<li class="chapter" data-level="3.2.4" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#some-examples"><i class="fa fa-check"></i><b>3.2.4</b> Some Examples</a></li>
+<li class="chapter" data-level="3.2.1" data-path="probability.html"><a href="probability.html#independence"><i class="fa fa-check"></i><b>3.2.1</b> Independence</a></li>
+<li class="chapter" data-level="3.2.2" data-path="probability.html"><a href="probability.html#conditional-probabilities"><i class="fa fa-check"></i><b>3.2.2</b> Conditional Probabilities</a></li>
+<li class="chapter" data-level="3.2.3" data-path="probability.html"><a href="probability.html#conditional-probabilities-and-independence"><i class="fa fa-check"></i><b>3.2.3</b> Conditional Probabilities and Independence</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="continuous-random-variables.html"><a href="continuous-random-variables.html"><i class="fa fa-check"></i><b>3.3</b> Continuous Random Variables</a>
+<li class="chapter" data-level="3.3" data-path="random-variables.html"><a href="random-variables.html"><i class="fa fa-check"></i><b>3.3</b> Random Variables</a>
 <ul>
-<li class="chapter" data-level="3.3.1" data-path="continuous-random-variables.html"><a href="continuous-random-variables.html#probability-density-function"><i class="fa fa-check"></i><b>3.3.1</b> Probability Density Function</a></li>
-<li class="chapter" data-level="3.3.2" data-path="continuous-random-variables.html"><a href="continuous-random-variables.html#cumulative-distribution-function-1"><i class="fa fa-check"></i><b>3.3.2</b> Cumulative Distribution Function</a></li>
-<li class="chapter" data-level="3.3.3" data-path="continuous-random-variables.html"><a href="continuous-random-variables.html#summaries-1"><i class="fa fa-check"></i><b>3.3.3</b> Summaries</a></li>
+<li class="chapter" data-level="3.3.1" data-path="random-variables.html"><a href="random-variables.html#distribution-functions"><i class="fa fa-check"></i><b>3.3.1</b> Distribution Functions</a></li>
+<li class="chapter" data-level="3.3.2" data-path="random-variables.html"><a href="random-variables.html#random-variable-types"><i class="fa fa-check"></i><b>3.3.2</b> Random variable types</a></li>
+<li class="chapter" data-level="3.3.3" data-path="random-variables.html"><a href="random-variables.html#discrete-random-variables"><i class="fa fa-check"></i><b>3.3.3</b> Discrete Random Variables</a></li>
+<li class="chapter" data-level="3.3.4" data-path="random-variables.html"><a href="random-variables.html#continuous-random-variables"><i class="fa fa-check"></i><b>3.3.4</b> Continuous Random Variables</a></li>
+<li class="chapter" data-level="3.3.5" data-path="random-variables.html"><a href="random-variables.html#expectation-of-a-random-variable"><i class="fa fa-check"></i><b>3.3.5</b> Expectation of a Random Variable</a></li>
+<li class="chapter" data-level="3.3.6" data-path="random-variables.html"><a href="random-variables.html#variance-of-random-variables"><i class="fa fa-check"></i><b>3.3.6</b> Variance of Random Variables</a></li>
+<li class="chapter" data-level="3.3.7" data-path="random-variables.html"><a href="random-variables.html#sample-mean-and-sample-variance"><i class="fa fa-check"></i><b>3.3.7</b> Sample Mean and Sample Variance</a></li>
+<li class="chapter" data-level="3.3.8" data-path="random-variables.html"><a href="random-variables.html#covariance-between-random-variables"><i class="fa fa-check"></i><b>3.3.8</b> Covariance between Random Variables</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="notable-continuous-distribution.html"><a href="notable-continuous-distribution.html"><i class="fa fa-check"></i><b>3.4</b> Notable Continuous Distribution</a>
+<li class="chapter" data-level="3.4" data-path="discrete-random-variables-1.html"><a href="discrete-random-variables-1.html"><i class="fa fa-check"></i><b>3.4</b> Discrete Random Variables</a>
 <ul>
-<li class="chapter" data-level="3.4.1" data-path="notable-continuous-distribution.html"><a href="notable-continuous-distribution.html#uniform-distribution"><i class="fa fa-check"></i><b>3.4.1</b> Uniform Distribution</a></li>
-<li class="chapter" data-level="3.4.2" data-path="notable-continuous-distribution.html"><a href="notable-continuous-distribution.html#exponential-distribution"><i class="fa fa-check"></i><b>3.4.2</b> Exponential Distribution</a></li>
-<li class="chapter" data-level="3.4.3" data-path="notable-continuous-distribution.html"><a href="notable-continuous-distribution.html#normal-distribution"><i class="fa fa-check"></i><b>3.4.3</b> Normal Distribution</a></li>
+<li class="chapter" data-level="3.4.1" data-path="discrete-random-variables-1.html"><a href="discrete-random-variables-1.html#probability-mass-function"><i class="fa fa-check"></i><b>3.4.1</b> Probability Mass Function</a></li>
+<li class="chapter" data-level="3.4.2" data-path="discrete-random-variables-1.html"><a href="discrete-random-variables-1.html#cumulative-distribution-function"><i class="fa fa-check"></i><b>3.4.2</b> Cumulative Distribution Function</a></li>
+<li class="chapter" data-level="3.4.3" data-path="discrete-random-variables-1.html"><a href="discrete-random-variables-1.html#summaries"><i class="fa fa-check"></i><b>3.4.3</b> Summaries</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="the-central-limit-theorem.html"><a href="the-central-limit-theorem.html"><i class="fa fa-check"></i><b>3.5</b> The Central Limit Theorem</a></li>
+<li class="chapter" data-level="3.5" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html"><i class="fa fa-check"></i><b>3.5</b> Notable Discrete Variables</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#bernoulli-distribution"><i class="fa fa-check"></i><b>3.5.1</b> Bernoulli Distribution</a></li>
+<li class="chapter" data-level="3.5.2" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#binomial-distribution"><i class="fa fa-check"></i><b>3.5.2</b> Binomial Distribution</a></li>
+<li class="chapter" data-level="3.5.3" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#poisson-distribution"><i class="fa fa-check"></i><b>3.5.3</b> Poisson Distribution</a></li>
+<li class="chapter" data-level="3.5.4" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#some-examples"><i class="fa fa-check"></i><b>3.5.4</b> Some Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="continuous-random-variables-1.html"><a href="continuous-random-variables-1.html"><i class="fa fa-check"></i><b>3.6</b> Continuous Random Variables</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="continuous-random-variables-1.html"><a href="continuous-random-variables-1.html#probability-density-function"><i class="fa fa-check"></i><b>3.6.1</b> Probability Density Function</a></li>
+<li class="chapter" data-level="3.6.2" data-path="continuous-random-variables-1.html"><a href="continuous-random-variables-1.html#cumulative-distribution-function-1"><i class="fa fa-check"></i><b>3.6.2</b> Cumulative Distribution Function</a></li>
+<li class="chapter" data-level="3.6.3" data-path="continuous-random-variables-1.html"><a href="continuous-random-variables-1.html#summaries-1"><i class="fa fa-check"></i><b>3.6.3</b> Summaries</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="notable-continuous-distribution.html"><a href="notable-continuous-distribution.html"><i class="fa fa-check"></i><b>3.7</b> Notable Continuous Distribution</a>
+<ul>
+<li class="chapter" data-level="3.7.1" data-path="notable-continuous-distribution.html"><a href="notable-continuous-distribution.html#uniform-distribution"><i class="fa fa-check"></i><b>3.7.1</b> Uniform Distribution</a></li>
+<li class="chapter" data-level="3.7.2" data-path="notable-continuous-distribution.html"><a href="notable-continuous-distribution.html#exponential-distribution"><i class="fa fa-check"></i><b>3.7.2</b> Exponential Distribution</a></li>
+<li class="chapter" data-level="3.7.3" data-path="notable-continuous-distribution.html"><a href="notable-continuous-distribution.html#normal-distribution"><i class="fa fa-check"></i><b>3.7.3</b> Normal Distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="3.8" data-path="the-central-limit-theorem.html"><a href="the-central-limit-theorem.html"><i class="fa fa-check"></i><b>3.8</b> The Central Limit Theorem</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="random-number-generation.html"><a href="random-number-generation.html"><i class="fa fa-check"></i><b>4</b> Random Number Generation</a>
 <ul>
@@ -353,11 +376,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="notable-continuous-distribution" class="section level2" number="3.4">
-<h2><span class="header-section-number">3.4</span> Notable Continuous Distribution</h2>
+<div id="notable-continuous-distribution" class="section level2" number="3.7">
+<h2><span class="header-section-number">3.7</span> Notable Continuous Distribution</h2>
 <p>As in the discrete case, there are some types of continuous random variables that are used frequently and therefore are given a name and their proprieties are well-studied.</p>
-<div id="uniform-distribution" class="section level3" number="3.4.1">
-<h3><span class="header-section-number">3.4.1</span> Uniform Distribution</h3>
+<div id="uniform-distribution" class="section level3" number="3.7.1">
+<h3><span class="header-section-number">3.7.1</span> Uniform Distribution</h3>
 <p>The first, and simplest, continuous random variable we study is the so-called (continuous) <em>uniform</em> distribution. We say that a random variable <span class="math inline">\(X\)</span> is uniformly distributed on the interval <span class="math inline">\([a,b]\)</span> if its pdf is
 <span class="math display">\[
 f(x)=\left\{ 
@@ -368,7 +391,7 @@ f(x)=\left\{
 \right.
 \]</span>
 This is plotted in Figure <a href="notable-continuous-distribution.html#fig:unipdf">3.9</a> for choices of parameters <span class="math inline">\(a=2\)</span> and <span class="math inline">\(b=6\)</span></p>
-<div class="sourceCode" id="cb804"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb804-1"><a href="notable-continuous-distribution.html#cb804-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">2</span>,<span class="fl">0.01</span>),<span class="fu">seq</span>(<span class="dv">2</span>,<span class="dv">6</span>,<span class="fl">0.01</span>),<span class="fu">seq</span>(<span class="dv">6</span>,<span class="dv">9</span>,<span class="fl">0.01</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb806"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb806-1"><a href="notable-continuous-distribution.html#cb806-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">2</span>,<span class="fl">0.01</span>),<span class="fu">seq</span>(<span class="dv">2</span>,<span class="dv">6</span>,<span class="fl">0.01</span>),<span class="fu">seq</span>(<span class="dv">6</span>,<span class="dv">9</span>,<span class="fl">0.01</span>))</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:unipdf"></span>
 <img src="bookdownproj_files/figure-html/unipdf-1.png" alt="Probability density function for a uniform random variable with parameters a = 2 and b = 6" width="50%" />
 <p class="caption">
@@ -387,7 +410,7 @@ F(x)=\left\{
 \right.
 \]</span>
 and this is plotted in Figure <a href="notable-continuous-distribution.html#fig:unicdf">3.10</a>.</p>
-<div class="sourceCode" id="cb805"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb805-1"><a href="notable-continuous-distribution.html#cb805-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">2</span>,<span class="fl">0.01</span>),<span class="fu">seq</span>(<span class="dv">2</span>,<span class="dv">6</span>,<span class="fl">0.01</span>),<span class="fu">seq</span>(<span class="dv">6</span>,<span class="dv">9</span>,<span class="fl">0.01</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb807"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb807-1"><a href="notable-continuous-distribution.html#cb807-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">2</span>,<span class="fl">0.01</span>),<span class="fu">seq</span>(<span class="dv">2</span>,<span class="dv">6</span>,<span class="fl">0.01</span>),<span class="fu">seq</span>(<span class="dv">6</span>,<span class="dv">9</span>,<span class="fl">0.01</span>))</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:unicdf"></span>
 <img src="bookdownproj_files/figure-html/unicdf-1.png" alt="Cumulative distribution function for a uniform random variable with parameters a = 2 and b = 6" width="50%" />
 <p class="caption">
@@ -407,16 +430,16 @@ So the mean is equal to the middle point of the interval <span class="math inlin
 <li><p>the third argument, <code>max</code>, is the parameter <span class="math inline">\(b\)</span>, by default equal to one.</p></li>
 </ul>
 <p>So for instance</p>
-<div class="sourceCode" id="cb806"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb806-1"><a href="notable-continuous-distribution.html#cb806-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dunif</span>(<span class="dv">5</span>, <span class="at">min =</span> <span class="dv">2</span>, <span class="at">max =</span> <span class="dv">6</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb808"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb808-1"><a href="notable-continuous-distribution.html#cb808-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dunif</span>(<span class="dv">5</span>, <span class="at">min =</span> <span class="dv">2</span>, <span class="at">max =</span> <span class="dv">6</span>)</span></code></pre></div>
 <pre><code>## [1] 0.25</code></pre>
 <p>computes the pdf at the point 5 of a uniform random variable with parameters <span class="math inline">\(a=2\)</span> and <span class="math inline">\(b=6\)</span>.</p>
 <p>Conversely,</p>
-<div class="sourceCode" id="cb808"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb808-1"><a href="notable-continuous-distribution.html#cb808-1" aria-hidden="true" tabindex="-1"></a><span class="fu">punif</span>(<span class="fl">0.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb810"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb810-1"><a href="notable-continuous-distribution.html#cb810-1" aria-hidden="true" tabindex="-1"></a><span class="fu">punif</span>(<span class="fl">0.5</span>)</span></code></pre></div>
 <pre><code>## [1] 0.5</code></pre>
 <p>computes the cdf at the point 0.5 of a uniform random variable with parameters <span class="math inline">\(a=0\)</span> and <span class="math inline">\(b=1\)</span>.</p>
 </div>
-<div id="exponential-distribution" class="section level3" number="3.4.2">
-<h3><span class="header-section-number">3.4.2</span> Exponential Distribution</h3>
+<div id="exponential-distribution" class="section level3" number="3.7.2">
+<h3><span class="header-section-number">3.7.2</span> Exponential Distribution</h3>
 <p>The second class of continuous random variables we will study are the so-called <em>exponential</em> random variables. We have actually already seen such a random variable in the donut shop example. More generally, we say that a continuous random variable <span class="math inline">\(X\)</span> is exponential with parameter <span class="math inline">\(\lambda&gt;0\)</span> if its pdf is
 <span class="math display">\[
 f(x) = \left\{
@@ -427,7 +450,7 @@ f(x) = \left\{
 \right.
 \]</span></p>
 <p>Figure <a href="notable-continuous-distribution.html#fig:exppdf1">3.11</a> reports the pdf of exponential random variables for various choices of the parameter <span class="math inline">\(\lambda\)</span>.</p>
-<div class="sourceCode" id="cb810"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb810-1"><a href="notable-continuous-distribution.html#cb810-1" aria-hidden="true" tabindex="-1"></a>values <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.25</span>,<span class="dv">1</span>,<span class="fl">2.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb812"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb812-1"><a href="notable-continuous-distribution.html#cb812-1" aria-hidden="true" tabindex="-1"></a>values <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.25</span>,<span class="dv">1</span>,<span class="fl">2.5</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:exppdf1"></span>
 <img src="bookdownproj_files/figure-html/exppdf1-1.png" alt="Probability density function for exponential random variables" width="50%" />
 <p class="caption">
@@ -445,7 +468,7 @@ F(x)=\left\{
 \right.
 \]</span>
 and is reported in Figure <a href="notable-continuous-distribution.html#fig:expcdf1">3.12</a> for the same choices of parameters.</p>
-<div class="sourceCode" id="cb811"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb811-1"><a href="notable-continuous-distribution.html#cb811-1" aria-hidden="true" tabindex="-1"></a>values <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.25</span>,<span class="dv">1</span>,<span class="fl">2.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb813"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb813-1"><a href="notable-continuous-distribution.html#cb813-1" aria-hidden="true" tabindex="-1"></a>values <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.25</span>,<span class="dv">1</span>,<span class="fl">2.5</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:expcdf1"></span>
 <img src="bookdownproj_files/figure-html/expcdf1-1.png" alt="Cumulative distribution function for exponential random variables" width="50%" />
 <p class="caption">
@@ -462,16 +485,16 @@ E(X)=\frac{1}{\lambda}, \hspace{1cm} V(X)=\frac{1}{\lambda^2}
 <li><p>the second argument, <code>rate</code>, is the parameter <span class="math inline">\(\lambda\)</span>, by default equal to one;</p></li>
 </ul>
 <p>So for instance</p>
-<div class="sourceCode" id="cb812"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb812-1"><a href="notable-continuous-distribution.html#cb812-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dexp</span>(<span class="dv">2</span>, <span class="at">rate =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb814"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb814-1"><a href="notable-continuous-distribution.html#cb814-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dexp</span>(<span class="dv">2</span>, <span class="at">rate =</span> <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## [1] 0.007436257</code></pre>
 <p>computes the pdf at the point 2 of an exponential random variable with parameter <span class="math inline">\(\lambda =3\)</span>.</p>
 <p>Conversely</p>
-<div class="sourceCode" id="cb814"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb814-1"><a href="notable-continuous-distribution.html#cb814-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pexp</span>(<span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb816"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb816-1"><a href="notable-continuous-distribution.html#cb816-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pexp</span>(<span class="dv">4</span>)</span></code></pre></div>
 <pre><code>## [1] 0.9816844</code></pre>
 <p>computes the cdf at the point 4 of an exponential random variable with parameter <span class="math inline">\(\lambda =1\)</span>.</p>
 </div>
-<div id="normal-distribution" class="section level3" number="3.4.3">
-<h3><span class="header-section-number">3.4.3</span> Normal Distribution</h3>
+<div id="normal-distribution" class="section level3" number="3.7.3">
+<h3><span class="header-section-number">3.7.3</span> Normal Distribution</h3>
 <p>The last class of continuous random variables we consider is the so-called <em>Normal</em> or <em>Gaussian</em> random variable. They are the most used and well-known random variable in statistics and we will see why this is the case.</p>
 <p>A continuous random variable <span class="math inline">\(X\)</span> is said to have a Normal distribution with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span> if its pdf is
 <span class="math display">\[
@@ -483,7 +506,7 @@ E(X)=\mu, \hspace{1cm} V(X)=\sigma^2,
 \]</span>
 and so the parameters have a straightforward interpretation in terms of mean and variance.</p>
 <p>Figure <a href="notable-continuous-distribution.html#fig:norm">3.13</a> shows the form of the pdf of the Normal distribution for various choices of the parameters. On the left we have Normal pdfs for <span class="math inline">\(\sigma^2=1\)</span> and various choices of <span class="math inline">\(\mu\)</span>: we can see that <span class="math inline">\(\mu\)</span> shifts the plot on the x-axis. On the right we have Normal pdfs for <span class="math inline">\(\mu=1\)</span> and various choices of <span class="math inline">\(\sigma^2\)</span>: we can see that all distributions are centered around the same value while they have a different spread/variability.</p>
-<div class="sourceCode" id="cb816"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb816-1"><a href="notable-continuous-distribution.html#cb816-1" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb818"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb818-1"><a href="notable-continuous-distribution.html#cb818-1" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:norm"></span>
 <img src="bookdownproj_files/figure-html/norm-1.png" alt="Probability density function for normal random variables" width="50%" />
 <p class="caption">
@@ -500,7 +523,7 @@ Figure 3.13: Probability density function for normal random variables
 F(x) = P(X\leq x)=\int_{-\infty}^{+\infty}\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{1}{2}\frac{(x-\mu)^2}{\sigma^2}\right)dx
 \]</span></p>
 <p>The cdf of the Normal for various choices of parameters is reported in Figure <a href="notable-continuous-distribution.html#fig:pnorm">3.14</a>.</p>
-<div class="sourceCode" id="cb817"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb817-1"><a href="notable-continuous-distribution.html#cb817-1" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb819"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb819-1"><a href="notable-continuous-distribution.html#cb819-1" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:pnorm"></span>
 <img src="bookdownproj_files/figure-html/pnorm-1.png" alt="Cumulative distribution function for normal random variables" width="50%" />
 <p class="caption">
@@ -534,11 +557,11 @@ Again this cannot be computed exactly, there is no closed-form expression. This 
 <li><p>the third argument, <code>sd</code>, is the standard deviation, that is <span class="math inline">\(\sqrt{\sigma^2}\)</span>, by default equal to one.</p></li>
 </ul>
 <p>So for instance</p>
-<div class="sourceCode" id="cb818"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb818-1"><a href="notable-continuous-distribution.html#cb818-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dnorm</span>(<span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb820"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb820-1"><a href="notable-continuous-distribution.html#cb820-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dnorm</span>(<span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## [1] 0.004431848</code></pre>
 <p>computes the value of the standard Normal pdf at the value three.</p>
 <p>Similarly,</p>
-<div class="sourceCode" id="cb820"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb820-1"><a href="notable-continuous-distribution.html#cb820-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="fl">0.4</span>,<span class="dv">1</span>,<span class="fl">0.5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb822"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb822-1"><a href="notable-continuous-distribution.html#cb822-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="fl">0.4</span>,<span class="dv">1</span>,<span class="fl">0.5</span>)</span></code></pre></div>
 <pre><code>## [1] 0.1150697</code></pre>
 <p>compute the value of the Normal cdf with parameters <span class="math inline">\(\mu=1\)</span> and <span class="math inline">\(\sqrt{\sigma^2}=0.5\)</span> at the value 0.4.</p>
 </div>
@@ -548,7 +571,7 @@ Again this cannot be computed exactly, there is no closed-form expression. This 
           </div>
         </div>
       </div>
-<a href="continuous-random-variables.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="continuous-random-variables-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="the-central-limit-theorem.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
