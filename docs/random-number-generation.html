@@ -24,7 +24,7 @@
 <meta name="author" content="Alejandro Martínez-Mingo &amp; Manuele Leonelli" />
 
 
-<meta name="date" content="2022-01-28" />
+<meta name="date" content="2022-02-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -377,7 +377,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="random-number-generation" class="section level1" number="4">
 <h1><span class="header-section-number">Chapter 4</span> Random Number Generation</h1>
-<p>At the hearth of any simulation model there is the capability of creating numbers that mimic those we would expect in real life. In simulation modeling we will assume that specific processes will be distributed according to a specific random variable. For instance we will assume that an employee in a donut shop takes a random time to serve customers distributed according to a Normal random variable with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>. In order to then carry out a simulation the computer will need to generate random serving times. This corresponds to simulating number that are distributed according to a specific distribution.</p>
+<p>At the hearth of any simulation model there is the capability of creating numbers that mimic those we would expect in real life. In simulation and modeling we will assume that specific processes will be distributed according to a specific random variable. For instance we will assume that an employee in a donut shop takes a random time to serve customers distributed according to a Normal random variable with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>. In order to then carry out a simulation the computer will need to generate random serving times. This corresponds to simulating number that are distributed according to a specific distribution.</p>
 <p>Let’s consider an example. Suppose you managed to generate two sequences of numbers, say <code>x1</code> and <code>x2</code>. Your objective is to simulate numbers from a Normal distribution. The histograms of the two sequences are reported in Figure <a href="random-number-generation.html#fig:seq">4.1</a> together with the estimated shape of the density. Clearly the sequence <code>x1</code> could be following a Normal distribution, since it is bell-shaped and reasonably symmetric. On the other hand, the sequence <code>x2</code> is not symmetric at all and does not resembles the density of a Normal.</p>
 <div class="sourceCode" id="cb842"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb842-1"><a href="random-number-generation.html#cb842-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="fu">data.frame</span>(<span class="at">x1=</span><span class="fu">rnorm</span>(<span class="dv">700</span>)), <span class="fu">aes</span>(<span class="at">x=</span>x1))<span class="sc">+</span></span>
 <span id="cb842-2"><a href="random-number-generation.html#cb842-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y=</span>..density..), <span class="at">colour=</span><span class="st">&quot;black&quot;</span>, <span class="at">fill=</span><span class="st">&quot;white&quot;</span>)<span class="sc">+</span></span>

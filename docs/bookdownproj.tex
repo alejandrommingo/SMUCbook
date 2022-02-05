@@ -6,7 +6,7 @@
 ]{book}
 \title{Simulation and Modeling to Understand the Change}
 \author{Alejandro Martínez-Mingo \& Manuele Leonelli}
-\date{2022-01-28}
+\date{2022-02-05}
 
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
@@ -760,7 +760,7 @@ The \texttt{history()} command displays the history of commands entered during t
 ##     writeLines(rawhist[inds], file2)
 ##     file.show(file2, title = "R History", delete.file = TRUE)
 ## }
-## <bytecode: 0x55b221f71380>
+## <bytecode: 0x565277fe49a0>
 ## <environment: namespace:utils>
 \end{verbatim}
 
@@ -2383,7 +2383,7 @@ To see how R handles dates and times, have a look at Sys.time():
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "2022-01-28 13:20:25 CET"
+## [1] "2022-02-05 11:32:14 CET"
 \end{verbatim}
 
 This description of date and time is strictly hierarchical from left to right: the longest time scale (years) comes first, then month, then day, separated by hyphens, then there is a blank space, followed by the time, with hours first (using the 24-hour clock), then minutes, then seconds, separated by colons. Finally, there is a character string explaining the time zone (CET stands for Central Europe Time)
@@ -2399,7 +2399,7 @@ The baseline for expressing today's date and time in seconds is 1 January 1970:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 1643372426
+## [1] 1644057134
 \end{verbatim}
 
 This is fine for plotting time series graphs, but it is not much good for computing monthly means (e.g.~is the mean for June significantly different from the July mean?) or daily means (e.g.~is the Monday mean significantly different from the Friday mean?).
@@ -2430,9 +2430,9 @@ the effort. Naturally, you can easily convert to one representation to the other
 
 \begin{verbatim}
 ##                sec                min               hour               mday 
-## "25.6971204280853"               "20"               "13"               "28" 
+## "14.4724290370941"               "32"               "11"                "5" 
 ##                mon               year               wday               yday 
-##                "0"              "122"                "5"               "27" 
+##                "1"              "122"                "6"               "35" 
 ##              isdst               zone             gmtoff 
 ##                "0"              "CET"             "3600"
 \end{verbatim}
@@ -9143,7 +9143,7 @@ The existence of this theorem is the reason why you used so often Normal probabi
 \hypertarget{random-number-generation}{%
 \chapter{Random Number Generation}\label{random-number-generation}}
 
-At the hearth of any simulation model there is the capability of creating numbers that mimic those we would expect in real life. In simulation modeling we will assume that specific processes will be distributed according to a specific random variable. For instance we will assume that an employee in a donut shop takes a random time to serve customers distributed according to a Normal random variable with mean \(\mu\) and variance \(\sigma^2\). In order to then carry out a simulation the computer will need to generate random serving times. This corresponds to simulating number that are distributed according to a specific distribution.
+At the hearth of any simulation model there is the capability of creating numbers that mimic those we would expect in real life. In simulation and modeling we will assume that specific processes will be distributed according to a specific random variable. For instance we will assume that an employee in a donut shop takes a random time to serve customers distributed according to a Normal random variable with mean \(\mu\) and variance \(\sigma^2\). In order to then carry out a simulation the computer will need to generate random serving times. This corresponds to simulating number that are distributed according to a specific distribution.
 
 Let's consider an example. Suppose you managed to generate two sequences of numbers, say \texttt{x1} and \texttt{x2}. Your objective is to simulate numbers from a Normal distribution. The histograms of the two sequences are reported in Figure \ref{fig:seq} together with the estimated shape of the density. Clearly the sequence \texttt{x1} could be following a Normal distribution, since it is bell-shaped and reasonably symmetric. On the other hand, the sequence \texttt{x2} is not symmetric at all and does not resembles the density of a Normal.
 
@@ -9349,7 +9349,7 @@ Some comments:
 
 \begin{itemize}
 \item
-  \(\mod m\) is the remainder of the integer division by \(m\). For instance \(5 \mod 2\) is one and \(4\mod 2\) is zero.
+  \(\mod m\) is the remainer of the integer division by \(m\). For instance \(5 \mod 2\) is one and \(4\mod 2\) is zero.
 \item
   therefore, the algorithm generates integers between 0 and \(m-1\).
 \item

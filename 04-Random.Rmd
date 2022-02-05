@@ -1,6 +1,6 @@
 # Random Number Generation
 
-At the hearth of any simulation model there is the capability of creating numbers that mimic those we would expect in real life. In simulation modeling we will assume that specific processes will be distributed according to a specific random variable. For instance we will assume that an employee in a donut shop takes a random time to serve customers distributed according to a Normal random variable with mean $\mu$ and variance $\sigma^2$. In order to then carry out a simulation the computer will need to generate random serving times. This corresponds to simulating number that are distributed according to a specific distribution. 
+At the hearth of any simulation model there is the capability of creating numbers that mimic those we would expect in real life. In simulation and modeling we will assume that specific processes will be distributed according to a specific random variable. For instance we will assume that an employee in a donut shop takes a random time to serve customers distributed according to a Normal random variable with mean $\mu$ and variance $\sigma^2$. In order to then carry out a simulation the computer will need to generate random serving times. This corresponds to simulating number that are distributed according to a specific distribution. 
 
 Let's consider an example. Suppose you managed to generate two sequences of numbers, say `x1` and `x2`. Your objective is to simulate numbers from a Normal distribution. The histograms of the two sequences are reported in Figure \@ref(fig:seq) together with the estimated shape of the density. Clearly the sequence `x1` could be following a Normal distribution, since it is bell-shaped and reasonably symmetric. On the other hand, the sequence `x2` is not symmetric at all and does not resembles the density of a Normal.
 
@@ -150,7 +150,7 @@ x_{i}=(ax_{i-1}+c)\mod m, \hspace{1cm} \mbox{for } i = 1,2,\dots
 \]
 Some comments:
 
- - $\mod m$ is the remainder of the integer division by $m$. For instance $5 \mod 2$ is one and $4\mod 2$ is zero.
+ - $\mod m$ is the remainer of the integer division by $m$. For instance $5 \mod 2$ is one and $4\mod 2$ is zero.
  
  - therefore, the algorithm generates integers between 0 and $m-1$.
  
@@ -267,7 +267,6 @@ You should already be familiar with the idea of *correlation*: this tells you ho
 Let's briefly recall the idea behind correlation. Suppose you have two sequences of numbers $u_1,\dots,u_N$ and $w_1,\dots,w_N$. To compute the correlation you would look at the pairs $(u_1,w_1),(u_2,w_2),\dots, (u_N,w_N)$ and assess how related the numbers within a pair $(u_i,w_i)$ are. Correlation, which is a number between -1 and 1, assesses how related the sequences are: the closer the number is to one in absolute value, the stronger the relationship.
 
 Now however we have just one sequence of numbers $u_1,\dots,u_N$. So for instance we could look at pairs $(u_1,u_2), (u_2,u_3), \dots, (u_{N-1},u_{N})$ which consider two consecutive numbers and compute their correlation. Similarly we could compute the correlation between $(u_1,u_{1+k}), (u_2,u_{2+k}),\dots, (u_{N-k},u_N)$ between each number in the sequence and the one k-positions ahead. This is what we call *autocorrelation of lag k*.
-
 
 If autocorrelations of various lags are close to zero, this gives an indication that the data is independent. If on the other hand, the autocorrelation at some lags is large, then there is an indication of dependence in the sequence of random numbers. Autocorrelations are computed and plotted in `R` using `acf` and reported in Figure \@ref(fig:acf). 
 
