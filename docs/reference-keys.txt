@@ -241,3 +241,16 @@ the-trajectory-object
 the-simulation-enviroment
 monitoring-and-data-retrieval
 simmer-example
+model-building
+a-simple-model
+models-as-functions
+model-functions-with-multiple-explanatory-variables
+reading-a-model
+model-design
+the-data
+the-response-variable
+explanatory-variables
+model-terms
+swimming-world-records
+model-notation
+daily-flights-example

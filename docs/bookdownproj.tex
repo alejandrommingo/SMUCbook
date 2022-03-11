@@ -6,7 +6,7 @@
 ]{book}
 \title{Simulation and Modeling to Understand the Change}
 \author{Alejandro Martínez-Mingo \& Manuele Leonelli}
-\date{2022-02-05}
+\date{2022-03-11}
 
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
@@ -760,7 +760,7 @@ The \texttt{history()} command displays the history of commands entered during t
 ##     writeLines(rawhist[inds], file2)
 ##     file.show(file2, title = "R History", delete.file = TRUE)
 ## }
-## <bytecode: 0x565277fe49a0>
+## <bytecode: 0x5557bc1419e0>
 ## <environment: namespace:utils>
 \end{verbatim}
 
@@ -2383,7 +2383,7 @@ To see how R handles dates and times, have a look at Sys.time():
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "2022-02-05 11:32:14 CET"
+## [1] "2022-03-11 12:08:45 CET"
 \end{verbatim}
 
 This description of date and time is strictly hierarchical from left to right: the longest time scale (years) comes first, then month, then day, separated by hyphens, then there is a blank space, followed by the time, with hours first (using the 24-hour clock), then minutes, then seconds, separated by colons. Finally, there is a character string explaining the time zone (CET stands for Central Europe Time)
@@ -2399,7 +2399,7 @@ The baseline for expressing today's date and time in seconds is 1 January 1970:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 1644057134
+## [1] 1646996925
 \end{verbatim}
 
 This is fine for plotting time series graphs, but it is not much good for computing monthly means (e.g.~is the mean for June significantly different from the July mean?) or daily means (e.g.~is the Monday mean significantly different from the Friday mean?).
@@ -2430,9 +2430,9 @@ the effort. Naturally, you can easily convert to one representation to the other
 
 \begin{verbatim}
 ##                sec                min               hour               mday 
-## "14.4724290370941"               "32"               "11"                "5" 
+## "45.4804699420929"                "8"               "12"               "11" 
 ##                mon               year               wday               yday 
-##                "1"              "122"                "6"               "35" 
+##                "2"              "122"                "5"               "69" 
 ##              isdst               zone             gmtoff 
 ##                "0"              "CET"             "3600"
 \end{verbatim}
@@ -11477,6 +11477,476 @@ Let's see how the system works without a administration worker through the plots
 \includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-501-1.pdf}
 
 Great! We've found the perfect balance for our little hospital.
+
+\hypertarget{model-building}{%
+\chapter{Model Building}\label{model-building}}
+
+The goal of a model is to provide a simple low-dimensional summary of a dataset. We're going to use models to partition data into \textbf{patterns} and \textbf{residuals}. Strong patterns will hide subtler trends, so we'll use models to help peel back layers of structure as we explore a dataset.
+
+However, before we can start using models on interesting, real, datasets, you need to understand the basics of \textbf{how models work}. For that reason, we start using only simulated datasets. These datasets are very simple, and not at all interesting, but they will help you understand the essence of modelling before you apply the same techniques to real data.
+
+There are two elements we have to define for a model:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  First, you define a \textbf{family} of models that express a precise, but generic, pattern that you want to capture. For example, the pattern might be a straight line, or a quadratic curve. You will express the model family as an equation like \texttt{y\ =\ a\_1\ *\ x\ +\ a\_2} or \texttt{y\ =\ a\_1\ *\ x\ \^{}\ a\_2}. Here, \texttt{x} and \texttt{y} are known variables from your data, and \texttt{a\_1} and \texttt{a\_2} are parameters that can vary to capture different patterns.
+\item
+  Next, you generate a \textbf{fitted model} by finding the model from the family that is the closest to your data. This takes the generic model family and makes it specific, like \texttt{y\ =\ 3\ *\ x\ +\ 7} or \texttt{y\ =\ 9\ *\ x\ \^{}\ 2}.
+\end{enumerate}
+
+It's important to understand that a fitted model is just the closest model from a family of models. That implies that you have the ``best'' model (according to some criteria); it doesn't imply that you have a good model and it certainly doesn't imply that the model is ``true''. George Box puts this well in his famous aphorism:
+
+\begin{quote}
+All models are wrong, but some are useful.
+\end{quote}
+
+The goal of a model is not to uncover truth, but to discover a simple approximation that is still \textbf{useful}.
+
+\hypertarget{a-simple-model}{%
+\section{A simple model}\label{a-simple-model}}
+
+Lets take a look at the simulated dataset \texttt{sim1}, included with the \texttt{modelr} package. It contains two continuous variables, \texttt{x} and \texttt{y}. Let's plot them to see how they're related:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(modelr)}
+\FunctionTok{ggplot}\NormalTok{(sim1, }\FunctionTok{aes}\NormalTok{(x, y)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-502-1.pdf}
+
+You can see a strong pattern in the data. Let's use a model to capture that pattern and make it explicit.
+
+It's our job to supply the basic form of the model. In this case, the relationship looks linear, i.e.~\texttt{y\ =\ a\_0\ +\ a\_1\ *\ x}. Let's start by getting a feel for what models from that family look like by randomly generating a few and overlaying them on the data. For this simple case, we can use \texttt{geom\_abline()} which takes a slope and intercept as parameters. Later on we'll learn more general techniques that work with any model.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{models }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{a1 =} \FunctionTok{runif}\NormalTok{(}\DecValTok{250}\NormalTok{, }\SpecialCharTok{{-}}\DecValTok{20}\NormalTok{, }\DecValTok{40}\NormalTok{),}
+  \AttributeTok{a2 =} \FunctionTok{runif}\NormalTok{(}\DecValTok{250}\NormalTok{, }\SpecialCharTok{{-}}\DecValTok{5}\NormalTok{, }\DecValTok{5}\NormalTok{)}
+\NormalTok{)}
+
+\FunctionTok{ggplot}\NormalTok{(sim1, }\FunctionTok{aes}\NormalTok{(x, y)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_abline}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{intercept =}\NormalTok{ a1, }\AttributeTok{slope =}\NormalTok{ a2), }\AttributeTok{data =}\NormalTok{ models, }\AttributeTok{alpha =} \DecValTok{1}\SpecialCharTok{/}\DecValTok{4}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-503-1.pdf}
+
+There are 250 models on this plot, but a lot are really bad! We need to find the good models by making precise our intuition that a good model is ``close'' to the data. We need a way to quantify the distance between the data and a model. Then we can fit the model by finding the value of a\_0 and a\_1 that generate the model with the smallest distance from this data.
+
+One easy place to start is to find the vertical distance between each point and the model, as in the following diagram. (Note that I've shifted the x values slightly so you can see the individual distances.)
+
+This distance is just the difference between the y value given by the model (the prediction), and the actual y value in the data (the response). To compute this distance, we first turn our model family into an R function. This takes the model parameters and the data as inputs, and gives values predicted by the model as output:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model1 }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(a, data) \{}
+\NormalTok{  a[}\DecValTok{1}\NormalTok{] }\SpecialCharTok{+}\NormalTok{ data}\SpecialCharTok{$}\NormalTok{x }\SpecialCharTok{*}\NormalTok{ a[}\DecValTok{2}\NormalTok{]}
+\NormalTok{\}}
+\FunctionTok{model1}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{7}\NormalTok{, }\FloatTok{1.5}\NormalTok{), sim1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1]  8.5  8.5  8.5 10.0 10.0 10.0 11.5 11.5 11.5 13.0 13.0 13.0 14.5 14.5 14.5
+## [16] 16.0 16.0 16.0 17.5 17.5 17.5 19.0 19.0 19.0 20.5 20.5 20.5 22.0 22.0 22.0
+\end{verbatim}
+
+Next, we need some way to compute an overall distance between the predicted and actual values. In other words, the plot above shows 30 distances: how do we collapse that into a single number?
+
+One common way to do this in statistics to use the ``root-mean-squared deviation''. We compute the difference between actual and predicted, square them, average them, and the take the square root. This distance has lots of appealing mathematical properties, which we're not going to talk about here. You'll just have to take my word for it!
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{measure\_distance }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(mod, data) \{}
+\NormalTok{  diff }\OtherTok{\textless{}{-}}\NormalTok{ data}\SpecialCharTok{$}\NormalTok{y }\SpecialCharTok{{-}} \FunctionTok{model1}\NormalTok{(mod, data)}
+  \FunctionTok{sqrt}\NormalTok{(}\FunctionTok{mean}\NormalTok{(diff }\SpecialCharTok{\^{}} \DecValTok{2}\NormalTok{))}
+\NormalTok{\}}
+\FunctionTok{measure\_distance}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{7}\NormalTok{, }\FloatTok{1.5}\NormalTok{), sim1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2.665212
+\end{verbatim}
+
+Next, let's overlay the 10 best models on to the data. I've coloured the models by \texttt{-dist}: this is an easy way to make sure that the best models (i.e.~the ones with the smallest distance) get the brighest colours.
+
+We selected the 10 best models out of 250 randomly generated. We will see next week that there is an easy method to find an ``optimal'' model. Here we use the function \texttt{optim} to find it, but do not worry about the details of this.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{best }\OtherTok{\textless{}{-}} \FunctionTok{optim}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{), measure\_distance, }\AttributeTok{data =}\NormalTok{ sim1)}
+\NormalTok{best}\SpecialCharTok{$}\NormalTok{par}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 4.222248 2.051204
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(sim1, }\FunctionTok{aes}\NormalTok{(x, y)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{size =} \DecValTok{2}\NormalTok{, }\AttributeTok{colour =} \StringTok{"grey30"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_abline}\NormalTok{(}\AttributeTok{intercept =}\NormalTok{ best}\SpecialCharTok{$}\NormalTok{par[}\DecValTok{1}\NormalTok{], }\AttributeTok{slope =}\NormalTok{ best}\SpecialCharTok{$}\NormalTok{par[}\DecValTok{2}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-506-1.pdf}
+
+The line gives the so-called fitted or predicted values, which give us the signal that the model managed to capture from the data.
+
+It's also useful to see what the model doesn't capture, the so-called residuals which are left after subtracting the predictions from the data. Residuals are powerful because they allow us to use models to remove striking patterns so we can study the subtler trends that remain.
+
+The residuals are just the distances between the observed and predicted values that we computed above.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fitted }\OtherTok{\textless{}{-}}\NormalTok{ best}\SpecialCharTok{$}\NormalTok{par[}\DecValTok{1}\NormalTok{] }\SpecialCharTok{+}\NormalTok{ best}\SpecialCharTok{$}\NormalTok{par[}\DecValTok{2}\NormalTok{]}\SpecialCharTok{*}\NormalTok{sim1}\SpecialCharTok{$}\NormalTok{x}
+\NormalTok{sim1}\SpecialCharTok{$}\NormalTok{resid }\OtherTok{\textless{}{-}}\NormalTok{ sim1}\SpecialCharTok{$}\NormalTok{y }\SpecialCharTok{{-}}\NormalTok{ fitted}
+
+\FunctionTok{ggplot}\NormalTok{(sim1, }\FunctionTok{aes}\NormalTok{(x, resid)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_ref\_line}\NormalTok{(}\AttributeTok{h =} \DecValTok{0}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-507-1.pdf}
+
+This looks like random noise, suggesting that our model has done a good job of capturing the patterns in the dataset.
+
+\hypertarget{models-as-functions}{%
+\section{Models as functions}\label{models-as-functions}}
+
+The concept of a function is very important when thinking about relationships. A function is a \textbf{mathematical concept}: the relationship between an output and one or more inputs. One way to talk about a function is that you plug in the inputs and receive back the output. For example, the formula \(y = 3x + 7\) can be read as a function with input \(x\) and output \(y\). Plug in a value of \(x\) and receive the output \(y\). So, when \(x\) is 5, the output y is 22.
+
+One way to represent a function is with a \textbf{formula}, but there are other ways as well, for example \textbf{graphs} and \textbf{tables}. The figure below shows a function representing the relationship between gas usage and temperature. The function is much simpler than the data. In the data, there is a scatter of usage levels at each temperature. But in the function there is only one output value for each input value.
+
+Some vocabulary will help to describe how to represent relationships with functions.
+
+\begin{itemize}
+\item
+  The \textbf{response variable} is the variable whose behavior or variation you are trying to understand. On a graph, the response variable is conventionally plotted on the vertical axis.
+\item
+  The \textbf{explanatory variables} are the other variables that you want to use to explain the variation in the response. The previous figure shows just one explanatory variable, temperature. It's plotted on the horizontal axis.
+\item
+  \textbf{Conditioning on explanatory variables} means taking the value of the explanatory variables into account when looking at the response variables. When you looked at the gas usage for those months with a temperature near 49°, you were conditioning gas usage on temperature.
+\item
+  The \textbf{model/fitted/predicted value} is the output of a function. The function -- called the model function -- has been arranged to take the explanatory variables as inputs and return as output a typical value of the response variable. That is, the model function gives the typical value of the response variable conditioning on the explanatory variables. The function shown in the previous figure is a model function. It gives the typical value of gas usage conditioned on the temperature. For instance, at 49°, the typical usage is 65 ccf. At 20°, the typical usage is much higher, about 200 ccf.
+\item
+  The \textbf{residuals} show how far each case is from its model value. For example, one of the cases plotted in Figure 6.2 is a month where the temperature was 13° and the gas usage was 191 ccf. When the input is 13°, the model function gives an output of 228 ccf. So, for that case, the residual is 191 - 228 = -37 ccf. Residuals are always ``actual value minus model value.''
+\end{itemize}
+
+This way, the \textbf{idea of a function} is fundamental to understanding statistical models. Whether the function is represented by a formula or a graph, the function takes one or more inputs and produces an output. The output is the model value, a ``typical'' or ``ideal'' value of the response variable at given levels of the inputs. The inputs are the values explanatory variables.
+
+The \textbf{model function} describes how the typical value of the response variable depends on the explanatory variables. The output of the model function varies along with the explanatory variables. For instance, when temperature is low, the model value of gas usage is high. When temperature is high, the model value of gas usage is low. The idea of ``depends on'' is very important.
+
+The model function describes a \textbf{relationship}. If you plug in values for the explanatory variables for a given case, you get the model value for that case. The model value is usually different from one case to another, at least so long as the values of the explanatory variables are different. When two cases have exactly the same values of the explanatory values, they will have exactly the same model value even though the actual response value might be different for the two cases.
+
+The \textbf{residuals} tell how each case differs from its model value. Both the model values and the residuals are important. The model values tell what's typical or average. The residuals tell how far from typical an individual case is likely to be.
+
+Models explain the \textbf{variation} in the response variable. Some of the variability is explained by the model, the remainder is unexplained. The model values capture the ``deterministic'' or ``explained'' part of the variability of the response variable from case to case. The residuals represent the ``random'' or ``unexplained'' part of the variability of the response variable.
+
+\hypertarget{model-functions-with-multiple-explanatory-variables}{%
+\subsection{Model Functions with Multiple Explanatory Variables}\label{model-functions-with-multiple-explanatory-variables}}
+
+Historically, women tended to be paid less than men. To some extent, this reflected the division of jobs along sex lines and limited range of jobs that were open to women -- secretarial, nursing, school teaching, etc. But often there was simple discrimination; an attitude that women's work wasn't as valuable or that women shouldn't be in the workplace. Over the past thirty or forty years, the situation has changed. Training and jobs that were once rarely available to women -- police work, management, medicine, law, science -- are now open to them.
+
+Surveys consistently show that women tend to earn less than men: a ``wage gap.'' To illustrate, consider data from one such survey, the Current Population Survey (CPS) from 1985. In the survey data, each case is one person. The variables are the person's hourly wages at the time of the survey, age, sex, marital status, the sector of the economy in which they work, etc.
+
+One aspect of these data is displayed by plotting \texttt{wage} versus \texttt{sex}. The model plotted along with the data show that typical wages for men are higher than for women.
+
+The situation is somewhat complex since the workforce reflected in the 1985 data is a mixture of people who were raised in the older system and those who were emerging in a more modern system. A woman's situation can depend strongly on when she was born. This is reflected in the data by the age variable.
+
+There are other factors as well. The roles and burdens of women in family life remain much more traditional than their roles in the economy. Perhaps marital status ought to be taken into account. In fact, there are all sorts of variables that you might want to include -- job type, race, location, etc. A statistical model can include multiple explanatory variables, all at once. To illustrate, consider explaining wage using the worker's age, sex, and marital status.
+
+In a typical graph of data, the vertical axis stands for the response variable and the horizontal axis for the explanatory variable. But what do you do when there is more than one explanatory variable? One approach, when some of the explanatory variables are categorical, is to use differing symbols or colors to represent the differing levels of the categories. The figure below shows wages versus age, sex, and marital status plotted out this way.
+
+The first thing that might be evident from the scatter plot is that not very much is obvious from the data on their own. There does seem to be a slight increase in wages with age, but the cases are scattered all over the place.
+
+The model, shown as the continuous curves in the figure, simplifies things. The relationships shown in the model are much clearer. You can see that wages tend to increase with age, up until about age 40, and they do so differently for men and for women and differently for married people and single people.
+
+Models can sometimes reveal patterns that are \textbf{not evident} in a graph of the data. This is a great advantage of modeling over simple visual inspection of data. There is a real risk, however, that a model is imposing structure that is not really there on the scatter of data, just as people imagine animal shapes in the stars. A skeptical approach is always warranted.
+
+\hypertarget{reading-a-model}{%
+\section{Reading a model}\label{reading-a-model}}
+
+There are two distinct ways that you can read a model.
+
+\begin{itemize}
+\item
+  Read out the \textbf{model value}. Plug in specific values for the explanatory variables and read out the resulting model value. For instance, an input temperature of 35° produces a predicted output gas usage of 125 ccf. Or a single, 30-year old female has a model value of \$8.10 per hour. (Remember, the model is based on data from 1985!)
+\item
+  Characterize the \textbf{relationship} described by the model. In contrast to reading out a model value for some specific values of the explanatory variables, here interest is in the overall relationship: how gas usage depends on temperature; how wages depend on sex or marital status or age.
+\end{itemize}
+
+Reading out the model value is useful when you want to make a \textbf{prediction} (What would the gas usage be if the temperature were 10° degrees?) or when you want to compare the actual value of the response variable to what the model says is a typical value. (Is the gas usage lower than expected in the 49° month, perhaps due to my new furnace?).
+
+Characterizing the relationship is useful when you want to make statements about broad patterns that go beyond individual cases. Is there really a connection between marital status and wage? Which way does it go?
+
+The \textbf{shape} of the model function tells you about such broad relationships. Reading the shape from a graph of the model is not difficult.
+
+For a \textbf{quantitative explanatory variable}, e.g., temperature or age, the model form is a continuous curve or line. An extremely important aspect of this curve is its slope. For the model of gas usage, the slope is down to the right: a negative slope. This means that as temperature increases, the gas usage goes down. In contrast, for the model of wages, the slope is up to the right: a positive slope. This means that as age increases, the wage goes up.
+
+For \textbf{categorical variables}, slopes don't apply. Instead, the pattern can be described in terms of differences. In the model where wage is explained only by sex, the difference between typical wages for males and females is 2.12 dollars per hour.
+
+When there is more than one explanatory variable, there will be a distinct slope or difference associated with each.
+
+\hypertarget{model-design}{%
+\section{Model Design}\label{model-design}}
+
+The suitability of a model for its intended purpose depends on choices that the modeler makes. There are three fundamental choices:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  The data.
+\item
+  The response variable.
+\item
+  The explanatory variables.
+\end{enumerate}
+
+\hypertarget{the-data}{%
+\subsection{The data}\label{the-data}}
+
+How were the data collected? Are they a random sample from a \textbf{relevant} sampling frame? Are they part of an experiment in which one or more variables were intentionally \textbf{manipulated} by the experimenter, or are they \textbf{observational} data? Are the relevant variables being measured? (This includes those that may not be directly of interest but which have a strong influence on the response.) Are the variables being measured in a meaningful way? Start thinking about your models and the variables you will want to include while you are still planning your \textbf{data collection}.
+
+When you are confronted with a situation where your data are not suitable, you need to be honest and realistic about the \textbf{limitations} of the conclusions you can draw.
+
+\hypertarget{the-response-variable}{%
+\subsection{The response variable}\label{the-response-variable}}
+
+The appropriate choice of a response variable for a model is often obvious. The response variable should be the thing that you want to \textbf{predict}, or the thing whose variability you want to understand. Often, it is something that you think is the effect produced by some other cause.
+
+For example, in examining the relationship between gas usage and outdoor temperature, it seems clear that gas usage should be the response: temperature is a major determinant of gas usage. But suppose that the modeler wanted to be able to measure outdoor temperature from the amount of gas used. Then it would make sense to take temperature as the response variable.
+
+Similarly, wages make sense as a response variable when you are interested in how wages vary from person to person depending on traits such as age, experience, and so on. But suppose that a sociologist was interested in assessing the influence of income on personal choices such as marriage. Then the marital status might be a suitable response variable, and wage would be an explanatory variable.
+
+\hypertarget{explanatory-variables}{%
+\subsection{Explanatory variables}\label{explanatory-variables}}
+
+Much of the thought in modeling goes into the \textbf{selection} of explanatory variables and we will see several ways to decide if an explanatory variable ought to be included in a model.
+
+Of course, some of the things that shape the choice of explanatory variables are obvious. Do you want to study sex-related differences in wage? Then sex had better be an explanatory variable. Is temperature a major determinant of the usage of natural gas? Then it makes sense to include it as an explanatory variable.
+
+You will see situations where including an explanatory variable \textbf{hurts} the model, so it is important to be careful. A much more common mistake is to leave out explanatory variables. Unfortunately, few people learn the techniques for handling multiple explanatory variables and so your task will often need to go beyond modeling to include \textbf{explaining} how this is done.
+
+When designing a model, you should think hard about what are potential explanatory variables and be prepared to include them in a model along with the variables that are of direct interest.
+
+\hypertarget{model-terms}{%
+\subsection{Model terms}\label{model-terms}}
+
+Once the modeler has selected explanatory variables, a choice must be made about model terms.
+
+Notice that the various models have graphs of different shapes. The gas-usage model is a gentle curve, the wage-vs-sex model is just two values, and the more elaborate wage model is four lines with different \textbf{slopes} and \textbf{intercepts}.
+
+The modeler determines the shape of the model through his or her \textbf{choice} of model terms. The basic idea of a model term is that explanatory variables can be included in a model in \textbf{more than one way}. Each kind of term describes a different way to include a variable in the model.
+
+You need to learn to describe models using model terms for several reasons.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  First, you will \textbf{communicate} in this language with the computers that you will use to perform the calculations for models.
+\item
+  Second, when there is more than one explanatory variable, it's hard to visualize the model function with a graph. Knowing the language of model terms will help you \textbf{``see''} the shape of the function even when you can't graph it.
+\item
+  Third, model terms are the way to talk about \textbf{``parts''} of models. In evaluating a model, statistical methods can be used to take the model apart and describe the contribution of each part.
+\end{enumerate}
+
+There are just a few basic kinds of models terms. They will be introduced by examples.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{intercept term}: a sort of ``baseline'' that is included in almost every model.
+\item
+  \textbf{main terms}: the effect of explanatory variables directly.
+\item
+  \textbf{interaction terms} how different explanatory variables modulate the relationship of each other to the response variable.
+\item
+  \textbf{transformation terms}: simple modifications of explanatory variables.
+\end{enumerate}
+
+Models almost always include the intercept term and a main term for each of the explanatory variables. Transformation and interaction terms can be added to create more expressive or flexible shapes.
+
+\hypertarget{swimming-world-records}{%
+\subsection{Swimming world records}\label{swimming-world-records}}
+
+The data are the record time (in seconds) for the 100-meter freestyle race along with the year in which the record was set and the sex of the swimmer. The response variable will be time, the explanatory variables will be year and sex.
+
+The figures show some obvious patterns, seen most clearly in the plot of time versus year. The record time has been going down over the years. This is natural, since setting a new record means beating the time of the previous record. There's also a clear difference between the men's and women's records; men's record times are faster than women's, although the difference has decreased markedly over the years.
+
+The following models may or may not reflect these patterns, depending on which model terms are included.
+
+The \textbf{intercept term} is included in almost every statistical model. The intercept term is a bit strange because it isn't something you measure; it isn't a variable. (The term ``intercept'' will make sense when model formulas are introduced in the next section).
+
+The figure below shows the swimming data with a simple model consisting only of the intercept term.
+
+The model value for this model is exactly the same for every case. In order to create model variation from case to case, you would need to include at least one explanatory variable in the model.
+
+The most basic and common way to include an explanatory variable is as a \textbf{main effect}. Almost all models include the intercept term and a main term for each of the explanatory variables.
+
+This produces model values that vary with year, but show no difference between the sexes. This is because sex has not been included in the model.
+
+The model values have been plotted out as small black dots. The model pattern is evident in the first graph: swim time versus year. But in the second graph -- swim time versus sex -- it seems to be all scrambled.
+
+Don't be confused by this. The right-hand graph doesn't include year as a variable, so the dependence of the model values on year is not at all evident from that graph. Still, each of the model value dots in the left graph occurs in the right graph at exactly the same vertical coordinate.
+
+This produces different model values for each level of sex.
+
+There is no model variation with year because year has not been included in the model. This model gives dependence on both sex and year.
+
+Note that the model values form two parallel lines in the graph of time versus year: one line for each sex.
+
+Interaction terms combine two other terms, typically two main terms. An interaction term can describe how one explanatory variable \textbf{modulates} the role of another explanatory variable in modeling the relationship of both with the response variable.
+
+In the graph, including the \textbf{interaction term} between sex and year produces a model with two non-parallel lines for time versus year. (The model also has the main terms for both sex and year and the intercept term, as always.)
+
+One way to think about the meaning of the interaction term in this model is that it describes how the effect of sex changes with year.
+
+Looking at the model, you can see how the difference between the sexes changes over the years; the difference is getting smaller. Without the interaction term, the model values would be two parallel lines; the difference between the lines wouldn't be able to change over the years.
+
+Another, equivalent way to put things is that the interaction term describes how the effect of year changes with sex. The effect of year on the response is reflected by the slope of the model line. Looking at the model, you can see that the slope is different depending on sex: steeper for women than men.
+
+For most people, it's surprising that one term -- the interaction between sex and year -- can describe both how the effect of year is modulated by sex, and how the effect of sex is modulated by year. But these are just two ways of looking at the same thing.
+
+A common misconception about interaction terms is that they describe how one explanatory variable affects another explanatory variable. Don't fall into this error. Model terms are always about how the response variable depends on the explanatory variables, not how explanatory variables depend on one another. An interaction term between two variables describes how two explanatory variables \textbf{combine} jointly to influence the response variable.
+
+Once people learn about interaction terms, they are tempted to include them everywhere. After all, it's natural to think that world record swimming times would depend differently on year for women than for men. Of course wages might depend differently on age for men and women! Regretably, the uncritical use of interaction terms can lead to poor models.
+
+A transformation term is a modification of another term using some mathematical transformation. Transformation terms only apply to quantitative variables. Some common transformations are \(x^2\) or \(\sqrt{x}\) or \(\log(x)\), where the quantitative explanatory variable is \(x\).
+
+A \textbf{transformation term} allows the model to have a dependence on \(x\) that is not a straight line. The graph shows a model that includes these terms: an intercept, main effects of sex and year, an interaction between sex and year, and a year-squared transformation term.
+
+Adding in the year-squared term provides some curvature to the model function.
+
+Look carefully at the model with a year-squared transformation term. You may notice that, according to the model, world record times for men have been getting worse since about year 1990. This is, of course, nonsense. Records can't get worse. A new record is set only when an old record is beaten.
+
+The model doesn't know this common sense about records -- the model terms allow the model to curve in a certain way and the model curves in exactly that way. What you probably want out of a model of world records is a slight curve that's constrained never to slope upward.
+
+There is no elementary way to do this. Indeed, it is an unresolved problem in statistics how best to include in a model additional knowledge that you might have such as ``world records can't get worse with time.''
+
+It's possible to construct a model with main terms but no intercept terms. If the explanatory variables are all quantitative, this is almost always a \textbf{mistake}. The figure, which plots the model function for swim time modeled by age with no intercept term, shows why.
+
+The model function is sloping slightly upward rather than falling as the data clearly indicate. This is because, without an intercept term, the model line is forced to go through the \textbf{origin}. The line is sloping upward so that it will show a time of zero in the hypothetical year zero! Silly. It's no wonder that the model function fails to look anything like the data.
+
+Never leave out the intercept unless you have a very good reason. Indeed, statistical software typically includes the intercept term by default. You have to go out of your way to tell the software to exclude the intercept.
+
+\hypertarget{model-notation}{%
+\section{Model notation}\label{model-notation}}
+
+There is a concise notation for specifying the choices made in a model design, that is, which is the response variable, what are the explanatory variables, and what model terms to use. This notation is the one you will use it in working with computers.
+
+To illustrate, here is the notation for some of the models looked at earlier in this chapter:
+
+\begin{itemize}
+\tightlist
+\item
+  ccf \textasciitilde{} 1 + temperature
+\item
+  wage \textasciitilde{} 1 + sex
+\item
+  time \textasciitilde{} 1 + year + sex + year:sex
+\end{itemize}
+
+The \textasciitilde{} symbol (pronounced ``tilde'') divides each statement into two parts. On the left of the tilde is the name of the response variable. On the right is a list of model terms. When there is more than one model term, as is typically the case, the terms are separated by a + sign.
+
+The examples show three types of model terms:
+
+\begin{itemize}
+\tightlist
+\item
+  The symbol 1 stands for the intercept term.
+\item
+  A variable name (e.g., sex or temperature) stands for using that variable in a main term.
+\item
+  An interaction term is written as two names separated by a colon, for instance year:sex.
+\end{itemize}
+
+Although this notation looks like arithmetic or algebra, IT IS NOT. The plus sign does not mean arithmetic addition, it simply is the divider mark between terms. In English, one uses a comma to mark the divider as in ``rock, paper, and scissors.'' The modeling notation uses + instead: ``rock + paper + scissors.'' So, in the modeling notation 1 + age does not mean ``arithmetically add 1 to the age.'' Instead, it means ``two model terms: the intercept and age as a main term.''
+
+Similarly, don't confuse the tilde with an algebraic equal sign. The model statement is not an equation. So the statement wage \textasciitilde{} 1 + age does not mean ``wage equals 1 plus age.'' Instead it means, wage is the response variable and there are two model terms: the intercept and age as a main term.''
+
+In order to avoid accidentally leaving out important terms, the modeling notation includes some shorthand. Two main points will cover most of what you will do:
+
+\begin{itemize}
+\item
+  You don't have to type the 1 term; it will be included by default. So, wage \textasciitilde{} age is the same thing as wage \textasciitilde{} 1 + age. On those very rare occasions when you might want to insist that there be no intercept term, you can indicate this with a minus sign: wage \textasciitilde{} age - 1.
+\item
+  Almost always, when you include an interaction term between two variables, you will also include the main terms for those variables. The * sign can be used as shorthand. The model wage \textasciitilde{} 1 + sex + age + sex:age can be written simply as wage \textasciitilde{} sex * age.
+\end{itemize}
+
+\hypertarget{daily-flights-example}{%
+\section{Daily Flights Example}\label{daily-flights-example}}
+
+Let's work through a dataset including the number of flights that leave NYC per day. This is a really small dataset --- only 365 rows and 2 columns --- and we're not going to end up with a fully realised model, but as you'll see, the steps along the way will help us better understand the data. Let's get started by counting the number of flights per day and visualising it with ggplot2.
+
+\begin{center}\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-508-1} \end{center}
+
+Understanding the long-term trend is challenging because there's a very strong day-of-week effect that dominates the subtler patterns. Let's start by looking at the distribution of flight numbers by day-of-week:
+
+\begin{center}\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-509-1} \end{center}
+
+There are fewer flights on weekends because most travel is for business. The effect is particularly pronounced on Saturday: you might sometimes leave on Sunday for a Monday morning meeting, but it's very rare that you'd leave on Saturday as you'd much rather be at home with your family.
+
+One way to remove this strong pattern is to use a model where a model term is day of the week. First, we fit the model, and display its predictions overlaid on the original data:
+
+\begin{center}\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-510-1} \end{center}
+
+Let's visualize the residuals
+
+\begin{center}\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-511-1} \end{center}
+
+Note the change in the y-axis: now we are seeing the deviation from the expected number of flights, given the day of week. This plot is useful because now that we've removed much of the large day-of-week effect, we can see some of the subtler patterns that remain.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Our model seems to fail starting in June: you can still see a strong regular pattern that our model hasn't captured. Drawing a plot with one line for each day of the week makes the cause easier to see:
+\end{enumerate}
+
+\begin{center}\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-512-1} \end{center}
+
+Our model fails to accurately predict the number of flights on Saturday: during summer there are more flights than we expect, and during Fall there are fewer.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  There are some days with far fewer flights than expected. If you're familiar with American public holidays, you might spot New Year's day, July 4th, Thanksgiving and Christmas.
+\end{enumerate}
+
+\begin{center}\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-513-1} \end{center}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  There seems to be some smoother long term trend over the course of a year. There are fewer flights in January (and December), and more in summer (May-Sep).
+\end{enumerate}
+
+\begin{verbatim}
+## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
+\end{verbatim}
+
+\begin{center}\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-514-1} \end{center}
+
+It is not the purpose of this chapter to teach you how to address these, but simply to notice them!!
 
   \bibliography{book.bib,packages.bib}
 
