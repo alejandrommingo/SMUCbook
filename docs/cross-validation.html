@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>9.3 Cross Validation | Simulation and Modeling to Understand the Change</title>
+  <meta name="description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="9.3 Cross Validation | Simulation and Modeling to Understand the Change" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="/images/Rplot.png" />
+  <meta property="og:description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
+  <meta name="github-repo" content="alejandrommingo/SMUCbook" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="9.3 Cross Validation | Simulation and Modeling to Understand the Change" />
+  
+  <meta name="twitter:description" content="These are lecture notes for the module Simulation and Modelling to Understand Change given in the School of Human Sciences and Technology at IE University, Madrid, Spain. The module is given in the 2nd semester of the 1st year of the bachelor in Data and Business Analytics. Knowledge of basic elements of R programming as well as probability and statistics is assumed." />
+  <meta name="twitter:image" content="/images/Rplot.png" />
+
+<meta name="author" content="Alejandro Martínez-Mingo &amp; Manuele Leonelli" />
+
+
+<meta name="date" content="2022-03-11" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="exploratory-data-analysis-1.html"/>
+<link rel="next" href="exercises-solutions.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="libs/viz-1.8.2/viz.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/grViz-binding-1.0.6.1/grViz.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.20/datatables.js"></script>
+<link href="libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">SMUC</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="what-is-simulation.html"><a href="what-is-simulation.html"><i class="fa fa-check"></i><b>1.1</b> What is simulation</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="what-is-simulation.html"><a href="what-is-simulation.html#a-simple-simulation-model"><i class="fa fa-check"></i><b>1.1.1</b> A simple simulation model</a></li>
+<li class="chapter" data-level="1.1.2" data-path="what-is-simulation.html"><a href="what-is-simulation.html#why-simulate"><i class="fa fa-check"></i><b>1.1.2</b> Why simulate?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="types-of-simulations.html"><a href="types-of-simulations.html"><i class="fa fa-check"></i><b>1.2</b> Types of simulations</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="types-of-simulations.html"><a href="types-of-simulations.html#stochastic-vs-deterministic-simulations"><i class="fa fa-check"></i><b>1.2.1</b> Stochastic vs deterministic simulations</a></li>
+<li class="chapter" data-level="1.2.2" data-path="types-of-simulations.html"><a href="types-of-simulations.html#static-vs-dynamic-simulations"><i class="fa fa-check"></i><b>1.2.2</b> Static vs dynamic simulations</a></li>
+<li class="chapter" data-level="1.2.3" data-path="types-of-simulations.html"><a href="types-of-simulations.html#discrete-vs-continuous-simulations"><i class="fa fa-check"></i><b>1.2.3</b> Discrete vs continuous simulations</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="elements-of-a-simulation-model.html"><a href="elements-of-a-simulation-model.html"><i class="fa fa-check"></i><b>1.3</b> Elements of a simulation model</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="elements-of-a-simulation-model.html"><a href="elements-of-a-simulation-model.html#objects-of-the-model"><i class="fa fa-check"></i><b>1.3.1</b> Objects of the model</a></li>
+<li class="chapter" data-level="1.3.2" data-path="elements-of-a-simulation-model.html"><a href="elements-of-a-simulation-model.html#organization-of-entities-and-resources"><i class="fa fa-check"></i><b>1.3.2</b> Organization of entities and resources</a></li>
+<li class="chapter" data-level="1.3.3" data-path="elements-of-a-simulation-model.html"><a href="elements-of-a-simulation-model.html#operations-of-the-objects"><i class="fa fa-check"></i><b>1.3.3</b> Operations of the objects</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="the-donut-shop-example.html"><a href="the-donut-shop-example.html"><i class="fa fa-check"></i><b>1.4</b> The donut shop example</a></li>
+<li class="chapter" data-level="1.5" data-path="simulating-a-little-health-center.html"><a href="simulating-a-little-health-center.html"><i class="fa fa-check"></i><b>1.5</b> Simulating a little health center</a></li>
+<li class="chapter" data-level="1.6" data-path="whats-next.html"><a href="whats-next.html"><i class="fa fa-check"></i><b>1.6</b> What’s next</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="r-programming.html"><a href="r-programming.html"><i class="fa fa-check"></i><b>2</b> R programming</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="why-r.html"><a href="why-r.html"><i class="fa fa-check"></i><b>2.1</b> Why R?</a></li>
+<li class="chapter" data-level="2.2" data-path="section-bibliography.html"><a href="section-bibliography.html"><i class="fa fa-check"></i><b>2.2</b> Section Bibliography</a></li>
+<li class="chapter" data-level="2.3" data-path="r-basics.html"><a href="r-basics.html"><i class="fa fa-check"></i><b>2.3</b> R basics</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="r-basics.html"><a href="r-basics.html#introduction-to-r"><i class="fa fa-check"></i><b>2.3.1</b> Introduction to R</a></li>
+<li class="chapter" data-level="2.3.2" data-path="r-basics.html"><a href="r-basics.html#r-history"><i class="fa fa-check"></i><b>2.3.2</b> R History</a></li>
+<li class="chapter" data-level="2.3.3" data-path="r-basics.html"><a href="r-basics.html#r-advantages"><i class="fa fa-check"></i><b>2.3.3</b> R Advantages</a></li>
+<li class="chapter" data-level="2.3.4" data-path="r-basics.html"><a href="r-basics.html#what-do-we-mean-by-r"><i class="fa fa-check"></i><b>2.3.4</b> What do we mean by R?</a></li>
+<li class="chapter" data-level="2.3.5" data-path="r-basics.html"><a href="r-basics.html#console-mode"><i class="fa fa-check"></i><b>2.3.5</b> Console Mode</a></li>
+<li class="chapter" data-level="2.3.6" data-path="r-basics.html"><a href="r-basics.html#getting-help-in-r"><i class="fa fa-check"></i><b>2.3.6</b> Getting help in R</a></li>
+<li class="chapter" data-level="2.3.7" data-path="r-basics.html"><a href="r-basics.html#packages-in-r"><i class="fa fa-check"></i><b>2.3.7</b> Packages in R</a></li>
+<li class="chapter" data-level="2.3.8" data-path="r-basics.html"><a href="r-basics.html#built-in-r-libraries"><i class="fa fa-check"></i><b>2.3.8</b> Built-in R libraries</a></li>
+<li class="chapter" data-level="2.3.9" data-path="r-basics.html"><a href="r-basics.html#contents-of-packages"><i class="fa fa-check"></i><b>2.3.9</b> Contents of Packages</a></li>
+<li class="chapter" data-level="2.3.10" data-path="r-basics.html"><a href="r-basics.html#installing-packages"><i class="fa fa-check"></i><b>2.3.10</b> Installing Packages</a></li>
+<li class="chapter" data-level="2.3.11" data-path="r-basics.html"><a href="r-basics.html#command-line-versus-scripts"><i class="fa fa-check"></i><b>2.3.11</b> Command line versus scripts</a></li>
+<li class="chapter" data-level="2.3.12" data-path="r-basics.html"><a href="r-basics.html#rstudio"><i class="fa fa-check"></i><b>2.3.12</b> RStudio</a></li>
+<li class="chapter" data-level="2.3.13" data-path="r-basics.html"><a href="r-basics.html#working-directory"><i class="fa fa-check"></i><b>2.3.13</b> Working Directory</a></li>
+<li class="chapter" data-level="2.3.14" data-path="r-basics.html"><a href="r-basics.html#exercise-set-up-your-working-directory"><i class="fa fa-check"></i><b>2.3.14</b> Exercise: Set up your Working Directory</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="expressions-objects-and-symbols.html"><a href="expressions-objects-and-symbols.html"><i class="fa fa-check"></i><b>2.4</b> Expressions, Objects and Symbols</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="expressions-objects-and-symbols.html"><a href="expressions-objects-and-symbols.html#some-examples-to-start-with"><i class="fa fa-check"></i><b>2.4.1</b> Some examples to start with</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="r-as-a-calculator.html"><a href="r-as-a-calculator.html"><i class="fa fa-check"></i><b>2.5</b> R as a Calculator</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="r-as-a-calculator.html"><a href="r-as-a-calculator.html#complex-numbers-in-r"><i class="fa fa-check"></i><b>2.5.1</b> Complex numbers in R</a></li>
+<li class="chapter" data-level="2.5.2" data-path="r-as-a-calculator.html"><a href="r-as-a-calculator.html#rounding"><i class="fa fa-check"></i><b>2.5.2</b> Rounding</a></li>
+<li class="chapter" data-level="2.5.3" data-path="r-as-a-calculator.html"><a href="r-as-a-calculator.html#arithmetics"><i class="fa fa-check"></i><b>2.5.3</b> Arithmetics</a></li>
+<li class="chapter" data-level="2.5.4" data-path="r-as-a-calculator.html"><a href="r-as-a-calculator.html#modulo-and-integer-quotients"><i class="fa fa-check"></i><b>2.5.4</b> Modulo and integer quotients</a></li>
+<li class="chapter" data-level="2.5.5" data-path="r-as-a-calculator.html"><a href="r-as-a-calculator.html#operators"><i class="fa fa-check"></i><b>2.5.5</b> Operators</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html"><i class="fa fa-check"></i><b>2.6</b> R Basic Data types</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#integers"><i class="fa fa-check"></i><b>2.6.1</b> Integers</a></li>
+<li class="chapter" data-level="2.6.2" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#integer-vs.-double"><i class="fa fa-check"></i><b>2.6.2</b> Integer vs. Double</a></li>
+<li class="chapter" data-level="2.6.3" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#logical-operators"><i class="fa fa-check"></i><b>2.6.3</b> Logical operators</a></li>
+<li class="chapter" data-level="2.6.4" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#real-numbers-equality"><i class="fa fa-check"></i><b>2.6.4</b> Real numbers equality</a></li>
+<li class="chapter" data-level="2.6.5" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#logical-arithmetic"><i class="fa fa-check"></i><b>2.6.5</b> Logical arithmetic</a></li>
+<li class="chapter" data-level="2.6.6" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#characters"><i class="fa fa-check"></i><b>2.6.6</b> Characters</a></li>
+<li class="chapter" data-level="2.6.7" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#characters-letters-vectors"><i class="fa fa-check"></i><b>2.6.7</b> Characters: letters vectors</a></li>
+<li class="chapter" data-level="2.6.8" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#characters-pasting-strings-together"><i class="fa fa-check"></i><b>2.6.8</b> Characters: Pasting strings together</a></li>
+<li class="chapter" data-level="2.6.9" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#characters-extracting-parts-of-strings"><i class="fa fa-check"></i><b>2.6.9</b> Characters: Extracting parts of strings</a></li>
+<li class="chapter" data-level="2.6.10" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#characters-counting-things-within-strings"><i class="fa fa-check"></i><b>2.6.10</b> Characters: Counting things within strings</a></li>
+<li class="chapter" data-level="2.6.11" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#characters-upper--and-lower-case-text"><i class="fa fa-check"></i><b>2.6.11</b> Characters: Upper- and lower-case text</a></li>
+<li class="chapter" data-level="2.6.12" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#dates-and-times"><i class="fa fa-check"></i><b>2.6.12</b> Dates and times</a></li>
+<li class="chapter" data-level="2.6.13" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#dates-and-times-reading-time-data-from-files"><i class="fa fa-check"></i><b>2.6.13</b> Dates and times: Reading time data from files</a></li>
+<li class="chapter" data-level="2.6.14" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#dates-and-times-the-strptime-function"><i class="fa fa-check"></i><b>2.6.14</b> Dates and times: The <code>strptime</code> function</a></li>
+<li class="chapter" data-level="2.6.15" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#dates-and-times-summary"><i class="fa fa-check"></i><b>2.6.15</b> Dates and times: Summary</a></li>
+<li class="chapter" data-level="2.6.16" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#testing-and-coercing"><i class="fa fa-check"></i><b>2.6.16</b> Testing and coercing</a></li>
+<li class="chapter" data-level="2.6.17" data-path="r-basic-data-types.html"><a href="r-basic-data-types.html#missing-values-infinity-and-things-that-are-not-numbers"><i class="fa fa-check"></i><b>2.6.17</b> Missing values, infinity and things that are not numbers</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html"><i class="fa fa-check"></i><b>2.7</b> R Basic Data Structures</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#vectors"><i class="fa fa-check"></i><b>2.7.1</b> Vectors</a></li>
+<li class="chapter" data-level="2.7.2" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#sequences"><i class="fa fa-check"></i><b>2.7.2</b> Sequences</a></li>
+<li class="chapter" data-level="2.7.3" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#vector-and-subscripts"><i class="fa fa-check"></i><b>2.7.3</b> Vector and Subscripts</a></li>
+<li class="chapter" data-level="2.7.4" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#vector-operations"><i class="fa fa-check"></i><b>2.7.4</b> Vector Operations</a></li>
+<li class="chapter" data-level="2.7.5" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#vector-functions"><i class="fa fa-check"></i><b>2.7.5</b> Vector Functions</a></li>
+<li class="chapter" data-level="2.7.6" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#sets"><i class="fa fa-check"></i><b>2.7.6</b> Sets</a></li>
+<li class="chapter" data-level="2.7.7" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#factors"><i class="fa fa-check"></i><b>2.7.7</b> Factors</a></li>
+<li class="chapter" data-level="2.7.8" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#matrices-and-arrays"><i class="fa fa-check"></i><b>2.7.8</b> Matrices and Arrays</a></li>
+<li class="chapter" data-level="2.7.9" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#matrices"><i class="fa fa-check"></i><b>2.7.9</b> Matrices</a></li>
+<li class="chapter" data-level="2.7.10" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#lists"><i class="fa fa-check"></i><b>2.7.10</b> Lists</a></li>
+<li class="chapter" data-level="2.7.11" data-path="r-basic-data-structures.html"><a href="r-basic-data-structures.html#data-frames"><i class="fa fa-check"></i><b>2.7.11</b> Data Frames</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="control-flow.html"><a href="control-flow.html"><i class="fa fa-check"></i><b>2.8</b> Control Flow</a>
+<ul>
+<li class="chapter" data-level="2.8.1" data-path="control-flow.html"><a href="control-flow.html#conditional-statements"><i class="fa fa-check"></i><b>2.8.1</b> Conditional statements</a></li>
+<li class="chapter" data-level="2.8.2" data-path="control-flow.html"><a href="control-flow.html#loops"><i class="fa fa-check"></i><b>2.8.2</b> Loops</a></li>
+<li class="chapter" data-level="2.8.3" data-path="control-flow.html"><a href="control-flow.html#functions"><i class="fa fa-check"></i><b>2.8.3</b> Functions</a></li>
+<li class="chapter" data-level="2.8.4" data-path="control-flow.html"><a href="control-flow.html#the-apply-family"><i class="fa fa-check"></i><b>2.8.4</b> The <code>apply</code> Family</a></li>
+<li class="chapter" data-level="2.8.5" data-path="control-flow.html"><a href="control-flow.html#apply-family-examples"><i class="fa fa-check"></i><b>2.8.5</b> <code>apply</code> Family Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="2.9" data-path="the-pipe-operator.html"><a href="the-pipe-operator.html"><i class="fa fa-check"></i><b>2.9</b> The pipe operator</a></li>
+<li class="chapter" data-level="2.10" data-path="plotting.html"><a href="plotting.html"><i class="fa fa-check"></i><b>2.10</b> Plotting</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="probability-basics.html"><a href="probability-basics.html"><i class="fa fa-check"></i><b>3</b> Probability Basics</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="set-theory.html"><a href="set-theory.html"><i class="fa fa-check"></i><b>3.1</b> Set theory</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="set-theory.html"><a href="set-theory.html#sample-spaces"><i class="fa fa-check"></i><b>3.1.1</b> Sample Spaces</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>3.2</b> Probability</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="probability.html"><a href="probability.html#independence"><i class="fa fa-check"></i><b>3.2.1</b> Independence</a></li>
+<li class="chapter" data-level="3.2.2" data-path="probability.html"><a href="probability.html#conditional-probabilities"><i class="fa fa-check"></i><b>3.2.2</b> Conditional Probabilities</a></li>
+<li class="chapter" data-level="3.2.3" data-path="probability.html"><a href="probability.html#conditional-probabilities-and-independence"><i class="fa fa-check"></i><b>3.2.3</b> Conditional Probabilities and Independence</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="random-variables.html"><a href="random-variables.html"><i class="fa fa-check"></i><b>3.3</b> Random Variables</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="random-variables.html"><a href="random-variables.html#distribution-functions"><i class="fa fa-check"></i><b>3.3.1</b> Distribution Functions</a></li>
+<li class="chapter" data-level="3.3.2" data-path="random-variables.html"><a href="random-variables.html#random-variable-types"><i class="fa fa-check"></i><b>3.3.2</b> Random variable types</a></li>
+<li class="chapter" data-level="3.3.3" data-path="random-variables.html"><a href="random-variables.html#discrete-random-variables"><i class="fa fa-check"></i><b>3.3.3</b> Discrete Random Variables</a></li>
+<li class="chapter" data-level="3.3.4" data-path="random-variables.html"><a href="random-variables.html#continuous-random-variables"><i class="fa fa-check"></i><b>3.3.4</b> Continuous Random Variables</a></li>
+<li class="chapter" data-level="3.3.5" data-path="random-variables.html"><a href="random-variables.html#expectation-of-a-random-variable"><i class="fa fa-check"></i><b>3.3.5</b> Expectation of a Random Variable</a></li>
+<li class="chapter" data-level="3.3.6" data-path="random-variables.html"><a href="random-variables.html#variance-of-random-variables"><i class="fa fa-check"></i><b>3.3.6</b> Variance of Random Variables</a></li>
+<li class="chapter" data-level="3.3.7" data-path="random-variables.html"><a href="random-variables.html#sample-mean-and-sample-variance"><i class="fa fa-check"></i><b>3.3.7</b> Sample Mean and Sample Variance</a></li>
+<li class="chapter" data-level="3.3.8" data-path="random-variables.html"><a href="random-variables.html#covariance-between-random-variables"><i class="fa fa-check"></i><b>3.3.8</b> Covariance between Random Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="discrete-random-variables-1.html"><a href="discrete-random-variables-1.html"><i class="fa fa-check"></i><b>3.4</b> Discrete Random Variables</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="discrete-random-variables-1.html"><a href="discrete-random-variables-1.html#probability-mass-function"><i class="fa fa-check"></i><b>3.4.1</b> Probability Mass Function</a></li>
+<li class="chapter" data-level="3.4.2" data-path="discrete-random-variables-1.html"><a href="discrete-random-variables-1.html#cumulative-distribution-function"><i class="fa fa-check"></i><b>3.4.2</b> Cumulative Distribution Function</a></li>
+<li class="chapter" data-level="3.4.3" data-path="discrete-random-variables-1.html"><a href="discrete-random-variables-1.html#summaries"><i class="fa fa-check"></i><b>3.4.3</b> Summaries</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html"><i class="fa fa-check"></i><b>3.5</b> Notable Discrete Variables</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#bernoulli-distribution"><i class="fa fa-check"></i><b>3.5.1</b> Bernoulli Distribution</a></li>
+<li class="chapter" data-level="3.5.2" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#binomial-distribution"><i class="fa fa-check"></i><b>3.5.2</b> Binomial Distribution</a></li>
+<li class="chapter" data-level="3.5.3" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#geometric-distribution"><i class="fa fa-check"></i><b>3.5.3</b> Geometric distribution</a></li>
+<li class="chapter" data-level="3.5.4" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#poisson-distribution"><i class="fa fa-check"></i><b>3.5.4</b> Poisson Distribution</a></li>
+<li class="chapter" data-level="3.5.5" data-path="notable-discrete-variables.html"><a href="notable-discrete-variables.html#some-examples"><i class="fa fa-check"></i><b>3.5.5</b> Some Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="continuous-random-variables-1.html"><a href="continuous-random-variables-1.html"><i class="fa fa-check"></i><b>3.6</b> Continuous Random Variables</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="continuous-random-variables-1.html"><a href="continuous-random-variables-1.html#probability-density-function"><i class="fa fa-check"></i><b>3.6.1</b> Probability Density Function</a></li>
+<li class="chapter" data-level="3.6.2" data-path="continuous-random-variables-1.html"><a href="continuous-random-variables-1.html#cumulative-distribution-function-1"><i class="fa fa-check"></i><b>3.6.2</b> Cumulative Distribution Function</a></li>
+<li class="chapter" data-level="3.6.3" data-path="continuous-random-variables-1.html"><a href="continuous-random-variables-1.html#summaries-1"><i class="fa fa-check"></i><b>3.6.3</b> Summaries</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="notable-continuous-distribution.html"><a href="notable-continuous-distribution.html"><i class="fa fa-check"></i><b>3.7</b> Notable Continuous Distribution</a>
+<ul>
+<li class="chapter" data-level="3.7.1" data-path="notable-continuous-distribution.html"><a href="notable-continuous-distribution.html#uniform-distribution"><i class="fa fa-check"></i><b>3.7.1</b> Uniform Distribution</a></li>
+<li class="chapter" data-level="3.7.2" data-path="notable-continuous-distribution.html"><a href="notable-continuous-distribution.html#exponential-distribution"><i class="fa fa-check"></i><b>3.7.2</b> Exponential Distribution</a></li>
+<li class="chapter" data-level="3.7.3" data-path="notable-continuous-distribution.html"><a href="notable-continuous-distribution.html#normal-distribution"><i class="fa fa-check"></i><b>3.7.3</b> Normal Distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="3.8" data-path="the-central-limit-theorem.html"><a href="the-central-limit-theorem.html"><i class="fa fa-check"></i><b>3.8</b> The Central Limit Theorem</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="random-number-generation.html"><a href="random-number-generation.html"><i class="fa fa-check"></i><b>4</b> Random Number Generation</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="properties-of-random-numbers.html"><a href="properties-of-random-numbers.html"><i class="fa fa-check"></i><b>4.1</b> Properties of Random Numbers</a></li>
+<li class="chapter" data-level="4.2" data-path="pseudo-random-numbers.html"><a href="pseudo-random-numbers.html"><i class="fa fa-check"></i><b>4.2</b> Pseudo Random Numbers</a></li>
+<li class="chapter" data-level="4.3" data-path="generating-pseudo-random-numbers.html"><a href="generating-pseudo-random-numbers.html"><i class="fa fa-check"></i><b>4.3</b> Generating Pseudo-Random Numbers</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="generating-pseudo-random-numbers.html"><a href="generating-pseudo-random-numbers.html#generating-pseudo-random-numbers-in-r"><i class="fa fa-check"></i><b>4.3.1</b> Generating Pseudo-Random Numbers in R</a></li>
+<li class="chapter" data-level="4.3.2" data-path="generating-pseudo-random-numbers.html"><a href="generating-pseudo-random-numbers.html#linear-congruential-method"><i class="fa fa-check"></i><b>4.3.2</b> Linear Congruential Method</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="testing-randomness.html"><a href="testing-randomness.html"><i class="fa fa-check"></i><b>4.4</b> Testing Randomness</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="testing-randomness.html"><a href="testing-randomness.html#testing-uniformity"><i class="fa fa-check"></i><b>4.4.1</b> Testing Uniformity</a></li>
+<li class="chapter" data-level="4.4.2" data-path="testing-randomness.html"><a href="testing-randomness.html#testing-independence"><i class="fa fa-check"></i><b>4.4.2</b> Testing Independence</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="random-variate-generation.html"><a href="random-variate-generation.html"><i class="fa fa-check"></i><b>4.5</b> Random Variate Generation</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="random-variate-generation.html"><a href="random-variate-generation.html#random-generation-in-r"><i class="fa fa-check"></i><b>4.5.1</b> Random Generation in R</a></li>
+<li class="chapter" data-level="4.5.2" data-path="random-variate-generation.html"><a href="random-variate-generation.html#the-inverse-transform-method"><i class="fa fa-check"></i><b>4.5.2</b> The Inverse Transform Method</a></li>
+<li class="chapter" data-level="4.5.3" data-path="random-variate-generation.html"><a href="random-variate-generation.html#simulating-bernoulli-and-binomial"><i class="fa fa-check"></i><b>4.5.3</b> Simulating Bernoulli and Binomial</a></li>
+<li class="chapter" data-level="4.5.4" data-path="random-variate-generation.html"><a href="random-variate-generation.html#simulating-other-distributions"><i class="fa fa-check"></i><b>4.5.4</b> Simulating Other Distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="testing-generic-simulation-sequences.html"><a href="testing-generic-simulation-sequences.html"><i class="fa fa-check"></i><b>4.6</b> Testing Generic Simulation Sequences</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="testing-generic-simulation-sequences.html"><a href="testing-generic-simulation-sequences.html#testing-distribution-fit"><i class="fa fa-check"></i><b>4.6.1</b> Testing Distribution Fit</a></li>
+<li class="chapter" data-level="4.6.2" data-path="testing-generic-simulation-sequences.html"><a href="testing-generic-simulation-sequences.html#testing-independence-1"><i class="fa fa-check"></i><b>4.6.2</b> Testing Independence</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="monte-carlo-simulation.html"><a href="monte-carlo-simulation.html"><i class="fa fa-check"></i><b>5</b> Monte Carlo Simulation</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="what-does-monte-carlo-simulation-mean.html"><a href="what-does-monte-carlo-simulation-mean.html"><i class="fa fa-check"></i><b>5.1</b> What does Monte Carlo simulation mean?</a></li>
+<li class="chapter" data-level="5.2" data-path="a-bit-of-history.html"><a href="a-bit-of-history.html"><i class="fa fa-check"></i><b>5.2</b> A bit of history</a></li>
+<li class="chapter" data-level="5.3" data-path="steps-of-monte-carlo-simulation.html"><a href="steps-of-monte-carlo-simulation.html"><i class="fa fa-check"></i><b>5.3</b> Steps of Monte Carlo simulation</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="steps-of-monte-carlo-simulation.html"><a href="steps-of-monte-carlo-simulation.html#estimating-pi-step-1"><i class="fa fa-check"></i><b>5.3.1</b> Estimating <span class="math inline">\(\pi\)</span>: step 1</a></li>
+<li class="chapter" data-level="5.3.2" data-path="steps-of-monte-carlo-simulation.html"><a href="steps-of-monte-carlo-simulation.html#estimating-pi-step-2"><i class="fa fa-check"></i><b>5.3.2</b> Estimating <span class="math inline">\(\pi\)</span>: step 2</a></li>
+<li class="chapter" data-level="5.3.3" data-path="steps-of-monte-carlo-simulation.html"><a href="steps-of-monte-carlo-simulation.html#estimating-pi-step-3"><i class="fa fa-check"></i><b>5.3.3</b> Estimating <span class="math inline">\(\pi\)</span>: step 3</a></li>
+<li class="chapter" data-level="5.3.4" data-path="steps-of-monte-carlo-simulation.html"><a href="steps-of-monte-carlo-simulation.html#estimating-pi-step-4"><i class="fa fa-check"></i><b>5.3.4</b> Estimating <span class="math inline">\(\pi\)</span>: step 4</a></li>
+<li class="chapter" data-level="5.3.5" data-path="steps-of-monte-carlo-simulation.html"><a href="steps-of-monte-carlo-simulation.html#estimating-pi-step-5"><i class="fa fa-check"></i><b>5.3.5</b> Estimating <span class="math inline">\(\pi\)</span>: step 5</a></li>
+<li class="chapter" data-level="5.3.6" data-path="steps-of-monte-carlo-simulation.html"><a href="steps-of-monte-carlo-simulation.html#estimating-pi-conclusions"><i class="fa fa-check"></i><b>5.3.6</b> Estimating <span class="math inline">\(\pi\)</span>: conclusions</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="the-sample-function.html"><a href="the-sample-function.html"><i class="fa fa-check"></i><b>5.4</b> The <code>sample</code> function</a></li>
+<li class="chapter" data-level="5.5" data-path="a-game-of-chance.html"><a href="a-game-of-chance.html"><i class="fa fa-check"></i><b>5.5</b> A game of chance</a></li>
+<li class="chapter" data-level="5.6" data-path="takeaways.html"><a href="takeaways.html"><i class="fa fa-check"></i><b>5.6</b> Takeaways</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="monte-carlo-methods-for-inference.html"><a href="monte-carlo-methods-for-inference.html"><i class="fa fa-check"></i><b>6</b> Monte Carlo methods for inference</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="monte-carlo-for-estimation.html"><a href="monte-carlo-for-estimation.html"><i class="fa fa-check"></i><b>6.1</b> Monte Carlo for estimation</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="monte-carlo-for-estimation.html"><a href="monte-carlo-for-estimation.html#sam-and-annie-from-sleepless-in-seattle"><i class="fa fa-check"></i><b>6.1.1</b> Sam and Annie from ‘Sleepless in Seattle’</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="general-case-with-standard-normal-distributions.html"><a href="general-case-with-standard-normal-distributions.html"><i class="fa fa-check"></i><b>6.2</b> General Case with Standard Normal Distributions</a></li>
+<li class="chapter" data-level="6.3" data-path="the-taxi-problem-comparing-estimators.html"><a href="the-taxi-problem-comparing-estimators.html"><i class="fa fa-check"></i><b>6.3</b> The taxi problem (comparing estimators)</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="discrete-events-simulation-with-r.html"><a href="discrete-events-simulation-with-r.html"><i class="fa fa-check"></i><b>7</b> Discrete Events Simulation with R</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="simmer-terminology.html"><a href="simmer-terminology.html"><i class="fa fa-check"></i><b>7.1</b> <code>simmer</code> terminology</a></li>
+<li class="chapter" data-level="7.2" data-path="the-trajectory-object.html"><a href="the-trajectory-object.html"><i class="fa fa-check"></i><b>7.2</b> The Trajectory Object</a></li>
+<li class="chapter" data-level="7.3" data-path="the-simulation-enviroment.html"><a href="the-simulation-enviroment.html"><i class="fa fa-check"></i><b>7.3</b> The Simulation Enviroment</a></li>
+<li class="chapter" data-level="7.4" data-path="monitoring-and-data-retrieval.html"><a href="monitoring-and-data-retrieval.html"><i class="fa fa-check"></i><b>7.4</b> Monitoring and data retrieval</a></li>
+<li class="chapter" data-level="7.5" data-path="simmer-example.html"><a href="simmer-example.html"><i class="fa fa-check"></i><b>7.5</b> <code>simmer</code> Example</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>8</b> Model Building</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="a-simple-model.html"><a href="a-simple-model.html"><i class="fa fa-check"></i><b>8.1</b> A simple model</a></li>
+<li class="chapter" data-level="8.2" data-path="models-as-functions.html"><a href="models-as-functions.html"><i class="fa fa-check"></i><b>8.2</b> Models as functions</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="models-as-functions.html"><a href="models-as-functions.html#model-functions-with-multiple-explanatory-variables"><i class="fa fa-check"></i><b>8.2.1</b> Model Functions with Multiple Explanatory Variables</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="reading-a-model.html"><a href="reading-a-model.html"><i class="fa fa-check"></i><b>8.3</b> Reading a model</a></li>
+<li class="chapter" data-level="8.4" data-path="model-design.html"><a href="model-design.html"><i class="fa fa-check"></i><b>8.4</b> Model Design</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="model-design.html"><a href="model-design.html#the-data"><i class="fa fa-check"></i><b>8.4.1</b> The data</a></li>
+<li class="chapter" data-level="8.4.2" data-path="model-design.html"><a href="model-design.html#the-response-variable"><i class="fa fa-check"></i><b>8.4.2</b> The response variable</a></li>
+<li class="chapter" data-level="8.4.3" data-path="model-design.html"><a href="model-design.html#explanatory-variables"><i class="fa fa-check"></i><b>8.4.3</b> Explanatory variables</a></li>
+<li class="chapter" data-level="8.4.4" data-path="model-design.html"><a href="model-design.html#model-terms"><i class="fa fa-check"></i><b>8.4.4</b> Model terms</a></li>
+<li class="chapter" data-level="8.4.5" data-path="model-design.html"><a href="model-design.html#swimming-world-records"><i class="fa fa-check"></i><b>8.4.5</b> Swimming world records</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="model-notation.html"><a href="model-notation.html"><i class="fa fa-check"></i><b>8.5</b> Model notation</a></li>
+<li class="chapter" data-level="8.6" data-path="daily-flights-example.html"><a href="daily-flights-example.html"><i class="fa fa-check"></i><b>8.6</b> Daily Flights Example</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>9</b> Exploratory Data Analysis</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="data-cleansing.html"><a href="data-cleansing.html"><i class="fa fa-check"></i><b>9.1</b> Data Cleansing</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="data-cleansing.html"><a href="data-cleansing.html#handling-missing-values"><i class="fa fa-check"></i><b>9.1.1</b> Handling missing values</a></li>
+<li class="chapter" data-level="9.1.2" data-path="data-cleansing.html"><a href="data-cleansing.html#handling-missing-values-deletion"><i class="fa fa-check"></i><b>9.1.2</b> Handling missing values (deletion)</a></li>
+<li class="chapter" data-level="9.1.3" data-path="data-cleansing.html"><a href="data-cleansing.html#handling-missing-values-imputation"><i class="fa fa-check"></i><b>9.1.3</b> Handling missing values (imputation)</a></li>
+<li class="chapter" data-level="9.1.4" data-path="data-cleansing.html"><a href="data-cleansing.html#outliers"><i class="fa fa-check"></i><b>9.1.4</b> Outliers</a></li>
+<li class="chapter" data-level="9.1.5" data-path="data-cleansing.html"><a href="data-cleansing.html#obvious-inconsistencies"><i class="fa fa-check"></i><b>9.1.5</b> Obvious inconsistencies</a></li>
+<li class="chapter" data-level="9.1.6" data-path="data-cleansing.html"><a href="data-cleansing.html#dummy-variables"><i class="fa fa-check"></i><b>9.1.6</b> Dummy variables</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html"><i class="fa fa-check"></i><b>9.2</b> Exploratory Data Analysis</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#some-terminology"><i class="fa fa-check"></i><b>9.2.1</b> Some terminology</a></li>
+<li class="chapter" data-level="9.2.2" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#variation"><i class="fa fa-check"></i><b>9.2.2</b> Variation</a></li>
+<li class="chapter" data-level="9.2.3" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#covariation"><i class="fa fa-check"></i><b>9.2.3</b> Covariation</a></li>
+<li class="chapter" data-level="9.2.4" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#patterns-and-models"><i class="fa fa-check"></i><b>9.2.4</b> Patterns and models</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="cross-validation.html"><a href="cross-validation.html"><i class="fa fa-check"></i><b>9.3</b> Cross Validation</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="cross-validation.html"><a href="cross-validation.html#traintest-split-cross-validation"><i class="fa fa-check"></i><b>9.3.1</b> Train/Test split cross validation</a></li>
+<li class="chapter" data-level="9.3.2" data-path="cross-validation.html"><a href="cross-validation.html#leave-one-out-cross-validation-loocv"><i class="fa fa-check"></i><b>9.3.2</b> Leave one out cross validation (LOOCV)</a></li>
+<li class="chapter" data-level="9.3.3" data-path="cross-validation.html"><a href="cross-validation.html#k-fold-cross-validation"><i class="fa fa-check"></i><b>9.3.3</b> K-fold cross validation</a></li>
+<li class="chapter" data-level="9.3.4" data-path="cross-validation.html"><a href="cross-validation.html#repeated-k-fold-cross-validation"><i class="fa fa-check"></i><b>9.3.4</b> Repeated K-fold cross validation</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="exercises-solutions.html"><a href="exercises-solutions.html"><i class="fa fa-check"></i><b>9.4</b> Exercises Solutions</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Simulation and Modeling to Understand the Change</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="cross-validation" class="section level2" number="9.3">
+<h2><span class="header-section-number">9.3</span> Cross Validation</h2>
+<p>A common danger in modeling is overfitting. Overfitting happens when we create a model that behaves perfectly with our data, predicting a large percentage of the dependent variable, but when generalizing it is not able to predict the data that come from reality. On the other hand, underfitting occurs when we create a model that does not fit our data (our sample of the population), and therefore will not fit properly to the reality. In none of the cases we can say that our model is generalizable.</p>
+<p>To explain it in a less technical language, let’s give an example. Imagine that you would like to move to Japan, and therefore you have decided to study the language from home. Let’s put two suppositions.</p>
+<ul>
+<li><p><strong>Overfitting:</strong> You decide that you are going to see all the episodes of Dragon Ball to get an idea of the language before going to Japan. You repeat all the sagas of this series several times during a year, and once you know perfectly the language of the series you think you are ready to start your trip to Japan. You pack your bag and take the first flight, and when you arrive at Tokyo airport you have your first conversation with a Japanese person. You quickly realize that you don’t understand practically anything he’s saying to you, and every time you talk (thing like “Kamehamehaaa!!!” or “Yūgō!!”) he looks at you strangely, as if you weren’t speaking the right way. You have trained your mind very well with specific data that is not able to be generalized to other contexts and situations, so it is not useful for your purpose. This would be a case of Overfitting.</p></li>
+<li><p><strong>Underfitting:</strong> You decide that you are going to read some of the Japanese dictionary before you leave. You spend two days reading the dictionary and the third day you take a flight to Tokyo. Obviously, when you arrive at Tokyo airport and start talking to a Japanese person, you don’t understand anything he says to you and you can’t articulate a word. You have trained your mind badly with very poor data, so although the words you have studied are used in more general contexts, you are not able to reach your goal. This would be a case of Underfitting.</p></li>
+</ul>
+<p align="center">
+<img src="images/EDA/OverfVsUnderf.png" width="650">
+</p>
+<p>In the graphs we can identify, on the left, the underfitting model, and on the right the overfitting model. But how could we solve this problem?</p>
+<p>Following the example, let’s imagine that we find a bar in our city where we can talk to Japanese people to practice our language. If we follow the first strategy, the first time we get there the same thing will happen, but we will realize about our mistakes in a controlled environment and we have time to return home and train with other situations. This is called <strong>Cross Validation</strong>. We divide our data into training sets and test sets to check that our model not only works correctly with the data I use to train it, but also with new data that has nothing to do with the training set.</p>
+<p>To avoid the over and underfitting problems we will use cross validation techniques. In this section we will explain the four most important cross validation techniques. All of them can be summarized in the following steps:</p>
+<ul>
+<li>Reserve a small sample of the data set</li>
+<li>Build (or train) the model using the remaining part of the data set</li>
+<li>Test the effectiveness of the model on the the reserved sample of the data set. If the model works well on the test data set, then it’s good.</li>
+</ul>
+<div id="traintest-split-cross-validation" class="section level3" number="9.3.1">
+<h3><span class="header-section-number">9.3.1</span> Train/Test split cross validation</h3>
+<p>Dividing a dataset into a training set and a testing set is a common and necessary operation when making a predictive model. It is important that we learn how to do this before we start creating any model. In general terms, an original dataset is usually divided into two sets: training and testing. Sometimes it is divided into a third subset called a validation set.</p>
+<ul>
+<li>Training dataset: This is the set with which we build the model. With this set we will calculate the parameters to obtain the equations that we will use later.</li>
+<li>Testing dataset: It is the set with which we check the effectiveness of our model. The equations and parameters of the original model are now used to calculate which is the output (Dependent Variable) based on the inputs of the testing set (Independent Variables). These outputs are used to compare the efficiency of the model, and see if it is really useful to predict or not the result.</li>
+</ul>
+<p align="center">
+<img src="images/EDA/traintest.jpeg" width="650">
+</p>
+<p>Generally, the training set and the testing set are divided using a ratio of 75%(training)-25%(testing) or even 80%-20%.</p>
+<p>There are many ways to divide data into two sections. The easiest way is to take the first 75%-80% for training and the rest for testing. However, this method can lead to problems because the first rows come from a different data source than the middle and end rows, or because they are ordered by time and so the time factor is important in the model. These situations can lead to the final result of the model being deviated from what it should have been.</p>
+<p>The most effective way is to use a method to select rows randomly. Let’s look at different methods for dividing the dataset into training and testing sets.</p>
+<p>Let’s start by reading the “Advertising” dataset. We will use four different ways to divide the original dataset into training and testing sets.</p>
+<div class="sourceCode" id="cb1089"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1089-1"><a href="cross-validation.html#cb1089-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">&quot;./Data/Advertising.csv&quot;</span>) <span class="co"># Read the data</span></span>
+<span id="cb1089-2"><a href="cross-validation.html#cb1089-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(data) <span class="co"># Test the structure is well readed (3333 rows and 21 columns)</span></span></code></pre></div>
+<pre><code>## [1] 200   4</code></pre>
+<ol style="list-style-type: decimal">
+<li>We are going to split the sample based on a random method, using the normal distribution. First we will create a vector of the same length as the number of cases in the dataset, but normally distributed.</li>
+</ol>
+<div class="sourceCode" id="cb1091"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1091-1"><a href="cross-validation.html#cb1091-1" aria-hidden="true" tabindex="-1"></a>randVec <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="fu">nrow</span>(data))</span>
+<span id="cb1091-2"><a href="cross-validation.html#cb1091-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(randVec)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-579-1.png" width="672" /></p>
+<ol start="2" style="list-style-type: decimal">
+<li>We use this new variable to randomly divide the cases. To do this we are going to create a new variable that we will call <code>check</code> that will store <code>TRUE</code> in the positions where <code>randVec</code> is less than 0.8 and <code>FALSE</code> in the remaining positions.</li>
+</ol>
+<div class="sourceCode" id="cb1092"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1092-1"><a href="cross-validation.html#cb1092-1" aria-hidden="true" tabindex="-1"></a>check <span class="ot">=</span> randVec <span class="sc">&lt;</span> <span class="fl">0.8</span></span>
+<span id="cb1092-2"><a href="cross-validation.html#cb1092-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(check,<span class="dv">6</span>)</span></code></pre></div>
+<pre><code>## [1] FALSE  TRUE FALSE  TRUE FALSE  TRUE</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Finally, we could define the <code>training</code> set with those data that meet the <code>check</code> condition and the <code>test</code> set with those that do not.</li>
+</ol>
+<div class="sourceCode" id="cb1094"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1094-1"><a href="cross-validation.html#cb1094-1" aria-hidden="true" tabindex="-1"></a>training <span class="ot">=</span> data[check,]</span>
+<span id="cb1094-2"><a href="cross-validation.html#cb1094-2" aria-hidden="true" tabindex="-1"></a>test <span class="ot">=</span> data[<span class="sc">!</span>check,]</span>
+<span id="cb1094-3"><a href="cross-validation.html#cb1094-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="fu">dim</span>(training), <span class="fu">dim</span>(test))</span></code></pre></div>
+<pre><code>## [1] 149   4  51   4</code></pre>
+<p>We can also do this by using the <code>sample</code> function in a simpler way than by generating a new random variable.</p>
+<div class="sourceCode" id="cb1096"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1096-1"><a href="cross-validation.html#cb1096-1" aria-hidden="true" tabindex="-1"></a>smp_size <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fl">0.80</span> <span class="sc">*</span> <span class="fu">nrow</span>(data))</span>
+<span id="cb1096-2"><a href="cross-validation.html#cb1096-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1096-3"><a href="cross-validation.html#cb1096-3" aria-hidden="true" tabindex="-1"></a>trainIndex <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">nrow</span>(data), <span class="at">size =</span> smp_size)</span>
+<span id="cb1096-4"><a href="cross-validation.html#cb1096-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1096-5"><a href="cross-validation.html#cb1096-5" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> data[trainIndex, ]</span>
+<span id="cb1096-6"><a href="cross-validation.html#cb1096-6" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> data[<span class="sc">-</span>trainIndex, ]</span>
+<span id="cb1096-7"><a href="cross-validation.html#cb1096-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1096-8"><a href="cross-validation.html#cb1096-8" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="fu">dim</span>(train), <span class="fu">dim</span>(test))</span></code></pre></div>
+<pre><code>## [1] 160   4  40   4</code></pre>
+<p>Finally, we can use libraries like <code>dplyr</code> or <code>caret</code> to make it faster.</p>
+<div class="sourceCode" id="cb1098"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1098-1"><a href="cross-validation.html#cb1098-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1098-2"><a href="cross-validation.html#cb1098-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1098-3"><a href="cross-validation.html#cb1098-3" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> <span class="fu">sample_frac</span>(data, <span class="fl">0.8</span>)</span>
+<span id="cb1098-4"><a href="cross-validation.html#cb1098-4" aria-hidden="true" tabindex="-1"></a>trainIndex <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">rownames</span>(train))</span>
+<span id="cb1098-5"><a href="cross-validation.html#cb1098-5" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> data[<span class="sc">-</span>trainIndex, ]</span>
+<span id="cb1098-6"><a href="cross-validation.html#cb1098-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1098-7"><a href="cross-validation.html#cb1098-7" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="fu">dim</span>(train), <span class="fu">dim</span>(test))</span></code></pre></div>
+<pre><code>## [1] 160   4  40   4</code></pre>
+<div class="sourceCode" id="cb1100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1100-1"><a href="cross-validation.html#cb1100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
+<span id="cb1100-2"><a href="cross-validation.html#cb1100-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1100-3"><a href="cross-validation.html#cb1100-3" aria-hidden="true" tabindex="-1"></a>trainingSamples <span class="ot">&lt;-</span> <span class="fu">createDataPartition</span>(data<span class="sc">$</span>Sales, <span class="at">p =</span> <span class="fl">0.8</span>, <span class="at">list =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1100-4"><a href="cross-validation.html#cb1100-4" aria-hidden="true" tabindex="-1"></a>train  <span class="ot">&lt;-</span> data[trainingSamples, ]</span>
+<span id="cb1100-5"><a href="cross-validation.html#cb1100-5" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> data[<span class="sc">-</span>trainingSamples, ]</span>
+<span id="cb1100-6"><a href="cross-validation.html#cb1100-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1100-7"><a href="cross-validation.html#cb1100-7" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="fu">dim</span>(train), <span class="fu">dim</span>(test))</span></code></pre></div>
+<pre><code>## [1] 162   4  38   4</code></pre>
+<p>This cross validation method, carried out in any of the four ways we have seen, is the most classic, and although it is still the most used, it is not the one that gives us the best results. Let’s look at two other methods that are a little more complex: Leave one out cross validation (LOOCV) and K-fold cross validation. Let’s see how each of them works and how to carry them out using the <code>caret</code> library.</p>
+</div>
+<div id="leave-one-out-cross-validation-loocv" class="section level3" number="9.3.2">
+<h3><span class="header-section-number">9.3.2</span> Leave one out cross validation (LOOCV)</h3>
+<p>This method works as follow:</p>
+<ol style="list-style-type: decimal">
+<li>Leave out one data point and build the model on the rest of the data set</li>
+<li>Test the model against the data point that is left out at step 1 and record the test error associated with the prediction</li>
+<li>Repeat the process for all data points</li>
+<li>Compute the overall prediction error by taking the average of all these test error estimates recorded at step 2</li>
+</ol>
+<p align="center">
+<img src="images/EDA/loocv.png" width="650">
+</p>
+<p>Let’s see how it works in R</p>
+<div class="sourceCode" id="cb1102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1102-1"><a href="cross-validation.html#cb1102-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define training control</span></span>
+<span id="cb1102-2"><a href="cross-validation.html#cb1102-2" aria-hidden="true" tabindex="-1"></a>trainControl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;LOOCV&quot;</span>)</span>
+<span id="cb1102-3"><a href="cross-validation.html#cb1102-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Train the model</span></span>
+<span id="cb1102-4"><a href="cross-validation.html#cb1102-4" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">train</span>(Sales <span class="sc">~</span>., <span class="at">data =</span> data, <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
+<span id="cb1102-5"><a href="cross-validation.html#cb1102-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">trControl =</span> trainControl)</span>
+<span id="cb1102-6"><a href="cross-validation.html#cb1102-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Summarize the results</span></span>
+<span id="cb1102-7"><a href="cross-validation.html#cb1102-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(model)</span></code></pre></div>
+<pre><code>## Linear Regression 
+## 
+## 200 samples
+##   3 predictor
+## 
+## No pre-processing
+## Resampling: Leave-One-Out Cross-Validation 
+## Summary of sample sizes: 199, 199, 199, 199, 199, 199, ... 
+## Resampling results:
+## 
+##   RMSE      Rsquared   MAE     
+##   1.716654  0.8912074  1.282867
+## 
+## Tuning parameter &#39;intercept&#39; was held constant at a value of TRUE</code></pre>
+<p>The advantage of the LOOCV method is that we make use all data points reducing potential bias. However, the process is repeated as many times as there are data points, resulting to a higher execution time when n is extremely large. Additionally, we test the model performance against one data point at each iteration. This might result to higher variation in the prediction error, if some data points are outliers.</p>
+</div>
+<div id="k-fold-cross-validation" class="section level3" number="9.3.3">
+<h3><span class="header-section-number">9.3.3</span> K-fold cross validation</h3>
+<p>The k-fold cross-validation method evaluates the model performance on different subsets of the training data and then calculate the average prediction error rate. The algorithm is as follow:</p>
+<ol style="list-style-type: decimal">
+<li>Randomly split the data set into k-subsets (or k-fold) (for example 5 subsets)</li>
+<li>Reserve one subset and train the model on all other subsets</li>
+<li>Test the model on the reserved subset and record the prediction error</li>
+<li>Repeat this process until each of the k subsets has served as the test set.</li>
+<li>Compute the average of the k recorded errors. This is called the cross-validation error serving as the performance metric for the model.</li>
+<li>K-fold cross-validation (CV) is a robust method for estimating the accuracy of a model.</li>
+</ol>
+<p>The most obvious advantage of k-fold CV compared to LOOCV is computational. A less obvious but potentially more important advantage of k-fold CV is that it often gives more accurate estimates of the test error rate than does LOOCV. Typical question, is how to choose right value of k?</p>
+<p>Lower value of K is more biased and hence undesirable. On the other hand, higher value of K is less biased, but can suffer from large variability. It is not hard to see that a smaller value of k (say k = 2) always takes us towards the train-test approach, whereas a higher value of k (say k = number of data points) leads us to LOOCV approach.</p>
+<p>In practice, one typically performs k-fold cross-validation using k’s between 5 and 10, as these values have been shown empirically to yield test error rate estimates that suffer neither from excessively high bias nor from very high variance. The following example uses <code>caret</code> library to perform the 10-fold cross validation to estimate the prediction error.</p>
+<div class="sourceCode" id="cb1104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1104-1"><a href="cross-validation.html#cb1104-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define training control</span></span>
+<span id="cb1104-2"><a href="cross-validation.html#cb1104-2" aria-hidden="true" tabindex="-1"></a>trainControl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="at">number =</span> <span class="dv">10</span>)</span>
+<span id="cb1104-3"><a href="cross-validation.html#cb1104-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Train the model</span></span>
+<span id="cb1104-4"><a href="cross-validation.html#cb1104-4" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">train</span>(Sales <span class="sc">~</span>., <span class="at">data =</span> data, <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
+<span id="cb1104-5"><a href="cross-validation.html#cb1104-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">trControl =</span> trainControl)</span>
+<span id="cb1104-6"><a href="cross-validation.html#cb1104-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Summarize the results</span></span>
+<span id="cb1104-7"><a href="cross-validation.html#cb1104-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(model)</span></code></pre></div>
+<pre><code>## Linear Regression 
+## 
+## 200 samples
+##   3 predictor
+## 
+## No pre-processing
+## Resampling: Cross-Validated (10 fold) 
+## Summary of sample sizes: 180, 180, 179, 182, 180, 180, ... 
+## Resampling results:
+## 
+##   RMSE      Rsquared   MAE     
+##   1.676153  0.9014748  1.277113
+## 
+## Tuning parameter &#39;intercept&#39; was held constant at a value of TRUE</code></pre>
+</div>
+<div id="repeated-k-fold-cross-validation" class="section level3" number="9.3.4">
+<h3><span class="header-section-number">9.3.4</span> Repeated K-fold cross validation</h3>
+<p>The process of splitting the data into k-folds can be repeated a number of times, this is called repeated k-fold cross validation. The final model error is taken as the mean error from the number of repeats. Is generally recommended to use the (repeated) k-fold cross-validation to estimate the prediction error rate. The following example uses 10-fold cross validation with 3 repeats:</p>
+<div class="sourceCode" id="cb1106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1106-1"><a href="cross-validation.html#cb1106-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define training control</span></span>
+<span id="cb1106-2"><a href="cross-validation.html#cb1106-2" aria-hidden="true" tabindex="-1"></a>trainControl <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;repeatedcv&quot;</span>, </span>
+<span id="cb1106-3"><a href="cross-validation.html#cb1106-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">number =</span> <span class="dv">10</span>, <span class="at">repeats =</span> <span class="dv">3</span>)</span>
+<span id="cb1106-4"><a href="cross-validation.html#cb1106-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Train the model</span></span>
+<span id="cb1106-5"><a href="cross-validation.html#cb1106-5" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">train</span>(Sales <span class="sc">~</span>., <span class="at">data =</span> data, <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
+<span id="cb1106-6"><a href="cross-validation.html#cb1106-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">trControl =</span> trainControl)</span>
+<span id="cb1106-7"><a href="cross-validation.html#cb1106-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Summarize the results</span></span>
+<span id="cb1106-8"><a href="cross-validation.html#cb1106-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(model)</span></code></pre></div>
+<pre><code>## Linear Regression 
+## 
+## 200 samples
+##   3 predictor
+## 
+## No pre-processing
+## Resampling: Cross-Validated (10 fold, repeated 3 times) 
+## Summary of sample sizes: 181, 180, 180, 179, 180, 179, ... 
+## Resampling results:
+## 
+##   RMSE      Rsquared   MAE     
+##   1.686375  0.8973303  1.281722
+## 
+## Tuning parameter &#39;intercept&#39; was held constant at a value of TRUE</code></pre>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="exploratory-data-analysis-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="exercises-solutions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/09-Exploratory-Data-Analysis.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/alejandrommingo/SMUCbook/blob/master/09-Exploratory-Data-Analysis.Rmd",
+"text": null
+},
+"download": ["bookdownproj.pdf", "bookdownproj.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

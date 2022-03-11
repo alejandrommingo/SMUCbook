@@ -760,7 +760,7 @@ The \texttt{history()} command displays the history of commands entered during t
 ##     writeLines(rawhist[inds], file2)
 ##     file.show(file2, title = "R History", delete.file = TRUE)
 ## }
-## <bytecode: 0x5557bc1419e0>
+## <bytecode: 0x561767f68d58>
 ## <environment: namespace:utils>
 \end{verbatim}
 
@@ -2383,7 +2383,7 @@ To see how R handles dates and times, have a look at Sys.time():
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "2022-03-11 12:08:45 CET"
+## [1] "2022-03-11 13:00:27 CET"
 \end{verbatim}
 
 This description of date and time is strictly hierarchical from left to right: the longest time scale (years) comes first, then month, then day, separated by hyphens, then there is a blank space, followed by the time, with hours first (using the 24-hour clock), then minutes, then seconds, separated by colons. Finally, there is a character string explaining the time zone (CET stands for Central Europe Time)
@@ -2399,7 +2399,7 @@ The baseline for expressing today's date and time in seconds is 1 January 1970:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 1646996925
+## [1] 1.647e+09
 \end{verbatim}
 
 This is fine for plotting time series graphs, but it is not much good for computing monthly means (e.g.~is the mean for June significantly different from the July mean?) or daily means (e.g.~is the Monday mean significantly different from the Friday mean?).
@@ -2429,12 +2429,12 @@ the effort. Naturally, you can easily convert to one representation to the other
 \end{Shaded}
 
 \begin{verbatim}
-##                sec                min               hour               mday 
-## "45.4804699420929"                "8"               "12"               "11" 
-##                mon               year               wday               yday 
-##                "2"              "122"                "5"               "69" 
-##              isdst               zone             gmtoff 
-##                "0"              "CET"             "3600"
+##               sec               min              hour              mday 
+## "27.376944065094"               "0"              "13"              "11" 
+##               mon              year              wday              yday 
+##               "2"             "122"               "5"              "69" 
+##             isdst              zone            gmtoff 
+##               "0"             "CET"            "3600"
 \end{verbatim}
 
 Here you see the nine components of the list. The time is represented by the number of seconds (\texttt{sec}), minutes (\texttt{min}) and hours (on the 24-hour clock). Next comes the day of the month (\texttt{mday}, starting from 1), then the month of the year (mon, starting at January = 0), then the year (starting at 0 = 1900). The day of the week (\texttt{wday}) is coded from Sunday = 0 to Saturday = 6. The day within the year (\texttt{yday}) is coded from 0 = January 1. Finally, there is a logical variable \texttt{isdst} which asks whether daylight saving time is in operation (0 = FALSE in this case). The ones you are most likely to use include \texttt{year} (to get yearly mean values), \texttt{mon} (to get monthly means) and \texttt{wday} (to get means for the different days of the week).
@@ -11947,6 +11947,1469 @@ Our model fails to accurately predict the number of flights on Saturday: during 
 \begin{center}\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-514-1} \end{center}
 
 It is not the purpose of this chapter to teach you how to address these, but simply to notice them!!
+
+\hypertarget{exploratory-data-analysis}{%
+\chapter{Exploratory Data Analysis}\label{exploratory-data-analysis}}
+
+In the previous chapter we understood some important concepts about modeling. However, when we want to model any phenomenon we must rely on historical data to describe it. The management and study of these data is an essential phase for any professional in the area.
+
+In this chapter we will define the phases that precede statistical modeling, and we will learn some fundamental concepts.
+
+\hypertarget{data-cleansing}{%
+\section{Data Cleansing}\label{data-cleansing}}
+
+We need to be sure that the data we use to create our models is reliable and well structured. And for that we are going to carry out a ``tedious'' data cleansing process. During this process we are going to handle \textbf{missing values}, \textbf{outliers}, \textbf{obvious inconsistences} and \textbf{dummy variables}.
+
+The first step in the modeling process consists of understanding our goals and the data provided to us. Normally we will have documentation about all the data provided. In case we are the ones who collect those data, we need to create the documentation ourselves. It is essential to understand all the variables that we have to determine their importance for the model. Once we understand out data we import the dataset in R to start working on it.
+
+\textbf{Titanic Example:}
+
+Once we have understood our data we are going to import it into R and study quantitatively how the variables behave before carrying out the cleaning. To do this, first check that the data have been imported correctly into R, ensuring that all rows and columns are identified in our data frame.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"./Data/titanic3.csv"}\NormalTok{, }\AttributeTok{stringsAsFactors =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{na.strings =} \StringTok{""}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-516-1.pdf}
+
+Secondly, we can obtain the structure of our data frame using the \texttt{str()} function to identify the variable types we have.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    1309 obs. of  14 variables:
+##  $ pclass   : int  1 1 1 1 1 1 1 1 1 1 ...
+##  $ survived : int  1 1 0 0 0 1 1 0 1 0 ...
+##  $ name     : chr  "Allen, Miss. Elisabeth Walton" "Allison, Master. Hudson Trevor" "Allison, Miss. Helen Loraine" "Allison, Mr. Hudson Joshua Creighton" ...
+##  $ sex      : chr  "female" "male" "female" "male" ...
+##  $ age      : num  29 0.917 2 30 25 ...
+##  $ sibsp    : int  0 1 1 1 1 0 1 0 2 0 ...
+##  $ parch    : int  0 2 2 2 2 0 0 0 0 0 ...
+##  $ ticket   : chr  "24160" "113781" "113781" "113781" ...
+##  $ fare     : num  211 152 152 152 152 ...
+##  $ cabin    : chr  "B5" "C22 C26" "C22 C26" "C22 C26" ...
+##  $ embarked : chr  "S" "S" "S" "S" ...
+##  $ boat     : chr  "2" "11" NA NA ...
+##  $ body     : int  NA NA NA 135 NA NA NA NA NA 22 ...
+##  $ home.dest: chr  "St Louis, MO" "Montreal, PQ / Chesterville, ON" "Montreal, PQ / Chesterville, ON" "Montreal, PQ / Chesterville, ON" ...
+\end{verbatim}
+
+\hypertarget{handling-missing-values}{%
+\subsection{Handling missing values}\label{handling-missing-values}}
+
+When we have missing values in a dataset there are several ways to handle them. Let's start grouping the solutions in two types:
+
+\hypertarget{deletion-drastic-approach}{%
+\subsubsection{Deletion (drastic approach):}\label{deletion-drastic-approach}}
+
+If we find missing values, following this approach we will remove the data, either the whole row or the whole column, depending on whether the missing information corresponds more with the case (we will delete that row) or with the variable (we will delete that column). For the deletion by row we have a basic function of R that will eliminate all the cases in which there is at least one missing value that is \texttt{na.omit()}. But we will never delete data only by columns or by rows, it will depend on the percentage of missing values that we identify in each column. A good criterion is to eliminate all the columns that have more than 80\% of missing values. Once we have eliminated those columns we will clean the cases with missing values by rows.
+
+\hypertarget{imputation}{%
+\subsubsection{Imputation:}\label{imputation}}
+
+Inferring the missing values. This consists of adding or replacing missing values with other values, for example a 0 or the average. There are several methods to impute a missing value and the choice of the best method will depend quite a lot on the context of the information.
+
+\begin{itemize}
+\item
+  Fill in any missing value with 0. In this case we can find for example ages or destination equal to 0, so it does not fit well for all missing values of the dataset.
+\item
+  Impute the value with a string. If we impute by the word ``unknown'', this word will appear instead of the missing values, but there are many variables for which we could fill with better information. Therefore, the most commonly used option is to replace the values in different ways for each variable.
+\item
+  We can also use some central tendency measure when filling in missing data, and that is to impute them by the mean or by the median. We can take the values that are not missing from the numeric columns and fill in the missing values with the mean of those values.
+\end{itemize}
+
+\hypertarget{handling-missing-values-deletion}{%
+\subsection{Handling missing values (deletion)}\label{handling-missing-values-deletion}}
+
+To start handling missing values from our dataset let's check how many we have for each variable. To do this we are going to use the \texttt{is.na()} function, let's see this function applied to the \texttt{body} variable:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(data}\SpecialCharTok{$}\NormalTok{body))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  TRUE  TRUE  TRUE FALSE  TRUE  TRUE
+\end{verbatim}
+
+This function will return a Boolean vector with TRUE's for missing values and FALSE's for filled values. If we need the complementary vector we could obtain it using the expression \texttt{!is.na()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(data}\SpecialCharTok{$}\NormalTok{body))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] FALSE FALSE FALSE  TRUE FALSE FALSE
+\end{verbatim}
+
+We can use the \texttt{sum()} function to count how many NA's we have in the variable
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sum}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(data}\SpecialCharTok{$}\NormalTok{body))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1188
+\end{verbatim}
+
+But this is only informing us about one variable, and we will need to know the amount of missing values we are working with.
+
+\begin{exercise}
+\textbf{Exercise}
+Develop a function that shows us the missing values for each of the variables of any dataset that we introduce as input.
+\end{exercise}
+
+Once we know the missing values we have to work with, we have to decide what to do with them. Remember that one way to handle them was to eliminate the cases with missing values, and we can do this through the \texttt{na.omit()} function. Let's see how it works comparing the dataset without missing values and the original one
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{=} \FunctionTok{na.omit}\NormalTok{(data)}
+\FunctionTok{c}\NormalTok{(}\FunctionTok{dim}\NormalTok{(data), }\FunctionTok{dim}\NormalTok{(x))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1309   14    0   14
+\end{verbatim}
+
+We see that we have 0 values now in our dataset. This is because all cases have at least one missing value. Let see what happens if we delete the missing values by columns:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{y }\OtherTok{=} \FunctionTok{data.frame}\NormalTok{(}\FunctionTok{t}\NormalTok{(}\FunctionTok{na.omit}\NormalTok{(}\FunctionTok{t}\NormalTok{(data))))}
+\FunctionTok{c}\NormalTok{(}\FunctionTok{dim}\NormalTok{(data), }\FunctionTok{dim}\NormalTok{(y))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1309   14 1309    7
+\end{verbatim}
+
+In this case we don't lose as much information as we did removing the cases with missing values, but we keep wasting information of variables that can be useful. For this reason, we will always try to balance the deletion of columns and rows.
+
+To do this we are going to create a function that remove all columns with more than 80\% of missing values and then remove the remaining cases with missing values.
+
+\begin{exercise}
+\textbf{Exercise}
+Develop a function that remove all columns with more than 80\% of missing values and then remove the remaining cases.
+\end{exercise}
+
+\hypertarget{handling-missing-values-imputation}{%
+\subsection{Handling missing values (imputation)}\label{handling-missing-values-imputation}}
+
+That's great! We already know how to deal with missing values from a case-elimination perspective. This would be one of the solutions, but we have already talked about another possible solution: the imputation of missing values. As mentioned above, there are many ways to impute missing values. Let's start by replacing all NA's with 0.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data0 }\OtherTok{=}\NormalTok{ data}
+\NormalTok{data0[}\FunctionTok{is.na}\NormalTok{(data0)] }\OtherTok{=} \DecValTok{0}
+\FunctionTok{datatable}\NormalTok{(data0)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-523-1.pdf}
+
+This is a good method, but we see that, for example, the variable \texttt{home.dest}(destination) is now equal to 0 in many cases, which is not easy to interpret.
+
+Let's see another imputation option. Now let's impute NA's by the word ``Unknown''.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dataString }\OtherTok{=}\NormalTok{ data}
+\NormalTok{dataString[}\FunctionTok{is.na}\NormalTok{(dataString)] }\OtherTok{=} \StringTok{"Unknown"}
+\FunctionTok{datatable}\NormalTok{(dataString)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-524-1.pdf}
+
+The problem now, as you can expect, is the opposite. We are treating numeric variables as characters when imputing by a word. For this reason, we will always try to impute the missing values of each variable considering its characteristics. Let's see how to do it with the following exercise:
+
+\begin{exercise}
+\textbf{Exercise:}
+
+Impute separately the missing values of the variable \texttt{body} by zeros, the missing values of the variable \texttt{home.dest} by the word ``Unknown'' and the missing values of the variable \texttt{age} by the mean in the variable \texttt{age}.
+
+\textbf{Hint:} To impute by the mean we need to estimate the mean of the variable, but the \texttt{mean()} function will return an error if we have missing values inside the variable. For that reason we have to include a parameter inside the \texttt{mean()} function called \texttt{na.rm\ =\ TRUE}.
+\end{exercise}
+
+\textbf{Note:} There are many other imputation methods much more appropriate, statistically speaking, than the ones we have used, but also much more complex. You will see many of this methods in the future, but in the meantime I recommend this \href{http://www.stat.uchicago.edu/~eichler/stat24600/Admin/MissingDataReview.pdf}{paper} from the Loyola University to go deeper.
+
+\hypertarget{outliers}{%
+\subsection{Outliers}\label{outliers}}
+
+There are multiple methods and a lot of literature about outliers. We will understand outliers as an observation (or set of observations) that are inconsistent with the data set. We will see one technique to detect these outliers, the \textbf{boxplot}.
+
+\textbf{NOTE}: Outliers are NOT errors. We must detect and manage them, but not necessarily remove them, this is a statistical decision and depends on each situation.
+
+For variables in which we can assume normality, the boxplot is a well-recognized technique. All the values above or below the whiskers are considered outliers. The upper whisker is calculated by adding 1.5 times the interquartile range to the third quartile, and the lower by subtracting it from the second quartile.
+
+The \textbf{Interquantile Range} is a measure of statistical dispersion, being equal to the difference between 75th and 25th percentiles, or between upper and lower quartiles, \(IQR = Q3 − Q1\). In other words, the IQR is the first quartile subtracted from the third quartile.
+
+Now we are going to see how the boxplot works. We will use the functions \texttt{boxplot} to print the graph, and \texttt{boxplot.stats} to obtain the exact values of the outliers.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{50}\NormalTok{, }\DecValTok{90}\NormalTok{, }\DecValTok{150}\NormalTok{)}
+\FunctionTok{boxplot.stats}\NormalTok{(x)}\SpecialCharTok{$}\NormalTok{out}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  90 150
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boxplot}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-526-1.pdf}
+
+In this case, the values 90 and 150 are considered as outliers as they are above the whisker. We have used a factor of 1.5 to create the whiskers, but we can change this parameter. The more we increase this factor the more we will extend the whiskers, so we include more values inside the range.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boxplot.stats}\NormalTok{(x, }\AttributeTok{coef =} \DecValTok{2}\NormalTok{)}\SpecialCharTok{$}\NormalTok{out}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 150
+\end{verbatim}
+
+The boxplot method fails when data are skewly distributed, as in an exponential distribution. Again, to go deeper in this field I recommend to start reading this \href{http://www.eng.tau.ac.il/~bengal/outlier.pdf}{paper}.
+
+\hypertarget{obvious-inconsistencies}{%
+\subsection{Obvious inconsistencies}\label{obvious-inconsistencies}}
+
+An obvious inconsistency occurs when a case contains a value or a combination of values that cannot correspond to reality. For example, a person cannot have a negative age, a man cannot be pregnant, and a child cannot have a driver's license.
+
+This can be expressed simply through rules or constraints. Checking for obvious inconsistencies can be carried out in R by logical operators. For example, to check that all values of \texttt{x} are not negative we can use the following code.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{=} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{3}\NormalTok{, }\DecValTok{10}\SpecialCharTok{:}\DecValTok{20}\NormalTok{, }\DecValTok{30}\NormalTok{)}
+\NormalTok{xNonNegative }\OtherTok{=}\NormalTok{ x }\SpecialCharTok{\textgreater{}=} \DecValTok{0}
+\NormalTok{xNonNegative}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+## [13]  TRUE
+\end{verbatim}
+
+However, as the number of variables increases, the number of rules increases rapidly, and it may be easier to manage the rules separately from the data. In addition, since rules can be interconnected given certain sets of variables, deciding which variable or variables can create an inconsistency can be complicated.
+
+The \texttt{editrules} package can help us define rules about datasets. In addition, with \texttt{editrules} we will be able to check which rules are fulfilled or not, and it allows us to find the minimum set of values that we have to change to avoid inconsistencies.
+
+We are going to work with a dataset called \texttt{people.csv} to establish our rules. Let's start by reading the dataset and checking which variables we have
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\OtherTok{=} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"./Data/people.csv"}\NormalTok{, }\AttributeTok{row.names =} \StringTok{"X"}\NormalTok{)}
+\FunctionTok{datatable}\NormalTok{(df)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-529-1.pdf}
+
+To check how the library works let's start by defining some restrictions on the \texttt{age} variable
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rules }\OtherTok{=} \FunctionTok{editset}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"age \textgreater{}= 0"}\NormalTok{, }\StringTok{"age \textless{}= 150"}\NormalTok{))}
+\NormalTok{rules}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Edit set:
+## num1 : 0 <= age
+## num2 : age <= 150
+\end{verbatim}
+
+The \texttt{editset} function analyzes textual rules and stores them in an object we have called \texttt{rules}. Each rule is given a name according to its type (\texttt{numeric}, \texttt{categorical} or \texttt{mixed}). In our example there are only two numerical rules. Now we can verify the data using the function \texttt{violatedEdits}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{violatedEdits}\NormalTok{(rules, df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       edit
+## record  num1  num2
+##      1 FALSE FALSE
+##      2 FALSE FALSE
+##      3 FALSE FALSE
+##      4 FALSE  TRUE
+##      5 FALSE FALSE
+\end{verbatim}
+
+We can see how the second rule is broken in case \texttt{4} of our dataset as it has an age greater than \texttt{150} years. This function will return a \texttt{logical\ array} indicating the possible inconsistencies in the data according to our rules.
+
+As we have said before, the number of rules that we will apply will increase enormously depending on the number of variables in our dataset. However, \texttt{editrules} will make our work easier, being able to write even the list of rules in a text file and introducing it later in R with the \texttt{editfile} function. Here we have an example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rules }\OtherTok{=} \FunctionTok{editfile}\NormalTok{(}\StringTok{"./Data/rules.txt"}\NormalTok{)}
+\NormalTok{rules}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Data model:
+## dat6 : agegroup %in% c('adult', 'child', 'elderly')
+## dat7 : status %in% c('married', 'single', 'widowed') 
+## 
+## Edit set:
+## num1 : 0 <= age
+## num2 : 0 < height
+## num3 : age <= 150
+## num4 : yearsmarried < age
+## cat5 : if( agegroup == 'child' ) status != 'married'
+## mix6 : if( age < yearsmarried + 17 ) !( status %in% c('married', 'widowed') )
+## mix7 : if( age < 18 ) !( agegroup %in% c('adult', 'elderly') )
+## mix8 : if( 18 <= age & age < 65 ) !( agegroup %in% c('child', 'elderly') )
+## mix9 : if( 65 <= age ) !( agegroup %in% c('adult', 'child') )
+\end{verbatim}
+
+In this file we can see that there are numerical, categorical and mixed, and also univariate and multivariate rules.
+
+In addition, as the number of rules can increase a lot, this library offers us another two functions to summarize the violation of the rules: \texttt{summary} and \texttt{plot}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{violatedRules }\OtherTok{=} \FunctionTok{violatedEdits}\NormalTok{(rules, df)}
+\FunctionTok{summary}\NormalTok{(violatedRules)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Edit violations, 5 observations, 0 completely missing (0%):
+## 
+##  editname freq rel
+##      cat5    2 40%
+##      mix6    2 40%
+##      num2    1 20%
+##      num3    1 20%
+##      num4    1 20%
+##      mix8    1 20%
+## 
+## Edit violations per record:
+## 
+##  errors freq rel
+##       0    1 20%
+##       1    1 20%
+##       2    2 40%
+##       3    1 20%
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(violatedRules)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-535-1.pdf}
+
+\hypertarget{dummy-variables}{%
+\subsection{Dummy variables}\label{dummy-variables}}
+
+What does dummifying a variable means? It is a process that consists of creating separate variables for each category when we have a categorical variable. Although categorical variables already contain a lot of information, it is sometimes useful to convert that category into separate columns.
+
+Example with the variable ``sex'': this variable defines a category, a classification of each of the rows between men and women. Instead of using this categorical variable we will create two dummy variables, a male column (0,1) and a female one (0,1). What we do is eliminate the categorical variables and create new variables for each category of the variable.
+
+However, we don't normally need to write all this code to create the dummy variables since R already takes into account the factors as if they were dummy variables in most of R modeling functions. But in case there is a library that does not interpret the factors as dummy variables, we can use this code to dummify the variables.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dummy\_sex }\OtherTok{\textless{}{-}} \FunctionTok{model.matrix}\NormalTok{( }\SpecialCharTok{\textasciitilde{}}\NormalTok{ sex }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{, }\AttributeTok{data =}\NormalTok{ data)}
+\FunctionTok{datatable}\NormalTok{(dummy\_sex)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-536-1.pdf}
+
+\hypertarget{exploratory-data-analysis-1}{%
+\section{Exploratory Data Analysis}\label{exploratory-data-analysis-1}}
+
+\textbf{Exploratory Data Analysis} (EDA) is not a formal process with a strict set of rules. More than anything, EDA is a state of mind. During the initial phases of EDA you should feel free to investigate every idea that occurs to you. Some of these ideas will pan out, and some will be dead ends. As your exploration continues, you will home in on a few particularly productive areas that you'll eventually write up and communicate to others.
+
+EDA is an important part of any data analysis, even if the questions are handed to you on a platter, because you always need to investigate the quality of your data. Data cleaning is just one step in the EDA process: you ask questions about whether your data meets your expectations or not. To do data cleaning, you'll need to deploy all the tools of EDA: visualization, transformation, and modelling.
+
+Your goal during EDA is to develop an understanding of your data. The easiest way to do this is to use questions as tools to guide your investigation. When you ask a question, the question focuses your attention on a specific part of your dataset and helps you decide which graphs, models, or transformations to make.
+
+EDA is fundamentally a creative process. And like most creative processes, the key to asking quality questions is to generate a large quantity of questions. It is difficult to ask revealing questions at the start of your analysis because you do not know what insights are contained in your dataset. On the other hand, each new question that you ask will expose you to a new aspect of your data and increase your chance of making a discovery. You can quickly drill down into the most interesting parts of your data---and develop a set of thought-provoking questions---if you follow up each question with a new question based on what you find.
+
+There is no rule about which questions you should ask to guide your research. However, two types of questions will always be useful for making discoveries within your data. You can loosely word these questions as:
+
+\begin{itemize}
+\item
+  What type of variation occurs within my variables?
+\item
+  What type of covariation occurs between my variables?
+\end{itemize}
+
+The rest of this class will look at these two questions. We'll explain what variation and covariation are, and we'll show you several ways to answer each question.
+
+\hypertarget{some-terminology}{%
+\subsection{Some terminology}\label{some-terminology}}
+
+To make the discussion easier, let's define some terms:
+
+\begin{itemize}
+\item
+  A \textbf{variable} is a quantity, quality, or property that you can measure.
+\item
+  A \textbf{value} is the state of a variable when you measure it. The value of a variable may change from measurement to measurement.
+\item
+  An \textbf{observation} is a set of measurements made under similar conditions (you usually make all of the measurements in an observation at the same time and on the same object). An observation will contain several values, each associated with a different variable. I'll sometimes refer to an observation as a data point.
+\item
+  \textbf{Tabular data} is a set of values, each associated with a variable and an observation. Tabular data is tidy if each value is placed in its own ``cell'', each variable in its own column, and each observation in its own row.
+\end{itemize}
+
+So far, all of the data that you've seen has been tidy. In real-life, most data isn't tidy,
+
+\hypertarget{variation}{%
+\subsection{Variation}\label{variation}}
+
+Variation is the tendency of the values of a variable to change from measurement to measurement. You can see variation easily in real life; if you measure any continuous variable twice, you will get two different results. This is true even if you measure quantities that are constant, like the speed of light. Each of your measurements will include a small amount of error that varies from measurement to measurement.
+
+Categorical variables can also vary if you measure across different subjects (e.g.~the eye colors of different people), or different times (e.g.~the energy levels of an electron at different moments). Every variable has its own pattern of variation, which can reveal interesting information. The best way to understand that pattern is to visualize the distribution of the variable's values.
+
+\hypertarget{visualising-distributions---discrete-case}{%
+\subsubsection{Visualising distributions - Discrete case}\label{visualising-distributions---discrete-case}}
+
+How you visualize the distribution of a variable will depend on whether the variable is categorical or continuous. A variable is \textbf{categorical} if it can only take one of a small set of values. In R, categorical variables are usually saved as factors or character vectors. To examine the distribution of a categorical variable, use a bar chart:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ diamonds) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ cut))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-537-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{barplot}\NormalTok{(}\FunctionTok{table}\NormalTok{(diamonds}\SpecialCharTok{$}\NormalTok{cut))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-538-1.pdf}
+
+The height of the bars displays how many observations occurred with each x value. You can compute these values manually with \texttt{dplyr::count()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(dplyr)}
+\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{count}\NormalTok{(cut)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 5 x 2
+##   cut           n
+##   <ord>     <int>
+## 1 Fair       1610
+## 2 Good       4906
+## 3 Very Good 12082
+## 4 Premium   13791
+## 5 Ideal     21551
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{table}\NormalTok{(diamonds}\SpecialCharTok{$}\NormalTok{cut)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##      Fair      Good Very Good   Premium     Ideal 
+##      1610      4906     12082     13791     21551
+\end{verbatim}
+
+\hypertarget{visualising-distributions---continuous-case}{%
+\subsubsection{Visualising distributions - Continuous case}\label{visualising-distributions---continuous-case}}
+
+A variable is \textbf{continuous} if it can take any of an infinite set of ordered values. Numbers and date-times are two examples of continuous variables. To examine the distribution of a continuous variable, use a histogram:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ diamonds) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ carat), }\AttributeTok{binwidth =} \FloatTok{0.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-541-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(diamonds}\SpecialCharTok{$}\NormalTok{carat)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-542-1.pdf}
+
+A histogram divides the x-axis into equally spaced bins and then uses the height of a bar to display the number of observations that fall in each bin. In the graph above, the tallest bar shows that almost 30,000 observations have a \texttt{carat} value between 0.25 and 0.75, which are the left and right edges of the bar.
+
+You can set the width of the intervals in a histogram with the \texttt{binwidth} argument, which is measured in the units of the \texttt{x} variable. You should always explore a variety of binwidths when working with histograms, as different binwidths can reveal different patterns. For example, here is how the graph above looks when we zoom into just the diamonds with a size of less than three carats and choose a smaller binwidth.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{smaller }\OtherTok{\textless{}{-}}\NormalTok{ diamonds }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(carat }\SpecialCharTok{\textless{}} \DecValTok{3}\NormalTok{)}
+  
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ smaller, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ carat)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \FloatTok{0.1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-543-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{smaller }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(diamonds, diamonds}\SpecialCharTok{$}\NormalTok{carat }\SpecialCharTok{\textless{}} \DecValTok{3}\NormalTok{)}
+
+\FunctionTok{hist}\NormalTok{(smaller}\SpecialCharTok{$}\NormalTok{carat,}\AttributeTok{breaks =} \DecValTok{20}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-544-1.pdf}
+
+If you wish to overlay multiple histograms in the same plot, I recommend using \texttt{geom\_freqpoly()} instead of \texttt{geom\_histogram()}. \texttt{geom\_freqpoly()} performs the same calculation as \texttt{geom\_histogram()}, but it uses lines instead of displaying the counts with bars. It's much easier to understand overlapping lines than bars.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ smaller, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ carat, }\AttributeTok{colour =}\NormalTok{ cut)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_freqpoly}\NormalTok{(}\AttributeTok{binwidth =} \FloatTok{0.1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-545-1.pdf}
+
+The function \texttt{density} can be used for the same purpose in standard \texttt{R}.
+
+Now that you can visualize variation, what should you look for in your plots? And what type of follow-up questions should you ask? I've put together a list below of the most useful types of information that you will find in your graphs, along with some follow-up questions for each type of information. The key to asking good follow-up questions will be to rely on your curiosity (What do you want to learn more about?) as well as your skepticism (How could this be misleading?).
+
+In both bar charts and histograms, tall bars show the common values of a variable, and shorter bars show less-common values. Places that do not have bars reveal values that were not seen in your data. To turn this information into useful questions, look for anything unexpected:
+
+\begin{itemize}
+\item
+  Which values are the most common? Why?
+\item
+  Which values are rare? Why? Does that match your expectations?
+\item
+  Can you see any unusual patterns? What might explain them?
+\end{itemize}
+
+As an example, the histogram below suggests several interesting questions:
+
+\begin{itemize}
+\item
+  Why are there more diamonds at whole carats and common fractions of carats?
+\item
+  Why are there more diamonds slightly to the right of each peak than there are slightly to the left of each peak?
+\item
+  Why are there no diamonds bigger than 3 carats?
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ smaller, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ carat)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \FloatTok{0.01}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-546-1.pdf}
+
+Clusters of similar values suggest that subgroups exist in your data. To understand the subgroups, ask:
+
+\begin{itemize}
+\item
+  How are the observations within each cluster similar to each other?
+\item
+  How are the observations in separate clusters different from each other?
+\item
+  How can you explain or describe the clusters?
+\end{itemize}
+
+The histogram below shows the length (in minutes) of 272 eruptions of the Old Faithful Geyser in Yellowstone National Park. Eruption times appear to be clustered into two groups: there are short eruptions (of around 2 minutes) and long eruptions (4-5 minutes), but little in between.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ faithful, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ eruptions)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \FloatTok{0.25}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-547-1.pdf}
+
+Many of the questions above will prompt you to explore a relationship between variables, for example, to see if the values of one variable can explain the behavior of another variable. We'll get to that shortly.
+
+Outliers are observations that are unusual; data points that don't seem to fit the pattern. Sometimes outliers are data entry errors; other times outliers suggest important new science. When you have a lot of data, outliers are sometimes difficult to see in a histogram. For example, take the distribution of the \texttt{y} variable from the diamonds dataset. The only evidence of outliers is the unusually wide limits on the x-axis.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(diamonds) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ y), }\AttributeTok{binwidth =} \FloatTok{0.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-548-1.pdf}
+
+There are so many observations in the common bins that the rare bins are so short that you can't see them (although maybe if you stare intently at 0 you'll spot something). To make it easy to see the unusual values, we need to zoom to small values of the y-axis with \texttt{coord\_cartesian()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(diamonds) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ y), }\AttributeTok{binwidth =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{coord\_cartesian}\NormalTok{(}\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{50}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-549-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(diamonds}\SpecialCharTok{$}\NormalTok{y, }\AttributeTok{ylim=}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{50}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-550-1.pdf}
+
+This allows us to see that there are three unusual values: 0, \textasciitilde30, and \textasciitilde60. We pluck them out with \texttt{dplyr}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{unusual }\OtherTok{\textless{}{-}}\NormalTok{ diamonds }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(y }\SpecialCharTok{\textless{}} \DecValTok{3} \SpecialCharTok{|}\NormalTok{ y }\SpecialCharTok{\textgreater{}} \DecValTok{20}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(price, x, y, z) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(y)}
+\NormalTok{unusual}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 9 x 4
+##   price     x     y     z
+##   <int> <dbl> <dbl> <dbl>
+## 1  5139  0      0    0   
+## 2  6381  0      0    0   
+## 3 12800  0      0    0   
+## 4 15686  0      0    0   
+## 5 18034  0      0    0   
+## 6  2130  0      0    0   
+## 7  2130  0      0    0   
+## 8  2075  5.15  31.8  5.12
+## 9 12210  8.09  58.9  8.06
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{unusual }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(diamonds, y }\SpecialCharTok{\textless{}} \DecValTok{3} \SpecialCharTok{|}\NormalTok{ y }\SpecialCharTok{\textgreater{}} \DecValTok{20}\NormalTok{)}
+\NormalTok{unusual }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(unusual}\SpecialCharTok{$}\NormalTok{price,unusual}\SpecialCharTok{$}\NormalTok{x, unusual}\SpecialCharTok{$}\NormalTok{y, unusual}\SpecialCharTok{$}\NormalTok{z)}
+\NormalTok{unusual}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        [,1] [,2] [,3] [,4]
+##  [1,]  5139 0.00  0.0 0.00
+##  [2,]  6381 0.00  0.0 0.00
+##  [3,] 12210 8.09 58.9 8.06
+##  [4,] 12800 0.00  0.0 0.00
+##  [5,] 15686 0.00  0.0 0.00
+##  [6,] 18034 0.00  0.0 0.00
+##  [7,]  2075 5.15 31.8 5.12
+##  [8,]  2130 0.00  0.0 0.00
+##  [9,]  2130 0.00  0.0 0.00
+\end{verbatim}
+
+The \texttt{y} variable measures one of the three dimensions of these diamonds, in mm. We know that diamonds can't have a width of 0mm, so these values must be incorrect. We might also suspect that measurements of 32mm and 59mm are implausible: those diamonds are over an inch long, but don't cost hundreds of thousands of dollars!
+
+It's good practice to repeat your analysis with and without the outliers. If they have minimal effect on the results, and you can't figure out why they're there, it's reasonable to replace them with missing values, and move on. However, if they have a substantial effect on your results, you shouldn't drop them without justification. You'll need to figure out what caused them (e.g.~a data entry error) and disclose that you removed them in your write-up.
+
+If you've encountered unusual values in your dataset, and simply want to move on to the rest of your analysis, you have two options.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Drop the entire row with the strange values:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds2 }\OtherTok{\textless{}{-}}\NormalTok{ diamonds }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(}\FunctionTok{between}\NormalTok{(y, }\DecValTok{3}\NormalTok{, }\DecValTok{20}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds2 }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(diamonds, y}\SpecialCharTok{\textgreater{}=} \DecValTok{3} \SpecialCharTok{\&}\NormalTok{ y}\SpecialCharTok{\textless{}=}\DecValTok{20}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+I don't recommend this option because just because one measurement is invalid, doesn't mean all the measurements are. Additionally, if you have low quality data, by time that you've applied this approach to every variable you might find that you don't have any data left!
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Instead, I recommend replacing the unusual values with missing values. The easiest way to do this is to use \texttt{mutate()} to replace the variable with a modified copy. You can use the \texttt{ifelse()} function to replace unusual values with \texttt{NA}:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds2 }\OtherTok{\textless{}{-}}\NormalTok{ diamonds }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{y =} \FunctionTok{ifelse}\NormalTok{(y }\SpecialCharTok{\textless{}} \DecValTok{3} \SpecialCharTok{|}\NormalTok{ y }\SpecialCharTok{\textgreater{}} \DecValTok{20}\NormalTok{, }\ConstantTok{NA}\NormalTok{, y))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds2}\SpecialCharTok{$}\NormalTok{y2 }\OtherTok{=} \FunctionTok{ifelse}\NormalTok{(diamonds}\SpecialCharTok{$}\NormalTok{y }\SpecialCharTok{\textless{}} \DecValTok{3} \SpecialCharTok{|}\NormalTok{ diamonds}\SpecialCharTok{$}\NormalTok{y }\SpecialCharTok{\textgreater{}} \DecValTok{20}\NormalTok{, }\ConstantTok{NA}\NormalTok{, diamonds}\SpecialCharTok{$}\NormalTok{y)}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{ifelse()} has three arguments. The first argument test should be a logical vector. The result will contain the value of the second argument, yes, when test is TRUE, and the value of the third argument, no, when it is false.
+
+Like R, ggplot2 subscribes to the philosophy that missing values should never silently go missing. It's not obvious where you should plot missing values, so ggplot2 doesn't include them in the plot, but it does warn that they've been removed:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ diamonds2, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ x, }\AttributeTok{y =}\NormalTok{ y)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 9 rows containing missing values (geom_point).
+\end{verbatim}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-557-1.pdf}
+
+To suppress that warning, set \texttt{na.rm\ =\ TRUE}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ diamonds2, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ x, }\AttributeTok{y =}\NormalTok{ y)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-558-1.pdf}
+
+Other times you want to understand what makes observations with missing values different to observations with recorded values. For example, in \texttt{nycflights13::flights}, missing values in the \texttt{dep\_time} variable indicate that the flight was cancelled. So you might want to compare the scheduled departure times for cancelled and non-cancelled times. You can do this by making a new variable with \texttt{is.na()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nycflights13}\SpecialCharTok{::}\NormalTok{flights }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{cancelled =} \FunctionTok{is.na}\NormalTok{(dep\_time),}
+    \AttributeTok{sched\_hour =}\NormalTok{ sched\_dep\_time }\SpecialCharTok{\%/\%} \DecValTok{100}\NormalTok{,}
+    \AttributeTok{sched\_min =}\NormalTok{ sched\_dep\_time }\SpecialCharTok{\%\%} \DecValTok{100}\NormalTok{,}
+    \AttributeTok{sched\_dep\_time =}\NormalTok{ sched\_hour }\SpecialCharTok{+}\NormalTok{ sched\_min }\SpecialCharTok{/} \DecValTok{60}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(sched\_dep\_time)) }\SpecialCharTok{+} 
+    \FunctionTok{geom\_freqpoly}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{colour =}\NormalTok{ cancelled), }\AttributeTok{binwidth =} \DecValTok{1}\SpecialCharTok{/}\DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-559-1.pdf}
+
+However this plot isn't great because there are many more non-cancelled flights than cancelled flights.
+
+\hypertarget{covariation}{%
+\subsection{Covariation}\label{covariation}}
+
+If variation describes the behavior \emph{within} a variable, \textbf{covariation} describes the behavior \textbf{between} variables. Covariation is the tendency for the values of two or more variables to vary together in a related way. The best way to spot covariation is to visualise the relationship between two or more variables. How you do that should again depend on the type of variables involved.
+
+\hypertarget{a-categorical-and-continuous-variable}{%
+\subsubsection{A categorical and continuous variable}\label{a-categorical-and-continuous-variable}}
+
+It's common to explore the distribution of a continuous variable broken down by a categorical variable, as in the previous frequency polygon. The default appearance of \texttt{geom\_freqpoly()} is not that useful for that sort of comparison because the height is given by the count. That means if one of the groups is much smaller than the others, it's hard to see the differences in shape. For example, let's explore how the price of a diamond varies with its quality:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ diamonds, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ price)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_freqpoly}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{colour =}\NormalTok{ cut), }\AttributeTok{binwidth =} \DecValTok{500}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-560-1.pdf}
+
+It's hard to see the difference in distribution because the overall counts differ so much:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(diamonds) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ cut))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-561-1.pdf}
+
+To make the comparison easier we need to swap what is displayed on the y-axis. Instead of displaying count, we'll display \textbf{density}, which is the count standardised so that the area under each frequency polygon is one.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ diamonds, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ price, }\AttributeTok{y =}\NormalTok{ ..density..)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_freqpoly}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{colour =}\NormalTok{ cut), }\AttributeTok{binwidth =} \DecValTok{500}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-562-1.pdf}
+
+There's something rather surprising about this plot - it appears that fair diamonds (the lowest quality) have the highest average price! But maybe that's because frequency polygons are a little hard to interpret - there's a lot going on in this plot.
+
+Another alternative to display the distribution of a continuous variable broken down by a categorical variable is the \textbf{boxplot}. A boxplot is a type of visual shorthand for a distribution of values that is popular among statisticians. Each boxplot consists of:
+
+\begin{itemize}
+\item
+  A box that stretches from the 25th percentile of the distribution to the 75th percentile, a distance known as the interquartile range (IQR). In the middle of the box is a line that displays the median, i.e.~50th percentile, of the distribution. These three lines give you a sense of the spread of the distribution and whether or not the distribution is symmetric about the median or skewed to one side.
+\item
+  Visual points that display observations that fall more than 1.5 times the IQR from either edge of the box. These outlying points are unusual so are plotted individually.
+\item
+  A line (or whisker) that extends from each end of the box and goes to the farthest non-outlier point in the distribution.
+\end{itemize}
+
+\hypertarget{a-categorical-and-continuous-variable-1}{%
+\subsubsection{A categorical and continuous variable}\label{a-categorical-and-continuous-variable-1}}
+
+Let's take a look at the distribution of price by cut using \texttt{geom\_boxplot()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ diamonds, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ cut, }\AttributeTok{y =}\NormalTok{ price)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-563-1.pdf}
+
+We see much less information about the distribution, but the boxplots are much more compact so we can more easily compare them (and fit more on one plot). It supports the counterintuitive finding that better quality diamonds are cheaper on average!
+
+\texttt{cut} is an ordered factor: fair is worse than good, which is worse than very good and so on. Many categorical variables don't have such an intrinsic order, so you might want to reorder them to make a more informative display. One way to do that is with the \texttt{reorder()} function.
+
+For example, take the \texttt{class} variable in the \texttt{mpg} dataset. You might be interested to know how highway mileage varies across classes:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ mpg, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ class, }\AttributeTok{y =}\NormalTok{ hwy)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-564-1.pdf}
+
+To make the trend easier to see, we can reorder \texttt{class} based on the median value of \texttt{hwy}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ mpg) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{reorder}\NormalTok{(class, hwy, }\AttributeTok{FUN =}\NormalTok{ median), }\AttributeTok{y =}\NormalTok{ hwy))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-565-1.pdf}
+
+If you have long variable names, \texttt{geom\_boxplot()} will work better if you flip it 90°. You can do that with \texttt{coord\_flip()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ mpg) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{reorder}\NormalTok{(class, hwy, }\AttributeTok{FUN =}\NormalTok{ median), }\AttributeTok{y =}\NormalTok{ hwy)) }\SpecialCharTok{+}
+  \FunctionTok{coord\_flip}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-566-1.pdf}
+
+\hypertarget{two-categorical-variables}{%
+\subsubsection{Two categorical variables}\label{two-categorical-variables}}
+
+To visualise the covariation between categorical variables, you'll need to count the number of observations for each combination. One way to do that is to rely on the built-in \texttt{geom\_count()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ diamonds) }\SpecialCharTok{+}
+  \FunctionTok{geom\_count}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ cut, }\AttributeTok{y =}\NormalTok{ color))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-567-1.pdf}
+
+The size of each circle in the plot displays how many observations occurred at each combination of values. Covariation will appear as a strong correlation between specific x values and specific y values.
+
+Another approach is to compute the count with dplyr:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{count}\NormalTok{(color, cut)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 35 x 3
+##    color cut           n
+##    <ord> <ord>     <int>
+##  1 D     Fair        163
+##  2 D     Good        662
+##  3 D     Very Good  1513
+##  4 D     Premium    1603
+##  5 D     Ideal      2834
+##  6 E     Fair        224
+##  7 E     Good        933
+##  8 E     Very Good  2400
+##  9 E     Premium    2337
+## 10 E     Ideal      3903
+## # ... with 25 more rows
+\end{verbatim}
+
+Then visualise with \texttt{geom\_tile()} and the \texttt{fill} aesthetic:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diamonds }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{count}\NormalTok{(color, cut) }\SpecialCharTok{\%\textgreater{}\%}  
+  \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ color, }\AttributeTok{y =}\NormalTok{ cut)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_tile}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{fill =}\NormalTok{ n))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-569-1.pdf}
+
+\hypertarget{two-continuous-variables}{%
+\subsubsection{Two continuous variables}\label{two-continuous-variables}}
+
+You've already seen one great way to visualise the covariation between two continuous variables: draw a scatterplot with \texttt{geom\_point()}. You can see covariation as a pattern in the points. For example, you can see an exponential relationship between the carat size and price of a diamond.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ diamonds) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ carat, }\AttributeTok{y =}\NormalTok{ price))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-570-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(diamonds}\SpecialCharTok{$}\NormalTok{carat,diamonds}\SpecialCharTok{$}\NormalTok{price)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-571-1.pdf}
+
+Scatterplots become less useful as the size of your dataset grows, because points begin to overplot, and pile up into areas of uniform black (as above). One way to fix the problem is to use the alpha aesthetic to add transparency.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ diamonds) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ carat, }\AttributeTok{y =}\NormalTok{ price), }\AttributeTok{alpha =} \DecValTok{1} \SpecialCharTok{/} \DecValTok{100}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-572-1.pdf}
+
+But using transparency can be challenging for very large datasets. Another solution is to use bin. Previously you used \texttt{geom\_histogram()} and \texttt{geom\_freqpoly()} to bin in one dimension.
+
+The function \texttt{geom\_bin2d()} does the same in two dimensions.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ smaller) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bin2d}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ carat, }\AttributeTok{y =}\NormalTok{ price))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-573-1.pdf}
+
+Another option is to bin one continuous variable so it acts like a categorical variable. Then you can use one of the techniques for visualising the combination of a categorical and a continuous variable that you learned about. For example, you could bin \texttt{carat} and then for each group, display a boxplot:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ smaller, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ carat, }\AttributeTok{y =}\NormalTok{ price)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{group =} \FunctionTok{cut\_width}\NormalTok{(carat, }\FloatTok{0.1}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-574-1.pdf}
+
+\hypertarget{patterns-and-models}{%
+\subsection{Patterns and models}\label{patterns-and-models}}
+
+Patterns in your data provide clues about relationships. If a systematic relationship exists between two variables it will appear as a pattern in the data. If you spot a pattern, ask yourself:
+
+\begin{itemize}
+\item
+  Could this pattern be due to coincidence (i.e.~random chance)?
+\item
+  How can you describe the relationship implied by the pattern?
+\item
+  How strong is the relationship implied by the pattern?
+\item
+  What other variables might affect the relationship?
+\item
+  Does the relationship change if you look at individual subgroups of the data?
+\end{itemize}
+
+A scatterplot of Old Faithful eruption lengths versus the wait time between eruptions shows a pattern: longer wait times are associated with longer eruptions. The scatterplot also displays the two clusters that we noticed before.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ faithful) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ eruptions, }\AttributeTok{y =}\NormalTok{ waiting))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-575-1.pdf}
+
+Patterns provide one of the most useful tools for data scientists because they reveal covariation. If you think of variation as a phenomenon that creates uncertainty, covariation is a phenomenon that reduces it. If two variables covary, you can use the values of one variable to make better predictions about the values of the second. If the covariation is due to a causal relationship (a special case), then you can use the value of one variable to control the value of the second.
+
+Models are a tool for extracting patterns out of data. For example, consider the diamonds data. It's hard to understand the relationship between cut and price, because cut and carat, and carat and price are tightly related. It's possible to use a model to remove the very strong relationship between price and carat so we can explore the subtleties that remain. The following code fits a model that predicts price from carat and then computes the residuals (the difference between the predicted value and the actual value). The residuals give us a view of the price of the diamond, once the effect of carat has been removed.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(modelr)}
+
+\NormalTok{mod }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(}\FunctionTok{log}\NormalTok{(price) }\SpecialCharTok{\textasciitilde{}} \FunctionTok{log}\NormalTok{(carat), }\AttributeTok{data =}\NormalTok{ diamonds)}
+
+\NormalTok{diamonds2 }\OtherTok{\textless{}{-}}\NormalTok{ diamonds }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{add\_residuals}\NormalTok{(mod) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{resid =} \FunctionTok{exp}\NormalTok{(resid))}
+
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ diamonds2) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ carat, }\AttributeTok{y =}\NormalTok{ resid))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-576-1.pdf}
+
+Once you've removed the strong relationship between carat and price, you can see what you expect in the relationship between cut and price: relative to their size, better quality diamonds are more expensive
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ diamonds2) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ cut, }\AttributeTok{y =}\NormalTok{ resid))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-577-1.pdf}
+
+\hypertarget{cross-validation}{%
+\section{Cross Validation}\label{cross-validation}}
+
+A common danger in modeling is overfitting. Overfitting happens when we create a model that behaves perfectly with our data, predicting a large percentage of the dependent variable, but when generalizing it is not able to predict the data that come from reality. On the other hand, underfitting occurs when we create a model that does not fit our data (our sample of the population), and therefore will not fit properly to the reality. In none of the cases we can say that our model is generalizable.
+
+To explain it in a less technical language, let's give an example. Imagine that you would like to move to Japan, and therefore you have decided to study the language from home. Let's put two suppositions.
+
+\begin{itemize}
+\item
+  \textbf{Overfitting:} You decide that you are going to see all the episodes of Dragon Ball to get an idea of the language before going to Japan. You repeat all the sagas of this series several times during a year, and once you know perfectly the language of the series you think you are ready to start your trip to Japan. You pack your bag and take the first flight, and when you arrive at Tokyo airport you have your first conversation with a Japanese person. You quickly realize that you don't understand practically anything he's saying to you, and every time you talk (thing like ``Kamehamehaaa!!!'' or ``Yūgō!!'') he looks at you strangely, as if you weren't speaking the right way. You have trained your mind very well with specific data that is not able to be generalized to other contexts and situations, so it is not useful for your purpose. This would be a case of Overfitting.
+\item
+  \textbf{Underfitting:} You decide that you are going to read some of the Japanese dictionary before you leave. You spend two days reading the dictionary and the third day you take a flight to Tokyo. Obviously, when you arrive at Tokyo airport and start talking to a Japanese person, you don't understand anything he says to you and you can't articulate a word. You have trained your mind badly with very poor data, so although the words you have studied are used in more general contexts, you are not able to reach your goal. This would be a case of Underfitting.
+\end{itemize}
+
+In the graphs we can identify, on the left, the underfitting model, and on the right the overfitting model. But how could we solve this problem?
+
+Following the example, let's imagine that we find a bar in our city where we can talk to Japanese people to practice our language. If we follow the first strategy, the first time we get there the same thing will happen, but we will realize about our mistakes in a controlled environment and we have time to return home and train with other situations. This is called \textbf{Cross Validation}. We divide our data into training sets and test sets to check that our model not only works correctly with the data I use to train it, but also with new data that has nothing to do with the training set.
+
+To avoid the over and underfitting problems we will use cross validation techniques. In this section we will explain the four most important cross validation techniques. All of them can be summarized in the following steps:
+
+\begin{itemize}
+\tightlist
+\item
+  Reserve a small sample of the data set
+\item
+  Build (or train) the model using the remaining part of the data set
+\item
+  Test the effectiveness of the model on the the reserved sample of the data set. If the model works well on the test data set, then it's good.
+\end{itemize}
+
+\hypertarget{traintest-split-cross-validation}{%
+\subsection{Train/Test split cross validation}\label{traintest-split-cross-validation}}
+
+Dividing a dataset into a training set and a testing set is a common and necessary operation when making a predictive model. It is important that we learn how to do this before we start creating any model. In general terms, an original dataset is usually divided into two sets: training and testing. Sometimes it is divided into a third subset called a validation set.
+
+\begin{itemize}
+\tightlist
+\item
+  Training dataset: This is the set with which we build the model. With this set we will calculate the parameters to obtain the equations that we will use later.
+\item
+  Testing dataset: It is the set with which we check the effectiveness of our model. The equations and parameters of the original model are now used to calculate which is the output (Dependent Variable) based on the inputs of the testing set (Independent Variables). These outputs are used to compare the efficiency of the model, and see if it is really useful to predict or not the result.
+\end{itemize}
+
+Generally, the training set and the testing set are divided using a ratio of 75\%(training)-25\%(testing) or even 80\%-20\%.
+
+There are many ways to divide data into two sections. The easiest way is to take the first 75\%-80\% for training and the rest for testing. However, this method can lead to problems because the first rows come from a different data source than the middle and end rows, or because they are ordered by time and so the time factor is important in the model. These situations can lead to the final result of the model being deviated from what it should have been.
+
+The most effective way is to use a method to select rows randomly. Let's look at different methods for dividing the dataset into training and testing sets.
+
+Let's start by reading the ``Advertising'' dataset. We will use four different ways to divide the original dataset into training and testing sets.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data }\OtherTok{=} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"./Data/Advertising.csv"}\NormalTok{) }\CommentTok{\# Read the data}
+\FunctionTok{dim}\NormalTok{(data) }\CommentTok{\# Test the structure is well readed (3333 rows and 21 columns)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 200   4
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  We are going to split the sample based on a random method, using the normal distribution. First we will create a vector of the same length as the number of cases in the dataset, but normally distributed.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{randVec }\OtherTok{=} \FunctionTok{rnorm}\NormalTok{(}\FunctionTok{nrow}\NormalTok{(data))}
+\FunctionTok{hist}\NormalTok{(randVec)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-579-1.pdf}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  We use this new variable to randomly divide the cases. To do this we are going to create a new variable that we will call \texttt{check} that will store \texttt{TRUE} in the positions where \texttt{randVec} is less than 0.8 and \texttt{FALSE} in the remaining positions.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{check }\OtherTok{=}\NormalTok{ randVec }\SpecialCharTok{\textless{}} \FloatTok{0.8}
+\FunctionTok{head}\NormalTok{(check,}\DecValTok{6}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  TRUE  TRUE  TRUE FALSE  TRUE  TRUE
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Finally, we could define the \texttt{training} set with those data that meet the \texttt{check} condition and the \texttt{test} set with those that do not.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{training }\OtherTok{=}\NormalTok{ data[check,]}
+\NormalTok{test }\OtherTok{=}\NormalTok{ data[}\SpecialCharTok{!}\NormalTok{check,]}
+\FunctionTok{c}\NormalTok{(}\FunctionTok{dim}\NormalTok{(training), }\FunctionTok{dim}\NormalTok{(test))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 155   4  45   4
+\end{verbatim}
+
+We can also do this by using the \texttt{sample} function in a simpler way than by generating a new random variable.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{smp\_size }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(}\FloatTok{0.80} \SpecialCharTok{*} \FunctionTok{nrow}\NormalTok{(data))}
+
+\NormalTok{trainIndex }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\FunctionTok{nrow}\NormalTok{(data), }\AttributeTok{size =}\NormalTok{ smp\_size)}
+
+\NormalTok{train }\OtherTok{\textless{}{-}}\NormalTok{ data[trainIndex, ]}
+\NormalTok{test }\OtherTok{\textless{}{-}}\NormalTok{ data[}\SpecialCharTok{{-}}\NormalTok{trainIndex, ]}
+
+\FunctionTok{c}\NormalTok{(}\FunctionTok{dim}\NormalTok{(train), }\FunctionTok{dim}\NormalTok{(test))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 160   4  40   4
+\end{verbatim}
+
+Finally, we can use libraries like \texttt{dplyr} or \texttt{caret} to make it faster.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(dplyr)}
+
+\NormalTok{train }\OtherTok{\textless{}{-}} \FunctionTok{sample\_frac}\NormalTok{(data, }\FloatTok{0.8}\NormalTok{)}
+\NormalTok{trainIndex }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{rownames}\NormalTok{(train))}
+\NormalTok{test }\OtherTok{\textless{}{-}}\NormalTok{ data[}\SpecialCharTok{{-}}\NormalTok{trainIndex, ]}
+
+\FunctionTok{c}\NormalTok{(}\FunctionTok{dim}\NormalTok{(train), }\FunctionTok{dim}\NormalTok{(test))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 160   4  40   4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(caret)}
+
+\NormalTok{trainingSamples }\OtherTok{\textless{}{-}} \FunctionTok{createDataPartition}\NormalTok{(data}\SpecialCharTok{$}\NormalTok{Sales, }\AttributeTok{p =} \FloatTok{0.8}\NormalTok{, }\AttributeTok{list =} \ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{train  }\OtherTok{\textless{}{-}}\NormalTok{ data[trainingSamples, ]}
+\NormalTok{test }\OtherTok{\textless{}{-}}\NormalTok{ data[}\SpecialCharTok{{-}}\NormalTok{trainingSamples, ]}
+
+\FunctionTok{c}\NormalTok{(}\FunctionTok{dim}\NormalTok{(train), }\FunctionTok{dim}\NormalTok{(test))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 162   4  38   4
+\end{verbatim}
+
+This cross validation method, carried out in any of the four ways we have seen, is the most classic, and although it is still the most used, it is not the one that gives us the best results. Let's look at two other methods that are a little more complex: Leave one out cross validation (LOOCV) and K-fold cross validation. Let's see how each of them works and how to carry them out using the \texttt{caret} library.
+
+\hypertarget{leave-one-out-cross-validation-loocv}{%
+\subsection{Leave one out cross validation (LOOCV)}\label{leave-one-out-cross-validation-loocv}}
+
+This method works as follow:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Leave out one data point and build the model on the rest of the data set
+\item
+  Test the model against the data point that is left out at step 1 and record the test error associated with the prediction
+\item
+  Repeat the process for all data points
+\item
+  Compute the overall prediction error by taking the average of all these test error estimates recorded at step 2
+\end{enumerate}
+
+Let's see how it works in R
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Define training control}
+\NormalTok{trainControl }\OtherTok{\textless{}{-}} \FunctionTok{trainControl}\NormalTok{(}\AttributeTok{method =} \StringTok{"LOOCV"}\NormalTok{)}
+\CommentTok{\# Train the model}
+\NormalTok{model }\OtherTok{\textless{}{-}} \FunctionTok{train}\NormalTok{(Sales }\SpecialCharTok{\textasciitilde{}}\NormalTok{., }\AttributeTok{data =}\NormalTok{ data, }\AttributeTok{method =} \StringTok{"lm"}\NormalTok{,}
+               \AttributeTok{trControl =}\NormalTok{ trainControl)}
+\CommentTok{\# Summarize the results}
+\FunctionTok{print}\NormalTok{(model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Linear Regression 
+## 
+## 200 samples
+##   3 predictor
+## 
+## No pre-processing
+## Resampling: Leave-One-Out Cross-Validation 
+## Summary of sample sizes: 199, 199, 199, 199, 199, 199, ... 
+## Resampling results:
+## 
+##   RMSE      Rsquared   MAE     
+##   1.716654  0.8912074  1.282867
+## 
+## Tuning parameter 'intercept' was held constant at a value of TRUE
+\end{verbatim}
+
+The advantage of the LOOCV method is that we make use all data points reducing potential bias. However, the process is repeated as many times as there are data points, resulting to a higher execution time when n is extremely large. Additionally, we test the model performance against one data point at each iteration. This might result to higher variation in the prediction error, if some data points are outliers.
+
+\hypertarget{k-fold-cross-validation}{%
+\subsection{K-fold cross validation}\label{k-fold-cross-validation}}
+
+The k-fold cross-validation method evaluates the model performance on different subsets of the training data and then calculate the average prediction error rate. The algorithm is as follow:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Randomly split the data set into k-subsets (or k-fold) (for example 5 subsets)
+\item
+  Reserve one subset and train the model on all other subsets
+\item
+  Test the model on the reserved subset and record the prediction error
+\item
+  Repeat this process until each of the k subsets has served as the test set.
+\item
+  Compute the average of the k recorded errors. This is called the cross-validation error serving as the performance metric for the model.
+\item
+  K-fold cross-validation (CV) is a robust method for estimating the accuracy of a model.
+\end{enumerate}
+
+The most obvious advantage of k-fold CV compared to LOOCV is computational. A less obvious but potentially more important advantage of k-fold CV is that it often gives more accurate estimates of the test error rate than does LOOCV. Typical question, is how to choose right value of k?
+
+Lower value of K is more biased and hence undesirable. On the other hand, higher value of K is less biased, but can suffer from large variability. It is not hard to see that a smaller value of k (say k = 2) always takes us towards the train-test approach, whereas a higher value of k (say k = number of data points) leads us to LOOCV approach.
+
+In practice, one typically performs k-fold cross-validation using k's between 5 and 10, as these values have been shown empirically to yield test error rate estimates that suffer neither from excessively high bias nor from very high variance. The following example uses \texttt{caret} library to perform the 10-fold cross validation to estimate the prediction error.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Define training control}
+\NormalTok{trainControl }\OtherTok{\textless{}{-}} \FunctionTok{trainControl}\NormalTok{(}\AttributeTok{method =} \StringTok{"cv"}\NormalTok{, }\AttributeTok{number =} \DecValTok{10}\NormalTok{)}
+\CommentTok{\# Train the model}
+\NormalTok{model }\OtherTok{\textless{}{-}} \FunctionTok{train}\NormalTok{(Sales }\SpecialCharTok{\textasciitilde{}}\NormalTok{., }\AttributeTok{data =}\NormalTok{ data, }\AttributeTok{method =} \StringTok{"lm"}\NormalTok{,}
+               \AttributeTok{trControl =}\NormalTok{ trainControl)}
+\CommentTok{\# Summarize the results}
+\FunctionTok{print}\NormalTok{(model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Linear Regression 
+## 
+## 200 samples
+##   3 predictor
+## 
+## No pre-processing
+## Resampling: Cross-Validated (10 fold) 
+## Summary of sample sizes: 180, 180, 180, 180, 179, 180, ... 
+## Resampling results:
+## 
+##   RMSE      Rsquared   MAE     
+##   1.672128  0.8981449  1.275382
+## 
+## Tuning parameter 'intercept' was held constant at a value of TRUE
+\end{verbatim}
+
+\hypertarget{repeated-k-fold-cross-validation}{%
+\subsection{Repeated K-fold cross validation}\label{repeated-k-fold-cross-validation}}
+
+The process of splitting the data into k-folds can be repeated a number of times, this is called repeated k-fold cross validation. The final model error is taken as the mean error from the number of repeats. Is generally recommended to use the (repeated) k-fold cross-validation to estimate the prediction error rate. The following example uses 10-fold cross validation with 3 repeats:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Define training control}
+\NormalTok{trainControl }\OtherTok{\textless{}{-}} \FunctionTok{trainControl}\NormalTok{(}\AttributeTok{method =} \StringTok{"repeatedcv"}\NormalTok{, }
+                              \AttributeTok{number =} \DecValTok{10}\NormalTok{, }\AttributeTok{repeats =} \DecValTok{3}\NormalTok{)}
+\CommentTok{\# Train the model}
+\NormalTok{model }\OtherTok{\textless{}{-}} \FunctionTok{train}\NormalTok{(Sales }\SpecialCharTok{\textasciitilde{}}\NormalTok{., }\AttributeTok{data =}\NormalTok{ data, }\AttributeTok{method =} \StringTok{"lm"}\NormalTok{,}
+               \AttributeTok{trControl =}\NormalTok{ trainControl)}
+\CommentTok{\# Summarize the results}
+\FunctionTok{print}\NormalTok{(model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Linear Regression 
+## 
+## 200 samples
+##   3 predictor
+## 
+## No pre-processing
+## Resampling: Cross-Validated (10 fold, repeated 3 times) 
+## Summary of sample sizes: 180, 180, 180, 180, 180, 179, ... 
+## Resampling results:
+## 
+##   RMSE    Rsquared   MAE     
+##   1.6784  0.9003384  1.282453
+## 
+## Tuning parameter 'intercept' was held constant at a value of TRUE
+\end{verbatim}
+
+\hypertarget{exercises-solutions}{%
+\section{Exercises Solutions}\label{exercises-solutions}}
+
+\begin{exercise}
+
+\textbf{Exercise 1 Solution}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"./Data/titanic3.csv"}\NormalTok{, }\AttributeTok{stringsAsFactors =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{na.strings =} \StringTok{""}\NormalTok{)}
+\NormalTok{n\_nan\_print }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(df)\{}
+    \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(df))\{}
+        \ControlFlowTok{if}\NormalTok{ (}\FunctionTok{sum}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(df[,i])) }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{)\{}
+            \FunctionTok{print}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"The column"}\NormalTok{, }\FunctionTok{colnames}\NormalTok{(data[i]), }\StringTok{"have"}\NormalTok{, }\FunctionTok{sum}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(df[,i])), }\StringTok{"missing values"}\NormalTok{))}
+\NormalTok{        \}}
+\NormalTok{    \}}
+\NormalTok{\}}
+
+\FunctionTok{n\_nan\_print}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "The column age have 263 missing values"
+## [1] "The column fare have 1 missing values"
+## [1] "The column cabin have 1014 missing values"
+## [1] "The column embarked have 2 missing values"
+## [1] "The column boat have 823 missing values"
+## [1] "The column body have 1188 missing values"
+## [1] "The column home.dest have 564 missing values"
+\end{verbatim}
+
+\end{exercise}
+
+\begin{exercise}
+
+\textbf{Exercise 2 Solution}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{remove\_mv }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(df,}\AttributeTok{per=}\FloatTok{0.8}\NormalTok{)\{}
+\NormalTok{    df\_new }\OtherTok{=}\NormalTok{ df[ ,(}\FunctionTok{colSums}\NormalTok{((}\FunctionTok{is.na}\NormalTok{(df))}\SpecialCharTok{/}\FunctionTok{nrow}\NormalTok{(df)) }\SpecialCharTok{\textless{}}\NormalTok{ per)]}
+\NormalTok{    df\_new }\OtherTok{=} \FunctionTok{na.omit}\NormalTok{(df\_new)}
+    \FunctionTok{return}\NormalTok{(df\_new)}
+\NormalTok{\}}
+
+\NormalTok{z }\OtherTok{=} \FunctionTok{remove\_mv}\NormalTok{(data,}\FloatTok{0.4}\NormalTok{)}
+\FunctionTok{c}\NormalTok{(}\FunctionTok{dim}\NormalTok{(data), }\FunctionTok{dim}\NormalTok{(z))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1309   14 1043   10
+\end{verbatim}
+
+\end{exercise}
+
+\begin{exercise}
+\textbf{Exercise 3 Solution:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dataImputed }\OtherTok{=}\NormalTok{ data}
+\NormalTok{dataImputed}\SpecialCharTok{$}\NormalTok{body[}\FunctionTok{is.na}\NormalTok{(dataImputed}\SpecialCharTok{$}\NormalTok{body)] }\OtherTok{=} \DecValTok{0}
+\NormalTok{dataImputed}\SpecialCharTok{$}\NormalTok{home.dest[}\FunctionTok{is.na}\NormalTok{(dataImputed}\SpecialCharTok{$}\NormalTok{home.dest)] }\OtherTok{=} \StringTok{"Unknown"}
+\NormalTok{dataImputed}\SpecialCharTok{$}\NormalTok{age[}\FunctionTok{is.na}\NormalTok{(dataImputed}\SpecialCharTok{$}\NormalTok{age)] }\OtherTok{=} \FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{(data}\SpecialCharTok{$}\NormalTok{age, }\AttributeTok{na.rm=}\NormalTok{T))}
+\FunctionTok{datatable}\NormalTok{(dataImputed)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bookdownproj_files/figure-latex/unnamed-chunk-590-1.pdf}
+\end{exercise}
 
   \bibliography{book.bib,packages.bib}
 

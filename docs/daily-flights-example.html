@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="model-notation.html"/>
-
+<link rel="next" href="exploratory-data-analysis.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -57,6 +57,13 @@
 <script src="libs/viz-1.8.2/viz.js"></script>
 <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
 <script src="libs/grViz-binding-1.0.6.1/grViz.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.20/datatables.js"></script>
+<link href="libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
 
 
 <style type="text/css">
@@ -374,6 +381,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.5" data-path="model-notation.html"><a href="model-notation.html"><i class="fa fa-check"></i><b>8.5</b> Model notation</a></li>
 <li class="chapter" data-level="8.6" data-path="daily-flights-example.html"><a href="daily-flights-example.html"><i class="fa fa-check"></i><b>8.6</b> Daily Flights Example</a></li>
 </ul></li>
+<li class="chapter" data-level="9" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>9</b> Exploratory Data Analysis</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="data-cleansing.html"><a href="data-cleansing.html"><i class="fa fa-check"></i><b>9.1</b> Data Cleansing</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="data-cleansing.html"><a href="data-cleansing.html#handling-missing-values"><i class="fa fa-check"></i><b>9.1.1</b> Handling missing values</a></li>
+<li class="chapter" data-level="9.1.2" data-path="data-cleansing.html"><a href="data-cleansing.html#handling-missing-values-deletion"><i class="fa fa-check"></i><b>9.1.2</b> Handling missing values (deletion)</a></li>
+<li class="chapter" data-level="9.1.3" data-path="data-cleansing.html"><a href="data-cleansing.html#handling-missing-values-imputation"><i class="fa fa-check"></i><b>9.1.3</b> Handling missing values (imputation)</a></li>
+<li class="chapter" data-level="9.1.4" data-path="data-cleansing.html"><a href="data-cleansing.html#outliers"><i class="fa fa-check"></i><b>9.1.4</b> Outliers</a></li>
+<li class="chapter" data-level="9.1.5" data-path="data-cleansing.html"><a href="data-cleansing.html#obvious-inconsistencies"><i class="fa fa-check"></i><b>9.1.5</b> Obvious inconsistencies</a></li>
+<li class="chapter" data-level="9.1.6" data-path="data-cleansing.html"><a href="data-cleansing.html#dummy-variables"><i class="fa fa-check"></i><b>9.1.6</b> Dummy variables</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html"><i class="fa fa-check"></i><b>9.2</b> Exploratory Data Analysis</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#some-terminology"><i class="fa fa-check"></i><b>9.2.1</b> Some terminology</a></li>
+<li class="chapter" data-level="9.2.2" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#variation"><i class="fa fa-check"></i><b>9.2.2</b> Variation</a></li>
+<li class="chapter" data-level="9.2.3" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#covariation"><i class="fa fa-check"></i><b>9.2.3</b> Covariation</a></li>
+<li class="chapter" data-level="9.2.4" data-path="exploratory-data-analysis-1.html"><a href="exploratory-data-analysis-1.html#patterns-and-models"><i class="fa fa-check"></i><b>9.2.4</b> Patterns and models</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="cross-validation.html"><a href="cross-validation.html"><i class="fa fa-check"></i><b>9.3</b> Cross Validation</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="cross-validation.html"><a href="cross-validation.html#traintest-split-cross-validation"><i class="fa fa-check"></i><b>9.3.1</b> Train/Test split cross validation</a></li>
+<li class="chapter" data-level="9.3.2" data-path="cross-validation.html"><a href="cross-validation.html#leave-one-out-cross-validation-loocv"><i class="fa fa-check"></i><b>9.3.2</b> Leave one out cross validation (LOOCV)</a></li>
+<li class="chapter" data-level="9.3.3" data-path="cross-validation.html"><a href="cross-validation.html#k-fold-cross-validation"><i class="fa fa-check"></i><b>9.3.3</b> K-fold cross validation</a></li>
+<li class="chapter" data-level="9.3.4" data-path="cross-validation.html"><a href="cross-validation.html#repeated-k-fold-cross-validation"><i class="fa fa-check"></i><b>9.3.4</b> Repeated K-fold cross validation</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="exercises-solutions.html"><a href="exercises-solutions.html"><i class="fa fa-check"></i><b>9.4</b> Exercises Solutions</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -429,8 +463,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="model-notation.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="model-notation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="exploratory-data-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
